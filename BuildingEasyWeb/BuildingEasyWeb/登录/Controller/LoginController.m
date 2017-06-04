@@ -11,6 +11,8 @@
 #import "LoginManager.h"
 #import "RegisterController.h"
 
+#import "ContactManager.h"
+
 @interface LoginController ()
 
 @end
@@ -44,7 +46,9 @@
 
 - (IBAction)login:(id)sender
 {
-    [LoginManager login];
+//    [LoginManager login];
+    ContactManager* contact = [[ContactManager alloc] init];
+    [contact getAllContact];
 }
 
 - (IBAction)registerNewCount:(id)sender

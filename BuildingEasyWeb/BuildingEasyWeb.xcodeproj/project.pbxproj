@@ -10,6 +10,11 @@
 		466DFF75999E037E2EF0D274 /* libPods-BuildingEasyWeb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
+		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
+		CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */; };
+		CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */; };
+		CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061CF1EE4003A00D3FC7E /* ContactManager.m */; };
 		CF5A4C531EE04769002A281B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A4C521EE04769002A281B /* main.m */; };
 		CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A4C551EE04769002A281B /* AppDelegate.m */; };
 		CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF5A4C5D1EE04769002A281B /* Assets.xcassets */; };
@@ -36,6 +41,13 @@
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CF3061C51EE3F85E00D3FC7E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CF3061C71EE3F96500D3FC7E /* OpenSystemUrlManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenSystemUrlManager.h; sourceTree = "<group>"; };
+		CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenSystemUrlManager.m; sourceTree = "<group>"; };
+		CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CF3061CE1EE4003A00D3FC7E /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
+		CF3061CF1EE4003A00D3FC7E /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
 		CF5A4C4E1EE04769002A281B /* BuildingEasyWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildingEasyWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF5A4C521EE04769002A281B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF5A4C541EE04769002A281B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +91,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */,
+				CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */,
+				CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */,
 				CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */,
 				466DFF75999E037E2EF0D274 /* libPods-BuildingEasyWeb.a in Frameworks */,
 			);
@@ -99,6 +114,9 @@
 		4B0335ED686B18DD5D492B1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */,
+				CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */,
+				CF3061C51EE3F85E00D3FC7E /* MapKit.framework */,
 				CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */,
 				885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */,
 			);
@@ -223,6 +241,10 @@
 				CFEEC0201EE2BBD100E1DB74 /* TableRefreshManager.m */,
 				CF184E5A1EE2E844009E7A3C /* LocationManager.h */,
 				CF184E5B1EE2E844009E7A3C /* LocationManager.m */,
+				CF3061C71EE3F96500D3FC7E /* OpenSystemUrlManager.h */,
+				CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */,
+				CF3061CE1EE4003A00D3FC7E /* ContactManager.h */,
+				CF3061CF1EE4003A00D3FC7E /* ContactManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -480,8 +502,10 @@
 				CFEEC0211EE2BBD100E1DB74 /* TableRefreshManager.m in Sources */,
 				CF5A4C7A1EE05357002A281B /* BaseController.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
+				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
+				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
@@ -595,6 +619,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BuildingEasyWeb/PrefixHeader.pch";
 				INFOPLIST_FILE = BuildingEasyWeb/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zhenghongyi.BuildingEasyWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -611,6 +636,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BuildingEasyWeb/PrefixHeader.pch";
 				INFOPLIST_FILE = BuildingEasyWeb/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zhenghongyi.BuildingEasyWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
