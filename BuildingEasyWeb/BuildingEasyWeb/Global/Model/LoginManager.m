@@ -13,12 +13,22 @@
 
 @implementation LoginManager
 
-+ (void)login
++ (void)login:(NSString *)phone password:(NSString *)password
 {
 //    [User shareUser].userID = @"9527";
 //    [User shareUser].userName = @"李明";
 //    [[User shareUser] saveUserInfoToFile];
     
+    [LoginManager changeRootControllerToMainTabVC];
+}
+
++ (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code
+{
+    [LoginManager changeRootControllerToMainTabVC];
+}
+
++ (void)changeRootControllerToMainTabVC
+{
     BuildingController* buildingVC = [[BuildingController alloc] init];
     buildingVC.title = @"楼盘";
     UINavigationController* buildingNaVC = [[UINavigationController alloc] initWithRootViewController:buildingVC];

@@ -15,6 +15,10 @@
 		CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */; };
 		CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061CF1EE4003A00D3FC7E /* ContactManager.m */; };
+		CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */; };
+		CF5785D71EE59D2100994741 /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D61EE59D2100994741 /* Global.m */; };
+		CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D91EE5A3C400994741 /* FindPassWordController.m */; };
+		CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5785DA1EE5A3C400994741 /* FindPassWordController.xib */; };
 		CF5A4C531EE04769002A281B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A4C521EE04769002A281B /* main.m */; };
 		CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A4C551EE04769002A281B /* AppDelegate.m */; };
 		CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF5A4C5D1EE04769002A281B /* Assets.xcassets */; };
@@ -48,6 +52,13 @@
 		CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CF3061CE1EE4003A00D3FC7E /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
 		CF3061CF1EE4003A00D3FC7E /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
+		CF5785D21EE59B6700994741 /* UIView+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MBProgressHUD.h"; sourceTree = "<group>"; };
+		CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MBProgressHUD.m"; sourceTree = "<group>"; };
+		CF5785D51EE59D2100994741 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		CF5785D61EE59D2100994741 /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
+		CF5785D81EE5A3C400994741 /* FindPassWordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassWordController.h; sourceTree = "<group>"; };
+		CF5785D91EE5A3C400994741 /* FindPassWordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassWordController.m; sourceTree = "<group>"; };
+		CF5785DA1EE5A3C400994741 /* FindPassWordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindPassWordController.xib; sourceTree = "<group>"; };
 		CF5A4C4E1EE04769002A281B /* BuildingEasyWeb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuildingEasyWeb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF5A4C521EE04769002A281B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF5A4C541EE04769002A281B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -245,6 +256,8 @@
 				CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */,
 				CF3061CE1EE4003A00D3FC7E /* ContactManager.h */,
 				CF3061CF1EE4003A00D3FC7E /* ContactManager.m */,
+				CF5785D51EE59D2100994741 /* Global.h */,
+				CF5785D61EE59D2100994741 /* Global.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,6 +285,9 @@
 				CFEEC0151EE2B0DD00E1DB74 /* RegisterController.h */,
 				CFEEC0161EE2B0DD00E1DB74 /* RegisterController.m */,
 				CFEEC0171EE2B0DD00E1DB74 /* RegisterController.xib */,
+				CF5785D81EE5A3C400994741 /* FindPassWordController.h */,
+				CF5785D91EE5A3C400994741 /* FindPassWordController.m */,
+				CF5785DA1EE5A3C400994741 /* FindPassWordController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -363,6 +379,8 @@
 				CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */,
 				CFEEC00E1EE2A79800E1DB74 /* UIView+Addition.h */,
 				CFEEC00F1EE2A79800E1DB74 /* UIView+Addition.m */,
+				CF5785D21EE59B6700994741 /* UIView+MBProgressHUD.h */,
+				CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */,
 				CFEEC0141EE2A8A100E1DB74 /* PopBackProtocol.h */,
 				CFEEC0111EE2A84000E1DB74 /* UINavigationController+Addition.h */,
 				CFEEC0121EE2A84000E1DB74 /* UINavigationController+Addition.m */,
@@ -438,6 +456,7 @@
 				CFEEC01E1EE2B5B800E1DB74 /* BuildingController.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
+				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */,
 				CFEEC01D1EE2B5B800E1DB74 /* BuildingController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
@@ -503,8 +523,10 @@
 				CF5A4C7A1EE05357002A281B /* BaseController.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
+				CF5785D71EE59D2100994741 /* Global.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
+				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,

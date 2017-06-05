@@ -8,7 +8,19 @@
 
 #import "RegisterController.h"
 
+#import "UIView+MBProgressHUD.h"
+#import "Global.h"
+#import "LoginManager.h"
+
 @interface RegisterController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *personRoleButton;
+@property (weak, nonatomic) IBOutlet UIButton *agencyRoleButton;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+@property (nonatomic, assign) BEWUserRole userRole;
 
 @end
 
@@ -20,13 +32,59 @@
     
     self.title = @"注册";
     self.navigationController.navigationBarHidden = NO;
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Action
+- (IBAction)selectRole:(UIButton *)sender
+{
+    if (_personRoleButton == sender) {
+        _agencyRoleButton.selected = NO;
+        _personRoleButton.selected = YES;
+        
+        _userRole = kPersonRole;
+    } else {
+        _personRoleButton.selected = NO;
+        _agencyRoleButton.selected = YES;
+        
+        _userRole = kAgencyRole;
+    }
+}
+
+- (IBAction)getVerificationCode:(id)sender
+{
+    NSLog(@"获取验证码");
+}
+
+- (IBAction)showHidePassWord:(UIButton *)sender
+{
+    sender.selected = !sender.isSelected;
+    _passwordTextField.secureTextEntry = !sender.isSelected;
+}
+
+- (IBAction)registerTap:(id)sender
+{
+    if (_userRole < kPersonRole) {
+        [MBProgressHUD showError:@"请选择角色" toView:self.view];
+        return;
+    }
+    if (!_phoneTextField.text.length) {
+        [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
+        return;
+    }
+    if (!_codeTextField.text.length) {
+        [MBProgressHUD showError:@"请填写验证码" toView:self.view];
+        return;
+    }
+    if (!_passwordTextField.text.length) {
+        [MBProgressHUD showError:@"请填写密码" toView:self.view];
+        return;
+    }
+    [LoginManager registerNewCount:_phoneTextField.text password:_passwordTextField.text code:_codeTextField.text];
 }
 
 @end

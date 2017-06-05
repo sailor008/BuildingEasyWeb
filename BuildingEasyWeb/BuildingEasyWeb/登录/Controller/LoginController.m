@@ -10,10 +10,13 @@
 
 #import "LoginManager.h"
 #import "RegisterController.h"
-
-#import "ContactManager.h"
+#import "FindPassWordController.h"
+#import "UIView+MBProgressHUD.h"
 
 @interface LoginController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 
 @end
 
@@ -46,15 +49,27 @@
 
 - (IBAction)login:(id)sender
 {
-//    [LoginManager login];
-    ContactManager* contact = [[ContactManager alloc] init];
-    [contact getAllContact];
+    if (!_phoneTextField.text.length) {
+        [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
+        return;
+    }
+    if (!_passWordTextField.text.length) {
+        [MBProgressHUD showError:@"请填写密码" toView:self.view];
+        return;
+    }
+    [LoginManager login:_phoneTextField.text password:_passWordTextField.text];
 }
 
 - (IBAction)registerNewCount:(id)sender
 {
     RegisterController* registerVC = [[RegisterController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
+}
+
+- (IBAction)findPassWord:(id)sender
+{
+    FindPassWordController* findPWVC = [[FindPassWordController alloc] init];
+    [self.navigationController pushViewController:findPWVC animated:YES];
 }
 
 @end

@@ -10,6 +10,7 @@
 
 @interface LoginManager : NSObject
 
-+ (void)login;
++ (void)login:(NSString *)phone password:(NSString *)password;
++ (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code;
 
 @end
