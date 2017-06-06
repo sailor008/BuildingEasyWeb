@@ -10,7 +10,7 @@
 
 #import "LoginController.h"
 #import "LoginManager.h"
-#import "BuildingController.h"
+#import "MainTabController.h"
 
 #import "User.h"
 
@@ -29,14 +29,16 @@
     
 //    [[User shareUser] clearUserInfoInFile];
     
-    [[User shareUser] getUserInfoFromFile];
-    if ([User shareUser].userID.length) {
-        self.window.rootViewController = [self mainTabController];
-    } else {
-        LoginController* loginVC = [[LoginController alloc] init];
-        UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        self.window.rootViewController = naviVC;
-    }
+//    [[User shareUser] getUserInfoFromFile];
+//    if ([User shareUser].userID.length) {
+        MainTabController* mainTabVC = [[MainTabController alloc] init];
+        [mainTabVC setupControllers];
+        self.window.rootViewController = mainTabVC;
+//    } else {
+//        LoginController* loginVC = [[LoginController alloc] init];
+//        UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//        self.window.rootViewController = naviVC;
+//    }
     
     [self.window makeKeyAndVisible];
     
@@ -68,27 +70,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-#pragma mark Private
-
-- (UIViewController *)mainTabController
-{
-    BuildingController* buildingVC = [[BuildingController alloc] init];
-    buildingVC.title = @"楼盘";
-    UINavigationController* buildingNaVC = [[UINavigationController alloc] initWithRootViewController:buildingVC];
-    
-    BaseController* customerVC = [[BaseController alloc] init];
-    customerVC.title = @"客户";
-    UINavigationController* customerNaVC = [[UINavigationController alloc] initWithRootViewController:customerVC];
-    
-    BaseController* mineVC = [[BaseController alloc] init];
-    mineVC.title = @"我的";
-    UINavigationController* mineNaVC = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    
-    UITabBarController* mainTabVC = [[UITabBarController alloc] init];
-    mainTabVC.viewControllers = @[buildingNaVC, customerNaVC, mineNaVC];
-    return mainTabVC;
 }
 
 @end

@@ -27,6 +27,11 @@
 		CF5A4CB71EE065C6002A281B /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A4CB51EE065C6002A281B /* LoginController.m */; };
 		CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF5A4CB61EE065C6002A281B /* LoginController.xib */; };
 		CF5A4CC41EE0663C002A281B /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5A4CC31EE0663C002A281B /* User.m */; };
+		CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7720FA1EE6D6FD00DD5AE2 /* MainTabController.m */; };
+		CF7721181EE6DEF200DD5AE2 /* BuildingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7721161EE6DEF200DD5AE2 /* BuildingCell.m */; };
+		CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF7721171EE6DEF200DD5AE2 /* BuildingCell.xib */; };
+		CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */; };
+		CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */; };
 		CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB630081EE250DC00AE5919 /* NetworkManager.m */; };
 		CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */; };
 		CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEEC00F1EE2A79800E1DB74 /* UIView+Addition.m */; };
@@ -74,6 +79,15 @@
 		CF5A4CB61EE065C6002A281B /* LoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginController.xib; sourceTree = "<group>"; };
 		CF5A4CC21EE0663C002A281B /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CF5A4CC31EE0663C002A281B /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CF7720F91EE6D6FD00DD5AE2 /* MainTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabController.h; sourceTree = "<group>"; };
+		CF7720FA1EE6D6FD00DD5AE2 /* MainTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabController.m; sourceTree = "<group>"; };
+		CF7721151EE6DEF200DD5AE2 /* BuildingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingCell.h; sourceTree = "<group>"; };
+		CF7721161EE6DEF200DD5AE2 /* BuildingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingCell.m; sourceTree = "<group>"; };
+		CF7721171EE6DEF200DD5AE2 /* BuildingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingCell.xib; sourceTree = "<group>"; };
+		CF7721361EE6F32100DD5AE2 /* SectionFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionFilterView.h; sourceTree = "<group>"; };
+		CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionFilterView.m; sourceTree = "<group>"; };
+		CF7721391EE6F34900DD5AE2 /* AdsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsScrollView.h; sourceTree = "<group>"; };
+		CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsScrollView.m; sourceTree = "<group>"; };
 		CFB630071EE250DC00AE5919 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		CFB630081EE250DC00AE5919 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		CFE828D31EE39B2F00290C79 /* UIViewController+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MBProgressHUD.h"; sourceTree = "<group>"; };
@@ -235,6 +249,8 @@
 			children = (
 				CF5A4C781EE05357002A281B /* BaseController.h */,
 				CF5A4C791EE05357002A281B /* BaseController.m */,
+				CF7720F91EE6D6FD00DD5AE2 /* MainTabController.h */,
+				CF7720FA1EE6D6FD00DD5AE2 /* MainTabController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -265,6 +281,10 @@
 		CF5A4C771EE0533E002A281B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CF7721391EE6F34900DD5AE2 /* AdsScrollView.h */,
+				CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */,
+				CF7721361EE6F32100DD5AE2 /* SectionFilterView.h */,
+				CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -368,6 +388,9 @@
 		CF5A4CC11EE06618002A281B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CF7721151EE6DEF200DD5AE2 /* BuildingCell.h */,
+				CF7721161EE6DEF200DD5AE2 /* BuildingCell.m */,
+				CF7721171EE6DEF200DD5AE2 /* BuildingCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -457,6 +480,7 @@
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
 				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
+				CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,10 +545,12 @@
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				CFEEC0211EE2BBD100E1DB74 /* TableRefreshManager.m in Sources */,
 				CF5A4C7A1EE05357002A281B /* BaseController.m in Sources */,
+				CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CF5785D71EE59D2100994741 /* Global.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,
+				CF7721181EE6DEF200DD5AE2 /* BuildingCell.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
@@ -533,6 +559,8 @@
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
 				CF5A4CB71EE065C6002A281B /* LoginController.m in Sources */,
+				CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */,
+				CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */,
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
 			);

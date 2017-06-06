@@ -8,7 +8,7 @@
 
 #import "LoginManager.h"
 
-#import "BuildingController.h"
+#import "MainTabController.h"
 #import "User.h"
 
 @implementation LoginManager
@@ -29,20 +29,8 @@
 
 + (void)changeRootControllerToMainTabVC
 {
-    BuildingController* buildingVC = [[BuildingController alloc] init];
-    buildingVC.title = @"楼盘";
-    UINavigationController* buildingNaVC = [[UINavigationController alloc] initWithRootViewController:buildingVC];
-    
-    BaseController* customerVC = [[BaseController alloc] init];
-    customerVC.title = @"客户";
-    UINavigationController* customerNaVC = [[UINavigationController alloc] initWithRootViewController:customerVC];
-    
-    BaseController* mineVC = [[BaseController alloc] init];
-    mineVC.title = @"我的";
-    UINavigationController* mineNaVC = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    
-    UITabBarController* mainTabVC = [[UITabBarController alloc] init];
-    mainTabVC.viewControllers = @[buildingNaVC, customerNaVC, mineNaVC];
+    MainTabController* mainTabVC = [[MainTabController alloc] init];
+    [mainTabVC setupControllers];
     
     [UIApplication sharedApplication].keyWindow.rootViewController = mainTabVC;
 }
