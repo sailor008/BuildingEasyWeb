@@ -15,6 +15,8 @@
 		CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */; };
 		CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061CF1EE4003A00D3FC7E /* ContactManager.m */; };
+		CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */; };
+		CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */; };
 		CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */; };
 		CF5785D71EE59D2100994741 /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D61EE59D2100994741 /* Global.m */; };
 		CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D91EE5A3C400994741 /* FindPassWordController.m */; };
@@ -57,6 +59,9 @@
 		CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CF3061CE1EE4003A00D3FC7E /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
 		CF3061CF1EE4003A00D3FC7E /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
+		CF55FF151EE8316B00B0ACD9 /* BuildingDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailController.h; sourceTree = "<group>"; };
+		CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingDetailController.m; sourceTree = "<group>"; };
+		CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingDetailController.xib; sourceTree = "<group>"; };
 		CF5785D21EE59B6700994741 /* UIView+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MBProgressHUD.h"; sourceTree = "<group>"; };
 		CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MBProgressHUD.m"; sourceTree = "<group>"; };
 		CF5785D51EE59D2100994741 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
@@ -374,6 +379,9 @@
 				CFEEC01A1EE2B5B800E1DB74 /* BuildingController.h */,
 				CFEEC01B1EE2B5B800E1DB74 /* BuildingController.m */,
 				CFEEC01C1EE2B5B800E1DB74 /* BuildingController.xib */,
+				CF55FF151EE8316B00B0ACD9 /* BuildingDetailController.h */,
+				CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */,
+				CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */,
+				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
 				CFEEC01E1EE2B5B800E1DB74 /* BuildingController.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
@@ -550,6 +559,7 @@
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CF5785D71EE59D2100994741 /* Global.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,
+				CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */,
 				CF7721181EE6DEF200DD5AE2 /* BuildingCell.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,

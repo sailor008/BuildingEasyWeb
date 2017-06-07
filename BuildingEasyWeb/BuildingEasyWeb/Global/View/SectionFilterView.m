@@ -146,12 +146,8 @@
         } else {
             optionButton.selected = NO;
         }
-        [optionButton setTitleColor:Hex(0x333333) forState:UIControlStateNormal];
     }
     
-    if (button.isSelected) {
-        [button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-    }
     // 遍历找出所在控制器，减少耦合
     UIResponder* nextObj = self.nextResponder;
     while (![nextObj isKindOfClass:[UIViewController class]]) {

@@ -16,6 +16,7 @@
 #import "UITableView+Addition.h"
 #import "AdsScrollView.h"
 #import "SectionFilterView.h"
+#import "BuildingDetailController.h"
 
 @interface BuildingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -123,11 +124,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        [self setupLocationButtonFace:@"深圳市的的"];
-    } else {
-        [self setupLocationButtonFace:@"广州"];
-    }
+    BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark Action
