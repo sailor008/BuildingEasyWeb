@@ -9,6 +9,7 @@
 #import "MainTabController.h"
 
 #import "BuildingController.h"
+#import "MineController.h"
 
 @interface MainTabController ()
 
@@ -30,7 +31,7 @@
     customerNaVC.tabBarItem.image = GetIMAGE(@"客户2.png");
     customerNaVC.tabBarItem.selectedImage = GetIMAGE(@"客户1.png");
     
-    BaseController* mineVC = [[BaseController alloc] init];
+    MineController* mineVC = [[MineController alloc] init];
     mineVC.title = @"我的";
     UINavigationController* mineNaVC = [[UINavigationController alloc] initWithRootViewController:mineVC];
     mineVC.tabBarItem.image = GetIMAGE(@"我的1.png");
