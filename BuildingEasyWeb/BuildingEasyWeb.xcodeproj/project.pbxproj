@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		466DFF75999E037E2EF0D274 /* libPods-BuildingEasyWeb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */; };
+		C782F47B1EE9A4D80067C07F /* MineController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4791EE9A4D80067C07F /* MineController.m */; };
+		C782F47C1EE9A4D80067C07F /* MineController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F47A1EE9A4D80067C07F /* MineController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
@@ -49,6 +51,9 @@
 /* Begin PBXFileReference section */
 		5512E8F545C3BB390F7AACE0 /* Pods-BuildingEasyWeb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuildingEasyWeb.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuildingEasyWeb/Pods-BuildingEasyWeb.release.xcconfig"; sourceTree = "<group>"; };
 		885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuildingEasyWeb.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C782F4781EE9A4D80067C07F /* MineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MineController.h; path = "BuildingEasyWeb/我的/MineController.h"; sourceTree = SOURCE_ROOT; };
+		C782F4791EE9A4D80067C07F /* MineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MineController.m; path = "BuildingEasyWeb/我的/MineController.m"; sourceTree = SOURCE_ROOT; };
+		C782F47A1EE9A4D80067C07F /* MineController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MineController.xib; path = "BuildingEasyWeb/我的/MineController.xib"; sourceTree = SOURCE_ROOT; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -355,6 +360,9 @@
 		CF5A4CBC1EE065FF002A281B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C782F4781EE9A4D80067C07F /* MineController.h */,
+				C782F4791EE9A4D80067C07F /* MineController.m */,
+				C782F47A1EE9A4D80067C07F /* MineController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -483,6 +491,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C782F47C1EE9A4D80067C07F /* MineController.xib in Resources */,
 				CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
 				CFEEC01E1EE2B5B800E1DB74 /* BuildingController.xib in Resources */,
@@ -572,6 +581,7 @@
 				CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */,
 				CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */,
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
+				C782F47B1EE9A4D80067C07F /* MineController.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
