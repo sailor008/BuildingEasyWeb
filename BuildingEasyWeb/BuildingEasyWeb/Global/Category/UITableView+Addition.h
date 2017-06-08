@@ -16,4 +16,7 @@
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, assign) NSInteger allCount;
 
+- (void)registerNibWithName:(NSString *)nibName;
+- (void)registerClassWithName:(NSString *)className;
+
 @end

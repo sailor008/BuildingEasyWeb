@@ -65,4 +65,14 @@ static const char kTableViewAllCount;
     return allCountNum.integerValue;
 }
 
+- (void)registerNibWithName:(NSString *)nibName
+{
+    [self registerNib:[UINib nibWithNibName:nibName bundle:nil] forCellReuseIdentifier:nibName];
+}
+
+- (void)registerClassWithName:(NSString *)className
+{
+    [self registerClass:NSClassFromString(className) forCellReuseIdentifier:className];
+}
+
 @end
