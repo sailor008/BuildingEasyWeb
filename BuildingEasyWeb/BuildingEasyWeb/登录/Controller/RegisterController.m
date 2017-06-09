@@ -11,6 +11,7 @@
 #import "UIView+MBProgressHUD.h"
 #import "Global.h"
 #import "LoginManager.h"
+#import "NetworkManager.h"
 
 @interface RegisterController ()
 
@@ -57,7 +58,11 @@
 
 - (IBAction)getVerificationCode:(id)sender
 {
-    NSLog(@"获取验证码");
+    [NetworkManager postWithUrl:@"wx/registerCode" parameters:@{@"mobile": _phoneTextField.text} success:^(id reponse) {
+        NSLog(@"reponse:%@", reponse);
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@---%@", msg, error);
+    }];
 }
 
 - (IBAction)showHidePassWord:(UIButton *)sender

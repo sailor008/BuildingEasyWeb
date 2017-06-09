@@ -10,6 +10,7 @@
 
 #import "MainTabController.h"
 #import "User.h"
+#import "NetworkManager.h"
 
 @implementation LoginManager
 
@@ -19,12 +20,24 @@
 //    [User shareUser].userName = @"李明";
 //    [[User shareUser] saveUserInfoToFile];
     
-    [LoginManager changeRootControllerToMainTabVC];
+    NSDictionary* parameters = @{@"mobile":phone, @"pwd":password};
+    [NetworkManager postWithUrl:@"wx/login" parameters:parameters success:^(id reponse) {
+        NSLog(@"success");
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@", error);
+    }];
+    
+//    [LoginManager changeRootControllerToMainTabVC];
 }
 
 + (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code
 {
     [LoginManager changeRootControllerToMainTabVC];
+}
+
++ (void)requestVerificationCode:(NSString *)phone
+{
+    
 }
 
 + (void)changeRootControllerToMainTabVC
