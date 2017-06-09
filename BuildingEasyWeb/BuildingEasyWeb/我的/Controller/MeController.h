@@ -1,5 +1,5 @@
 //
-//  MineController.h
+//  MeController.h
 //  BuildingEasyWeb
 //
 //  Created by SeekMac on 2017/6/7.
@@ -8,6 +8,6 @@
 
 #import "BaseController.h"
 
-@interface MineController : BaseController
+@interface MeController : BaseController
 
 @end

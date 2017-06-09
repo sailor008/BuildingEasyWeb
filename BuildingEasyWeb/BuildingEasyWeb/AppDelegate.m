@@ -31,13 +31,13 @@
     
 //    [[User shareUser] getUserInfoFromFile];
 //    if ([User shareUser].userID.length) {
-//        MainTabController* mainTabVC = [[MainTabController alloc] init];
-//        [mainTabVC setupControllers];
-//        self.window.rootViewController = mainTabVC;
+        MainTabController* mainTabVC = [[MainTabController alloc] init];
+        [mainTabVC setupControllers];
+        self.window.rootViewController = mainTabVC;
 //    } else {
-        LoginController* loginVC = [[LoginController alloc] init];
-        UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        self.window.rootViewController = naviVC;
+//        LoginController* loginVC = [[LoginController alloc] init];
+//        UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//        self.window.rootViewController = naviVC;
 //    }
     
     [self.window makeKeyAndVisible];
