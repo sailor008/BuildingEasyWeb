@@ -13,6 +13,8 @@
 #import "LoginManager.h"
 #import "NetworkManager.h"
 
+#import "NSString+Addition.h"
+
 @interface RegisterController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *personRoleButton;
@@ -58,11 +60,16 @@
 
 - (IBAction)getVerificationCode:(id)sender
 {
+    if (!_phoneTextField.text.length) {
+        [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
+        return;
+    }
     [NetworkManager postWithUrl:@"wx/registerCode" parameters:@{@"mobile": _phoneTextField.text} success:^(id reponse) {
         NSLog(@"reponse:%@", reponse);
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"error:%@---%@", msg, error);
     }];
+
 }
 
 - (IBAction)showHidePassWord:(UIButton *)sender
@@ -89,7 +96,16 @@
         [MBProgressHUD showError:@"请填写密码" toView:self.view];
         return;
     }
-    [LoginManager registerNewCount:_phoneTextField.text password:_passwordTextField.text code:_codeTextField.text];
+    
+    NSDictionary* parameters = @{@"mobile":_phoneTextField.text,
+                                 @"regCode":_codeTextField.text,
+                                 @"role":@(_userRole - 1),
+                                 @"pwd":[_passwordTextField.text md5]};
+    [NetworkManager postWithUrl:@"wx/mobileRegister" parameters:parameters success:^(id reponse) {
+        NSLog(@"response:%@", reponse);
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@", msg);
+    }];
 }
 
 @end

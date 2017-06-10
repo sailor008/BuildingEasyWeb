@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import <Contacts/Contacts.h>
+#import "ContactModel.h"
+
+typedef void(^Contacts)(NSArray<ContactModel *> *allContacts);
 
 @interface ContactManager : NSObject
 
-- (void)getAllContact;
++ (void)getAllContact:(Contacts)contacts;
 
 @end

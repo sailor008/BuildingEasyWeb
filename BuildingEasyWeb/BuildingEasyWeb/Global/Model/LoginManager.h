@@ -11,7 +11,7 @@
 @interface LoginManager : NSObject
 
 + (void)login:(NSString *)phone password:(NSString *)password;
-+ (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code;
++ (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code role:(NSNumber *)role;
 + (void)requestVerificationCode:(NSString *)phone;
 
 @end

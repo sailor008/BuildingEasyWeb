@@ -11,6 +11,7 @@
 #import "MainTabController.h"
 #import "User.h"
 #import "NetworkManager.h"
+#import "NSString+Addition.h"
 
 @implementation LoginManager
 
@@ -30,8 +31,12 @@
 //    [LoginManager changeRootControllerToMainTabVC];
 }
 
-+ (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code
++ (void)registerNewCount:(NSString *)phone password:(NSString *)password code:(NSString *)code role:(NSNumber *)role
 {
+    NSDictionary* parameters = @{@"mobile":phone,
+                                 @"regCode":code,
+                                 @"role":role,
+                                 @"pwd":password};
     [LoginManager changeRootControllerToMainTabVC];
 }
 
