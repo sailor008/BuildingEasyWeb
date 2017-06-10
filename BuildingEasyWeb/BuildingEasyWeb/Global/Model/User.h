@@ -10,10 +10,18 @@
 
 @interface User : NSObject <NSCoding>
 
-@property (nonatomic, copy) NSString* userName;
-@property (nonatomic, copy) NSString* userID;
+@property (nonatomic, copy) NSString* nickname;
+@property (nonatomic, copy) NSString* userId;
+@property (nonatomic, copy) NSString* mobile;
+@property (nonatomic, copy) NSString* token;
+@property (nonatomic, copy) NSString* headImg;
+@property (nonatomic, copy) NSNumber* role;
+
+@property (nonatomic, copy) NSString* pwd;
 
 + (instancetype)shareUser;
+
+- (void)copyToShareUser;
 
 - (BOOL)saveUserInfoToFile;
 - (BOOL)getUserInfoFromFile;

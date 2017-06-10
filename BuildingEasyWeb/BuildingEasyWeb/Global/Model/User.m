@@ -8,9 +8,14 @@
 
 #import "User.h"
 
-static NSString* const kUserName = @"UserName";
+static NSString* const kNickname = @"NickName";
 static NSString* const kUserID = @"UserID";
+static NSString* const kMobile = @"Mobile";
+static NSString* const kToken = @"Token";
+static NSString* const kHeadImg = @"HeadImg";
+static NSString* const kRole = @"Role";
 static NSString* const kUserFileName = @"UserInfo";
+static NSString* const kUserPWD = @"UserPWD";
 
 @implementation User
 
@@ -42,9 +47,13 @@ static NSString* const kUserFileName = @"UserInfo";
         
         if (userInfo) {
             User* shareUser = [User shareUser];
-            shareUser.userName = userInfo.userName;
-            shareUser.userID = userInfo.userID;
-            
+            shareUser.nickname = userInfo.nickname;
+            shareUser.userId = userInfo.userId;
+            shareUser.token = userInfo.token;
+            shareUser.role = userInfo.role;
+            shareUser.mobile = userInfo.mobile;
+            shareUser.headImg = userInfo.headImg;
+            shareUser.pwd = userInfo.pwd;
             return YES;
         }
     }
@@ -54,9 +63,25 @@ static NSString* const kUserFileName = @"UserInfo";
 - (BOOL)clearUserInfoInFile
 {
     User* userInfo = [User shareUser];
-    userInfo.userID = @"";
-    userInfo.userName = @"";
+    userInfo.userId = @"";
+    userInfo.nickname = @"";
+    userInfo.token = @"";
+    userInfo.headImg = @"";
+    userInfo.mobile = @"";
+    userInfo.role = @(0);
+    userInfo.pwd = @"";
     return [self saveUserInfoToFile];
+}
+
+- (void)copyToShareUser
+{
+    [User shareUser].userId = [self.userId copy];
+    [User shareUser].nickname = [self.nickname copy];
+    [User shareUser].token = [self.token copy];
+    [User shareUser].headImg = [self.headImg copy];
+    [User shareUser].mobile = [self.mobile copy];
+    [User shareUser].role = self.role;
+    [User shareUser].pwd = self.pwd;
 }
 
 #pragma mark NSCoding
@@ -65,16 +90,26 @@ static NSString* const kUserFileName = @"UserInfo";
 {
     self = [super init];
     if (self) {
-        _userName = [aDecoder decodeObjectForKey:kUserName];
-        _userID = [aDecoder decodeObjectForKey:kUserID];
+        _nickname = [aDecoder decodeObjectForKey:kNickname];
+        _userId = [aDecoder decodeObjectForKey:kUserID];
+        _mobile = [aDecoder decodeObjectForKey:kMobile];
+        _token = [aDecoder decodeObjectForKey:kToken];
+        _headImg = [aDecoder decodeObjectForKey:kHeadImg];
+        _role = [aDecoder decodeObjectForKey:kRole];
+        _pwd = [aDecoder decodeObjectForKey:kUserPWD];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:_userName forKey:kUserName];
-    [aCoder encodeObject:_userID forKey:kUserID];
+    [aCoder encodeObject:_nickname forKey:kNickname];
+    [aCoder encodeObject:_userId forKey:kUserID];
+    [aCoder encodeObject:_mobile forKey:kMobile];
+    [aCoder encodeObject:_token forKey:kToken];
+    [aCoder encodeObject:_headImg forKey:kHeadImg];
+    [aCoder encodeObject:_role forKey:kRole];
+    [aCoder encodeObject:_pwd forKey:kUserPWD];
 }
 
 @end
