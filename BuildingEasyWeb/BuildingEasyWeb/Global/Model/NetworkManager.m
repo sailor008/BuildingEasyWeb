@@ -27,16 +27,11 @@ static const NSString* host = @"39.108.58.165:11071";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[NetworkManager alloc] init];
-        manager.httpSessionManager = [AFHTTPSessionManager manager];
-        manager.httpSessionManager.requestSerializer.timeoutInterval = 30.0f;
         
-        AFJSONResponseSerializer *serializerResponse = [AFJSONResponseSerializer serializer];
-        serializerResponse.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
+        AFHTTPSessionManager *httpSessionManager = [AFHTTPSessionManager manager];
+//        httpSessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
         
-        manager.httpSessionManager.responseSerializer = serializerResponse;
-        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-        serializer.timeoutInterval = 30.0f;
-        manager.httpSessionManager.requestSerializer = serializer;
+        manager.httpSessionManager = httpSessionManager;
     });
     return manager;
 }
@@ -44,18 +39,15 @@ static const NSString* host = @"39.108.58.165:11071";
 + (void)postWithUrl:(NSString *)urlStr parameters:(NSDictionary *)parameters success:(RequestSuccess)successBlock failure:(RequestFailure)failureBlock
 {
     NSString* requestUrl = [NSString stringWithFormat:@"http://%@/%@", host, urlStr];
-    requestUrl = [NetworkManager fullUrl:requestUrl];
     
-    NSString* signStr = [NetworkManager singWithUrl:requestUrl];
+    NSDictionary* fullParameters = [NetworkManager fullParameters:parameters];
     
-    requestUrl = [NSString stringWithFormat:@"%@&sign=%@", requestUrl, signStr];
-    
-    [[NetworkManager shareNetworkManager].httpSessionManager POST:requestUrl parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+    [[NetworkManager shareNetworkManager].httpSessionManager POST:requestUrl parameters:fullParameters progress:^(NSProgress * _Nonnull uploadProgress) {
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [NetworkManager handleWithResponseObject:responseObject success:successBlock failure:failureBlock];
-        
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error, error.domain);
     }];
@@ -75,12 +67,14 @@ static const NSString* host = @"39.108.58.165:11071";
     }];
 }
 
+#pragma mark - 统一处理成功请求结果
 + (void)handleWithResponseObject:(id  _Nullable)responseObject success:(RequestSuccess)successBlock failure:(RequestFailure)failureBlock
 {
+//    NSDictionary* response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
     NSDictionary* response = (NSDictionary *)responseObject;
     
     NSNumber* code = response[@"code"];
-    if ([code isEqualToNumber:@(200)]) {
+    if ([code isEqualToNumber:@(0)]) {
         successBlock(response[@"data"]);
     } else {
         NSError* error = [[NSError alloc] initWithDomain:response[@"msg"] code:[response[@"code"] integerValue] userInfo:responseObject];
@@ -88,30 +82,34 @@ static const NSString* host = @"39.108.58.165:11071";
     }
 }
 
-+ (NSString *)singWithUrl:(NSString *)url
+#pragma mark - 拼接完整请求参数
++ (NSDictionary *)fullParameters:(NSDictionary *)parameters
 {
-    NSString* md5Str = [url md5];
-    return [md5Str substringWithRange:NSMakeRange(0, 12)];
+    NSMutableString* parametersStr = [NSMutableString string];
+    [parameters enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj) {
+            [parametersStr appendFormat:@"%@=%@", key, obj];
+        } else {
+            [parametersStr appendFormat:@"%@=", key];
+        }
+    }];
+    
+    long timeInterval = [[NSDate date] timeIntervalSince1970] * 1000;
+    
+    NSString* originalStr = [NSString stringWithFormat:@"token=&userId=&platform=1&times=%ld&%@&louyi0609source^8^#", timeInterval, parametersStr];
+    originalStr = [originalStr lowercaseString];
+    
+    NSString* signStr = [[originalStr md5] substringToIndex:12];
+    
+    NSMutableDictionary *fullParams = [NSMutableDictionary dictionary];
+    [fullParams addEntriesFromDictionary:parameters];
+    fullParams[@"token"] = nil;
+    fullParams[@"userId"] = nil;
+    fullParams[@"platform"] = @(1);
+    fullParams[@"times"] = @(timeInterval);
+    fullParams[@"sign"] = signStr;
+    
+    return [fullParams copy];
 }
-
-+ (NSString *)fullUrl:(NSString *)url
-{
-    long timeInterval = [[NSDate date] timeIntervalSince1970];
-    NSString* fullUrl = [NSString stringWithFormat:@"%@?token=&userId=&platform=1&times=%ld&appkey=louyi0609source^8^#", url, timeInterval];
-    return [fullUrl copy];
-}
-
-//+ (NSDictionary *)appendParametersAfter:(NSDictionary *)parameters
-//{
-//    NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-//    [dict addEntriesFromDictionary:parameters];
-//    dict[@"platform"] = @"1";
-//    long timeInterval = [[NSDate date] timeIntervalSince1970];
-//    dict[@"times"] = @(timeInterval);
-//    dict[@"token"] = @"";
-//    dict[@"userId"] = @"";
-//    dict[@"appkey"] = @"louyi0609source^8^#";
-//    return [dict copy];
-//}
 
 @end

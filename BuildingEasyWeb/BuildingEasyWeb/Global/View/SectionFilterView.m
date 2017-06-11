@@ -170,6 +170,7 @@
     } else {
         filterY = absoluteY - containTableView.contentOffset.y + self.frame.size.height;
     }
+    filterY += containTableView.top;
     
     _filterContainView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     

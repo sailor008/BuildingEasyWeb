@@ -15,7 +15,7 @@
 - (NSString *)md5 {
     const char *cStr = [self UTF8String];
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
-    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    CC_MD5(cStr, strlen(cStr), digest);
     
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     
@@ -23,6 +23,30 @@
         [output appendFormat:@"%02x", digest[i]];
     
     return  output;
+}
+
+- (NSString *)firstPinyin
+{
+    NSMutableString *mutableString = [NSMutableString stringWithString:self];
+    CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformToLatin, false);
+    CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformStripDiacritics, false);
+    mutableString =(NSMutableString *)[mutableString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if (mutableString.length) {
+        NSString* firstPinyinStr = [[mutableString substringToIndex:1] lowercaseString];
+        
+        NSString * regex = @"^[a-z]$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        BOOL isMatch = [pred evaluateWithObject:firstPinyinStr];
+        
+        if (isMatch) {
+            return firstPinyinStr;
+        } else {
+            return @"#";
+        }
+    }
+    
+    return @"#";
 }
 
 @end

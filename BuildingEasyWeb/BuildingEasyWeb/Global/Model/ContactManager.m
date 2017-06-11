@@ -10,26 +10,26 @@
 
 @implementation ContactManager
 
-- (void)getAllContact
++ (void)getAllContact:(Contacts)contacts
 {
     // 1. 判断当前的授权状态
     if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusNotDetermined) {// 未授权
         CNContactStore *store = [[CNContactStore alloc] init];
         [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (granted) {
-                [self readLocalContactBook];
+                [ContactManager readLocalContactBook:contacts];
             } else {
                 NSLog(@"授权失败");
             }
         }];
     } else if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) {
-        [self readLocalContactBook];
+        [ContactManager readLocalContactBook:contacts];
     } else {
         NSLog(@"未授权");
     }
 }
 
-- (void)readLocalContactBook
++ (void)readLocalContactBook:(Contacts)contacts
 {
     // 2. 获取联系人仓库
     CNContactStore *store = [[CNContactStore alloc] init];
@@ -40,22 +40,35 @@
     // 4. 根据请求Key, 创建请求对象
     CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:keys];
     
+    NSMutableArray* tempArr = [NSMutableArray array];
+    
     // 5. 发送请求
     [store enumerateContactsWithFetchRequest:request error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
         
         // 6.1 获取姓名
         NSString *givenName = contact.givenName;
         NSString *familyName = contact.familyName;
-        NSLog(@"%@--%@", givenName, familyName);
+//        NSLog(@"%@--%@", givenName, familyName);
         
         // 6.2 获取电话
         NSArray *phoneArray = contact.phoneNumbers;
         for (CNLabeledValue *labelValue in phoneArray) {
             
             CNPhoneNumber *number = labelValue.value;
-            NSLog(@"%@--%@", number.stringValue, labelValue.label);
+//            NSLog(@"%@--%@", number.stringValue, labelValue.label);
+            
+            ContactModel* model = [[ContactModel alloc] init];
+            model.name = [NSString stringWithFormat:@"%@%@", familyName, givenName];
+            if (!model.name.length) {
+                model.name = number.stringValue;
+            }
+            model.phone = number.stringValue;
+            [tempArr addObject:model];
+            
         }
     }];
+    
+    contacts([tempArr copy]);
 }
 
 @end

@@ -27,18 +27,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-//    [[User shareUser] clearUserInfoInFile];
-    
-//    [[User shareUser] getUserInfoFromFile];
-//    if ([User shareUser].userID.length) {
+    [[User shareUser] getUserInfoFromFile];
+    if ([User shareUser].userId.length) {
         MainTabController* mainTabVC = [[MainTabController alloc] init];
         [mainTabVC setupControllers];
         self.window.rootViewController = mainTabVC;
-//    } else {
-//        LoginController* loginVC = [[LoginController alloc] init];
-//        UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//        self.window.rootViewController = naviVC;
-//    }
+    } else {
+        LoginController* loginVC = [[LoginController alloc] init];
+        UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        self.window.rootViewController = naviVC;
+    }
     
     [self.window makeKeyAndVisible];
     

@@ -11,5 +11,6 @@
 @interface NSString (Addition)
 
 - (NSString *)md5;
+- (NSString *)firstPinyin;
 
 @end

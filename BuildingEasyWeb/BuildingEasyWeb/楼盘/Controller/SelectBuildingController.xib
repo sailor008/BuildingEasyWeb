@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectBuildingController">
+            <connections>
+                <outlet property="tableView" destination="IdL-uP-m5v" id="HY0-yF-SdS"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFk-Dh-a8x">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yza-AG-cI6">
+                            <rect key="frame" x="10" y="9" width="355" height="29"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="Nto-T0-915">
+                                    <rect key="frame" x="9" y="6" width="16" height="16"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6KE-VN-aoQ">
+                                    <rect key="frame" x="35" y="0.0" width="320" height="29"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="6KE-VN-aoQ" firstAttribute="leading" secondItem="Nto-T0-915" secondAttribute="trailing" constant="10" id="BgH-jM-bYi"/>
+                                <constraint firstItem="6KE-VN-aoQ" firstAttribute="top" secondItem="Yza-AG-cI6" secondAttribute="top" id="Rcc-a9-jCh"/>
+                                <constraint firstItem="Nto-T0-915" firstAttribute="leading" secondItem="Yza-AG-cI6" secondAttribute="leading" constant="9" id="WJL-Hc-ley"/>
+                                <constraint firstAttribute="trailing" secondItem="6KE-VN-aoQ" secondAttribute="trailing" id="ZHd-EB-oj9"/>
+                                <constraint firstItem="Nto-T0-915" firstAttribute="centerY" secondItem="Yza-AG-cI6" secondAttribute="centerY" id="qrm-DP-Fhn"/>
+                                <constraint firstAttribute="bottom" secondItem="6KE-VN-aoQ" secondAttribute="bottom" id="uIJ-T0-4ly"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="14.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layer.bordUIColor">
+                                    <color key="value" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Yza-AG-cI6" secondAttribute="bottom" constant="9" id="AWl-f1-x5p"/>
+                        <constraint firstAttribute="trailing" secondItem="Yza-AG-cI6" secondAttribute="trailing" constant="10" id="JLd-6V-zdz"/>
+                        <constraint firstItem="Yza-AG-cI6" firstAttribute="leading" secondItem="KFk-Dh-a8x" secondAttribute="leading" constant="10" id="NP4-QQ-btp"/>
+                        <constraint firstAttribute="height" constant="47" id="NgH-HW-JKS"/>
+                        <constraint firstItem="Yza-AG-cI6" firstAttribute="top" secondItem="KFk-Dh-a8x" secondAttribute="top" constant="9" id="hpO-fF-3wT"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IdL-uP-m5v">
+                    <rect key="frame" x="0.0" y="47" width="375" height="620"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Oy2-FE-LVp"/>
+                        <outlet property="delegate" destination="-1" id="A5h-U4-eD2"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="KFk-Dh-a8x" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3e6-yC-Pcf"/>
+                <constraint firstItem="KFk-Dh-a8x" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TyH-Bc-mAa"/>
+                <constraint firstAttribute="trailing" secondItem="KFk-Dh-a8x" secondAttribute="trailing" id="U2S-KT-Din"/>
+                <constraint firstAttribute="bottom" secondItem="IdL-uP-m5v" secondAttribute="bottom" id="W9n-IV-UtH"/>
+                <constraint firstAttribute="trailing" secondItem="IdL-uP-m5v" secondAttribute="trailing" id="frP-xf-Nrq"/>
+                <constraint firstItem="IdL-uP-m5v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iMz-ee-yws"/>
+                <constraint firstItem="IdL-uP-m5v" firstAttribute="top" secondItem="KFk-Dh-a8x" secondAttribute="bottom" id="ze6-mo-8FA"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="搜索" width="16" height="16"/>
+    </resources>
+</document>
