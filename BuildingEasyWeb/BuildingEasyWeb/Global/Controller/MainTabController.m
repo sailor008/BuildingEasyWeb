@@ -10,6 +10,9 @@
 
 #import "BuildingController.h"
 #import "MeController.h"
+#import "NetworkManager.h"
+#import "LoginManager.h"
+#import "User.h"
 
 @interface MainTabController ()
 
@@ -45,6 +48,21 @@
     // Do any additional setup after loading the view.
     
     self.tabBar.tintColor = Hex(0xff4c00);
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ([User shareUser].isLogin == NO) {
+        NSString* mobile = [User shareUser].mobile;
+        NSString* pwd = [User shareUser].pwd;
+        [LoginManager login:mobile password:pwd callback:^{
+            [LoginManager getUserInfo];
+        }];
+    } else {
+        [LoginManager getUserInfo];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

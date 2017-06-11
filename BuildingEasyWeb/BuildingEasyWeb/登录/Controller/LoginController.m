@@ -12,6 +12,8 @@
 #import "RegisterController.h"
 #import "FindPassWordController.h"
 #import "UIView+MBProgressHUD.h"
+#import "NSString+Addition.h"
+#import "User.h"
 
 @interface LoginController ()
 
@@ -38,6 +40,8 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    
+    _phoneTextField.text = [User shareUser].mobile;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +61,9 @@
         [MBProgressHUD showError:@"请填写密码" toView:self.view];
         return;
     }
-    [LoginManager login:_phoneTextField.text password:_passWordTextField.text];
+    [LoginManager login:_phoneTextField.text password:[_passWordTextField.text md5] callback:^{
+        
+    }];
 }
 
 - (IBAction)registerNewCount:(id)sender

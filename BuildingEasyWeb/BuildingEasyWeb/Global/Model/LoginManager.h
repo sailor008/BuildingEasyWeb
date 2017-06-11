@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Global.h"
+
 @interface LoginManager : NSObject
 
-+ (void)login:(NSString *)phone password:(NSString *)password;
++ (void)login:(NSString *)phone password:(NSString *)password callback:(Callback)callback;
 + (void)registerWithInfo:(NSDictionary *)info;
-+ (void)requestVerificationCode:(NSString *)phone;
+
++ (void)getUserInfo;
+
++ (void)findPassWord:(NSString *)mobile pwd:(NSString *)pwd code:(NSString *)code;
 
 @end

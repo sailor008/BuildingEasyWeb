@@ -29,4 +29,10 @@
 + (void)hideHUD;
 + (void)hideHUDForView:(UIView *)view;
 
++ (MBProgressHUD *)showLoading;
++ (void)dissmissWithError:(NSString *)error;
++ (void)dissmissWithError:(NSString *)error toView:(UIView *)view;
++ (void)dismissWithSuccess:(NSString *)success;
++ (void)dismissWithSuccess:(NSString *)success toView:(UIView *)view;
+
 @end

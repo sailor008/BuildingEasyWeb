@@ -10,6 +10,8 @@
 
 #import "UIView+MBProgressHUD.h"
 #import "LoginManager.h"
+#import "NetworkManager.h"
+#import "NSString+Addition.h"
 
 static NSInteger const kNewPWDButtonTag = 1000;
 //static NSInteger const kAgainPWDButtonTag = 1001;
@@ -41,7 +43,11 @@ static NSInteger const kNewPWDButtonTag = 1000;
 #pragma mark Action
 - (IBAction)getVerificationCode:(id)sender
 {
-    NSLog(@"获取验证码");
+    [NetworkManager postWithUrl:@"wx/sendResetCode" parameters:@{@"mobile":_phoneTextField.text} success:^(id reponse) {
+        NSLog(@"获取验证码成功");
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"获取验证码失败:%@", error);
+    }];
 }
 
 - (IBAction)showHidePassWord:(UIButton *)sender
@@ -76,7 +82,8 @@ static NSInteger const kNewPWDButtonTag = 1000;
         [MBProgressHUD showError:@"两次密码不一致" toView:self.view];
         return;
     }
-    [LoginManager login:_phoneTextField.text password:_passWordTextField.text];
+    
+    [LoginManager findPassWord:_phoneTextField.text pwd:[_passWordTextField.text md5] code:_codeTextField.text];
 }
 
 @end

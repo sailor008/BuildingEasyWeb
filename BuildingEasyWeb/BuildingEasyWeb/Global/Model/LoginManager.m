@@ -9,6 +9,7 @@
 #import "LoginManager.h"
 
 #import "MainTabController.h"
+#import "LoginController.h"
 #import "User.h"
 #import "NetworkManager.h"
 #import "NSString+Addition.h"
@@ -17,16 +18,22 @@
 
 @implementation LoginManager
 
-+ (void)login:(NSString *)phone password:(NSString *)password
++ (void)login:(NSString *)phone password:(NSString *)password callback:(Callback)callback
 {
-    NSDictionary* parameters = @{@"mobile":phone, @"pwd":[password md5]};
+    [MBProgressHUD showLoading];
+    NSDictionary* parameters = @{@"mobile":phone, @"pwd":password};
     [NetworkManager postWithUrl:@"wx/login" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUD];
         
         User* user = [User mj_objectWithKeyValues:reponse];
-        user.pwd = [password md5];
+        user.pwd = password;
         [user copyToShareUser];
         [[User shareUser] saveUserInfoToFile];
+        
+        [User shareUser].isLogin = YES;
         [LoginManager changeRootControllerToMainTabVC];
+        
+        callback();
         
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD showError:msg];
@@ -46,20 +53,65 @@
         
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD showError:msg];
+        [LoginManager changeRootControllerToLoginVC];
     }];
 }
 
-+ (void)requestVerificationCode:(NSString *)phone
++ (void)getUserInfo
 {
-    
+    [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+        
+        User* user = [User mj_objectWithKeyValues:reponse];
+        user.pwd = [User shareUser].pwd;
+        [user copyToShareUser];
+        [[User shareUser] saveUserInfoToFile];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@", error);
+    }];
 }
 
++ (void)findPassWord:(NSString *)mobile pwd:(NSString *)pwd code:(NSString *)code
+{
+    [MBProgressHUD showLoading];
+    NSDictionary* parameters = @{@"mobile":mobile,
+                                 @"code":code,
+                                 @"pwd":pwd};
+    [NetworkManager postWithUrl:@"wx/updateUserPwd" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUD];
+        
+        User* user = [User mj_objectWithKeyValues:reponse];
+        user.pwd = pwd;
+        [user copyToShareUser];
+        [[User shareUser] saveUserInfoToFile];
+        
+        [User shareUser].isLogin = YES;
+        [LoginManager changeRootControllerToMainTabVC];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg];
+    }];
+}
+
+#pragma mark Private
 + (void)changeRootControllerToMainTabVC
 {
-    MainTabController* mainTabVC = [[MainTabController alloc] init];
-    [mainTabVC setupControllers];
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = mainTabVC;
+    UIViewController* rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (![rootVC isKindOfClass:[MainTabController class]]) {
+        MainTabController* mainTabVC = [[MainTabController alloc] init];
+        [mainTabVC setupControllers];
+        
+        [UIApplication sharedApplication].keyWindow.rootViewController = mainTabVC;
+    }
+}
+
++ (void)changeRootControllerToLoginVC
+{
+    UIViewController* rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (![rootVC isKindOfClass:[MainTabController class]]) {
+        LoginController* loginVC = [[LoginController alloc] init];
+        [UIApplication sharedApplication].keyWindow.rootViewController = loginVC;
+    }
 }
 
 @end
