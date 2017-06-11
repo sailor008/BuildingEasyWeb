@@ -16,6 +16,8 @@
 		C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4891EE9CDAD0067C07F /* MeCellInfo.xib */; };
 		C782F48F1EE9D7430067C07F /* MeCellStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F48D1EE9D7430067C07F /* MeCellStatus.m */; };
 		C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F48E1EE9D7430067C07F /* MeCellStatus.xib */; };
+		C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4971EEBCAD80067C07F /* AboutMeController.m */; };
+		C782F49A1EEBCAD80067C07F /* AboutMeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4981EEBCAD80067C07F /* AboutMeController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
@@ -74,6 +76,9 @@
 		C782F48C1EE9D7430067C07F /* MeCellStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCellStatus.h; sourceTree = "<group>"; };
 		C782F48D1EE9D7430067C07F /* MeCellStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCellStatus.m; sourceTree = "<group>"; };
 		C782F48E1EE9D7430067C07F /* MeCellStatus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCellStatus.xib; sourceTree = "<group>"; };
+		C782F4961EEBCAD80067C07F /* AboutMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeController.h; sourceTree = "<group>"; };
+		C782F4971EEBCAD80067C07F /* AboutMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeController.m; sourceTree = "<group>"; };
+		C782F4981EEBCAD80067C07F /* AboutMeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutMeController.xib; sourceTree = "<group>"; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -388,6 +393,9 @@
 		CF5A4CBC1EE065FF002A281B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C782F4961EEBCAD80067C07F /* AboutMeController.h */,
+				C782F4971EEBCAD80067C07F /* AboutMeController.m */,
+				C782F4981EEBCAD80067C07F /* AboutMeController.xib */,
 				C782F4821EE9B9FC0067C07F /* MeController.h */,
 				C782F4831EE9B9FC0067C07F /* MeController.m */,
 				C782F4841EE9B9FC0067C07F /* MeController.xib */,
@@ -543,6 +551,7 @@
 				CFEEC01E1EE2B5B800E1DB74 /* BuildingController.xib in Resources */,
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
+				C782F49A1EEBCAD80067C07F /* AboutMeController.xib in Resources */,
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
 				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
 				C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */,
@@ -630,6 +639,7 @@
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
+				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
 				C782F48F1EE9D7430067C07F /* MeCellStatus.m in Sources */,
 				CF5A4CB71EE065C6002A281B /* LoginController.m in Sources */,

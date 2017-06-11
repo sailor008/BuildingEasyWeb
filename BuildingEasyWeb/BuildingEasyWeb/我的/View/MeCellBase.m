@@ -26,8 +26,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    
-    NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+}
+
+- (void)initWithData:imgName title:(NSString*) title{
+    _iconImgView.image = GetIMAGE(imgName);
+    _titleLabel.text = title;
 }
 
 @end

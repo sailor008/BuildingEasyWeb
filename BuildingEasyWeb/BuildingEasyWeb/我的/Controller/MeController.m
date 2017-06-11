@@ -8,13 +8,29 @@
 
 #import "MeController.h"
 #import "UITableView+Addition.h"
+
 #import "MeCellBase.h"
 #import "MeCellInfo.h"
 #import "MeCellStatus.h"
 
+#import "AboutMeController.h"
+
+
+typedef void (^onListCell)(void);
+
+
 @interface MeController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, copy) NSArray *viewCfgData;
+
+- (void)initViewCfg;
+- (void)onAboutMe;
+- (void)onFeedback;
+- (void)onMyMsg;
+- (void)onCustomerExt;
+
 
 @end
 
@@ -28,7 +44,48 @@
     [_tableView registerNibWithName:@"MeCellInfo"];
     [_tableView registerNibWithName:@"MeCellStatus"];
 
+    [self initViewCfg];
+}
 
+- (void)initViewCfg {
+    onListCell func_onAboutMe = ^() {
+        [self onAboutMe];
+    };
+    onListCell func_onFeedback = ^() {
+        [self onFeedback];
+    };
+    onListCell func_onMyMsg = ^() {
+        [self onMyMsg];
+    };
+    onListCell func_onCustomerExt = ^() {
+        [self onCustomerExt];
+    };
+    
+    _viewCfgData = @[
+                     @[@"客户报备.png", @"客户报备", func_onCustomerExt],
+                     @[@"消息.png",@"我的消息", func_onMyMsg],
+                     @[@"意见反馈.png",@"意见反馈", func_onFeedback],
+                     @[@"关于我们.png",@"关于我们", func_onAboutMe],
+                     ];
+}
+
+- (void)onAboutMe {
+    NSLog(@"is on About me!!!!!!!!!!!");
+    AboutMeController* aboutMeVC = [[AboutMeController alloc] init];
+    aboutMeVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:aboutMeVC animated:YES];
+}
+
+- (void)onFeedback{
+    NSLog(@"is on onFeedback!!!!!!!!!!!");
+}
+
+- (void)onMyMsg{
+    NSLog(@"is onMyMsg!!!!!!!!!!!");
+}
+
+- (void)onCustomerExt{
+    NSLog(@"is onCustomerExt!!!!!!!!!!!");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,7 +169,23 @@
 
     }else {
         MeCellBase* cell = [tableView dequeueReusableCellWithIdentifier:@"MeCellBase" forIndexPath:indexPath];
+        [cell initWithData: _viewCfgData[indexPath.row][0] title: _viewCfgData[indexPath.row][1]];
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0) {
+
+    }else if(indexPath.section == 1) {
+        if(indexPath.row == 0) {
+
+        }else { //if(indexPath.row == 1)
+        }
+        
+    }else {
+        onListCell func_block = _viewCfgData[indexPath.row][2];
+        func_block();
     }
 }
 
