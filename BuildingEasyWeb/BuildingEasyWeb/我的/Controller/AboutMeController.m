@@ -9,6 +9,8 @@
 #import "AboutMeController.h"
 
 @interface AboutMeController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
@@ -22,7 +24,9 @@
     
     self.title = @"关于我们";
     
-    
+    _nameLabel.text = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    NSString *shortVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    _versionLabel.text = [NSString stringWithFormat:@"当前版本V%@", shortVersion];
 }
 
 - (void)didReceiveMemoryWarning {

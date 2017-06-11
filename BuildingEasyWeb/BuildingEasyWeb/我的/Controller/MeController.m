@@ -14,6 +14,8 @@
 #import "MeCellStatus.h"
 
 #import "AboutMeController.h"
+#import "FeedbackController.h"
+#import "MyMessageController.h"
 
 
 typedef void (^onListCell)(void);
@@ -78,10 +80,17 @@ typedef void (^onListCell)(void);
 
 - (void)onFeedback{
     NSLog(@"is on onFeedback!!!!!!!!!!!");
+    
+    FeedbackController* feedbackVC = [[FeedbackController alloc]init];
+    feedbackVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:feedbackVC animated:YES];
 }
 
 - (void)onMyMsg{
     NSLog(@"is onMyMsg!!!!!!!!!!!");
+    MyMessageController* myMsgVC = [[MyMessageController alloc]init];
+    myMsgVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:myMsgVC animated:YES];
 }
 
 - (void)onCustomerExt{

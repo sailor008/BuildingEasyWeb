@@ -18,6 +18,12 @@
 		C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F48E1EE9D7430067C07F /* MeCellStatus.xib */; };
 		C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4971EEBCAD80067C07F /* AboutMeController.m */; };
 		C782F49A1EEBCAD80067C07F /* AboutMeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4981EEBCAD80067C07F /* AboutMeController.xib */; };
+		C782F49E1EED21790067C07F /* FeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F49C1EED21790067C07F /* FeedbackController.m */; };
+		C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F49D1EED21790067C07F /* FeedbackController.xib */; };
+		C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4A11EED51BE0067C07F /* MyMessageController.m */; };
+		C782F4A41EED51BE0067C07F /* MyMessageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4A21EED51BE0067C07F /* MyMessageController.xib */; };
+		C782F4A81EEDB5910067C07F /* MyMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4A61EEDB5910067C07F /* MyMsgCell.m */; };
+		C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4A71EEDB5910067C07F /* MyMsgCell.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
@@ -94,6 +100,15 @@
 		C782F4961EEBCAD80067C07F /* AboutMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutMeController.h; sourceTree = "<group>"; };
 		C782F4971EEBCAD80067C07F /* AboutMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeController.m; sourceTree = "<group>"; };
 		C782F4981EEBCAD80067C07F /* AboutMeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutMeController.xib; sourceTree = "<group>"; };
+		C782F49B1EED21790067C07F /* FeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackController.h; sourceTree = "<group>"; };
+		C782F49C1EED21790067C07F /* FeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackController.m; sourceTree = "<group>"; };
+		C782F49D1EED21790067C07F /* FeedbackController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackController.xib; sourceTree = "<group>"; };
+		C782F4A01EED51BE0067C07F /* MyMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageController.h; sourceTree = "<group>"; };
+		C782F4A11EED51BE0067C07F /* MyMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageController.m; sourceTree = "<group>"; };
+		C782F4A21EED51BE0067C07F /* MyMessageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMessageController.xib; sourceTree = "<group>"; };
+		C782F4A51EEDB5910067C07F /* MyMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMsgCell.h; path = "BuildingEasyWeb/我的/View/MyMsgCell.h"; sourceTree = SOURCE_ROOT; };
+		C782F4A61EEDB5910067C07F /* MyMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMsgCell.m; path = "BuildingEasyWeb/我的/View/MyMsgCell.m"; sourceTree = SOURCE_ROOT; };
+		C782F4A71EEDB5910067C07F /* MyMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMsgCell.xib; path = "BuildingEasyWeb/我的/View/MyMsgCell.xib"; sourceTree = SOURCE_ROOT; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -440,6 +455,12 @@
 				C782F4821EE9B9FC0067C07F /* MeController.h */,
 				C782F4831EE9B9FC0067C07F /* MeController.m */,
 				C782F4841EE9B9FC0067C07F /* MeController.xib */,
+				C782F49B1EED21790067C07F /* FeedbackController.h */,
+				C782F49C1EED21790067C07F /* FeedbackController.m */,
+				C782F49D1EED21790067C07F /* FeedbackController.xib */,
+				C782F4A01EED51BE0067C07F /* MyMessageController.h */,
+				C782F4A11EED51BE0067C07F /* MyMessageController.m */,
+				C782F4A21EED51BE0067C07F /* MyMessageController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -454,6 +475,9 @@
 		CF5A4CBE1EE065FF002A281B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C782F4A51EEDB5910067C07F /* MyMsgCell.h */,
+				C782F4A61EEDB5910067C07F /* MyMsgCell.m */,
+				C782F4A71EEDB5910067C07F /* MyMsgCell.xib */,
 				C782F47D1EE9B9DD0067C07F /* MeCellBase.h */,
 				C782F47E1EE9B9DD0067C07F /* MeCellBase.m */,
 				C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */,
@@ -612,6 +636,8 @@
 				CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */,
 				CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */,
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
+				C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */,
+				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
@@ -623,6 +649,7 @@
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
 				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
 				C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */,
+				C782F4A41EED51BE0067C07F /* MyMessageController.xib in Resources */,
 				CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */,
 				CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,
@@ -692,6 +719,7 @@
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
+				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
 				C782F4851EE9B9FC0067C07F /* MeController.m in Sources */,
 				CFEEC0211EE2BBD100E1DB74 /* TableRefreshManager.m in Sources */,
 				CF5A4C7A1EE05357002A281B /* BaseController.m in Sources */,
@@ -715,10 +743,12 @@
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
+				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
 				C782F48F1EE9D7430067C07F /* MeCellStatus.m in Sources */,
 				CF5A4CB71EE065C6002A281B /* LoginController.m in Sources */,
+				C782F4A81EEDB5910067C07F /* MyMsgCell.m in Sources */,
 				CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */,
 				CF665BF91EEB9AB200028B1B /* BaobeiCell.m in Sources */,
 				CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */,
