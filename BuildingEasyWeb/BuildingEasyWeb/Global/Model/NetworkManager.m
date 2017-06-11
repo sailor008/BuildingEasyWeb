@@ -1,4 +1,4 @@
-//
+ //
 //  NetworkManager.m
 //  BuildingEasyWeb
 //
@@ -10,6 +10,7 @@
 
 #import <AFNetworking.h>
 #import "NSString+Addition.h"
+#import "User.h"
 
 static const NSString* host = @"39.108.58.165:11071";
 
@@ -103,8 +104,8 @@ static const NSString* host = @"39.108.58.165:11071";
     
     NSMutableDictionary *fullParams = [NSMutableDictionary dictionary];
     [fullParams addEntriesFromDictionary:parameters];
-    fullParams[@"token"] = nil;
-    fullParams[@"userId"] = nil;
+    fullParams[@"token"] = [User shareUser].token.length ? [User shareUser].token : nil;
+    fullParams[@"userId"] = [User shareUser].userId.length ? [User shareUser].userId : nil;;
     fullParams[@"platform"] = @(1);
     fullParams[@"times"] = @(timeInterval);
     fullParams[@"sign"] = signStr;

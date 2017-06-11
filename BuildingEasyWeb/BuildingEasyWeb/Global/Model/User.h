@@ -17,7 +17,13 @@
 @property (nonatomic, copy) NSString* headImg;
 @property (nonatomic, copy) NSNumber* role;
 
+@property (nonatomic, copy) NSString* email;
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, copy) NSNumber* auth;
+
 @property (nonatomic, copy) NSString* pwd;
+
+@property (nonatomic, assign) BOOL isLogin;
 
 + (instancetype)shareUser;
 

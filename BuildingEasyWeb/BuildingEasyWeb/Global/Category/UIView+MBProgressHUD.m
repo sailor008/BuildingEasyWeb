@@ -130,4 +130,60 @@
     [self hideHUDForView:view animated:YES];
 }
 
+/**
+ *  显示加载中
+ *
+ *  @return 直接返回一个MBProgressHUD，需要手动关闭
+ */
++ (MBProgressHUD *)showLoading
+{
+    return [MBProgressHUD showMessage:@""];
+}
+
+/**
+ *  显示错误信息，自动关闭MBProgressHUD
+ *
+ *  @param error  错误提示内容
+ */
++ (void)dissmissWithError:(NSString *)error
+{
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showError:error];
+}
+
+/**
+ *  显示错误信息，自动关闭MBProgressHUD
+ *
+ *  @param error  错误提示内容
+ *  @param view   显示MBProgressHUD的视图
+ */
++ (void)dissmissWithError:(NSString *)error toView:(UIView *)view
+{
+    [MBProgressHUD hideHUDForView:view];
+    [MBProgressHUD showError:error toView:view];
+}
+
+/**
+ *  显示错误信息，自动关闭MBProgressHUD
+ *
+ *  @param success  成功提示内容
+ */
++ (void)dismissWithSuccess:(NSString *)success
+{
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showSuccess:success];
+}
+
+/**
+ *  显示错误信息，自动关闭MBProgressHUD
+ *
+ *  @param success  成功提示内容
+ *  @param view   显示MBProgressHUD的视图
+ */
++ (void)dismissWithSuccess:(NSString *)success toView:(UIView *)view
+{
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showSuccess:success toView:view];
+}
+
 @end

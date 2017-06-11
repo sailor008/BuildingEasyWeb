@@ -13,6 +13,8 @@ typedef NS_ENUM(NSInteger, BEWUserRole) {
     kAgencyRole
 };
 
+typedef void(^Callback)();
+
 @interface Global : NSObject
 
 @end

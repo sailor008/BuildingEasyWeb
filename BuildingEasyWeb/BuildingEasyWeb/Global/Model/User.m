@@ -16,6 +16,9 @@ static NSString* const kHeadImg = @"HeadImg";
 static NSString* const kRole = @"Role";
 static NSString* const kUserFileName = @"UserInfo";
 static NSString* const kUserPWD = @"UserPWD";
+static NSString* const kAuth = @"Auth";
+static NSString* const kEmail = @"Email";
+static NSString* const kUserName = @"Name";
 
 @implementation User
 
@@ -54,6 +57,9 @@ static NSString* const kUserPWD = @"UserPWD";
             shareUser.mobile = userInfo.mobile;
             shareUser.headImg = userInfo.headImg;
             shareUser.pwd = userInfo.pwd;
+            shareUser.name = userInfo.name;
+            shareUser.email = userInfo.email;
+            shareUser.auth = userInfo.auth;
             return YES;
         }
     }
@@ -62,14 +68,17 @@ static NSString* const kUserPWD = @"UserPWD";
 
 - (BOOL)clearUserInfoInFile
 {
+    // 退出登录手机号码不清空
     User* userInfo = [User shareUser];
     userInfo.userId = @"";
     userInfo.nickname = @"";
     userInfo.token = @"";
     userInfo.headImg = @"";
-    userInfo.mobile = @"";
     userInfo.role = @(0);
     userInfo.pwd = @"";
+    userInfo.name = @"";
+    userInfo.email = @"";
+    userInfo.auth = @(0);
     return [self saveUserInfoToFile];
 }
 
@@ -82,6 +91,9 @@ static NSString* const kUserPWD = @"UserPWD";
     [User shareUser].mobile = [self.mobile copy];
     [User shareUser].role = self.role;
     [User shareUser].pwd = self.pwd;
+    [User shareUser].name = self.name;
+    [User shareUser].email = self.email;
+    [User shareUser].auth = self.auth;
 }
 
 #pragma mark NSCoding
@@ -97,6 +109,9 @@ static NSString* const kUserPWD = @"UserPWD";
         _headImg = [aDecoder decodeObjectForKey:kHeadImg];
         _role = [aDecoder decodeObjectForKey:kRole];
         _pwd = [aDecoder decodeObjectForKey:kUserPWD];
+        _name = [aDecoder decodeObjectForKey:kUserName];
+        _email = [aDecoder decodeObjectForKey:kEmail];
+        _auth = [aDecoder decodeObjectForKey:kAuth];
     }
     return self;
 }
@@ -110,6 +125,9 @@ static NSString* const kUserPWD = @"UserPWD";
     [aCoder encodeObject:_headImg forKey:kHeadImg];
     [aCoder encodeObject:_role forKey:kRole];
     [aCoder encodeObject:_pwd forKey:kUserPWD];
+    [aCoder encodeObject:_name forKey:kUserName];
+    [aCoder encodeObject:_email forKey:kEmail];
+    [aCoder encodeObject:_auth forKey:kAuth];
 }
 
 @end
