@@ -16,7 +16,7 @@
 {
     //返回按钮的箭头颜色
     UINavigationBar * navigationBar = [UINavigationBar appearance];
-    [navigationBar setTintColor:[UIColor orangeColor]];
+    [navigationBar setTintColor:Hex(0xff4c00)];
 }
 
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item

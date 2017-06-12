@@ -57,7 +57,10 @@ static const NSString* host = @"39.108.58.165:11071";
 + (void)getWithUrl:(NSString *)urlStr parameters:(NSDictionary *)parameters success:(RequestSuccess)successBlock failure:(RequestFailure)failureBlock
 {
     NSString* requestUrl = [NSString stringWithFormat:@"http://%@/%@", host, urlStr];
-    [[NetworkManager shareNetworkManager].httpSessionManager GET:requestUrl parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    
+    NSDictionary* fullParameters = [NetworkManager fullParameters:parameters];
+    
+    [[NetworkManager shareNetworkManager].httpSessionManager GET:requestUrl parameters:fullParameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -97,10 +100,20 @@ static const NSString* host = @"39.108.58.165:11071";
     
     long timeInterval = [[NSDate date] timeIntervalSince1970] * 1000;
     
-    NSString* originalStr = [NSString stringWithFormat:@"token=&userId=&platform=1&times=%ld&%@&louyi0609source^8^#", timeInterval, parametersStr];
-    originalStr = [originalStr lowercaseString];
+    NSMutableString* originalStr;
+    if ([User shareUser].token.length) {
+        [originalStr appendFormat:@"token=%@", [User shareUser].token];
+    } else {
+        [originalStr appendString:@"token="];
+    }
+    if ([User shareUser].userId.length) {
+        [originalStr appendFormat:@"&userId=%@", [User shareUser].userId];
+    } else {
+        [originalStr appendString:@"&userId="];
+    }
+    [originalStr appendFormat:@"&platform=1&times=%ld&%@&louyi0609source^8^#", timeInterval, parametersStr];
     
-    NSString* signStr = [[originalStr md5] substringToIndex:12];
+    NSString* signStr = [[[originalStr lowercaseString] md5] substringToIndex:12];
     
     NSMutableDictionary *fullParams = [NSMutableDictionary dictionary];
     [fullParams addEntriesFromDictionary:parameters];
