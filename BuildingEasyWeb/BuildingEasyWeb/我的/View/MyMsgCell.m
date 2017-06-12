@@ -1,21 +1,22 @@
 //
-//  MeCellBase.m
+//  MyMsgCell.m
 //  BuildingEasyWeb
 //
-//  Created by SeekMac on 2017/6/9.
+//  Created by SeekMac on 2017/6/12.
 //  Copyright © 2017年 zhenghongyi. All rights reserved.
 //
 
-#import "MeCellBase.h"
+#import "MyMsgCell.h"
 
-@interface MeCellBase()
+@interface MyMsgCell()
 
-@property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
-@implementation MeCellBase
+@implementation MyMsgCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -26,11 +27,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-- (void)initWithData:imgName title:(NSString*) title{
-    _iconImgView.image = GetIMAGE(imgName);
-    _titleLabel.text = title;
 }
 
 @end
