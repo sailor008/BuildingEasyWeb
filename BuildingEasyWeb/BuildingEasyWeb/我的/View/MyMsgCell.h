@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MsgData.h"
+#import "MsgModel.h"
 
 @interface MyMsgCell : UITableViewCell
 
-- (void)initWithData:(MsgData*) data;
+- (void)initWithData:(MsgModel*) data;
 @end

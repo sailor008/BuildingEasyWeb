@@ -30,7 +30,7 @@
 }
 
 
-- (void)initWithData:(MsgData*) data{
+- (void)initWithData:(MsgModel*) data{
     _contentLabel.numberOfLines = 0;//表示label可以多行显示
     _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
     

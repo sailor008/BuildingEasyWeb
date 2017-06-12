@@ -1,5 +1,5 @@
 //
-//  MsgData.h
+//  MsgModel.h
 //  BuildingEasyWeb
 //
 //  Created by SeekMac on 2017/6/13.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface MsgData : NSObject
+@interface MsgModel : NSObject
 
 @property (nonatomic, copy) NSString* title;
 @property (nonatomic, copy) NSString* content;

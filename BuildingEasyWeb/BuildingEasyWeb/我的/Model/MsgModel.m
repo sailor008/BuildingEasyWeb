@@ -1,19 +1,19 @@
 //
-//  MsgData.m
+//  MsgModel.m
 //  BuildingEasyWeb
 //
 //  Created by SeekMac on 2017/6/13.
 //  Copyright © 2017年 zhenghongyi. All rights reserved.
 //
 
-#import "MsgData.h"
+#import "MsgModel.h"
 
-@interface MsgData()
+@interface MsgModel()
 
 @end
 
 
-@implementation MsgData
+@implementation MsgModel
 
 - (id)initWithTitle:(NSString*)title content:(NSString*) content{
     self = [super init];

@@ -46,15 +46,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MsgData* msgData = self.aryMsgData[indexPath.row];
-    return msgData.cellHeight;
+    MsgModel* MsgModel = self.aryMsgData[indexPath.row];
+    return MsgModel.cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MyMsgCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MyMsgCell" forIndexPath:indexPath];
-    MsgData* msgData = self.aryMsgData[indexPath.row];
-    [cell initWithData: msgData];
+    MsgModel* MsgModel = self.aryMsgData[indexPath.row];
+    [cell initWithData: MsgModel];
     return cell;
 }
 

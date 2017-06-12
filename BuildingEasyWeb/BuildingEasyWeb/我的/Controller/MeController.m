@@ -100,7 +100,7 @@ typedef void (^onListCell)(void);
         NSString* tmpTit = [NSString stringWithFormat:@"标题%lu",(unsigned long)i];
         NSString* tmpCon =  [tmpStr substringWithRange:NSMakeRange(sIdx, eIdx)];
         
-        MsgData* msg = [[MsgData alloc]initWithTitle:tmpTit content:tmpCon];
+        MsgModel* msg = [[MsgModel alloc]initWithTitle:tmpTit content:tmpCon];
         [listData addObject:msg];
     }
     
