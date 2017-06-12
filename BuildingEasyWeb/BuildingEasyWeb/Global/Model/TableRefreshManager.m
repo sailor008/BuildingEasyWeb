@@ -22,17 +22,23 @@
 
 + (void)tableView:(UITableView *)tableView loadData:(void(^)(BOOL isMore))block
 {
+    __weak typeof(tableView) weakTableView = tableView;
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakTableView.page = 1;
         block(NO);
     }];
     
-    tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+    tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        weakTableView.page ++;
         block(YES);
     }];
 }
 
 + (void)tableViewEndRefresh:(UITableView *)tableView
 {
+    if (tableView.hasNext == NO) {
+        tableView.mj_footer.state = MJRefreshStateNoMoreData;
+    }
     [tableView.mj_header endRefreshing];
     [tableView.mj_footer endRefreshing];
 }

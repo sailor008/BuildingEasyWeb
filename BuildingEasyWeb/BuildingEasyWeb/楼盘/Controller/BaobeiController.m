@@ -101,6 +101,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 - (IBAction)importContact:(id)sender
 {
     ContactListController* contactVC = [[ContactListController alloc] init];
+    contactVC.selectedContact = ^(ContactModel *model) {
+        _nameLabel.text = model.name;
+        _phoneLabel.text = model.phone;
+    };
     [self.navigationController pushViewController:contactVC animated:YES];
 }
 

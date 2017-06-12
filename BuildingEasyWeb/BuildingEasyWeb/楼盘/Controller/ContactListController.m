@@ -18,7 +18,13 @@
 @property (nonatomic, strong) NSMutableArray* indexArr;
 @property (nonatomic, strong) NSMutableDictionary* contactDic;
 
+@property (nonatomic, strong) NSMutableArray* searchIndexArr;
+@property (nonatomic, strong) NSMutableDictionary* searchDic;
+
+@property (nonatomic, assign) BOOL isSearch;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @end
 
@@ -30,12 +36,14 @@
     
     self.title = @"通讯录";
     
+    [_searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
     [_tableView registerNibWithName:@"ContactCell"];
     _tableView.sectionIndexColor = Hex(0xff4c00);
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self.navigationController action:@selector(popViewControllerAnimated:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(commitContact)];
     
     _indexArr = [NSMutableArray array];
     _contactDic = [NSMutableDictionary dictionary];
@@ -72,39 +80,131 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString* indexStr = _indexArr[section];
-    NSArray* array = _contactDic[indexStr];
-    return array.count;
+    if (_isSearch) {
+        NSString* indexStr = _searchIndexArr[section];
+        NSArray* array = _searchDic[indexStr];
+        return array.count;
+    } else {
+        NSString* indexStr = _indexArr[section];
+        NSArray* array = _contactDic[indexStr];
+        return array.count;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _indexArr.count;
+    if (_isSearch) {
+        return _searchIndexArr.count;
+    } else {
+        return _indexArr.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ContactCell* cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
-    NSString* indexStr = _indexArr[indexPath.section];
-    NSArray* array = _contactDic[indexStr];
-    ContactModel* model = array[indexPath.row];
+    
+    ContactModel* model;
+    if (_isSearch) {
+        NSString* indexStr = _searchIndexArr[indexPath.section];
+        NSArray* array = _searchDic[indexStr];
+        model = array[indexPath.row];
+    } else {
+        NSString* indexStr = _indexArr[indexPath.section];
+        NSArray* array = _contactDic[indexStr];
+        model = array[indexPath.row];
+    }
+    
     cell.model = model;
     return cell;
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return _indexArr[section];
+    if (_isSearch) {
+        return _searchIndexArr[section];
+    } else {
+        return _indexArr[section];
+    }
 }
 
--(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return _indexArr;
+    if (_isSearch) {
+        return _searchIndexArr;
+    } else {
+        return _indexArr;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-    return [_indexArr indexOfObject:title];
+    if (_isSearch) {
+        return [_searchIndexArr indexOfObject:title];
+    } else {
+        return [_indexArr indexOfObject:title];
+    }
+}
+
+#pragma mark Action
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    [_searchIndexArr removeAllObjects];
+    [_searchDic removeAllObjects];
+    
+    _isSearch = textField.text.length > 0;
+    if (textField.text.length) {
+        
+        _searchDic = [NSMutableDictionary dictionary];
+        _searchIndexArr = [NSMutableArray array];
+        
+        NSString* keyStr = textField.text;
+        for (NSString* indexStr in _indexArr) {
+            NSArray* array = _contactDic[indexStr];
+            
+            for (ContactModel* model in array) {
+                if ([model.name containsString:keyStr] || [model.phone containsString:keyStr]) {
+                    // 查找到含有关键字的模型，存入搜索结果
+                    if ([_searchIndexArr containsObject:indexStr]) {
+                        NSMutableArray* tempArray = _searchDic[indexStr];
+                        [tempArray addObject:model];
+                    } else {
+                        [_searchIndexArr addObject:indexStr];
+                        
+                        NSMutableArray* tempArray = [NSMutableArray array];
+                        [tempArray addObject:model];
+                        _searchDic[indexStr] = tempArray;
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+    [_tableView reloadData];
+}
+
+- (void)commitContact
+{
+    NSIndexPath* indexPath = [_tableView indexPathForSelectedRow];
+    if (_isSearch) {
+        NSString* indexStr = _searchIndexArr[indexPath.section];
+        NSArray* array = _searchDic[indexStr];
+        
+        if (self.selectedContact) {
+            self.selectedContact(array[indexPath.row]);
+        }
+    } else {
+        NSString* indexStr = _indexArr[indexPath.section];
+        NSArray* array = _contactDic[indexStr];
+        
+        if (self.selectedContact) {
+            self.selectedContact(array[indexPath.row]);
+        }
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

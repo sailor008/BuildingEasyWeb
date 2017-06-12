@@ -54,15 +54,15 @@
 {
     [super viewDidAppear:animated];
     
-    if ([User shareUser].isLogin == NO) {
-        NSString* mobile = [User shareUser].mobile;
-        NSString* pwd = [User shareUser].pwd;
-        [LoginManager login:mobile password:pwd callback:^{
-            [LoginManager getUserInfo];
-        }];
-    } else {
-        [LoginManager getUserInfo];
-    }
+//    if ([User shareUser].isLogin == NO) {
+//        NSString* mobile = [User shareUser].mobile;
+//        NSString* pwd = [User shareUser].pwd;
+//        [LoginManager login:mobile password:pwd callback:^{
+//            [LoginManager getUserInfo];
+//        }];
+//    } else {
+//        [LoginManager getUserInfo];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

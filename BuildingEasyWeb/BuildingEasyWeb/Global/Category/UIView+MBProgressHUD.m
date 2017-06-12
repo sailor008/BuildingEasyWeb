@@ -140,6 +140,11 @@
     return [MBProgressHUD showMessage:@""];
 }
 
++ (MBProgressHUD *)showLoadingToView:(UIView *)view
+{
+    return [MBProgressHUD showMessage:@"" toView:view];
+}
+
 /**
  *  显示错误信息，自动关闭MBProgressHUD
  *

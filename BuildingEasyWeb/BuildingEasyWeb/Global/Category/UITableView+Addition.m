@@ -14,6 +14,7 @@ static const char kTableViewPage;
 static const char kTableViewAllPage;
 static const char kTableViewCount;
 static const char kTableViewAllCount;
+static const char kTableViewHasNext;
 
 @implementation UITableView (Addition)
 
@@ -63,6 +64,18 @@ static const char kTableViewAllCount;
 {
     NSNumber* allCountNum = objc_getAssociatedObject(self, &kTableViewAllCount);
     return allCountNum.integerValue;
+}
+
+- (void)setHasNext:(BOOL)hasNext
+{
+    NSNumber* hasNextNum = [NSNumber numberWithBool:hasNext];
+    objc_setAssociatedObject(self, &kTableViewHasNext, hasNextNum, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)hasNext
+{
+    NSNumber* hasNextNum = objc_getAssociatedObject(self, &kTableViewHasNext);
+    return hasNextNum.boolValue;
 }
 
 - (void)registerNibWithName:(NSString *)nibName
