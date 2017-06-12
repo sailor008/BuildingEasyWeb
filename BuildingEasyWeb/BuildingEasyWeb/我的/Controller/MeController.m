@@ -88,7 +88,25 @@ typedef void (^onListCell)(void);
 
 - (void)onMyMsg{
     NSLog(@"is onMyMsg!!!!!!!!!!!");
+    
+    
+    NSString* tmpStr = @"测试内容：6月8日举行的英国大选再次飞出“黑天鹅”，本来在议会中占多数议席的保守党非但没能如愿扩大领先优势，反而失去了多数议席，要拉拢小党才能勉强维持执政地位，这意味着首相特雷莎·梅不但没能在脱欧问题上获得民众更清晰确定的授权，而且弄巧成拙，引火烧身，将自身的领袖地位、英国政局和英国在脱欧谈判上的处境都置于险境。";
+    
+    NSMutableArray* listData = [[NSMutableArray alloc]init];
+    for (NSUInteger i = 0; i < 6; i++) {
+        int sIdx = arc4random()% 10;
+        int eIdx = arc4random()% (tmpStr.length - 20) + 15;
+        
+        NSString* tmpTit = [NSString stringWithFormat:@"标题%lu",(unsigned long)i];
+        NSString* tmpCon =  [tmpStr substringWithRange:NSMakeRange(sIdx, eIdx)];
+        
+        MsgData* msg = [[MsgData alloc]initWithTitle:tmpTit content:tmpCon];
+        [listData addObject:msg];
+    }
+    
+    
     MyMessageController* myMsgVC = [[MyMessageController alloc]init];
+    myMsgVC.aryMsgData = listData;
     myMsgVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:myMsgVC animated:YES];
 }

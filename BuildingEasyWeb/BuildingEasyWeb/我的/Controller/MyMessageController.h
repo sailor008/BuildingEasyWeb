@@ -8,6 +8,10 @@
 
 #import "BaseController.h"
 
+#import "MyMsgCell.h"
+
 @interface MyMessageController : BaseController
+
+@property (nonatomic,strong) NSArray *aryMsgData;
 
 @end

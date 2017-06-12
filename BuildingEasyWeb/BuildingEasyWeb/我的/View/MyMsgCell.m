@@ -29,4 +29,14 @@
     // Configure the view for the selected state
 }
 
+
+- (void)initWithData:(MsgData*) data{
+    _contentLabel.numberOfLines = 0;//表示label可以多行显示
+    _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    
+    _titleLabel.text = data.title;
+    _contentLabel.text = data.content;
+    
+}
+
 @end

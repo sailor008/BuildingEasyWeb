@@ -24,6 +24,7 @@
 		C782F4A41EED51BE0067C07F /* MyMessageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4A21EED51BE0067C07F /* MyMessageController.xib */; };
 		C782F4A81EEDB5910067C07F /* MyMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4A61EEDB5910067C07F /* MyMsgCell.m */; };
 		C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4A71EEDB5910067C07F /* MyMsgCell.xib */; };
+		C782F4AC1EEEF78B0067C07F /* MsgData.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4AB1EEEF78B0067C07F /* MsgData.m */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
@@ -109,6 +110,8 @@
 		C782F4A51EEDB5910067C07F /* MyMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMsgCell.h; path = "BuildingEasyWeb/我的/View/MyMsgCell.h"; sourceTree = SOURCE_ROOT; };
 		C782F4A61EEDB5910067C07F /* MyMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMsgCell.m; path = "BuildingEasyWeb/我的/View/MyMsgCell.m"; sourceTree = SOURCE_ROOT; };
 		C782F4A71EEDB5910067C07F /* MyMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMsgCell.xib; path = "BuildingEasyWeb/我的/View/MyMsgCell.xib"; sourceTree = SOURCE_ROOT; };
+		C782F4AA1EEEF78B0067C07F /* MsgData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgData.h; sourceTree = "<group>"; };
+		C782F4AB1EEEF78B0067C07F /* MsgData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgData.m; sourceTree = "<group>"; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -468,6 +471,8 @@
 		CF5A4CBD1EE065FF002A281B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C782F4AA1EEEF78B0067C07F /* MsgData.h */,
+				C782F4AB1EEEF78B0067C07F /* MsgData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -743,6 +748,7 @@
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
+				C782F4AC1EEEF78B0067C07F /* MsgData.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
