@@ -10,4 +10,7 @@
 
 @interface MeCellBase : UITableViewCell
 
+
+- (void)initWithData:imgName title:(NSString*) title;
+
 @end
