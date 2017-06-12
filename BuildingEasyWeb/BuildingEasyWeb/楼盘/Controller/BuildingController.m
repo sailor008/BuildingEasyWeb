@@ -17,6 +17,11 @@
 #import "AdsScrollView.h"
 #import "SectionFilterView.h"
 #import "BuildingDetailController.h"
+#import "NetworkManager.h"
+#import "BuildingListModel.h"
+#import <MJExtension.h>
+#import "LoginManager.h"
+#import "User.h"
 
 @interface BuildingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AdsScrollView* adsView;
 @property (nonatomic, strong) SectionFilterView* sectionView;
+
+@property (nonatomic, strong) NSMutableArray* buildingArr;
 
 @end
 
@@ -44,6 +51,14 @@
 //    }];
     
     [self setupUI];
+    
+    if ([User shareUser].isLogin == NO) {
+        NSString* mobile = [User shareUser].mobile;
+        NSString* pwd = [User shareUser].pwd;
+        [LoginManager login:mobile password:pwd callback:^{
+            [self requestData];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +102,34 @@
     [_locationButton setImage:GetIMAGE(@"定位.png") forState:UIControlStateNormal];
     _locationButton.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, -6);
     [_locationButton sizeToFit];
+}
+
+- (void)requestData
+{
+    NSDictionary* parameters = @{@"averAgeId":@0,
+                                 @"distanceId":@0,
+                                 @"classifyId":@0,
+                                 @"areaCode":@0,
+                                 @"lon":@113.26,
+                                 @"lat":@23.14,
+                                 @"pageNo":@1,
+                                 @"pageSize":@10,
+                                 @"keyword":@""};
+    [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
+        NSLog(@"response :%@", reponse);
+        
+        _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
+        NSArray* list = [reponse objectForKey:@"list"];
+        for (NSDictionary* dic in list) {
+            BuildingListModel* model = [BuildingListModel mj_objectWithKeyValues:dic];
+            [_buildingArr addObject:model];
+        }
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error :%@", error);
+    }];
 }
 
 #pragma mark UITableViewDataSource

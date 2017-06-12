@@ -37,6 +37,7 @@
 		CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D541EEAE9A0009A1B50 /* BaobeiController.m */; };
 		CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */; };
 		CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D591EEAF44E009A1B50 /* NSString+Addition.m */; };
+		CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */; };
 		CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */; };
 		CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */; };
 		CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */; };
@@ -59,6 +60,7 @@
 		CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */; };
 		CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */; };
 		CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB630081EE250DC00AE5919 /* NetworkManager.m */; };
+		CFD016931EED353F003E1BF8 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD016921EED353F003E1BF8 /* CityModel.m */; };
 		CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD367A1EEBCAB5007497AC /* SelectBuildingController.m */; };
 		CFDD367D1EEBCAB5007497AC /* SelectBuildingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDD367B1EEBCAB5007497AC /* SelectBuildingController.xib */; };
 		CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD367F1EEBCF38007497AC /* CALayer+Addition.m */; };
@@ -130,6 +132,8 @@
 		CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaobeiController.xib; sourceTree = "<group>"; };
 		CF413D581EEAF44E009A1B50 /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		CF413D591EEAF44E009A1B50 /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
+		CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingListModel.h; sourceTree = "<group>"; };
+		CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingListModel.m; sourceTree = "<group>"; };
 		CF55FF151EE8316B00B0ACD9 /* BuildingDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailController.h; sourceTree = "<group>"; };
 		CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingDetailController.m; sourceTree = "<group>"; };
 		CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingDetailController.xib; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsScrollView.m; sourceTree = "<group>"; };
 		CFB630071EE250DC00AE5919 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		CFB630081EE250DC00AE5919 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		CFD016911EED353F003E1BF8 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		CFD016921EED353F003E1BF8 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
 		CFDD36791EEBCAB5007497AC /* SelectBuildingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectBuildingController.h; sourceTree = "<group>"; };
 		CFDD367A1EEBCAB5007497AC /* SelectBuildingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectBuildingController.m; sourceTree = "<group>"; };
 		CFDD367B1EEBCAB5007497AC /* SelectBuildingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectBuildingController.xib; sourceTree = "<group>"; };
@@ -524,6 +530,10 @@
 		CF5A4CC01EE06618002A281B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CFD016911EED353F003E1BF8 /* CityModel.h */,
+				CFD016921EED353F003E1BF8 /* CityModel.m */,
+				CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */,
+				CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -721,6 +731,7 @@
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
 				CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */,
 				CFEEC01D1EE2B5B800E1DB74 /* BuildingController.m in Sources */,
+				CFD016931EED353F003E1BF8 /* CityModel.m in Sources */,
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
@@ -741,6 +752,7 @@
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,
+				CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,

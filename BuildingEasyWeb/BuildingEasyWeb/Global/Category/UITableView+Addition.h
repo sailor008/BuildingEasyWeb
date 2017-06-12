@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSInteger count;
 @property (nonatomic, assign) NSInteger allCount;
 
+@property (nonatomic, assign) BOOL hasNext;
+
 - (void)registerNibWithName:(NSString *)nibName;
 - (void)registerClassWithName:(NSString *)className;
 

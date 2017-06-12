@@ -8,6 +8,12 @@
 
 #import "BaseController.h"
 
+#import "ContactModel.h"
+
+typedef void(^SelectedContact)(ContactModel* model);
+
 @interface ContactListController : BaseController
+
+@property (nonatomic, strong) SelectedContact selectedContact;
 
 @end

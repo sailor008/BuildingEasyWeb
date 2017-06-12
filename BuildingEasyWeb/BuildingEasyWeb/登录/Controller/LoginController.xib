@@ -34,7 +34,7 @@
                     <rect key="frame" x="87.5" y="181" width="261.5" height="17"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJN-Ev-lJy" userLabel="分隔线">
                     <rect key="frame" x="26" y="211.5" width="323" height="1"/>

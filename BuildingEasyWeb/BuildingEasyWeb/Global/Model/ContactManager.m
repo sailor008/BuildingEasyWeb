@@ -17,7 +17,9 @@
         CNContactStore *store = [[CNContactStore alloc] init];
         [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (granted) {
-                [ContactManager readLocalContactBook:contacts];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [ContactManager readLocalContactBook:contacts];
+                });
             } else {
                 NSLog(@"授权失败");
             }
