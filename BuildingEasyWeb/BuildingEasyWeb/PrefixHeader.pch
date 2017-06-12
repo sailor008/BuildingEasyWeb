@@ -23,3 +23,5 @@
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #define GetIMAGE(imageName) [UIImage imageNamed:imageName]
+
+#define kWeakSelf(weakSelf) __weak typeof(self) weakSelf = self;

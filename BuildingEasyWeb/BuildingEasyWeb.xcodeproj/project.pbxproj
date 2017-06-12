@@ -36,6 +36,7 @@
 		CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D541EEAE9A0009A1B50 /* BaobeiController.m */; };
 		CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */; };
 		CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D591EEAF44E009A1B50 /* NSString+Addition.m */; };
+		CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */; };
 		CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */; };
 		CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */; };
 		CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */; };
@@ -128,6 +129,8 @@
 		CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaobeiController.xib; sourceTree = "<group>"; };
 		CF413D581EEAF44E009A1B50 /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		CF413D591EEAF44E009A1B50 /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
+		CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingListModel.h; sourceTree = "<group>"; };
+		CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingListModel.m; sourceTree = "<group>"; };
 		CF55FF151EE8316B00B0ACD9 /* BuildingDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailController.h; sourceTree = "<group>"; };
 		CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingDetailController.m; sourceTree = "<group>"; };
 		CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingDetailController.xib; sourceTree = "<group>"; };
@@ -524,6 +527,8 @@
 			children = (
 				CFD016911EED353F003E1BF8 /* CityModel.h */,
 				CFD016921EED353F003E1BF8 /* CityModel.m */,
+				CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */,
+				CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -742,6 +747,7 @@
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,
+				CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,

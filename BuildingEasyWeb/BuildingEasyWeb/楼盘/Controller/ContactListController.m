@@ -128,7 +128,7 @@
     }
 }
 
--(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     if (_isSearch) {
         return _searchIndexArr;

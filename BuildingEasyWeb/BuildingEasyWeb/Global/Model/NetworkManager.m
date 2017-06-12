@@ -100,7 +100,7 @@ static const NSString* host = @"39.108.58.165:11071";
     
     long timeInterval = [[NSDate date] timeIntervalSince1970] * 1000;
     
-    NSMutableString* originalStr;
+    NSMutableString* originalStr = [NSMutableString string];
     if ([User shareUser].token.length) {
         [originalStr appendFormat:@"token=%@", [User shareUser].token];
     } else {
