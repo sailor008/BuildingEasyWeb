@@ -21,6 +21,10 @@
 @property (nonatomic, copy) NSString* viewCityName;
 @property (nonatomic, copy) NSArray* areaList;
 
+// 以下字段针对城市列表增加 wx/getCityListByInitial
+@property (nonatomic, copy) NSString* cityName;
+@property (nonatomic, assign) BOOL hotCity;
+
 @end
 
 @interface ProvinceModel : NSObject
@@ -34,5 +38,12 @@
 @interface AllAreaList : NSObject
 
 @property (nonatomic, copy) NSArray* provinceCityList;
+
+@end
+
+@interface CityListByInitial : NSObject
+
+@property (nonatomic, copy) NSString* initial;// 首字母
+@property (nonatomic, copy) NSArray* city;
 
 @end

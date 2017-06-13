@@ -9,6 +9,7 @@
 #import "UITableView+Addition.h"
 
 #import <objc/runtime.h>
+#import <MJRefresh.h>
 
 static const char kTableViewPage;
 static const char kTableViewAllPage;

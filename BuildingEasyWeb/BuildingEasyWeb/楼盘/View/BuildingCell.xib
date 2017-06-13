@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,6 +30,12 @@
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="火" translatesAutoresizingMaskIntoConstraints="NO" id="LQ1-La-bGA">
+                        <rect key="frame" x="53" y="172.5" width="13" height="13"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="笋" translatesAutoresizingMaskIntoConstraints="NO" id="5Rt-sf-Nzh">
+                        <rect key="frame" x="72" y="172.5" width="13" height="13"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="佣:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePw-Bo-gLT">
                         <rect key="frame" x="10" y="197" width="18.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -71,6 +77,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="5Rt-sf-Nzh" firstAttribute="leading" secondItem="LQ1-La-bGA" secondAttribute="trailing" constant="6" id="3mK-KX-lZu"/>
                     <constraint firstItem="4eV-dJ-UDR" firstAttribute="leading" secondItem="ePw-Bo-gLT" secondAttribute="trailing" id="6Ys-07-Xnw"/>
                     <constraint firstItem="pxR-70-VFG" firstAttribute="leading" secondItem="Alh-M8-7fJ" secondAttribute="trailing" id="BjO-JX-DBp"/>
                     <constraint firstItem="ePw-Bo-gLT" firstAttribute="top" secondItem="aUU-rK-xPN" secondAttribute="bottom" constant="9" id="BuN-hC-AYw"/>
@@ -83,20 +90,25 @@
                     <constraint firstItem="kkf-n0-bBs" firstAttribute="centerY" secondItem="cgc-7y-PkV" secondAttribute="centerY" id="VuZ-QW-S9y"/>
                     <constraint firstItem="USH-y6-MCZ" firstAttribute="leading" secondItem="4eV-dJ-UDR" secondAttribute="trailing" constant="17" id="Wbb-oJ-as5"/>
                     <constraint firstItem="cgc-7y-PkV" firstAttribute="leading" secondItem="ePw-Bo-gLT" secondAttribute="leading" id="Xa2-EL-mMB"/>
+                    <constraint firstItem="5Rt-sf-Nzh" firstAttribute="centerY" secondItem="LQ1-La-bGA" secondAttribute="centerY" id="dSz-1T-4Nd"/>
                     <constraint firstItem="pxR-70-VFG" firstAttribute="centerY" secondItem="ePw-Bo-gLT" secondAttribute="centerY" id="hds-pl-ldz"/>
                     <constraint firstItem="cgc-7y-PkV" firstAttribute="top" secondItem="USH-y6-MCZ" secondAttribute="bottom" constant="7" id="jID-dE-wWG"/>
                     <constraint firstItem="aUU-rK-xPN" firstAttribute="top" secondItem="Hcv-jt-Rfv" secondAttribute="bottom" constant="10" id="lBK-v1-Wih"/>
                     <constraint firstItem="Hcv-jt-Rfv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="nKh-HI-Tdy"/>
+                    <constraint firstItem="LQ1-La-bGA" firstAttribute="leading" secondItem="aUU-rK-xPN" secondAttribute="trailing" constant="12" id="nzW-WY-fDE"/>
                     <constraint firstItem="pxR-70-VFG" firstAttribute="trailing" secondItem="Hcv-jt-Rfv" secondAttribute="trailing" id="pje-a8-PCv"/>
                     <constraint firstItem="aUU-rK-xPN" firstAttribute="leading" secondItem="Hcv-jt-Rfv" secondAttribute="leading" id="v7o-fg-Sv9"/>
                     <constraint firstItem="kkf-n0-bBs" firstAttribute="leading" secondItem="cgc-7y-PkV" secondAttribute="trailing" constant="7" id="waV-Di-gZN"/>
+                    <constraint firstItem="LQ1-La-bGA" firstAttribute="centerY" secondItem="aUU-rK-xPN" secondAttribute="centerY" id="y41-M4-TZ5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressLabel" destination="kkf-n0-bBs" id="oVT-Na-yf0"/>
+                <outlet property="bambooImageVIew" destination="5Rt-sf-Nzh" id="5F5-2g-388"/>
                 <outlet property="buildingImageView" destination="Hcv-jt-Rfv" id="upL-Vm-5Se"/>
                 <outlet property="commissionLabel" destination="4eV-dJ-UDR" id="rA8-Tw-xFH"/>
                 <outlet property="distanceLabel" destination="USH-y6-MCZ" id="OZJ-8z-ZFW"/>
+                <outlet property="hotImageView" destination="LQ1-La-bGA" id="nlG-YB-hkK"/>
                 <outlet property="nameLabel" destination="aUU-rK-xPN" id="mYG-kV-A4l"/>
                 <outlet property="priceLabel" destination="Alh-M8-7fJ" id="v2r-la-afv"/>
             </connections>
@@ -105,5 +117,7 @@
     <resources>
         <image name="logo" width="60" height="60"/>
         <image name="位置" width="17" height="16"/>
+        <image name="火" width="13" height="13"/>
+        <image name="笋" width="13" height="13"/>
     </resources>
 </document>

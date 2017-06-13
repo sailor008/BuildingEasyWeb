@@ -38,3 +38,12 @@
 }
 
 @end
+
+@implementation CityListByInitial
+
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{@"city" : @"CityModel"};
+}
+
+@end
