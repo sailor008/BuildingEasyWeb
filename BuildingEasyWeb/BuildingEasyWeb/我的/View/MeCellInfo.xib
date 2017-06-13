@@ -45,6 +45,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="头像" width="60" height="60"/>
+        <image name="头像" width="44" height="44"/>
     </resources>
 </document>
