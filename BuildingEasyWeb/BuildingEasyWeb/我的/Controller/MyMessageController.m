@@ -10,13 +10,9 @@
 
 #import "UITableView+Addition.h"
 
-#import "MyMsgCell.h"
 
 @interface MyMessageController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (nonatomic,strong) NSArray *contentAry;
-
 
 @end
 
@@ -28,12 +24,6 @@
     self.title = @"我的消息";
     
     [_tableView registerNibWithName: @"MyMsgCell"];
-    
-    _tableView.estimatedRowHeight = 100;
-    _tableView.rowHeight = UITableViewAutomaticDimension;
-    
-    self.contentAry = @[@"哈哈哈",@"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈",@"啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈",@"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈"];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,31 +42,19 @@
 */
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.aryMsgData.count;
 }
 
-
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    float height = 50.0f;
-//    
-//    return height;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MsgModel* MsgModel = self.aryMsgData[indexPath.row];
+    return MsgModel.cellHeight;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    MyMsgCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MyMsgCell" forIndexPath:indexPath];
-//    [cell initWithData: _viewCfgData[indexPath.row][0] title: _viewCfgData[indexPath.row][1]];
-    
-    
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    
-        }
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.text = self.contentAry[indexPath.row];
-    
+    MyMsgCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MyMsgCell" forIndexPath:indexPath];
+    MsgModel* MsgModel = self.aryMsgData[indexPath.row];
+    [cell initWithData: MsgModel];
     return cell;
 }
 
