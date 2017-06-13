@@ -22,6 +22,8 @@
 #import <MJExtension.h>
 #import "LoginManager.h"
 #import "User.h"
+#import "UIView+MBProgressHUD.h"
+#import "CityListController.h"
 
 @interface BuildingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -41,22 +43,20 @@
     // Do any additional setup after loading the view from its nib.
     
     [_tableView registerNibWithName:@"BuildingCell"];
-
-//    [TableRefreshManager tableView:_tableView loadData:^(BOOL isMore) {
-//        NSLog(@"here");
-//    }];
-//    
 //    [LocationManager startGetLocation:^(NSString *city) {
 //        NSLog(@"所在城市：%@",city);
 //    }];
     
     [self setupUI];
+    [self addTableViewRefresh];
+    
+    _buildingArr = [NSMutableArray array];
     
     if ([User shareUser].isLogin == NO) {
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
         [LoginManager login:mobile password:pwd callback:^{
-            [self requestData];
+            [_tableView.mj_header beginRefreshing];
         }];
     }
 }
@@ -77,6 +77,7 @@
     self.navigationItem.rightBarButtonItem = searchItem;
     
     _locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_locationButton addTarget:self action:@selector(selectCity) forControlEvents:UIControlEventTouchUpInside];
     [self setupLocationButtonFace:@"广州"];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_locationButton];
     
@@ -93,6 +94,22 @@
     [_sectionView configOption:@[@"区域", @"类型", @"价格", @"距离"] filterContent:@[@[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"]]];
 }
 
+- (void)selectCity
+{
+    CityListController* cityListVC = [[CityListController alloc] init];
+    cityListVC.currentCity = @"广州";
+    cityListVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:cityListVC animated:YES];
+}
+
+- (void)addTableViewRefresh
+{
+    kWeakSelf(weakSelf);
+    [TableRefreshManager tableView:_tableView loadData:^(BOOL isMore) {
+        [weakSelf requestData];
+    }];
+}
+
 #pragma mark Private
 - (void)setupLocationButtonFace:(NSString *)city
 {
@@ -106,17 +123,25 @@
 
 - (void)requestData
 {
+    [self requestBuildList];
+    [self requestBannerList];
+}
+
+- (void)requestBuildList
+{
     NSDictionary* parameters = @{@"averAgeId":@0,
                                  @"distanceId":@0,
                                  @"classifyId":@0,
                                  @"areaCode":@0,
                                  @"lon":@113.26,
                                  @"lat":@23.14,
-                                 @"pageNo":@1,
+                                 @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":@""};
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
-        NSLog(@"response :%@", reponse);
+        if (_buildingArr.count > 0) {
+            _tableView.page ++;
+        }
         
         _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
         NSArray* list = [reponse objectForKey:@"list"];
@@ -126,21 +151,40 @@
         }
         
         [_tableView reloadData];
+        [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error :%@", error);
+        [MBProgressHUD showError:msg toView:self.view];
+        [TableRefreshManager tableViewEndRefresh:_tableView];
+    }];
+}
+
+// 请求轮播图，不用加入遮罩
+- (void)requestBannerList
+{
+    [NetworkManager postWithUrl:@"wx/getBannerList" parameters:nil success:^(id reponse) {
+        NSArray* bannerList = (NSArray *)reponse;
+        NSMutableArray* array = [NSMutableArray array];
+        for (NSDictionary* banner in bannerList) {
+            [array addObject:banner[@"imgUrl"]];
+        }
+        _adsView.sourceArray = [array copy];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"banner error:%@", error);
     }];
 }
 
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return _buildingArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuildingCell" forIndexPath:indexPath];
+    cell.model = _buildingArr[indexPath.row];
     return cell;
 }
 

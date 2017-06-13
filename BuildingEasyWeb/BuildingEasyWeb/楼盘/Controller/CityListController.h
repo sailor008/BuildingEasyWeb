@@ -10,4 +10,6 @@
 
 @interface CityListController : BaseController
 
+@property (nonatomic, copy) NSString* currentCity;
+
 @end
