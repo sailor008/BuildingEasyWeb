@@ -25,6 +25,8 @@
 		C782F4A81EEDB5910067C07F /* MyMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4A61EEDB5910067C07F /* MyMsgCell.m */; };
 		C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4A71EEDB5910067C07F /* MyMsgCell.xib */; };
 		C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4AB1EEEF78B0067C07F /* MsgModel.m */; };
+		C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE691EF0414B000EF857 /* MyInfoController.m */; };
+		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */; };
@@ -116,6 +118,9 @@
 		C782F4A71EEDB5910067C07F /* MyMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMsgCell.xib; path = "BuildingEasyWeb/我的/View/MyMsgCell.xib"; sourceTree = SOURCE_ROOT; };
 		C782F4AA1EEEF78B0067C07F /* MsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgModel.h; sourceTree = "<group>"; };
 		C782F4AB1EEEF78B0067C07F /* MsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgModel.m; sourceTree = "<group>"; };
+		C7BBCE681EF0414B000EF857 /* MyInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoController.h; sourceTree = "<group>"; };
+		C7BBCE691EF0414B000EF857 /* MyInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoController.m; sourceTree = "<group>"; };
+		C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoController.xib; sourceTree = "<group>"; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -475,6 +480,9 @@
 				C782F4A01EED51BE0067C07F /* MyMessageController.h */,
 				C782F4A11EED51BE0067C07F /* MyMessageController.m */,
 				C782F4A21EED51BE0067C07F /* MyMessageController.xib */,
+				C7BBCE681EF0414B000EF857 /* MyInfoController.h */,
+				C7BBCE691EF0414B000EF857 /* MyInfoController.m */,
+				C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -674,6 +682,7 @@
 				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
 				C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */,
 				C782F4A41EED51BE0067C07F /* MyMessageController.xib in Resources */,
+				C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */,
 				CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */,
 				CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,
@@ -766,6 +775,7 @@
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,
+				C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */,
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
