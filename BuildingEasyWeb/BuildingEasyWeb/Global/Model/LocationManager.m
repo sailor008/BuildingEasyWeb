@@ -49,7 +49,7 @@
     [manager stopUpdatingLocation];
     
     CLLocation *newLocation = locations[0];
-//    CLLocationCoordinate2D oldCoordinate = newLocation.coordinate;
+    CLLocationCoordinate2D coordinate = newLocation.coordinate;
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:newLocation
@@ -67,7 +67,7 @@
                            city = place.locality;
                        }
                        
-                       self.city(city);
+                       self.city(city, coordinate.latitude, coordinate.longitude);
                        
                    }];
 }

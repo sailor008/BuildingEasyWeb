@@ -15,7 +15,7 @@
 #import "BuildingCell.h"
 #import "UITableView+Addition.h"
 #import "AdsScrollView.h"
-#import "SectionFilterView.h"
+//#import "SectionFilterView.h"
 #import "BuildingDetailController.h"
 #import "NetworkManager.h"
 #import "BuildingListModel.h"
@@ -24,15 +24,20 @@
 #import "User.h"
 #import "UIView+MBProgressHUD.h"
 #import "CityListController.h"
+#import "BuildingSectionView.h"
 
-@interface BuildingController () <UITableViewDataSource, UITableViewDelegate>
+@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AdsScrollView* adsView;
-@property (nonatomic, strong) SectionFilterView* sectionView;
+//@property (nonatomic, strong) SectionFilterView* sectionView;
+@property (nonatomic, strong) BuildingSectionView* sectionView;
 
 @property (nonatomic, strong) NSMutableArray* buildingArr;
+@property (nonatomic, copy) NSString* currentCity;
+@property (nonatomic, assign) double lat;
+@property (nonatomic, assign) double lng;
 
 @end
 
@@ -42,10 +47,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _currentCity = @"广州市";
+    
     [_tableView registerNibWithName:@"BuildingCell"];
-//    [LocationManager startGetLocation:^(NSString *city) {
-//        NSLog(@"所在城市：%@",city);
-//    }];
     
     [self setupUI];
     [self addTableViewRefresh];
@@ -90,14 +94,23 @@
     [headerView addSubview:_adsView];
     _tableView.tableHeaderView = headerView;
     
-    _sectionView = [[SectionFilterView alloc] init];
-    [_sectionView configOption:@[@"区域", @"类型", @"价格", @"距离"] filterContent:@[@[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"]]];
+//    _sectionView = [[SectionFilterView alloc] init];
+//    _sectionView.highLightCell = YES;
+//    [_sectionView configOption:@[@"区域", @"类型", @"价格", @"距离"] filterContent:@[@[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"]]];
+    _sectionView = [[[NSBundle mainBundle] loadNibNamed:@"BuildingSectionView" owner:nil options:nil] lastObject];
+    _sectionView.delegate = self;
+    
+    [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
+        _lat = lat;
+        _lng = lng;
+        [self setupLocationButtonFace:city];
+    }];
 }
 
 - (void)selectCity
 {
     CityListController* cityListVC = [[CityListController alloc] init];
-    cityListVC.currentCity = @"广州";
+    cityListVC.currentCity = _currentCity;
     cityListVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:cityListVC animated:YES];
 }
@@ -113,6 +126,7 @@
 #pragma mark Private
 - (void)setupLocationButtonFace:(NSString *)city
 {
+    _currentCity = city;
     [_locationButton setTitle:city forState:UIControlStateNormal];
     [_locationButton setTitleColor:Hex(0x292929) forState:UIControlStateNormal];
     _locationButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
@@ -214,6 +228,12 @@
     BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark BuildingSectionViewDelegate
+- (void)showFilterViewWithIndex:(NSInteger)index
+{
+    [_sectionView showFilterContent:@[@"11", @"22"]];
 }
 
 #pragma mark Action

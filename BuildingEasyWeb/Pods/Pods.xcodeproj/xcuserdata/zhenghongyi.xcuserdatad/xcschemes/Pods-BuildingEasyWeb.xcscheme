@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '566A34F3F34D30BCFFE531CA75188FD4'
+               BlueprintIdentifier = '9C3ADCDCD8503A0BC483DFE229D5F514'
                BlueprintName = 'Pods-BuildingEasyWeb'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-BuildingEasyWeb.a'>

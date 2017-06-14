@@ -30,7 +30,7 @@
     
     tableView.mj_footer.automaticallyHidden = YES;
     tableView.mj_footer.automaticallyChangeAlpha = YES;
-    tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         weakTableView.page ++;
         block(YES);
     }];
@@ -39,9 +39,11 @@
 + (void)tableViewEndRefresh:(UITableView *)tableView
 {
     [tableView.mj_header endRefreshing];
-    [tableView.mj_footer endRefreshing];
-    if (tableView.hasNext == NO) {
-        tableView.mj_footer.state = MJRefreshStateNoMoreData;
+    
+    if (tableView.hasNext) {
+        [tableView.mj_footer endRefreshing];
+    } else {
+        [tableView.mj_footer endRefreshingWithNoMoreData];
     }
 }
 

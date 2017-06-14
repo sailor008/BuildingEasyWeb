@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^LocationCity)(NSString* city);
+typedef void(^LocationCity)(NSString* city, double lat, double lng);
 
 @interface LocationManager : NSObject
 

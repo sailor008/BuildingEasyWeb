@@ -29,6 +29,8 @@
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
+		CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */; };
+		CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
 		CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */; };
 		CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -122,6 +124,9 @@
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingSectionView.h; sourceTree = "<group>"; };
+		CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingSectionView.m; sourceTree = "<group>"; };
+		CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingSectionView.xib; sourceTree = "<group>"; };
 		CF3061C51EE3F85E00D3FC7E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CF3061C71EE3F96500D3FC7E /* OpenSystemUrlManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenSystemUrlManager.h; sourceTree = "<group>"; };
 		CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenSystemUrlManager.m; sourceTree = "<group>"; };
@@ -566,6 +571,9 @@
 				CFDD36961EEBF297007497AC /* ContactCell.h */,
 				CFDD36971EEBF297007497AC /* ContactCell.m */,
 				CFDD36981EEBF297007497AC /* ContactCell.xib */,
+				CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */,
+				CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */,
+				CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -660,6 +668,7 @@
 				CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */,
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
 				C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */,
+				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
@@ -761,6 +770,7 @@
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,
+				CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */,
 				CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,

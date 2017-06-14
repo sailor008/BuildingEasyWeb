@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '398328838D4798F66A97E49252A496E9'
-               BlueprintName = 'SDWebImage'
+               BlueprintIdentifier = '3CAF99E525444760E4006B7C19E0D5E3'
+               BlueprintName = 'CYLTableViewPlaceHolder'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libSDWebImage.a'>
+               BuildableName = 'libCYLTableViewPlaceHolder.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
