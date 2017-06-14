@@ -20,9 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
-//@property (nonatomic, strong) NSMutableArray* indexArr;
-//@property (nonatomic, strong) NSMutableDictionary* areaDic;
-
 @property (nonatomic, copy) NSArray* indexArray;
 
 @property (nonatomic, strong) NSMutableArray* cityList;
@@ -30,9 +27,6 @@
 @property (nonatomic, assign) BOOL isSearch;
 
 @property (nonatomic, strong) NSMutableArray* searchList;
-
-//@property (nonatomic, strong) NSMutableArray* searchIndexArr;
-//@property (nonatomic, strong) NSMutableDictionary* searchDic;
 
 @end
 
@@ -47,9 +41,6 @@
     _currentCityLabel.text = _currentCity;
     
     [_searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-//    _indexArr = [NSMutableArray array];
-//    _areaDic = [NSMutableDictionary dictionary];
     
     _cityList = [NSMutableArray array];
     _searchList = [NSMutableArray array];
@@ -75,7 +66,6 @@
     [NetworkManager getWithUrl:@"wx/getCityListByInitial" parameters:nil success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
 
-        NSLog(@"citylist :%@", reponse);
         NSArray* array = (NSArray *)reponse;
         
         NSMutableArray* hotCityList = [NSMutableArray array];
@@ -99,39 +89,6 @@
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg toView:self.view];
     }];
-
-    
-//    [MBProgressHUD showLoadingToView:self.view];
-//    [NetworkManager getWithUrl:@"wx/getCityList" parameters:nil success:^(id reponse) {
-//        [MBProgressHUD hideHUDForView:self.view];
-//        
-//        AllAreaList* allAreaList = [AllAreaList mj_objectWithKeyValues:reponse];
-//        
-//        for (ProvinceModel* province in allAreaList.provinceCityList) {
-//            for (CityModel* city in province.cityList) {
-//                NSString* indexStr = [city.viewCityName firstPinyin];
-//                indexStr = [indexStr uppercaseString];
-//                if (![_indexArr containsObject:indexStr]) {
-//                    [_indexArr addObject:indexStr];
-//                    
-//                    NSMutableArray* array = [NSMutableArray array];
-//                    [array addObject:city];
-//                    _areaDic[indexStr] = array;
-//                } else {
-//                    NSMutableArray* array = _areaDic[indexStr];
-//                    [array addObject:city];
-//                }
-//            }
-//        }
-//        
-//        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"" ascending:YES];
-//        _indexArr = [[[_indexArr copy] sortedArrayUsingDescriptors:@[sortDescriptor]] mutableCopy];
-//        
-//        [_tableView reloadData];
-//        
-//    } failure:^(NSError *error, NSString *msg) {
-//        [MBProgressHUD dissmissWithError:msg toView:self.view];
-//    }];
 }
 
 #pragma mark UITableViewDataSource
@@ -226,34 +183,21 @@
         NSString* keyStr = textField.text;
         for (CityListByInitial* cityListByInitial in _cityList) {
             
+            NSMutableArray* tempArr = [NSMutableArray array];
             for (CityModel* cityModel in cityListByInitial.city) {
                 if ([cityModel.cityName rangeOfString:keyStr].location != NSNotFound) {
-                    
+                    [tempArr addObject:cityModel];
                 }
             }
             
+            if (tempArr.count) {
+                CityListByInitial* tempCityListByInitial = [[CityListByInitial alloc] init];
+                tempCityListByInitial.initial = cityListByInitial.initial;
+                tempCityListByInitial.city = [tempArr copy];
+                [_searchList addObject:tempCityListByInitial];
+            }
+            
         }
-        
-//        for (NSString* indexStr in _indexArr) {
-//            NSArray* array = _areaDic[indexStr];
-//            
-//            for (CityModel* model in array) {
-//                if ([model.viewCityName rangeOfString:keyStr].location != NSNotFound) {
-//                    // 查找到含有关键字的模型，存入搜索结果
-//                    if ([_searchIndexArr containsObject:indexStr]) {
-//                        NSMutableArray* tempArray = _searchDic[indexStr];
-//                        [tempArray addObject:model];
-//                    } else {
-//                        [_searchIndexArr addObject:indexStr];
-//                        
-//                        NSMutableArray* tempArray = [NSMutableArray array];
-//                        [tempArray addObject:model];
-//                        _searchDic[indexStr] = tempArray;
-//                    }
-//                    
-//                }
-//            }
-//        }
         
     }
     
