@@ -16,6 +16,7 @@
 #import "AboutMeController.h"
 #import "FeedbackController.h"
 #import "MyMessageController.h"
+#import "MyInfoController.h"
 
 
 typedef void (^onListCell)(void);
@@ -32,6 +33,7 @@ typedef void (^onListCell)(void);
 - (void)onFeedback;
 - (void)onMyMsg;
 - (void)onCustomerExt;
+- (void)onMyInfo;
 
 
 @end
@@ -113,6 +115,14 @@ typedef void (^onListCell)(void);
 
 - (void)onCustomerExt{
     NSLog(@"is onCustomerExt!!!!!!!!!!!");
+}
+
+- (void)onMyInfo{
+    NSLog(@"is onMyInfo!!!!!!!!!!!");
+    MyInfoController* myInfoVC = [[MyInfoController alloc]init];
+    myInfoVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:myInfoVC animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -203,7 +213,7 @@ typedef void (^onListCell)(void);
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0) {
-
+        [self onMyInfo];
     }else if(indexPath.section == 1) {
         if(indexPath.row == 0) {
 
