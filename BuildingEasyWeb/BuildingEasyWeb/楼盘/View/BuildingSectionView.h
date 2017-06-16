@@ -10,7 +10,8 @@
 
 @protocol BuildingSectionViewDelegate <NSObject>
 
-- (void)showFilterViewWithIndex:(NSInteger)index;
+- (void)showFilterViewWithOptionTag:(NSInteger)index;
+- (void)selectFilterResultIndex:(NSInteger)selectedIndex currentTag:(NSInteger)tag;
 
 @end
 

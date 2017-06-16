@@ -10,6 +10,7 @@
 
 #import "BuildingController.h"
 #import "MeController.h"
+#import "CustomerListController.h"
 #import "NetworkManager.h"
 #import "LoginManager.h"
 #import "User.h"
@@ -28,7 +29,7 @@
     buildingNaVC.tabBarItem.image = GetIMAGE(@"楼盘1.png");
     buildingNaVC.tabBarItem.selectedImage = GetIMAGE(@"楼盘2.png");
     
-    BaseController* customerVC = [[BaseController alloc] init];
+    CustomerListController* customerVC = [[CustomerListController alloc] init];
     customerVC.title = @"客户";
     UINavigationController* customerNaVC = [[UINavigationController alloc] initWithRootViewController:customerVC];
     customerNaVC.tabBarItem.image = GetIMAGE(@"客户2.png");

@@ -63,6 +63,13 @@
 		CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF7721171EE6DEF200DD5AE2 /* BuildingCell.xib */; };
 		CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */; };
 		CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */; };
+		CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */; };
+		CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */; };
+		CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBF01EF3DD0C001C8A9C /* CustomerListController.m */; };
+		CF99FBF31EF3DD0C001C8A9C /* CustomerListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF99FBF11EF3DD0C001C8A9C /* CustomerListController.xib */; };
+		CF99FBF71EF3DFC0001C8A9C /* CustomerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBF51EF3DFC0001C8A9C /* CustomerListCell.m */; };
+		CF99FBF81EF3DFC0001C8A9C /* CustomerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF99FBF61EF3DFC0001C8A9C /* CustomerListCell.xib */; };
+		CF99FBFB1EF3E2ED001C8A9C /* CustomerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBFA1EF3E2ED001C8A9C /* CustomerListModel.m */; };
 		CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB630081EE250DC00AE5919 /* NetworkManager.m */; };
 		CFD016931EED353F003E1BF8 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD016921EED353F003E1BF8 /* CityModel.m */; };
 		CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD367A1EEBCAB5007497AC /* SelectBuildingController.m */; };
@@ -181,6 +188,18 @@
 		CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionFilterView.m; sourceTree = "<group>"; };
 		CF7721391EE6F34900DD5AE2 /* AdsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsScrollView.h; sourceTree = "<group>"; };
 		CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsScrollView.m; sourceTree = "<group>"; };
+		CF99FBE41EF385D8001C8A9C /* BuildingFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingFilterModel.h; sourceTree = "<group>"; };
+		CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingFilterModel.m; sourceTree = "<group>"; };
+		CF99FBE71EF3BEB4001C8A9C /* BuildingDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailModel.h; sourceTree = "<group>"; };
+		CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingDetailModel.m; sourceTree = "<group>"; };
+		CF99FBEF1EF3DD0C001C8A9C /* CustomerListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerListController.h; sourceTree = "<group>"; };
+		CF99FBF01EF3DD0C001C8A9C /* CustomerListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerListController.m; sourceTree = "<group>"; };
+		CF99FBF11EF3DD0C001C8A9C /* CustomerListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerListController.xib; sourceTree = "<group>"; };
+		CF99FBF41EF3DFC0001C8A9C /* CustomerListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerListCell.h; sourceTree = "<group>"; };
+		CF99FBF51EF3DFC0001C8A9C /* CustomerListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerListCell.m; sourceTree = "<group>"; };
+		CF99FBF61EF3DFC0001C8A9C /* CustomerListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerListCell.xib; sourceTree = "<group>"; };
+		CF99FBF91EF3E2ED001C8A9C /* CustomerListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerListModel.h; sourceTree = "<group>"; };
+		CF99FBFA1EF3E2ED001C8A9C /* CustomerListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerListModel.m; sourceTree = "<group>"; };
 		CFB630071EE250DC00AE5919 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		CFB630081EE250DC00AE5919 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		CFD016911EED353F003E1BF8 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
@@ -447,6 +466,9 @@
 		CF5A4CB91EE065E6002A281B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CF99FBEF1EF3DD0C001C8A9C /* CustomerListController.h */,
+				CF99FBF01EF3DD0C001C8A9C /* CustomerListController.m */,
+				CF99FBF11EF3DD0C001C8A9C /* CustomerListController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -454,6 +476,8 @@
 		CF5A4CBA1EE065E6002A281B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CF99FBF91EF3E2ED001C8A9C /* CustomerListModel.h */,
+				CF99FBFA1EF3E2ED001C8A9C /* CustomerListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -461,6 +485,9 @@
 		CF5A4CBB1EE065E6002A281B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CF99FBF41EF3DFC0001C8A9C /* CustomerListCell.h */,
+				CF99FBF51EF3DFC0001C8A9C /* CustomerListCell.m */,
+				CF99FBF61EF3DFC0001C8A9C /* CustomerListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -547,6 +574,10 @@
 				CFD016921EED353F003E1BF8 /* CityModel.m */,
 				CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */,
 				CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */,
+				CF99FBE41EF385D8001C8A9C /* BuildingFilterModel.h */,
+				CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */,
+				CF99FBE71EF3BEB4001C8A9C /* BuildingDetailModel.h */,
+				CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -669,11 +700,13 @@
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
 				C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */,
 				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
+				CF99FBF31EF3DD0C001C8A9C /* CustomerListController.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
 				CFDD36851EEBD4B9007497AC /* SelectBuildingCell.xib in Resources */,
+				CF99FBF81EF3DFC0001C8A9C /* CustomerListCell.xib in Resources */,
 				CFEEC01E1EE2B5B800E1DB74 /* BuildingController.xib in Resources */,
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
@@ -745,6 +778,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
 				CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */,
@@ -771,6 +805,7 @@
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,
 				CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */,
+				CF99FBF71EF3DFC0001C8A9C /* CustomerListCell.m in Sources */,
 				CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,
@@ -779,13 +814,16 @@
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
+				CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
 				C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */,
+				CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
 				C782F48F1EE9D7430067C07F /* MeCellStatus.m in Sources */,
 				CF5A4CB71EE065C6002A281B /* LoginController.m in Sources */,
+				CF99FBFB1EF3E2ED001C8A9C /* CustomerListModel.m in Sources */,
 				C782F4A81EEDB5910067C07F /* MyMsgCell.m in Sources */,
 				CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */,
 				CF665BF91EEB9AB200028B1B /* BaobeiCell.m in Sources */,

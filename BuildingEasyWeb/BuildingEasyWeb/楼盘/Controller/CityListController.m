@@ -143,7 +143,7 @@
     }
 }
 
--(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     NSMutableArray* indexArr = [NSMutableArray array];
     NSArray* sourceArr;
