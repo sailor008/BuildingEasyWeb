@@ -16,12 +16,7 @@
                 <frame key="frameInset" width="342" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
-                        <constraints>
-                            <constraint firstAttribute="height" constant="60" id="5IO-c2-CzI"/>
-                            <constraint firstAttribute="width" constant="60" id="KdI-Am-a8M"/>
-                        </constraints>
-                    </imageView>
+                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz"/>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号：15234534545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0j-s0-oux" userLabel="手机号">
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -42,6 +37,11 @@
                     <constraint firstItem="p0j-s0-oux" firstAttribute="top" secondItem="cB5-zK-mXk" secondAttribute="bottom" constant="4" id="t5U-SK-A9F"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="headImgView" destination="sba-4q-6Qz" id="i7T-Ng-uVB"/>
+                <outlet property="mobileLabel" destination="p0j-s0-oux" id="H2z-to-IpT"/>
+                <outlet property="nameLabel" destination="cB5-zK-mXk" id="1Ux-UI-Bxy"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

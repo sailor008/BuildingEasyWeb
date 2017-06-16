@@ -20,12 +20,12 @@ typedef void (^onTabVCell)(void);
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //uiview obj
-@property (nonatomic, copy) UIImageView* iconImgView;
+@property (nonatomic, copy) UIImageView* headImgView;
 
 //data model
 @property (nonatomic, copy) NSArray *aryCellCfg;
 
-
+//inner private func
 - (void)initViewCfg;
 - (void)onHeadImg;
 - (void)onEmail;
@@ -43,6 +43,16 @@ typedef void (^onTabVCell)(void);
     // Do any additional setup after loading the view from its nib.
     self.title = @"我的资料";
     
+    [_tableView registerNibWithName: @"MeCellInfo"];
+
+    
+    [self setupUI];
+    
+    [self initViewCfg];
+
+}
+
+- (void)setupUI {
     UIButton* btnLogout = [UIButton buttonWithType:UIButtonTypeSystem];
     btnLogout.frame = CGRectMake(10, 446, 355, 49);
     btnLogout.backgroundColor = Hex(0xff4c00);
@@ -54,11 +64,6 @@ typedef void (^onTabVCell)(void);
     [btnLogout setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [btnLogout addTarget:self action:@selector(onBtnLogout:) forControlEvents:UIControlEventTouchUpInside];
     [_tableView addSubview:btnLogout];
-    
-    [_tableView registerNibWithName: @"MeCellInfo"];
-    
-    [self initViewCfg];
-
 }
 
 - (void)initViewCfg {
@@ -146,11 +151,11 @@ typedef void (^onTabVCell)(void);
         }
         if(indexPath.section == 0 && indexPath.row == 0) {
             cell.detailTextLabel.text = @"";
-            _iconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(285.0, 8.0, 60.0, 60.0)];
-            _iconImgView.layer.masksToBounds = YES;
-            _iconImgView.layer.cornerRadius = 30.0f;
-            _iconImgView.image = GetIMAGE(@"头像");
-            [cell addSubview:_iconImgView];
+            _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(285.0, 8.0, 60.0, 60.0)];
+            _headImgView.layer.masksToBounds = YES;
+            _headImgView.layer.cornerRadius = 30.0f;
+            _headImgView.image = GetIMAGE(@"头像");
+            [cell addSubview:_headImgView];
         }
     }
     return cell;
