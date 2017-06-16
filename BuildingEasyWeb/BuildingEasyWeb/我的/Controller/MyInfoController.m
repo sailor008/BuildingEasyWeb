@@ -11,11 +11,12 @@
 #import "UITableView+Addition.h"
 
 #import "MeCellInfo.h"
+#import "User.h"
 
 
 typedef void (^onTabVCell)(void);
 
-@interface MyInfoController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MyInfoController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -23,7 +24,9 @@ typedef void (^onTabVCell)(void);
 @property (nonatomic, copy) UIImageView* headImgView;
 
 //data model
-@property (nonatomic, copy) NSArray *aryCellCfg;
+@property (nonatomic, copy) NSArray *aryCellTitle;
+@property (nonatomic, copy) NSArray *aryCellContent;
+
 
 //inner private func
 - (void)initViewCfg;
@@ -67,12 +70,23 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)initViewCfg {
-    _aryCellCfg = @[
-                    @[@"头像", @"手机号", @"邮箱", @"姓名", @"昵称"],
-                    @[@"认证"],
-                    @[@"修改密码"],
+    _aryCellTitle = @[
+                        @[@"头像", @"手机号", @"邮箱", @"姓名", @"昵称"],
+                        @[@"认证"],
+                        @[@"修改密码"],
                     ];
-    
+    User* m_user = [User shareUser];
+//    NSString* autoStr = [m_user.auth  isEqual: @1]? @"已认证":@"未认证";
+    NSString* autoStr = m_user.auth? @"已认证":@"未认证";
+    NSString* mobile = m_user.mobile == nil? @"": m_user.mobile;
+    NSString* email = m_user.email == nil? @"": m_user.email;
+    NSString* name = m_user.name == nil? @"": m_user.name;
+    NSString* nickname = m_user.nickname == nil? @"": m_user.nickname;
+    _aryCellContent = @[
+                        @[@"", mobile, email, name, nickname],
+                        @[autoStr,],
+                        @[@""],
+                        ];
 }
 
 - (void)onBtnLogout:(UIButton*)btn {
@@ -138,9 +152,10 @@ typedef void (^onTabVCell)(void);
     if(cell == nil){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
         cell.textLabel.font = [UIFont systemFontOfSize: 15.0f];
-        cell.textLabel.text = _aryCellCfg[indexPath.section][indexPath.row];
+        cell.textLabel.text = _aryCellTitle[indexPath.section][indexPath.row];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0f];
-        cell.detailTextLabel.text = @"内容";
+        //update 属性值
+        cell.detailTextLabel.text = _aryCellContent[indexPath.section][indexPath.row];
         cell.detailTextLabel.textColor = Hex(0x747474);
         if(indexPath.section == 0 && indexPath.row == 1) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -154,7 +169,12 @@ typedef void (^onTabVCell)(void);
             _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(285.0, 8.0, 60.0, 60.0)];
             _headImgView.layer.masksToBounds = YES;
             _headImgView.layer.cornerRadius = 30.0f;
-            _headImgView.image = GetIMAGE(@"头像");
+            if([User shareUser].headImg != nil && [User shareUser].headImg.length > 0) {
+                NSData *imgData = [[NSData alloc]initWithBase64EncodedString:[User shareUser].headImg options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                _headImgView.image = [UIImage imageWithData:imgData];
+            }else{
+                _headImgView.image = GetIMAGE(@"头像");
+            }
             [cell addSubview:_headImgView];
         }
     }
@@ -188,6 +208,46 @@ typedef void (^onTabVCell)(void);
 
 - (void)onHeadImg {
     NSLog(@"onHeadImg<<<<<< ");
+    
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    alertVc.title = @"请选择图片来源";
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        }
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        
+    }];
+    [camera setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
+    
+    UIAlertAction *picture = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+            
+        }
+        pickerImage.delegate = self;
+        pickerImage.allowsEditing = NO;
+        
+        [self presentViewController:pickerImage animated:YES completion:nil];
+    }];
+    [picture setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
+
+    
+    UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
+    }];
+    [cancle setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
+
+    [alertVc addAction:camera];
+    [alertVc addAction:picture];
+    [alertVc addAction:cancle];
+    [self presentViewController:alertVc animated:YES completion:nil];
 };
 
 - (void)onEmail {
@@ -214,6 +274,54 @@ typedef void (^onTabVCell)(void);
     NSLog(@"onModifyPassword<<<<<< ");
     
 };
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* resultImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(resultImg) ==nil)
+        {
+            data = UIImageJPEGRepresentation(resultImg,1.0);
+        }
+        else
+        {
+            data = UIImagePNGRepresentation(resultImg);
+        }
+        
+        [User shareUser].headImg = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        
+        
+//        //图片保存的路径
+//        //这里将图片放在沙盒的documents文件夹中
+//        NSString *DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//        
+//        //文件管理器
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        
+//        //把刚刚图片转换的data对象拷贝至沙盒中并保存为image.png
+//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/userHeader.png"] contents:data attributes:nil];
+        
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        
+        //加在视图中
+        _headImgView.image = resultImg;
+        
+    }
+}
+// 取消选取图片
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end
