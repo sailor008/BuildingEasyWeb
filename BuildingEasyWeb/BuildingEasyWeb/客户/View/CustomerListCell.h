@@ -1,5 +1,5 @@
 //
-//  BuildingInfoCell.h
+//  CustomerListCell.h
 //  BuildingEasyWeb
 //
 //  Created by zhenghongyi on 2017/6/16.
@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BuildingInfoCell : UICollectionViewCell
+#import "CustomerListModel.h"
+
+@interface CustomerListCell : UITableViewCell
+
+@property (nonatomic, strong) CustomerModel* model;
 
 @end

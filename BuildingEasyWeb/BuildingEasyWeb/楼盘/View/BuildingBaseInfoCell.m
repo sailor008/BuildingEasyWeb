@@ -31,4 +31,31 @@
     // Configure the view for the selected state
 }
 
+- (void)setContentArray:(NSArray *)contentArray
+{
+    _contentArray = contentArray;
+    
+    NSMutableDictionary* dic = contentArray[0];
+    _firstLabel.text = dic.allKeys[0];
+    _firstContentLabel.text = dic.allValues[0];
+    
+    if (contentArray.count > 1) {
+        dic = contentArray [1];
+        _secondLabel.text = dic.allKeys[0];
+        _secondContentLabel.text = dic.allValues[0];
+        _secondLabel.hidden = NO;
+        _secondContentLabel.hidden = NO;
+    } else {
+        _secondLabel.hidden = YES;
+        _secondContentLabel.hidden = YES;
+    }
+    
+    if (_firstContentLabel.text.length == 0) {
+        _firstContentLabel.text = @"暂无";
+    }
+    if (_secondContentLabel.text.length == 0) {
+        _secondContentLabel.text = @"暂无";
+    }
+}
+
 @end

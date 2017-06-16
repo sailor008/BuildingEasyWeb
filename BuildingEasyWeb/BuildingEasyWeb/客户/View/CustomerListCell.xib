@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomerListCell" id="KGk-i7-Jjw" customClass="CustomerListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="54.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcc-4f-IC1">
+                        <rect key="frame" x="20" y="8" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13800138000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWA-f2-1Ho">
+                        <rect key="frame" x="20" y="33" width="85.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="电话_customer" translatesAutoresizingMaskIntoConstraints="NO" id="uPO-k5-4OF">
+                        <rect key="frame" x="282" y="7.5" width="18" height="18"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="短信" translatesAutoresizingMaskIntoConstraints="NO" id="MMe-QH-09x">
+                        <rect key="frame" x="248" y="8" width="19" height="17"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPr-Z4-xu2" userLabel="分隔线">
+                        <rect key="frame" x="0.0" y="53.5" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Chc-no-3E4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Mcc-4f-IC1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="0m7-z2-fN7"/>
+                    <constraint firstItem="GWA-f2-1Ho" firstAttribute="top" secondItem="Mcc-4f-IC1" secondAttribute="bottom" constant="8" id="1QM-ZB-1iU"/>
+                    <constraint firstItem="Mcc-4f-IC1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3bS-zW-jh3"/>
+                    <constraint firstAttribute="trailing" secondItem="uPO-k5-4OF" secondAttribute="trailing" constant="20" id="COe-aC-gFi"/>
+                    <constraint firstItem="GWA-f2-1Ho" firstAttribute="leading" secondItem="Mcc-4f-IC1" secondAttribute="leading" id="IOa-2d-RtD"/>
+                    <constraint firstAttribute="bottom" secondItem="kPr-Z4-xu2" secondAttribute="bottom" id="MiY-Xs-OLt"/>
+                    <constraint firstItem="MMe-QH-09x" firstAttribute="centerY" secondItem="uPO-k5-4OF" secondAttribute="centerY" id="NsX-CJ-K6a"/>
+                    <constraint firstItem="uPO-k5-4OF" firstAttribute="leading" secondItem="MMe-QH-09x" secondAttribute="trailing" constant="15" id="f5m-6y-vqh"/>
+                    <constraint firstItem="uPO-k5-4OF" firstAttribute="centerY" secondItem="Mcc-4f-IC1" secondAttribute="centerY" id="nav-Jo-D7Y"/>
+                    <constraint firstItem="kPr-Z4-xu2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nv4-7s-iWl"/>
+                    <constraint firstAttribute="trailing" secondItem="kPr-Z4-xu2" secondAttribute="trailing" id="vLN-uP-xt0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="Mcc-4f-IC1" id="QK5-qG-pL0"/>
+                <outlet property="phoneLabel" destination="GWA-f2-1Ho" id="8sQ-i5-VyK"/>
+            </connections>
+            <point key="canvasLocation" x="35" y="82.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="电话_customer" width="18" height="18"/>
+        <image name="短信" width="19" height="17"/>
+    </resources>
+</document>

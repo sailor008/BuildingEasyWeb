@@ -112,6 +112,7 @@
                     <constraint firstAttribute="bottom" secondItem="Q6L-cD-YGD" secondAttribute="bottom" id="vlD-pJ-rPT"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="firstContentLabel" destination="dbe-QT-mjJ" id="Oe9-hb-clL"/>
                 <outlet property="firstLabel" destination="7u6-Fx-h79" id="gfe-ak-Adz"/>

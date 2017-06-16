@@ -10,4 +10,6 @@
 
 @interface BuildingBaseInfoCell : UITableViewCell
 
+@property (nonatomic, copy) NSArray* contentArray;
+
 @end
