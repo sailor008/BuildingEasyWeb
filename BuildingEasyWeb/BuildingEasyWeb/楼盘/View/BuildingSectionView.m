@@ -18,6 +18,9 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 @property (nonatomic, copy) NSArray* contentArray;
 @property (nonatomic, assign) CGFloat filterTableViewHeight;
 
+@property (nonatomic, assign) NSInteger currentButtonTag;
+@property (nonatomic, strong) UIButton* currentButton;
+
 @end
 
 @implementation BuildingSectionView
@@ -30,6 +33,8 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
         _filterTableView.dataSource = self;
         _filterTableView.delegate = self;
         [_filterTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"BuildingSectionFilterCell"];
+        
+        _currentButtonTag = -1;
     }
     return self;
 }
@@ -38,35 +43,19 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 {
     self.contentArray = content;
     
-    UITableView* containTableView = (UITableView *)self.superview;
-    containTableView.scrollEnabled = NO;
+    UITableView* tableView = (UITableView *)self.superview;
+    tableView.scrollEnabled = NO;
+    CGFloat sectionY = [self convertRect:self.bounds toView:tableView].origin.y;
     
-    // 转换出当前section在tableview上的绝对位置
-    CGFloat filterY;
+    CGFloat filterY = sectionY + self.bounds.size.height + tableView.frame.origin.y;
     
-    CGFloat absoluteY = [self convertRect:self.bounds toView:containTableView].origin.y;
-    NSLog(@"section Y:%f", absoluteY);
-    if (containTableView.contentOffset.y >= absoluteY) {
-        filterY = self.frame.size.height;
-    } else {
-        filterY = absoluteY - containTableView.contentOffset.y + self.frame.size.height;
-    }
-    filterY += containTableView.top;
-    
-    NSLog(@"filterY :%f", filterY);
-    
-    UITabBarController* tabVC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    
-    _filterTableViewHeight = ScreenHeight - filterY - tabVC.tabBar.height;
-    
-    _filterTableView.frame = CGRectMake(0, filterY, ScreenWidth, 0);
-    
+    _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, 0);
     if (!_filterTableView.superview) {
-        [containTableView addSubview:_filterTableView];
+        [tableView addSubview:_filterTableView];
     }
     
     [UIView animateWithDuration:0.25 animations:^{
-        _filterTableView.height = _filterTableViewHeight;
+        _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     }];
     
     [_filterTableView reloadData];
@@ -75,17 +64,24 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 #pragma mark Action
 - (IBAction)tapButtonToShowHideFilter:(UIButton *)sender
 {
+    _currentButton = sender;
     sender.selected = !sender.isSelected;
     
     if (sender.isSelected) {
-        if (_delegate && [_delegate respondsToSelector:@selector(showFilterViewWithIndex:)]) {
-            [_delegate showFilterViewWithIndex:sender.tag - kBuildingSectionButtonBaseTag];
+        _currentButtonTag = sender.tag - kBuildingSectionButtonBaseTag;
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(showFilterViewWithOptionTag:)]) {
+            [_delegate showFilterViewWithOptionTag:sender.tag - kBuildingSectionButtonBaseTag];
         }
+        
     } else {
-        UITableView* containTableView = (UITableView *)self.superview;
-        containTableView.scrollEnabled = YES;
+        CGRect rect = _filterTableView.frame;
+        
+        UITableView* tableView = (UITableView *)self.superview;
+        tableView.scrollEnabled = YES;
+        
         [UIView animateWithDuration:0.25 animations:^{
-            _filterTableView.height = 0;
+            _filterTableView.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 0);
         }];
     }
 }
@@ -100,7 +96,19 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuildingSectionFilterCell" forIndexPath:indexPath];
     cell.textLabel.text = _contentArray[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textColor = Hex(0x747474);
     return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self tapButtonToShowHideFilter:_currentButton];
+    if (_delegate && [_delegate respondsToSelector:@selector(selectFilterResultIndex:currentTag:)]) {
+        [_delegate selectFilterResultIndex:indexPath.row currentTag:_currentButtonTag];
+    }
 }
 
 @end

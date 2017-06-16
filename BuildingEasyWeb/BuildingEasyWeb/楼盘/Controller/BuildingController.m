@@ -15,7 +15,6 @@
 #import "BuildingCell.h"
 #import "UITableView+Addition.h"
 #import "AdsScrollView.h"
-//#import "SectionFilterView.h"
 #import "BuildingDetailController.h"
 #import "NetworkManager.h"
 #import "BuildingListModel.h"
@@ -25,19 +24,30 @@
 #import "UIView+MBProgressHUD.h"
 #import "CityListController.h"
 #import "BuildingSectionView.h"
+#import "CityModel.h"
+#import "BuildingFilterModel.h"
 
 @interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AdsScrollView* adsView;
-//@property (nonatomic, strong) SectionFilterView* sectionView;
 @property (nonatomic, strong) BuildingSectionView* sectionView;
 
 @property (nonatomic, strong) NSMutableArray* buildingArr;
 @property (nonatomic, copy) NSString* currentCity;
 @property (nonatomic, assign) double lat;
 @property (nonatomic, assign) double lng;
+
+@property (nonatomic, strong) NSMutableArray* areaList;
+@property (nonatomic, strong) NSMutableArray* typeList;
+@property (nonatomic, strong) NSMutableArray* priceList;
+@property (nonatomic, strong) NSMutableArray* distanceList;
+
+@property (nonatomic, copy) NSString* averAgeId;
+@property (nonatomic, copy) NSString* distanceId;
+@property (nonatomic, copy) NSString* classifyId;
+@property (nonatomic, copy) NSString* areaCode;
 
 @end
 
@@ -47,14 +57,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _currentCity = @"广州市";
-    
-    [_tableView registerNibWithName:@"BuildingCell"];
-    
     [self setupUI];
+    [self setupProperty];
     [self addTableViewRefresh];
-    
-    _buildingArr = [NSMutableArray array];
     
     if ([User shareUser].isLogin == NO) {
         NSString* mobile = [User shareUser].mobile;
@@ -68,6 +73,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupProperty
+{
+    _currentCity = @"深圳市";
+    
+    _areaList = [NSMutableArray array];
+    _typeList = [NSMutableArray array];
+    _priceList = [NSMutableArray array];
+    _distanceList = [NSMutableArray array];
+    
+    _averAgeId = @"0";
+    _distanceId = @"0";
+    _classifyId = @"0";
+    _areaCode = @"0";
+    
+    [_tableView registerNibWithName:@"BuildingCell"];
+    
+    _buildingArr = [NSMutableArray array];
 }
 
 - (void)setupUI
@@ -94,16 +118,14 @@
     [headerView addSubview:_adsView];
     _tableView.tableHeaderView = headerView;
     
-//    _sectionView = [[SectionFilterView alloc] init];
-//    _sectionView.highLightCell = YES;
-//    [_sectionView configOption:@[@"区域", @"类型", @"价格", @"距离"] filterContent:@[@[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"], @[@"1", @"2"]]];
     _sectionView = [[[NSBundle mainBundle] loadNibNamed:@"BuildingSectionView" owner:nil options:nil] lastObject];
     _sectionView.delegate = self;
     
+    kWeakSelf(weakSelf);
     [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
-        _lat = lat;
-        _lng = lng;
-        [self setupLocationButtonFace:city];
+        weakSelf.lat = lat;
+        weakSelf.lng = lng;
+        [weakSelf setupLocationButtonFace:city];
     }];
 }
 
@@ -135,6 +157,8 @@
     [_locationButton sizeToFit];
 }
 
+#pragma mark Request - 网络请求
+
 - (void)requestData
 {
     [self requestBuildList];
@@ -143,10 +167,10 @@
 
 - (void)requestBuildList
 {
-    NSDictionary* parameters = @{@"averAgeId":@0,
-                                 @"distanceId":@0,
-                                 @"classifyId":@0,
-                                 @"areaCode":@0,
+    NSDictionary* parameters = @{@"averAgeId":_averAgeId,
+                                 @"distanceId":_distanceId,
+                                 @"classifyId":_classifyId,
+                                 @"areaCode":_areaCode,
                                  @"lon":@113.26,
                                  @"lat":@23.14,
                                  @"pageNo":@(_tableView.page),
@@ -189,6 +213,111 @@
     }];
 }
 
+- (void)requestAreaList
+{
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager getWithUrl:@"wx/getAreaList" parameters:@{@"cityName":@"广州市"} success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        NSArray* array = (NSArray *)reponse;
+        NSMutableArray* areaNameList = [NSMutableArray array];
+        [_areaList removeAllObjects];
+        for (NSDictionary* dic in array) {
+            AreaModel* model = [AreaModel mj_objectWithKeyValues:dic];
+            [_areaList addObject:model];
+            [areaNameList addObject:model.areaName];
+        }
+        [_sectionView showFilterContent:[areaNameList copy]];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
+- (void)requestBuildingTypeList
+{
+    if (_typeList.count) {
+        NSMutableArray* typeNameList = [NSMutableArray array];
+        for (BuildingTypeModel* model in _typeList) {
+            [typeNameList addObject:model.classifyName];
+        }
+        [_sectionView showFilterContent:[typeNameList copy]];
+        return;
+    }
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getClassifyList" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        NSArray* array = (NSArray *)reponse;
+        NSMutableArray* typeNameList = [NSMutableArray array];
+        [_typeList removeAllObjects];
+        for (NSDictionary* dic in array) {
+            BuildingTypeModel* model = [BuildingTypeModel mj_objectWithKeyValues:dic];
+            [_typeList addObject:model];
+            [typeNameList addObject:model.classifyName];
+        }
+        [_sectionView showFilterContent:[typeNameList copy]];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
+- (void)requestBuildingPriceList
+{
+    if (_priceList.count) {
+        NSMutableArray* priceNameList = [NSMutableArray array];
+        for (BuildingPriceModel* model in _priceList) {
+            [priceNameList addObject:model.interval];
+        }
+        [_sectionView showFilterContent:[priceNameList copy]];
+        return;
+    }
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getAverageList" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        NSArray* array = (NSArray *)reponse;
+        NSMutableArray* priceNameList = [NSMutableArray array];
+        [_priceList removeAllObjects];
+        for (NSDictionary* dic in array) {
+            BuildingPriceModel* model = [BuildingPriceModel mj_objectWithKeyValues:dic];
+            [_priceList addObject:model];
+            [priceNameList addObject:model.interval];
+        }
+        [_sectionView showFilterContent:[priceNameList copy]];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
+- (void)requestBuildingDistanceList
+{
+    if (_distanceList.count) {
+        NSMutableArray* distanceNameList = [NSMutableArray array];
+        for (BuildingDistanceModel* model in _distanceList) {
+            [distanceNameList addObject:model.interval];
+        }
+        [_sectionView showFilterContent:[distanceNameList copy]];
+        return;
+    }
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getDistanceList" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        NSArray* array = (NSArray *)reponse;
+        NSMutableArray* distanceNameList = [NSMutableArray array];
+        [_distanceList removeAllObjects];
+        for (NSDictionary* dic in array) {
+            BuildingDistanceModel* model = [BuildingDistanceModel mj_objectWithKeyValues:dic];
+            [_distanceList addObject:model];
+            [distanceNameList addObject:model.interval];
+        }
+        [_sectionView showFilterContent:[distanceNameList copy]];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -227,13 +356,60 @@
 {
     BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
     detailVC.hidesBottomBarWhenPushed = YES;
+    BuildingListModel* model = _buildingArr[indexPath.row];
+    detailVC.buildId = model.buildId;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark BuildingSectionViewDelegate
-- (void)showFilterViewWithIndex:(NSInteger)index
+- (void)showFilterViewWithOptionTag:(NSInteger)index
 {
-    [_sectionView showFilterContent:@[@"11", @"22"]];
+    switch (index) {
+        case 0:
+            [self requestAreaList];
+            break;
+        case 1:
+            [self requestBuildingTypeList];
+            break;
+        case 2:
+            [self requestBuildingPriceList];
+            break;
+        default:
+            [self requestBuildingDistanceList];
+            break;
+    }
+}
+
+- (void)selectFilterResultIndex:(NSInteger)selectedIndex currentTag:(NSInteger)tag
+{
+    switch (tag) {
+        case 0:
+        {
+            AreaModel* model = _areaList[selectedIndex];
+            _areaCode = model.areaCode;
+        }
+            break;
+        case 1:
+        {
+            BuildingTypeModel* model = _typeList[selectedIndex];
+            _classifyId = model.classifyId;
+        }
+            break;
+        case 2:
+        {
+            BuildingPriceModel* model = _priceList[selectedIndex];
+            _averAgeId = model.averageId;
+        }
+            break;
+        default:
+        {
+            BuildingDistanceModel* model = _distanceList[selectedIndex];
+            _distanceId = model.distanceId;
+        }
+            break;
+    }
+    
+    [_tableView.mj_header beginRefreshing];
 }
 
 #pragma mark Action

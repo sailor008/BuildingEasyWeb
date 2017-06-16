@@ -8,6 +8,16 @@
 
 #import "BuildingBaseInfoCell.h"
 
+@interface BuildingBaseInfoCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *firstLabel;
+@property (weak, nonatomic) IBOutlet UILabel *firstContentLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *secondLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondContentLabel;
+
+@end
+
 @implementation BuildingBaseInfoCell
 
 - (void)awakeFromNib {

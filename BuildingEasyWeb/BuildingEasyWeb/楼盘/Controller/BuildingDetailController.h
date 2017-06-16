@@ -10,4 +10,6 @@
 
 @interface BuildingDetailController : BaseController
 
+@property (nonatomic, copy) NSString* buildId;
+
 @end

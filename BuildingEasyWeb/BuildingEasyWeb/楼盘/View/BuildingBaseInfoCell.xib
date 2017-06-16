@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -112,6 +112,12 @@
                     <constraint firstAttribute="bottom" secondItem="Q6L-cD-YGD" secondAttribute="bottom" id="vlD-pJ-rPT"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="firstContentLabel" destination="dbe-QT-mjJ" id="Oe9-hb-clL"/>
+                <outlet property="firstLabel" destination="7u6-Fx-h79" id="gfe-ak-Adz"/>
+                <outlet property="secondContentLabel" destination="Q6L-cD-YGD" id="QUT-xf-6O2"/>
+                <outlet property="secondLabel" destination="mKZ-uc-NUg" id="FIc-E2-iME"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

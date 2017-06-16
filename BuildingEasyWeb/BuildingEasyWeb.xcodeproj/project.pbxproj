@@ -63,6 +63,10 @@
 		CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF7721171EE6DEF200DD5AE2 /* BuildingCell.xib */; };
 		CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */; };
 		CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */; };
+		CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */; };
+		CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */; };
+		CF99FBED1EF3C4B0001C8A9C /* BuildingInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBEB1EF3C4B0001C8A9C /* BuildingInfoCell.m */; };
+		CF99FBEE1EF3C4B0001C8A9C /* BuildingInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF99FBEC1EF3C4B0001C8A9C /* BuildingInfoCell.xib */; };
 		CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB630081EE250DC00AE5919 /* NetworkManager.m */; };
 		CFD016931EED353F003E1BF8 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD016921EED353F003E1BF8 /* CityModel.m */; };
 		CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD367A1EEBCAB5007497AC /* SelectBuildingController.m */; };
@@ -181,6 +185,13 @@
 		CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionFilterView.m; sourceTree = "<group>"; };
 		CF7721391EE6F34900DD5AE2 /* AdsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsScrollView.h; sourceTree = "<group>"; };
 		CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsScrollView.m; sourceTree = "<group>"; };
+		CF99FBE41EF385D8001C8A9C /* BuildingFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingFilterModel.h; sourceTree = "<group>"; };
+		CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingFilterModel.m; sourceTree = "<group>"; };
+		CF99FBE71EF3BEB4001C8A9C /* BuildingDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailModel.h; sourceTree = "<group>"; };
+		CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingDetailModel.m; sourceTree = "<group>"; };
+		CF99FBEA1EF3C4B0001C8A9C /* BuildingInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingInfoCell.h; sourceTree = "<group>"; };
+		CF99FBEB1EF3C4B0001C8A9C /* BuildingInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingInfoCell.m; sourceTree = "<group>"; };
+		CF99FBEC1EF3C4B0001C8A9C /* BuildingInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingInfoCell.xib; sourceTree = "<group>"; };
 		CFB630071EE250DC00AE5919 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		CFB630081EE250DC00AE5919 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		CFD016911EED353F003E1BF8 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
@@ -547,6 +558,10 @@
 				CFD016921EED353F003E1BF8 /* CityModel.m */,
 				CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */,
 				CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */,
+				CF99FBE41EF385D8001C8A9C /* BuildingFilterModel.h */,
+				CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */,
+				CF99FBE71EF3BEB4001C8A9C /* BuildingDetailModel.h */,
+				CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +589,9 @@
 				CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */,
 				CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */,
 				CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */,
+				CF99FBEA1EF3C4B0001C8A9C /* BuildingInfoCell.h */,
+				CF99FBEB1EF3C4B0001C8A9C /* BuildingInfoCell.m */,
+				CF99FBEC1EF3C4B0001C8A9C /* BuildingInfoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -669,6 +687,7 @@
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
 				C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */,
 				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
+				CF99FBEE1EF3C4B0001C8A9C /* BuildingInfoCell.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
@@ -753,6 +772,7 @@
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
+				CF99FBED1EF3C4B0001C8A9C /* BuildingInfoCell.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
 				C782F4851EE9B9FC0067C07F /* MeController.m in Sources */,
 				CFEEC0211EE2BBD100E1DB74 /* TableRefreshManager.m in Sources */,
@@ -779,8 +799,10 @@
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
+				CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
 				C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */,
+				CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
