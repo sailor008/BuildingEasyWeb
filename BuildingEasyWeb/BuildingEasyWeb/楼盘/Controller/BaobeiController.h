@@ -10,4 +10,7 @@
 
 @interface BaobeiController : BaseController
 
+@property (nonatomic, copy) NSString* city;
+@property (nonatomic, copy) NSString* areaCode;
+
 @end

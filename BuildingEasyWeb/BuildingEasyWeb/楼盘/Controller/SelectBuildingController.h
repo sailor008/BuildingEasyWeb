@@ -8,6 +8,17 @@
 
 #import "BaseController.h"
 
+@protocol SelectBuildingResultDelegate <NSObject>
+
+- (void)selectBuildingResult:(NSArray<NSString *>*)buildIDs;
+
+@end
+
 @interface SelectBuildingController : BaseController
+
+@property (nonatomic, copy) NSString* city;
+@property (nonatomic, copy) NSString* areaCode;
+
+@property (nonatomic, weak) id<SelectBuildingResultDelegate> delegate;
 
 @end

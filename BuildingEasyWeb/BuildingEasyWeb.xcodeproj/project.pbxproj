@@ -29,6 +29,7 @@
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
+		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
 		CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */; };
 		CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
@@ -36,6 +37,11 @@
 		CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */; };
 		CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061CF1EE4003A00D3FC7E /* ContactManager.m */; };
+		CF30C3C21EF4B9E80070D124 /* CustomerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF30C3C01EF4B9E80070D124 /* CustomerDetailController.m */; };
+		CF30C3C31EF4B9E80070D124 /* CustomerDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF30C3C11EF4B9E80070D124 /* CustomerDetailController.xib */; };
+		CF30C3C71EF4BFCC0070D124 /* BuildingProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF30C3C51EF4BFCC0070D124 /* BuildingProgressCell.m */; };
+		CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */; };
+		CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */; };
 		CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */; };
 		CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */; };
 		CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D541EEAE9A0009A1B50 /* BaobeiController.m */; };
@@ -131,6 +137,7 @@
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AreaSectionFilterView.xib; sourceTree = "<group>"; };
 		CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingSectionView.h; sourceTree = "<group>"; };
 		CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingSectionView.m; sourceTree = "<group>"; };
 		CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingSectionView.xib; sourceTree = "<group>"; };
@@ -141,6 +148,14 @@
 		CF3061CC1EE3FDC100D3FC7E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CF3061CE1EE4003A00D3FC7E /* ContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactManager.h; sourceTree = "<group>"; };
 		CF3061CF1EE4003A00D3FC7E /* ContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactManager.m; sourceTree = "<group>"; };
+		CF30C3BF1EF4B9E80070D124 /* CustomerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerDetailController.h; sourceTree = "<group>"; };
+		CF30C3C01EF4B9E80070D124 /* CustomerDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerDetailController.m; sourceTree = "<group>"; };
+		CF30C3C11EF4B9E80070D124 /* CustomerDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerDetailController.xib; sourceTree = "<group>"; };
+		CF30C3C41EF4BFCC0070D124 /* BuildingProgressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingProgressCell.h; sourceTree = "<group>"; };
+		CF30C3C51EF4BFCC0070D124 /* BuildingProgressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingProgressCell.m; sourceTree = "<group>"; };
+		CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingProgressCell.xib; sourceTree = "<group>"; };
+		CF30C3C91EF5140E0070D124 /* CustomerDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerDetailModel.h; sourceTree = "<group>"; };
+		CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerDetailModel.m; sourceTree = "<group>"; };
 		CF413D4E1EEADDE7009A1B50 /* BuildingBaseInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingBaseInfoCell.h; sourceTree = "<group>"; };
 		CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingBaseInfoCell.m; sourceTree = "<group>"; };
 		CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingBaseInfoCell.xib; sourceTree = "<group>"; };
@@ -469,6 +484,9 @@
 				CF99FBEF1EF3DD0C001C8A9C /* CustomerListController.h */,
 				CF99FBF01EF3DD0C001C8A9C /* CustomerListController.m */,
 				CF99FBF11EF3DD0C001C8A9C /* CustomerListController.xib */,
+				CF30C3BF1EF4B9E80070D124 /* CustomerDetailController.h */,
+				CF30C3C01EF4B9E80070D124 /* CustomerDetailController.m */,
+				CF30C3C11EF4B9E80070D124 /* CustomerDetailController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -478,6 +496,8 @@
 			children = (
 				CF99FBF91EF3E2ED001C8A9C /* CustomerListModel.h */,
 				CF99FBFA1EF3E2ED001C8A9C /* CustomerListModel.m */,
+				CF30C3C91EF5140E0070D124 /* CustomerDetailModel.h */,
+				CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -488,6 +508,9 @@
 				CF99FBF41EF3DFC0001C8A9C /* CustomerListCell.h */,
 				CF99FBF51EF3DFC0001C8A9C /* CustomerListCell.m */,
 				CF99FBF61EF3DFC0001C8A9C /* CustomerListCell.xib */,
+				CF30C3C41EF4BFCC0070D124 /* BuildingProgressCell.h */,
+				CF30C3C51EF4BFCC0070D124 /* BuildingProgressCell.m */,
+				CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -599,6 +622,7 @@
 				CFDD36831EEBD4B9007497AC /* SelectBuildingCell.xib */,
 				CFDD36861EEBD87B007497AC /* AreaSectionFilterView.h */,
 				CFDD36871EEBD87B007497AC /* AreaSectionFilterView.m */,
+				CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */,
 				CFDD36961EEBF297007497AC /* ContactCell.h */,
 				CFDD36971EEBF297007497AC /* ContactCell.m */,
 				CFDD36981EEBF297007497AC /* ContactCell.xib */,
@@ -699,6 +723,7 @@
 				CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */,
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
 				C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */,
+				CF30C3C31EF4B9E80070D124 /* CustomerDetailController.xib in Resources */,
 				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
 				CF99FBF31EF3DD0C001C8A9C /* CustomerListController.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
@@ -708,6 +733,7 @@
 				CFDD36851EEBD4B9007497AC /* SelectBuildingCell.xib in Resources */,
 				CF99FBF81EF3DFC0001C8A9C /* CustomerListCell.xib in Resources */,
 				CFEEC01E1EE2B5B800E1DB74 /* BuildingController.xib in Resources */,
+				CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */,
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				C782F49A1EEBCAD80067C07F /* AboutMeController.xib in Resources */,
@@ -716,6 +742,7 @@
 				C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */,
 				C782F4A41EED51BE0067C07F /* MyMessageController.xib in Resources */,
 				C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */,
+				CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */,
 				CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */,
 				CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,
@@ -786,11 +813,13 @@
 				CFD016931EED353F003E1BF8 /* CityModel.m in Sources */,
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
+				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
 				C782F4851EE9B9FC0067C07F /* MeController.m in Sources */,
 				CFEEC0211EE2BBD100E1DB74 /* TableRefreshManager.m in Sources */,
 				CF5A4C7A1EE05357002A281B /* BaseController.m in Sources */,
+				CF30C3C71EF4BFCC0070D124 /* BuildingProgressCell.m in Sources */,
 				CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */,
 				CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
@@ -832,6 +861,7 @@
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
 				CFDD36911EEBE52F007497AC /* ContactListController.m in Sources */,
+				CF30C3C21EF4B9E80070D124 /* CustomerDetailController.m in Sources */,
 				C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
