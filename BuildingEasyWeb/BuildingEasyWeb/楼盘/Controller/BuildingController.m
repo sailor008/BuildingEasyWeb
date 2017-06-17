@@ -358,6 +358,8 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     BuildingListModel* model = _buildingArr[indexPath.row];
     detailVC.buildId = model.buildId;
+    detailVC.city = _currentCity;
+    detailVC.areaCode = _areaCode;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

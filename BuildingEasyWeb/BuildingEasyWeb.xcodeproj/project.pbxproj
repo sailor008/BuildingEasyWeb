@@ -29,6 +29,7 @@
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
+		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
 		CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */; };
 		CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
@@ -136,6 +137,7 @@
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AreaSectionFilterView.xib; sourceTree = "<group>"; };
 		CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingSectionView.h; sourceTree = "<group>"; };
 		CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingSectionView.m; sourceTree = "<group>"; };
 		CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingSectionView.xib; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				CFDD36831EEBD4B9007497AC /* SelectBuildingCell.xib */,
 				CFDD36861EEBD87B007497AC /* AreaSectionFilterView.h */,
 				CFDD36871EEBD87B007497AC /* AreaSectionFilterView.m */,
+				CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */,
 				CFDD36961EEBF297007497AC /* ContactCell.h */,
 				CFDD36971EEBF297007497AC /* ContactCell.m */,
 				CFDD36981EEBF297007497AC /* ContactCell.xib */,
@@ -739,6 +742,7 @@
 				C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */,
 				C782F4A41EED51BE0067C07F /* MyMessageController.xib in Resources */,
 				C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */,
+				CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */,
 				CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */,
 				CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,

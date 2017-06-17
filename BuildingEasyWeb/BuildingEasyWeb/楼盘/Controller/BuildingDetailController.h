@@ -12,4 +12,7 @@
 
 @property (nonatomic, copy) NSString* buildId;
 
+@property (nonatomic, copy) NSString* city;
+@property (nonatomic, copy) NSString* areaCode;
+
 @end

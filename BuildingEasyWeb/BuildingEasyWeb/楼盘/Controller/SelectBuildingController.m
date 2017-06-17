@@ -12,11 +12,23 @@
 #import "UITableView+Addition.h"
 #import "AreaSectionFilterView.h"
 #import "CityListController.h"
+#import "NetworkManager.h"
+#import "UIView+MBProgressHUD.h"
+#import "TableRefreshManager.h"
+#import "BuildingListModel.h"
+#import <MJExtension.h>
+#import "CityModel.h"
 
 @interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AreaSectionFilterView* areaSectionView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+
+@property (nonatomic, strong) NSMutableArray* buildingArr;
+@property (nonatomic, strong) NSMutableArray* areaList;
+
+@property (nonatomic, strong) NSMutableArray<NSString *>* buildIdArr;
 
 @end
 
@@ -28,7 +40,13 @@
     
     self.title = @"选择报备楼盘";
     
+    _buildingArr = [NSMutableArray array];
+    _areaList = [NSMutableArray array];
+    _buildIdArr = [NSMutableArray array];
     [self setupUI];
+    [self addTableViewRefresh];
+    
+    [_tableView.mj_header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,22 +58,42 @@
 {
     [_tableView registerNibWithName:@"SelectBuildingCell"];
     _tableView.allowsMultipleSelection = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(commitSelectedBuildIdsResult)];
     
-    _areaSectionView = [[AreaSectionFilterView alloc] init];
-    _areaSectionView.areaDelagete = self;
-    [_areaSectionView configOption:@[@"全部区域"] filterContent:@[@[@"1", @"2"]]];
+    _areaSectionView = [[[NSBundle mainBundle] loadNibNamed:@"AreaSectionFilterView" owner:nil options:nil] lastObject];
+    _areaSectionView.delegate = self;
+    
+    [_areaSectionView setCurrentCity:_city];
+}
+
+- (void)addTableViewRefresh
+{
+    kWeakSelf(weakSelf);
+    [TableRefreshManager tableView:_tableView loadData:^(BOOL isMore) {
+        [weakSelf requestData];
+    }];
+}
+
+#pragma mark Action
+- (void)commitSelectedBuildIdsResult
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(selectBuildingResult:)]) {
+        [_delegate selectBuildingResult:_buildIdArr];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return _buildingArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SelectBuildingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"SelectBuildingCell" forIndexPath:indexPath];
+    BuildingListModel* model = _buildingArr[indexPath.row];
+    cell.model = model;
     return cell;
 }
 
@@ -82,12 +120,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    BuildingListModel* model = _buildingArr[indexPath.row];
+    [_buildIdArr addObject:model.buildId];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    BuildingListModel* model = _buildingArr[indexPath.row];
+    [_buildIdArr removeObject:model.buildId];
 }
 
 #pragma mark AreaSectionFilterViewDelegate
@@ -95,6 +135,76 @@
 {
     CityListController* cityVC = [[CityListController alloc] init];
     [self.navigationController pushViewController:cityVC animated:YES];
+}
+
+- (void)showFilter
+{
+    [self requestAreaList];
+}
+
+- (void)selectFilterResultIndex:(NSInteger)selectedIndex
+{
+    AreaModel* model = _areaList[selectedIndex];
+    _areaCode = model.areaCode;
+
+    [_tableView.mj_header beginRefreshing];
+}
+
+#pragma mark RequestData
+- (void)requestData
+{
+    NSString* keyWord = _searchTextField.text.length ? _searchTextField.text : @"";
+    NSDictionary* parameters = @{@"averAgeId":@0,
+                                 @"distanceId":@0,
+                                 @"classifyId":@0,
+                                 @"areaCode":_areaCode,
+                                 @"lon":@113.26,
+                                 @"lat":@23.14,
+                                 @"pageNo":@(_tableView.page),
+                                 @"pageSize":@10,
+                                 @"keyword":keyWord};
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        if (_buildingArr.count > 0) {
+            _tableView.page ++;
+        }
+        
+        _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
+        NSArray* list = [reponse objectForKey:@"list"];
+        for (NSDictionary* dic in list) {
+            BuildingListModel* model = [BuildingListModel mj_objectWithKeyValues:dic];
+            [_buildingArr addObject:model];
+        }
+        
+        [_tableView reloadData];
+        [TableRefreshManager tableViewEndRefresh:_tableView];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD showError:msg toView:self.view];
+        [TableRefreshManager tableViewEndRefresh:_tableView];
+    }];
+}
+
+- (void)requestAreaList
+{
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager getWithUrl:@"wx/getAreaList" parameters:@{@"cityName":@"广州市"} success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        NSArray* array = (NSArray *)reponse;
+        NSMutableArray* areaNameList = [NSMutableArray array];
+        [_areaList removeAllObjects];
+        for (NSDictionary* dic in array) {
+            AreaModel* model = [AreaModel mj_objectWithKeyValues:dic];
+            [_areaList addObject:model];
+            [areaNameList addObject:model.areaName];
+        }
+        [_areaSectionView showFilterContent:[areaNameList copy]];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
 }
 
 @end

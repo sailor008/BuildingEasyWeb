@@ -16,7 +16,7 @@
 
 static NSInteger const kIntentionButtonBaseTag = 1000;
 
-@interface BaobeiController () <UITableViewDelegate, UITableViewDataSource, BaobeiCellDelegate>
+@interface BaobeiController () <UITableViewDelegate, UITableViewDataSource, BaobeiCellDelegate, SelectBuildingResultDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
@@ -111,6 +111,9 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 - (IBAction)addIntentBuilding:(id)sender
 {
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
+    buildingVC.city = _city;
+    buildingVC.areaCode = _areaCode;
+    buildingVC.delegate = self;
     [self.navigationController pushViewController:buildingVC animated:YES];
 }
 
@@ -153,6 +156,12 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 - (void)changeAdviser:(id)building
 {
     
+}
+
+#pragma mark SelectBuildingResultDelegate
+- (void)selectBuildingResult:(NSArray<NSString *>*)buildIDs
+{
+    NSLog(@"buildIds :%@", buildIDs);
 }
 
 @end

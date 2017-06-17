@@ -35,4 +35,14 @@
     _selectButton.selected = selected;
 }
 
+- (void)setModel:(BuildingListModel *)model
+{
+    _model = model;
+    
+    _nameLabel.text = model.name;
+    _commissionLabel.text = model.commission;
+    _priceLabel.text = model.average;
+    _addressLabel.text = model.address;
+}
+
 @end

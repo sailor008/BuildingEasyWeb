@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BuildingListModel.h"
+
 @interface SelectBuildingCell : UITableViewCell
+
+@property (nonatomic, strong) BuildingListModel* model;
 
 @end
