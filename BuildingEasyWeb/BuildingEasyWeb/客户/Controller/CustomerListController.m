@@ -14,8 +14,10 @@
 #import "CustomerListModel.h"
 #import "UIView+MBProgressHUD.h"
 #import <MJExtension.h>
+#import "CustomerDetailController.h"
+#import <CYLTableViewPlaceHolder.h>
 
-@interface CustomerListController () <UITableViewDataSource, UITableViewDelegate>
+@interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -45,6 +47,12 @@
     [_searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self requestData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -128,6 +136,29 @@
     return 55;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CustomerDetailController* detailVC = [[CustomerDetailController alloc] init];
+    CustomerModel* model;
+    if (_isSearch) {
+        CustomerListModel* listModel = _searchList[indexPath.section];
+        model = listModel.customerList[indexPath.row];
+    } else {
+        CustomerListModel* listModel = _customerList[indexPath.section];
+        model = listModel.customerList[indexPath.row];
+    }
+    detailVC.customerId = model.customerId;
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark CYLTableViewPlaceHolderDelegate
+- (UIView *)makePlaceHolderView
+{
+    UIImageView* emptyImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"为空.png")];
+    return emptyImageView;
+}
+
 #pragma mark Action
 - (void)textFieldDidChange:(UITextField *)textField
 {
@@ -158,7 +189,7 @@
         
     }
     
-    [_tableView reloadData];
+    [_tableView cyl_reloadData];
 }
 
 #pragma mark RequestData
@@ -174,7 +205,7 @@
             CustomerListModel* model = [CustomerListModel mj_objectWithKeyValues:dic];
             [_customerList addObject:model];
         }
-        [_tableView reloadData];
+        [_tableView cyl_reloadData];
         
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg];
