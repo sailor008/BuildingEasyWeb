@@ -36,18 +36,32 @@
     // Configure the view for the selected state
 }
 
+- (void)setModel:(BuildBaobeiModel *)model
+{
+    _model = model;
+    
+    BuildingListModel* buildModel = model.buildModel;
+    _buildingLabel.text = buildModel.name;
+    _commissionLabel.text = buildModel.commission;
+    _distanceLabel.text = buildModel.distance;
+    
+    BuildAdviser* advierModel = model.selectedAdviser;
+    _nameLabel.text = advierModel.name;
+    _workIDLabel.text = advierModel.adviserId;
+}
+
 #pragma mark Action
 - (IBAction)deleteBuilding:(id)sender
 {
     if ([_delegate respondsToSelector:@selector(deleteBuilding:cellIndex:)]) {
-        [_delegate deleteBuilding:nil cellIndex:_index];
+        [_delegate deleteBuilding:_model cellIndex:_index];
     }
 }
 
 - (IBAction)changeAdviser:(id)sender
 {
-    if ([_delegate respondsToSelector:@selector(changeAdviser:)]) {
-        [_delegate changeAdviser:nil];
+    if ([_delegate respondsToSelector:@selector(changeAdviser:cellIndex:)]) {
+        [_delegate changeAdviser:_model cellIndex:_index];
     }
 }
 

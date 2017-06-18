@@ -92,6 +92,12 @@
 		CFDD36991EEBF297007497AC /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD36971EEBF297007497AC /* ContactCell.m */; };
 		CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDD36981EEBF297007497AC /* ContactCell.xib */; };
 		CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */; };
+		CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF681EF66618000EEB27 /* BuildAdviser.m */; };
+		CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF6B1EF66971000EEB27 /* BuildAdviserView.m */; };
+		CFEAFF6E1EF6697A000EEB27 /* BuildAdviserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFEAFF6D1EF6697A000EEB27 /* BuildAdviserView.xib */; };
+		CFEAFF721EF66E00000EEB27 /* BuildAdviserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF701EF66E00000EEB27 /* BuildAdviserCell.m */; };
+		CFEAFF731EF66E00000EEB27 /* BuildAdviserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFEAFF711EF66E00000EEB27 /* BuildAdviserCell.xib */; };
+		CFEAFF761EF6C255000EEB27 /* BuildBaobeiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF751EF6C255000EEB27 /* BuildBaobeiModel.m */; };
 		CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEEC00F1EE2A79800E1DB74 /* UIView+Addition.m */; };
 		CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEEC0121EE2A84000E1DB74 /* UINavigationController+Addition.m */; };
 		CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEEC0161EE2B0DD00E1DB74 /* RegisterController.m */; };
@@ -242,6 +248,16 @@
 		CFDD36981EEBF297007497AC /* ContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
 		CFE828D31EE39B2F00290C79 /* UIViewController+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MBProgressHUD.h"; sourceTree = "<group>"; };
 		CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MBProgressHUD.m"; sourceTree = "<group>"; };
+		CFEAFF671EF66618000EEB27 /* BuildAdviser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildAdviser.h; sourceTree = "<group>"; };
+		CFEAFF681EF66618000EEB27 /* BuildAdviser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildAdviser.m; sourceTree = "<group>"; };
+		CFEAFF6A1EF66971000EEB27 /* BuildAdviserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildAdviserView.h; sourceTree = "<group>"; };
+		CFEAFF6B1EF66971000EEB27 /* BuildAdviserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildAdviserView.m; sourceTree = "<group>"; };
+		CFEAFF6D1EF6697A000EEB27 /* BuildAdviserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildAdviserView.xib; sourceTree = "<group>"; };
+		CFEAFF6F1EF66E00000EEB27 /* BuildAdviserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildAdviserCell.h; sourceTree = "<group>"; };
+		CFEAFF701EF66E00000EEB27 /* BuildAdviserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildAdviserCell.m; sourceTree = "<group>"; };
+		CFEAFF711EF66E00000EEB27 /* BuildAdviserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildAdviserCell.xib; sourceTree = "<group>"; };
+		CFEAFF741EF6C255000EEB27 /* BuildBaobeiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildBaobeiModel.h; sourceTree = "<group>"; };
+		CFEAFF751EF6C255000EEB27 /* BuildBaobeiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildBaobeiModel.m; sourceTree = "<group>"; };
 		CFEEC00C1EE29C0600E1DB74 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		CFEEC00E1EE2A79800E1DB74 /* UIView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Addition.h"; sourceTree = "<group>"; };
 		CFEEC00F1EE2A79800E1DB74 /* UIView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Addition.m"; sourceTree = "<group>"; };
@@ -601,6 +617,10 @@
 				CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */,
 				CF99FBE71EF3BEB4001C8A9C /* BuildingDetailModel.h */,
 				CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */,
+				CFEAFF671EF66618000EEB27 /* BuildAdviser.h */,
+				CFEAFF681EF66618000EEB27 /* BuildAdviser.m */,
+				CFEAFF741EF6C255000EEB27 /* BuildBaobeiModel.h */,
+				CFEAFF751EF6C255000EEB27 /* BuildBaobeiModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -629,6 +649,12 @@
 				CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */,
 				CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */,
 				CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */,
+				CFEAFF6A1EF66971000EEB27 /* BuildAdviserView.h */,
+				CFEAFF6B1EF66971000EEB27 /* BuildAdviserView.m */,
+				CFEAFF6D1EF6697A000EEB27 /* BuildAdviserView.xib */,
+				CFEAFF6F1EF66E00000EEB27 /* BuildAdviserCell.h */,
+				CFEAFF701EF66E00000EEB27 /* BuildAdviserCell.m */,
+				CFEAFF711EF66E00000EEB27 /* BuildAdviserCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -720,10 +746,12 @@
 				CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */,
 				CF665BFA1EEB9AB200028B1B /* BaobeiCell.xib in Resources */,
 				CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */,
+				CFEAFF731EF66E00000EEB27 /* BuildAdviserCell.xib in Resources */,
 				CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */,
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
 				C782F49F1EED21790067C07F /* FeedbackController.xib in Resources */,
 				CF30C3C31EF4B9E80070D124 /* CustomerDetailController.xib in Resources */,
+				CFEAFF6E1EF6697A000EEB27 /* BuildAdviserView.xib in Resources */,
 				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
 				CF99FBF31EF3DD0C001C8A9C /* CustomerListController.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
@@ -805,6 +833,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFEAFF761EF6C255000EEB27 /* BuildBaobeiModel.m in Sources */,
 				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
@@ -826,6 +855,7 @@
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CFDD36951EEBEB4D007497AC /* ContactModel.m in Sources */,
 				CF5785D71EE59D2100994741 /* Global.m in Sources */,
+				CFEAFF721EF66E00000EEB27 /* BuildAdviserCell.m in Sources */,
 				CFDD36991EEBF297007497AC /* ContactCell.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,
 				CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */,
@@ -847,6 +877,7 @@
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
 				C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */,
 				CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */,
+				CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
@@ -859,6 +890,7 @@
 				CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */,
 				CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */,
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
+				CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
 				CFDD36911EEBE52F007497AC /* ContactListController.m in Sources */,
 				CF30C3C21EF4B9E80070D124 /* CustomerDetailController.m in Sources */,
