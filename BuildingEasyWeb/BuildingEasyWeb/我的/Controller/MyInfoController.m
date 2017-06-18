@@ -9,7 +9,10 @@
 #import "MyInfoController.h"
 
 #import "UITableView+Addition.h"
+#import "SDWebImageDecoder.h"
+#import "NetworkManager.h"
 
+#import "EditMyInfoBaseController.h"
 #import "MeCellInfo.h"
 #import "User.h"
 
@@ -205,7 +208,45 @@ typedef void (^onTabVCell)(void);
         [self onModifyPassword];
     }
 }
+- (void)onEmail {
+    NSLog(@"onEmail<<<<<< ");
+    EditMyInfoBaseController* editEmailVC = [[EditMyInfoBaseController alloc] init];
+    editEmailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:editEmailVC animated:YES];
+};
 
+- (void)onName {
+    NSLog(@"onName<<<<<< ");
+//    EditMyInfoBaseController* editNameVC = [[EditMyInfoBaseController alloc] init];
+//    editNameVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:editNameVC animated:YES];
+
+};
+
+- (void)onNickName {
+    NSLog(@"onNickName<<<<<< ");
+    EditMyInfoBaseController* editNickNameVC = [[EditMyInfoBaseController alloc] init];
+    editNickNameVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:editNickNameVC animated:YES];
+
+};
+
+- (void)onAuthentication {
+    NSLog(@"onAuthentication<<<<<< ");
+    
+};
+
+- (void)onModifyPassword {
+    NSLog(@"onModifyPassword<<<<<< ");
+    
+    EditMyInfoBaseController* editPasswordVC = [[EditMyInfoBaseController alloc] init];
+    editPasswordVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:editPasswordVC animated:YES];
+};
+
+/////////////////////////////
+////下面是编辑头像的处理
+/////////////////////////////
 - (void)onHeadImg {
     NSLog(@"onHeadImg<<<<<< ");
     
@@ -230,10 +271,9 @@ typedef void (^onTabVCell)(void);
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
             pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
-            
         }
         pickerImage.delegate = self;
-        pickerImage.allowsEditing = NO;
+        pickerImage.allowsEditing = YES;
         
         [self presentViewController:pickerImage animated:YES completion:nil];
     }];
@@ -250,77 +290,86 @@ typedef void (^onTabVCell)(void);
     [self presentViewController:alertVc animated:YES completion:nil];
 };
 
-- (void)onEmail {
-    NSLog(@"onEmail<<<<<< ");
-
-};
-
-- (void)onName {
-    NSLog(@"onName<<<<<< ");
-
-};
-
-- (void)onNickName {
-    NSLog(@"onNickName<<<<<< ");
-
-};
-
-- (void)onAuthentication {
-    NSLog(@"onAuthentication<<<<<< ");
-
-};
-
-- (void)onModifyPassword {
-    NSLog(@"onModifyPassword<<<<<< ");
-    
-};
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"])
     {
-        //先把图片转成NSData
-        UIImage* resultImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData *data;
-        if (UIImagePNGRepresentation(resultImg) ==nil)
+        //取出选取的图片
+        UIImage* selectImg = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        //把图片按size 压缩
+        UIImage *compressImg = [self compressImageWithTargetSize:selectImg size:CGSizeMake(120.0, 120.0)];
+        //把图片转成NSData
+        NSData *imgData;
+        if (UIImagePNGRepresentation(compressImg) == nil)
         {
-            data = UIImageJPEGRepresentation(resultImg,1.0);
+            imgData = UIImageJPEGRepresentation(compressImg, 1.0);
         }
         else
         {
-            data = UIImagePNGRepresentation(resultImg);
+            imgData = UIImagePNGRepresentation(compressImg);
         }
+        [User shareUser].headImg = [imgData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         
-        [User shareUser].headImg = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        
-        
-//        //图片保存的路径
-//        //这里将图片放在沙盒的documents文件夹中
-//        NSString *DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        
-//        //文件管理器
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        
-//        //把刚刚图片转换的data对象拷贝至沙盒中并保存为image.png
-//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/userHeader.png"] contents:data attributes:nil];
-        
+        NSLog(@"目标图片的大小：data.length %ld kb", imgData.length/1024);
+        NSLog(@"目标图片的大小：base64str.length %ld kb(base64)", [User shareUser].headImg.length/1024);
+
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
         
         //加在视图中
-        _headImgView.image = resultImg;
-        
+        _headImgView.image = compressImg;        
     }
 }
 // 取消选取图片
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+//2.保持原来的长宽比，生成一个缩略图
+- (UIImage *)compressImageWithTargetSize:(UIImage *)image size:(CGSize)targetSize
+{
+    UIImage *newimage;
+    if (nil == image) {
+        newimage = nil;
+        return newimage;
+    }
+
+    CGSize oriSize = image.size;
+    //计算目标的绘制区域
+    CGRect rect;
+    if (targetSize.width/targetSize.height > oriSize.width/oriSize.height) {
+        rect.size.width = targetSize.height * oriSize.width/oriSize.height;
+        rect.size.height = targetSize.height;
+        rect.origin.x = (targetSize.width - rect.size.width)/2;
+        rect.origin.y = 0;
+    }
+    else{
+        rect.size.width = targetSize.width;
+        rect.size.height = targetSize.width * oriSize.height/oriSize.width;
+        rect.origin.x = 0;
+        rect.origin.y = (targetSize.height - rect.size.height)/2;
+    }
+    NSLog(@"压缩之后的图片size：w = %f , h = %f", rect.size.width, rect.size.height);
+    
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(targetSize);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+    UIRectFill(CGRectMake(0, 0, targetSize.width, targetSize.height));//clear background
+    //按照目标size绘制
+    [image drawInRect:rect];
+    
+    // 从当前context中创建一个改变大小后的图片
+    newimage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    
+    return newimage;
 }
 
 
