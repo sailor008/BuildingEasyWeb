@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSMutableArray* buildingArr;
 @property (nonatomic, strong) NSMutableArray* areaList;
 
-@property (nonatomic, strong) NSMutableArray<NSString *>* buildIdArr;
+@property (nonatomic, strong) NSMutableArray* buildIdArr;
 
 @end
 
@@ -121,13 +121,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildingListModel* model = _buildingArr[indexPath.row];
-    [_buildIdArr addObject:model.buildId];
+    [_buildIdArr addObject:model];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildingListModel* model = _buildingArr[indexPath.row];
-    [_buildIdArr removeObject:model.buildId];
+    [_buildIdArr removeObject:model];
 }
 
 #pragma mark AreaSectionFilterViewDelegate

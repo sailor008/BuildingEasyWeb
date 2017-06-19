@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@interface FormulaModel : NSObject
+
+@property (nonatomic, copy) NSString* formula;
+@property (nonatomic, copy) NSString* apartment;
+@property (nonatomic, copy) NSString* formulaDesc;
+@property (nonatomic, copy) NSString* buildDesc;
+@property (nonatomic, copy) NSString* formulaId;
+
+@end
+
 @interface BuildingInfoModel : NSObject
 
 @property (nonatomic, copy) NSString* name;
@@ -46,5 +56,6 @@
 @interface BuildingDetailModel : NSObject
 
 @property (nonatomic, strong) BuildingInfoModel* buildInfo;
+@property (nonatomic, copy) NSArray* formulaList;
 
 @end

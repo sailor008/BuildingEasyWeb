@@ -17,6 +17,7 @@
 #import "BuildingDetailModel.h"
 #import <MJExtension.h>
 #import "AdsScrollView.h"
+#import "FormulaListCell.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -27,12 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *hotImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *bambooImageView;
 
-@property (weak, nonatomic) IBOutlet UILabel *buildingTypeLabel;// 户型
-@property (weak, nonatomic) IBOutlet UILabel *commissionLabel;// 佣金
-@property (weak, nonatomic) IBOutlet UILabel *rewardLabel;// 奖励
-
-@property (weak, nonatomic) IBOutlet UILabel *floorLabel;// 层数
-@property (weak, nonatomic) IBOutlet UILabel *unitLabel;// 户数
+@property (weak, nonatomic) IBOutlet UITableView *formulaTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *formulaTableViewHeight;
 
 @property (weak, nonatomic) IBOutlet UILabel *ruleLabel;
 
@@ -78,6 +75,8 @@
     }
     _baseInfoArray = [temp copy];
     
+    [_formulaTableView registerNibWithName:@"FormulaListCell"];
+    
     [_tableView registerNibWithName:@"BuildingBaseInfoCell"];
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     _tableView.layer.borderColor = Hex(0xff4c00).CGColor;
@@ -94,11 +93,19 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView == _formulaTableView) {
+        return _detail.formulaList.count;
+    }
     return _baseInfoArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == _formulaTableView) {
+        FormulaListCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FormulaListCell" forIndexPath:indexPath];
+        cell.model = _detail.formulaList[indexPath.row];
+        return cell;
+    }
     BuildingBaseInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuildingBaseInfoCell" forIndexPath:indexPath];
     cell.contentArray = _baseInfoArray[indexPath.row];
     return cell;
@@ -107,6 +114,9 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == _formulaTableView) {
+        return 101;
+    }
     return 40;
 }
 
@@ -186,7 +196,9 @@
     
     _ruleLabel.text = _detail.buildInfo.rules;
     
-    _buildingTypeLabel.text = _detail.buildInfo.houseType;
+    _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
+    [_formulaTableView reloadData];
+    
     _sellDetaillabel.text = _detail.buildInfo.sellingPoint;
     [self analysisBaseInfoArray];
 }

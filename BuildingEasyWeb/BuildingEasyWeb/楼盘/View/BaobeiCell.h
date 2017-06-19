@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BuildBaobeiModel.h"
+
 @protocol BaobeiCellDelegate <NSObject>
 
-- (void)deleteBuilding:(id)building cellIndex:(NSInteger)index;
-- (void)changeAdviser:(id)building;
+- (void)deleteBuilding:(BuildBaobeiModel *)building cellIndex:(NSInteger)index;
+- (void)changeAdviser:(BuildBaobeiModel *)building cellIndex:(NSInteger)index;
 
 @end
 
@@ -19,5 +21,7 @@
 
 @property (nonatomic, weak) id<BaobeiCellDelegate> delegate;
 @property (nonatomic, assign) NSInteger index;
+
+@property (nonatomic, strong) BuildBaobeiModel* model;
 
 @end

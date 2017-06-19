@@ -13,10 +13,20 @@
 #import "UITableView+Addition.h"
 #import "SelectBuildingController.h"
 #import "ContactListController.h"
+#import "BuildAdviser.h"
+#import <MJExtension.h>
+#import "NetworkManager.h"
+#import "BuildAdviserView.h"
+#import "UIView+MBProgressHUD.h"
+
+#import "BuildBaobeiModel.h"
 
 static NSInteger const kIntentionButtonBaseTag = 1000;
 
-@interface BaobeiController () <UITableViewDelegate, UITableViewDataSource, BaobeiCellDelegate, SelectBuildingResultDelegate>
+@interface BaobeiController () <UITableViewDelegate, UITableViewDataSource, BaobeiCellDelegate, SelectBuildingResultDelegate, BuildAdviserViewDelegate>
+{
+    NSInteger _tempIndex;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
@@ -26,7 +36,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSMutableArray* bulidList;
+@property (nonatomic, strong) BuildBaobeiModel* selectedModel;
+
+@property (nonatomic, assign) NSInteger intend;// 意向，初始未选是-1
 
 @end
 
@@ -38,7 +51,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     
     self.title = @"报备客户";
     
-    _count = 3;
+    _intend = -1;
+    _bulidList = [NSMutableArray array];
     
     [self setupUI];
 }
@@ -90,6 +104,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 #pragma mark Action
 - (IBAction)intentionTap:(UIButton *)sender
 {
+    _intend = sender.tag - kIntentionButtonBaseTag;
     UIView* superView = sender.superview;
     for (int i = 0; i < 3; i ++) {
         UIButton* button = [superView viewWithTag:kIntentionButtonBaseTag + i];
@@ -119,13 +134,59 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (void)baobei
 {
+    if (!_nameLabel.text.length) {
+        [MBProgressHUD showError:@"请填写客户姓名"];
+        return;
+    }
+    if (!_phoneLabel.text.length) {
+        [MBProgressHUD showError:@"请填写客户电话号码"];
+        return;
+    }
+    if (_intend < 0) {
+        [MBProgressHUD showError:@"请选择购房意向"];
+        return;
+    }
+    if (!_bulidList.count) {
+        [MBProgressHUD showError:@"请选择意向楼盘"];
+        return;
+    }
     
+    
+    if (_tempIndex >= _bulidList.count) {
+        [MBProgressHUD showSuccess:@"报备成功" toView:self.view];
+        _tempIndex = 0;
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+    BuildBaobeiModel* model = _bulidList[_tempIndex];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"name"] = _nameLabel.text;
+    parameters[@"mobile"] = _phoneLabel.text;
+    parameters[@"intention"] = @(_intend);
+    parameters[@"buildId"] = model.buildModel.buildId;
+    parameters[@"adviserId"] = model.selectedAdviser.adviserId;
+
+    [NetworkManager postWithUrl:@"wx/addCustomer" parameters:parameters success:^(id reponse) {
+        NSLog(@"reponse:%@", reponse);
+        
+        _tempIndex++;
+        [self baobei];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@", error);
+        
+        _tempIndex++;
+        [self baobei];
+    }];
 }
 
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _count;
+    return _bulidList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,6 +194,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     BaobeiCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BaobeiCell" forIndexPath:indexPath];
     cell.delegate = self;
     cell.index = indexPath.row;
+    cell.model = _bulidList[indexPath.row];
     return cell;
 }
 
@@ -143,25 +205,87 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 }
 
 #pragma mark BaobeiCellDelegate
-- (void)deleteBuilding:(id)building cellIndex:(NSInteger)index
+- (void)deleteBuilding:(BuildBaobeiModel *)building cellIndex:(NSInteger)index
 {
+    [_bulidList removeObject:building];
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    --_count;
     [_tableView beginUpdates];
-    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [_tableView endUpdates];
     [_tableView reloadData];
 }
 
-- (void)changeAdviser:(id)building
+- (void)changeAdviser:(BuildBaobeiModel *)building cellIndex:(NSInteger)index
 {
+    BuildAdviserView* adviserView = [[[NSBundle mainBundle] loadNibNamed:@"BuildAdviserView" owner:nil options:nil] lastObject];
+    adviserView.frame = self.view.bounds;
+    adviserView.delegate = self;
+    [self.view addSubview:adviserView];
     
+    _selectedModel = _bulidList[index];
+    adviserView.model = _selectedModel;
+}
+
+#pragma mark BuildAdviserViewDelegate
+- (void)selectedAdviser
+{
+    [_tableView reloadData];
 }
 
 #pragma mark SelectBuildingResultDelegate
-- (void)selectBuildingResult:(NSArray<NSString *>*)buildIDs
+- (void)selectBuildingResult:(NSArray *)buildIDs
 {
-    NSLog(@"buildIds :%@", buildIDs);
+    for (BuildingListModel* model in buildIDs) {
+        BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
+        baobeiModel.buildModel = model;
+        [_bulidList addObject:baobeiModel];
+    }
+    
+    [_tableView reloadData];
+    
+    [MBProgressHUD showLoadingToView:self.view];
+    [self requestAdviserList];
+}
+
+#pragma mark RequestData
+- (void)requestAdviserList
+{
+    if (_tempIndex >= _bulidList.count) {
+        _tempIndex = 0;
+        [MBProgressHUD hideHUDForView:self.view];
+        [_tableView reloadData];
+        return;
+    }
+    
+    // 懒得做线程组，干脆改成用递归，一个个请求
+    BuildBaobeiModel* baobeiModel = _bulidList[_tempIndex];
+    if (baobeiModel.adviserList) {// 已经请求过,不再请求
+        _tempIndex ++;
+        [self requestAdviserList];
+        return;
+    }
+    NSString* buildIDStr = baobeiModel.buildModel.buildId;
+    [NetworkManager postWithUrl:@"wx/getAdviserList" parameters:@{@"buildId":buildIDStr} success:^(id reponse) {
+
+        NSArray* array = (NSArray *)reponse;
+        NSMutableArray* tempArr = [NSMutableArray array];
+        for (NSDictionary* dic in array) {
+            BuildAdviser* model = [BuildAdviser mj_objectWithKeyValues:dic];
+            [tempArr addObject:model];
+        }
+        
+        BuildBaobeiModel* baobeiModel = _bulidList[_tempIndex];
+        baobeiModel.adviserList = tempArr;
+        
+        _tempIndex ++;
+        [self requestAdviserList];
+
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@", error);
+        
+        _tempIndex ++;
+        [self requestAdviserList];
+    }];
 }
 
 @end

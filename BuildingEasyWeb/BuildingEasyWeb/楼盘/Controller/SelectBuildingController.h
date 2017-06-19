@@ -10,7 +10,7 @@
 
 @protocol SelectBuildingResultDelegate <NSObject>
 
-- (void)selectBuildingResult:(NSArray<NSString *>*)buildIDs;
+- (void)selectBuildingResult:(NSArray *)buildIDs;
 
 @end
 

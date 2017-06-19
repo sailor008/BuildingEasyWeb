@@ -8,10 +8,19 @@
 
 #import "BuildingDetailModel.h"
 
+@implementation FormulaModel
+
+@end
+
 @implementation BuildingInfoModel
 
 @end
 
 @implementation BuildingDetailModel
+
++ (NSDictionary *)mj_objectClassInArray
+{
+    return @{@"formulaList" : @"FormulaModel"};
+}
 
 @end

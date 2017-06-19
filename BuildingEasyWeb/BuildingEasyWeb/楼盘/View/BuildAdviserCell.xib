@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuildAdviserCell" id="KGk-i7-Jjw" customClass="BuildAdviserCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5W-XZ-oFe">
+                        <rect key="frame" x="20" y="13.5" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13800138000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWS-Qs-HIe">
+                        <rect key="frame" x="69" y="13.5" width="91" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZ7-eL-vCm">
+                        <rect key="frame" x="296" y="11" width="14" height="22"/>
+                        <state key="normal" image="未选中"/>
+                        <state key="selected" image="选中"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="SZ7-eL-vCm" secondAttribute="trailing" constant="10" id="033-kp-IaN"/>
+                    <constraint firstItem="P5W-XZ-oFe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3rQ-WY-p0Z"/>
+                    <constraint firstItem="kWS-Qs-HIe" firstAttribute="leading" secondItem="P5W-XZ-oFe" secondAttribute="trailing" constant="20" id="8MB-Ok-xUd"/>
+                    <constraint firstItem="SZ7-eL-vCm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ECQ-5G-bPB"/>
+                    <constraint firstItem="P5W-XZ-oFe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="dl7-tP-R6H"/>
+                    <constraint firstItem="kWS-Qs-HIe" firstAttribute="centerY" secondItem="P5W-XZ-oFe" secondAttribute="centerY" id="uQr-M1-cXy"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="P5W-XZ-oFe" id="DXm-fs-LMp"/>
+                <outlet property="phoneLabel" destination="kWS-Qs-HIe" id="5QD-0E-Sp5"/>
+                <outlet property="selectButton" destination="SZ7-eL-vCm" id="Uq9-fY-LB7"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="未选中" width="14" height="14"/>
+        <image name="选中" width="14" height="14"/>
+    </resources>
+</document>
