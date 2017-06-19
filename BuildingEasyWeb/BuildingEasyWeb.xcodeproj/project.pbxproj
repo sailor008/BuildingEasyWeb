@@ -69,6 +69,8 @@
 		CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF7721171EE6DEF200DD5AE2 /* BuildingCell.xib */; };
 		CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */; };
 		CF77213B1EE6F34900DD5AE2 /* AdsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */; };
+		CF8F7FE81EF77803009A6C3E /* FormulaListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F7FE61EF77803009A6C3E /* FormulaListCell.m */; };
+		CF8F7FE91EF77803009A6C3E /* FormulaListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8F7FE71EF77803009A6C3E /* FormulaListCell.xib */; };
 		CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */; };
 		CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBE81EF3BEB4001C8A9C /* BuildingDetailModel.m */; };
 		CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBF01EF3DD0C001C8A9C /* CustomerListController.m */; };
@@ -209,6 +211,9 @@
 		CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionFilterView.m; sourceTree = "<group>"; };
 		CF7721391EE6F34900DD5AE2 /* AdsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdsScrollView.h; sourceTree = "<group>"; };
 		CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdsScrollView.m; sourceTree = "<group>"; };
+		CF8F7FE51EF77803009A6C3E /* FormulaListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormulaListCell.h; sourceTree = "<group>"; };
+		CF8F7FE61EF77803009A6C3E /* FormulaListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormulaListCell.m; sourceTree = "<group>"; };
+		CF8F7FE71EF77803009A6C3E /* FormulaListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormulaListCell.xib; sourceTree = "<group>"; };
 		CF99FBE41EF385D8001C8A9C /* BuildingFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingFilterModel.h; sourceTree = "<group>"; };
 		CF99FBE51EF385D8001C8A9C /* BuildingFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingFilterModel.m; sourceTree = "<group>"; };
 		CF99FBE71EF3BEB4001C8A9C /* BuildingDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailModel.h; sourceTree = "<group>"; };
@@ -655,6 +660,9 @@
 				CFEAFF6F1EF66E00000EEB27 /* BuildAdviserCell.h */,
 				CFEAFF701EF66E00000EEB27 /* BuildAdviserCell.m */,
 				CFEAFF711EF66E00000EEB27 /* BuildAdviserCell.xib */,
+				CF8F7FE51EF77803009A6C3E /* FormulaListCell.h */,
+				CF8F7FE61EF77803009A6C3E /* FormulaListCell.m */,
+				CF8F7FE71EF77803009A6C3E /* FormulaListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -773,6 +781,7 @@
 				CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */,
 				CF7721191EE6DEF200DD5AE2 /* BuildingCell.xib in Resources */,
 				CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */,
+				CF8F7FE91EF77803009A6C3E /* FormulaListCell.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,
 				CFDD367D1EEBCAB5007497AC /* SelectBuildingController.xib in Resources */,
 			);
@@ -836,6 +845,7 @@
 				CFEAFF761EF6C255000EEB27 /* BuildBaobeiModel.m in Sources */,
 				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
+				CF8F7FE81EF77803009A6C3E /* FormulaListCell.m in Sources */,
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
 				CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */,
 				CFEEC01D1EE2B5B800E1DB74 /* BuildingController.m in Sources */,
@@ -998,11 +1008,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = D97EM46M64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/Required",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Required",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BuildingEasyWeb/PrefixHeader.pch";
 				INFOPLIST_FILE = BuildingEasyWeb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = zhenghongyi.BuildingEasyWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1015,11 +1038,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = D97EM46M64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/Required",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Optional",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformConnector",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/QQSDK",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Required",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BuildingEasyWeb/PrefixHeader.pch";
 				INFOPLIST_FILE = BuildingEasyWeb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = zhenghongyi.BuildingEasyWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
