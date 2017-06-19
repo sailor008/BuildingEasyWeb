@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) CustomerDetailModel* detailModel;
 
+@property (nonatomic, strong) NSMutableArray* buildList;
+
 @end
 
 @implementation CustomerDetailController
@@ -36,6 +38,10 @@
     
     self.navigationController.navigationBarHidden = YES;
     
+    _nameLabel.text = _customerName;
+    _phoneLabel.text = _phone;
+    
+    _buildList = [NSMutableArray array];
     _tableView.tableHeaderView = _headerView;
     [_tableView registerNibWithName:@"BuildingProgressCell"];
     
@@ -76,12 +82,13 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return _buildList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildingProgressCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuildingProgressCell" forIndexPath:indexPath];
+    cell.model = _buildList[indexPath.row];
     return cell;
 }
 
@@ -94,12 +101,25 @@
 #pragma mark RequestData
 - (void)requestData
 {
+//    [MBProgressHUD showLoadingToView:self.view];
+//    [NetworkManager postWithUrl:@"wx/getCustomerInfo" parameters:@{@"customerId":_customerId} success:^(id reponse) {
+//        [MBProgressHUD hideHUDForView:self.view];
+//        
+//        _detailModel = [CustomerDetailModel mj_objectWithKeyValues:reponse];
+//        [self setupInterFace];
+//        
+//    } failure:^(NSError *error, NSString *msg) {
+//        [MBProgressHUD dissmissWithError:msg];
+//    }];
+    
     [MBProgressHUD showLoadingToView:self.view];
-    [NetworkManager postWithUrl:@"wx/getCustomerInfo" parameters:@{@"customerId":_customerId} success:^(id reponse) {
+    [NetworkManager postWithUrl:@"wx/getCustomerListByName" parameters:@{@"customerName":_customerName} success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
-        
-        _detailModel = [CustomerDetailModel mj_objectWithKeyValues:reponse];
-        [self setupInterFace];
+        for (NSDictionary* dic in (NSArray *)reponse) {
+            CustomerBuildModel* model = [CustomerBuildModel mj_objectWithKeyValues:dic];
+            [_buildList addObject:model];
+        }
+        [_tableView reloadData];
         
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg];

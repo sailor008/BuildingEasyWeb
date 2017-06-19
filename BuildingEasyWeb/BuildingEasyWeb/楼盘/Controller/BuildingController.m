@@ -101,7 +101,7 @@
     naviLogoView.frame = CGRectMake(0, 0, naviLogoView.width, naviLogoView.height);
     self.navigationItem.titleView = naviLogoView;
     
-    UIBarButtonItem* searchItem = [[UIBarButtonItem alloc] initWithImage:GetIMAGE(@"搜索.png") style:UIBarButtonItemStylePlain target:self action:@selector(searchBuilding)];
+    UIBarButtonItem* searchItem = [[UIBarButtonItem alloc] initWithImage:GetIMAGE(@"搜索_首页.png") style:UIBarButtonItemStylePlain target:self action:@selector(searchBuilding)];
     self.navigationItem.rightBarButtonItem = searchItem;
     
     _locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
