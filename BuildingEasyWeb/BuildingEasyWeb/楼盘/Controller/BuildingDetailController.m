@@ -157,7 +157,6 @@
         [MBProgressHUD hideHUDForView:self.view];
         
         [self setDataToInterFace:reponse];
-        NSLog(@"response :%@", reponse);
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"error :%@", error);
         [MBProgressHUD dissmissWithError:msg toView:self.view];

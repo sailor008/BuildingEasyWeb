@@ -13,6 +13,16 @@ typedef NS_ENUM(NSInteger, BEWUserRole) {
     kAgencyRole
 };
 
+typedef NS_ENUM(NSInteger, BEWProgressState) {
+    kBaobeiState,// 报备
+    kVisitState,// 带看
+    kTakeupState,// 认购
+    kDealState,// 签约
+    kPayState,// 回款
+    kSettleState,// 结清
+    kInvalidState// 失效
+};
+
 typedef void(^Callback)();
 
 @interface Global : NSObject

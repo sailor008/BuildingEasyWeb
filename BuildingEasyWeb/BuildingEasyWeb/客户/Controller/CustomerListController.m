@@ -148,6 +148,8 @@
         model = listModel.customerList[indexPath.row];
     }
     detailVC.customerId = model.customerId;
+    detailVC.customerName = model.name;
+    detailVC.phone = model.mobile;
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }

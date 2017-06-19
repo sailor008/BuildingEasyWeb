@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CustomerBuildModel.h"
+
 @interface BuildingProgressCell : UITableViewCell
+
+@property (nonatomic, strong) CustomerBuildModel* model;
 
 @end

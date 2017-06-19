@@ -11,8 +11,9 @@
 #import "LoginController.h"
 #import "LoginManager.h"
 #import "MainTabController.h"
-
 #import "User.h"
+
+#import "WXApi.h"
 
 @interface AppDelegate ()
 
@@ -38,6 +39,7 @@
         self.window.rootViewController = naviVC;
     }
     
+    [WXApi registerApp:@""];
     
     [self.window makeKeyAndVisible];
     

@@ -164,22 +164,22 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="JQP-jB-g4x">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="JQP-jB-g4x">
                                         <rect key="frame" x="-2" y="-2" width="12" height="12"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" tag="1001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="zTd-2p-Ww2">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="1001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="zTd-2p-Ww2">
                                         <rect key="frame" x="52" y="-2" width="12" height="12"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" tag="1002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="5Fh-59-qHD">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="1002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="5Fh-59-qHD">
                                         <rect key="frame" x="106.5" y="-2" width="12" height="12"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" tag="1003" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="fRi-Yz-QHT">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="1003" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="fRi-Yz-QHT">
                                         <rect key="frame" x="161.5" y="-2" width="12" height="12"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" tag="1004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="TCs-7n-DUi">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="1004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="TCs-7n-DUi">
                                         <rect key="frame" x="216" y="-2" width="12" height="12"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" tag="1005" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="6cm-vm-NYq">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="1005" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="6cm-vm-NYq">
                                         <rect key="frame" x="270" y="-2" width="12" height="12"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" tag="2000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报备" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSn-ut-9uA">
@@ -284,14 +284,14 @@
                                 <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-cj-xs3">
-                                <rect key="frame" x="29" y="152" width="37" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报备时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-cj-xs3">
+                                <rect key="frame" x="29" y="152" width="61.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-01-01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itk-gn-osV">
-                                <rect key="frame" x="66" y="152" width="65" height="14.5"/>
+                                <rect key="frame" x="90.5" y="152" width="65" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -337,6 +337,15 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <connections>
+                <outlet property="buildNameLabel" destination="UYo-di-TWB" id="sq5-D3-asK"/>
+                <outlet property="currentStateLabel" destination="gn7-ph-4Ux" id="5Of-HS-DDc"/>
+                <outlet property="intendImageView" destination="Guz-eE-CBr" id="l14-oJ-cFC"/>
+                <outlet property="nameLabel" destination="3qQ-Lf-fkM" id="bqu-81-s5F"/>
+                <outlet property="phoneLabel" destination="Ug5-ut-CEa" id="qcU-xU-WC8"/>
+                <outlet property="progressView" destination="Ybb-SU-eyU" id="zri-S2-ggp"/>
+                <outlet property="timeLabel" destination="itk-gn-osV" id="MyC-jU-HxC"/>
+            </connections>
             <point key="canvasLocation" x="34" y="81.5"/>
         </tableViewCell>
     </objects>
