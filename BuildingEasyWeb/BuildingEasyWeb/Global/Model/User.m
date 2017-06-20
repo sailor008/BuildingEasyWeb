@@ -32,6 +32,22 @@ static NSString* const kUserName = @"Name";
     return user;
 }
 
+- (NSString *)city
+{
+    if (!_city) {
+        return @"广州";
+    }
+    return _city;
+}
+
+- (NSString *)areaCode
+{
+    if (!_areaCode) {
+        return @"0";
+    }
+    return _areaCode;
+}
+
 - (NSString *)getUserFilePath
 {
     NSArray *array = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);

@@ -25,6 +25,12 @@
 
 @property (nonatomic, assign) BOOL isLogin;
 
+// 辅助使用，因为多个地方要用到，但不做本地归档
+@property (nonatomic, copy) NSString* city;
+@property (nonatomic, copy) NSString* areaCode;
+@property (nonatomic, assign) double lat;
+@property (nonatomic, assign) double lng;
+
 + (instancetype)shareUser;
 
 - (void)copyToShareUser;

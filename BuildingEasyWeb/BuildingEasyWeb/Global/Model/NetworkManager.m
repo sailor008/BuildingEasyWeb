@@ -31,7 +31,7 @@ static const NSString* host = @"39.108.58.165:11071";
         
         AFHTTPSessionManager *httpSessionManager = [AFHTTPSessionManager manager];
 //        httpSessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        
+        httpSessionManager.requestSerializer.timeoutInterval = 20;
         manager.httpSessionManager = httpSessionManager;
     });
     return manager;

@@ -20,8 +20,7 @@
 
 + (NSDictionary *)mj_objectClassInArray
 {
-    return @{@"adviser" : @"Adviser",
-             @"stateList" : @"StateList"};
+    return @{@"stateList" : @"StateList"};
 }
 
 @end

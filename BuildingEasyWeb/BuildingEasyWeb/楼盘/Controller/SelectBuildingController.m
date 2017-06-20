@@ -18,6 +18,7 @@
 #import "BuildingListModel.h"
 #import <MJExtension.h>
 #import "CityModel.h"
+#import "User.h"
 
 @interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate>
 
@@ -30,6 +31,9 @@
 
 @property (nonatomic, strong) NSMutableArray* buildIdArr;
 
+//@property (nonatomic, copy) NSString* city;
+@property (nonatomic, copy) NSString* areaCode;
+
 @end
 
 @implementation SelectBuildingController
@@ -40,6 +44,7 @@
     
     self.title = @"选择报备楼盘";
     
+    _areaCode = [User shareUser].areaCode;
     _buildingArr = [NSMutableArray array];
     _areaList = [NSMutableArray array];
     _buildIdArr = [NSMutableArray array];
@@ -63,7 +68,7 @@
     _areaSectionView = [[[NSBundle mainBundle] loadNibNamed:@"AreaSectionFilterView" owner:nil options:nil] lastObject];
     _areaSectionView.delegate = self;
     
-    [_areaSectionView setCurrentCity:_city];
+    [_areaSectionView setCurrentCity:[User shareUser].city];
 }
 
 - (void)addTableViewRefresh

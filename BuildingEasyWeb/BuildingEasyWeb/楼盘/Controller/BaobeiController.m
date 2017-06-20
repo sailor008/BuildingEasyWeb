@@ -57,6 +57,12 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     [self setupUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -64,6 +70,9 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (void)setupUI
 {
+    _nameLabel.text = _name;
+    _phoneLabel.text = _phone;
+    
     _tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     
     _importButton.layer.cornerRadius = 5;
@@ -126,8 +135,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 - (IBAction)addIntentBuilding:(id)sender
 {
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
-    buildingVC.city = _city;
-    buildingVC.areaCode = _areaCode;
     buildingVC.delegate = self;
     [self.navigationController pushViewController:buildingVC animated:YES];
 }

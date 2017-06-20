@@ -32,6 +32,10 @@
 		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
 		CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */; };
 		CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */; };
+		CF2FCA861EF91079001E974C /* ProgressDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2FCA841EF91079001E974C /* ProgressDetailController.m */; };
+		CF2FCA871EF91079001E974C /* ProgressDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2FCA851EF91079001E974C /* ProgressDetailController.xib */; };
+		CF2FCA8B1EF915D0001E974C /* ProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2FCA891EF915D0001E974C /* ProgressCell.m */; };
+		CF2FCA8C1EF915D0001E974C /* ProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2FCA8A1EF915D0001E974C /* ProgressCell.xib */; };
 		CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061C51EE3F85E00D3FC7E /* MapKit.framework */; };
 		CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */; };
 		CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3061CA1EE3FDAA00D3FC7E /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -48,6 +52,9 @@
 		CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */; };
 		CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D591EEAF44E009A1B50 /* NSString+Addition.m */; };
 		CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */; };
+		CF53E8EA1EF96747008D0322 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E8E81EF96747008D0322 /* EditController.m */; };
+		CF53E8EB1EF96747008D0322 /* EditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF53E8E91EF96747008D0322 /* EditController.xib */; };
+		CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E8ED1EF96E17008D0322 /* PlaceholderTextView.m */; };
 		CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */; };
 		CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */; };
 		CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5785D31EE59B6700994741 /* UIView+MBProgressHUD.m */; };
@@ -159,6 +166,12 @@
 		CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingSectionView.h; sourceTree = "<group>"; };
 		CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingSectionView.m; sourceTree = "<group>"; };
 		CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingSectionView.xib; sourceTree = "<group>"; };
+		CF2FCA831EF91079001E974C /* ProgressDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressDetailController.h; sourceTree = "<group>"; };
+		CF2FCA841EF91079001E974C /* ProgressDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressDetailController.m; sourceTree = "<group>"; };
+		CF2FCA851EF91079001E974C /* ProgressDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressDetailController.xib; sourceTree = "<group>"; };
+		CF2FCA881EF915D0001E974C /* ProgressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressCell.h; sourceTree = "<group>"; };
+		CF2FCA891EF915D0001E974C /* ProgressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressCell.m; sourceTree = "<group>"; };
+		CF2FCA8A1EF915D0001E974C /* ProgressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressCell.xib; sourceTree = "<group>"; };
 		CF3061C51EE3F85E00D3FC7E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CF3061C71EE3F96500D3FC7E /* OpenSystemUrlManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenSystemUrlManager.h; sourceTree = "<group>"; };
 		CF3061C81EE3F96500D3FC7E /* OpenSystemUrlManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenSystemUrlManager.m; sourceTree = "<group>"; };
@@ -184,6 +197,11 @@
 		CF413D591EEAF44E009A1B50 /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
 		CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingListModel.h; sourceTree = "<group>"; };
 		CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingListModel.m; sourceTree = "<group>"; };
+		CF53E8E71EF96747008D0322 /* EditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditController.h; sourceTree = "<group>"; };
+		CF53E8E81EF96747008D0322 /* EditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditController.m; sourceTree = "<group>"; };
+		CF53E8E91EF96747008D0322 /* EditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditController.xib; sourceTree = "<group>"; };
+		CF53E8EC1EF96E17008D0322 /* PlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderTextView.h; sourceTree = "<group>"; };
+		CF53E8ED1EF96E17008D0322 /* PlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextView.m; sourceTree = "<group>"; };
 		CF55FF151EE8316B00B0ACD9 /* BuildingDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingDetailController.h; sourceTree = "<group>"; };
 		CF55FF161EE8316B00B0ACD9 /* BuildingDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingDetailController.m; sourceTree = "<group>"; };
 		CF55FF171EE8316B00B0ACD9 /* BuildingDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingDetailController.xib; sourceTree = "<group>"; };
@@ -497,6 +515,8 @@
 				CF77213A1EE6F34900DD5AE2 /* AdsScrollView.m */,
 				CF7721361EE6F32100DD5AE2 /* SectionFilterView.h */,
 				CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */,
+				CF53E8EC1EF96E17008D0322 /* PlaceholderTextView.h */,
+				CF53E8ED1EF96E17008D0322 /* PlaceholderTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -548,6 +568,12 @@
 				CF30C3BF1EF4B9E80070D124 /* CustomerDetailController.h */,
 				CF30C3C01EF4B9E80070D124 /* CustomerDetailController.m */,
 				CF30C3C11EF4B9E80070D124 /* CustomerDetailController.xib */,
+				CF2FCA831EF91079001E974C /* ProgressDetailController.h */,
+				CF2FCA841EF91079001E974C /* ProgressDetailController.m */,
+				CF2FCA851EF91079001E974C /* ProgressDetailController.xib */,
+				CF53E8E71EF96747008D0322 /* EditController.h */,
+				CF53E8E81EF96747008D0322 /* EditController.m */,
+				CF53E8E91EF96747008D0322 /* EditController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -574,6 +600,9 @@
 				CF30C3C41EF4BFCC0070D124 /* BuildingProgressCell.h */,
 				CF30C3C51EF4BFCC0070D124 /* BuildingProgressCell.m */,
 				CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */,
+				CF2FCA881EF915D0001E974C /* ProgressCell.h */,
+				CF2FCA891EF915D0001E974C /* ProgressCell.m */,
+				CF2FCA8A1EF915D0001E974C /* ProgressCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -807,6 +836,7 @@
 				CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */,
 				CF665BFA1EEB9AB200028B1B /* BaobeiCell.xib in Resources */,
 				CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */,
+				CF2FCA871EF91079001E974C /* ProgressDetailController.xib in Resources */,
 				CFEAFF731EF66E00000EEB27 /* BuildAdviserCell.xib in Resources */,
 				CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */,
 				CFDD368D1EEBE2C0007497AC /* CityListController.xib in Resources */,
@@ -816,6 +846,7 @@
 				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
 				CF99FBF31EF3DD0C001C8A9C /* CustomerListController.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
+				CF53E8EB1EF96747008D0322 /* EditController.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
@@ -837,6 +868,7 @@
 				CF8F7FE91EF77803009A6C3E /* FormulaListCell.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,
 				CFDD367D1EEBCAB5007497AC /* SelectBuildingController.xib in Resources */,
+				CF2FCA8C1EF915D0001E974C /* ProgressCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFEAFF761EF6C255000EEB27 /* BuildBaobeiModel.m in Sources */,
+				CF2FCA861EF91079001E974C /* ProgressDetailController.m in Sources */,
 				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
 				CF8F7FE81EF77803009A6C3E /* FormulaListCell.m in Sources */,
@@ -905,6 +938,7 @@
 				CFD016931EED353F003E1BF8 /* CityModel.m in Sources */,
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
+				CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */,
 				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
@@ -923,12 +957,14 @@
 				CFDD36991EEBF297007497AC /* ContactCell.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,
 				CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */,
+				CF53E8EA1EF96747008D0322 /* EditController.m in Sources */,
 				CF7721181EE6DEF200DD5AE2 /* BuildingCell.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,
 				CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */,
 				CF99FBF71EF3DFC0001C8A9C /* CustomerListCell.m in Sources */,
+				CF2FCA8B1EF915D0001E974C /* ProgressCell.m in Sources */,
 				CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */,
 				CF8F80921EF7C652009A6C3E /* CustomerBuildModel.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,

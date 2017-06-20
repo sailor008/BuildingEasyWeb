@@ -134,8 +134,6 @@
 - (IBAction)baobei:(id)sender
 {
     BaobeiController* baobeiVC = [[BaobeiController alloc] init];
-    baobeiVC.city = _city;
-    baobeiVC.areaCode = _areaCode;
     [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 
