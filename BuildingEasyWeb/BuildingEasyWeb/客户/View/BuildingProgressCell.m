@@ -62,7 +62,7 @@ const NSInteger kProgressLabelTag = 2000;
             break;
     }
     
-    NSArray* stateArr = @[@"报备", @"带看", @"认购", @"签约", @"回款", @"结清"];
+    NSArray* stateArr = @[@"报备", @"带看", @"认购", @"签约", @"回款", @"结清", @"失效"];
     _currentStateLabel.text = stateArr[model.currentState];
     
     NSTimeInterval timeInterval = model.createTime / 1000;

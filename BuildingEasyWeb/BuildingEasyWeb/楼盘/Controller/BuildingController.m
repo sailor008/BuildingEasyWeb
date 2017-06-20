@@ -47,7 +47,7 @@
 @property (nonatomic, copy) NSString* averAgeId;
 @property (nonatomic, copy) NSString* distanceId;
 @property (nonatomic, copy) NSString* classifyId;
-@property (nonatomic, copy) NSString* areaCode;
+//@property (nonatomic, copy) NSString* areaCode;
 
 @end
 
@@ -67,6 +67,8 @@
         [LoginManager login:mobile password:pwd callback:^{
             [_tableView.mj_header beginRefreshing];
         }];
+    } else {
+        [_tableView.mj_header beginRefreshing];
     }
 }
 
@@ -87,7 +89,7 @@
     _averAgeId = @"0";
     _distanceId = @"0";
     _classifyId = @"0";
-    _areaCode = @"0";
+//    _areaCode = @"0";
     
     [_tableView registerNibWithName:@"BuildingCell"];
     
@@ -126,6 +128,10 @@
         weakSelf.lat = lat;
         weakSelf.lng = lng;
         [weakSelf setupLocationButtonFace:city];
+        
+        [User shareUser].city = city;
+        [User shareUser].lat = lat;
+        [User shareUser].lng = lng;
     }];
 }
 
@@ -170,7 +176,7 @@
     NSDictionary* parameters = @{@"averAgeId":_averAgeId,
                                  @"distanceId":_distanceId,
                                  @"classifyId":_classifyId,
-                                 @"areaCode":_areaCode,
+                                 @"areaCode":[User shareUser].areaCode,
                                  @"lon":@113.26,
                                  @"lat":@23.14,
                                  @"pageNo":@(_tableView.page),
@@ -358,8 +364,6 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     BuildingListModel* model = _buildingArr[indexPath.row];
     detailVC.buildId = model.buildId;
-    detailVC.city = _currentCity;
-    detailVC.areaCode = _areaCode;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
@@ -388,7 +392,7 @@
         case 0:
         {
             AreaModel* model = _areaList[selectedIndex];
-            _areaCode = model.areaCode;
+            [User shareUser].areaCode = model.areaCode;
         }
             break;
         case 1:

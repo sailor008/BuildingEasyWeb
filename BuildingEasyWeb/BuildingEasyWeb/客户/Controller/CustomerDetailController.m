@@ -13,18 +13,16 @@
 #import "NetworkManager.h"
 #import "UIView+MBProgressHUD.h"
 #import <MJExtension.h>
-#import "CustomerDetailModel.h"
+#import "BaobeiController.h"
+#import "ProgressDetailController.h"
 
 @interface CustomerDetailController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *intendImageView;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (nonatomic, strong) CustomerDetailModel* detailModel;
 
 @property (nonatomic, strong) NSMutableArray* buildList;
 
@@ -36,8 +34,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationController.navigationBarHidden = YES;
-    
     _nameLabel.text = _customerName;
     _phoneLabel.text = _phone;
     
@@ -46,6 +42,18 @@
     [_tableView registerNibWithName:@"BuildingProgressCell"];
     
     [self requestData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,7 +84,10 @@
 
 - (IBAction)recommendOthers:(id)sender
 {
-    
+    BaobeiController* baobeiVC = [[BaobeiController alloc] init];
+    baobeiVC.name = _customerName;
+    baobeiVC.phone = _phone;
+    [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 
 #pragma mark UITableViewDataSource
@@ -98,24 +109,22 @@
     return 199;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ProgressDetailController* progressDetailVC = [[ProgressDetailController alloc] init];
+    CustomerBuildModel* model = _buildList[indexPath.row];
+    progressDetailVC.customerId = model.customerId;
+    [self.navigationController pushViewController:progressDetailVC animated:YES];
+}
+
 #pragma mark RequestData
 - (void)requestData
 {
-//    [MBProgressHUD showLoadingToView:self.view];
-//    [NetworkManager postWithUrl:@"wx/getCustomerInfo" parameters:@{@"customerId":_customerId} success:^(id reponse) {
-//        [MBProgressHUD hideHUDForView:self.view];
-//        
-//        _detailModel = [CustomerDetailModel mj_objectWithKeyValues:reponse];
-//        [self setupInterFace];
-//        
-//    } failure:^(NSError *error, NSString *msg) {
-//        [MBProgressHUD dissmissWithError:msg];
-//    }];
-    
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getCustomerListByName" parameters:@{@"customerName":_customerName} success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
-        for (NSDictionary* dic in (NSArray *)reponse) {
+        NSArray* list = [reponse objectForKey:@"list"];
+        for (NSDictionary* dic in list) {
             CustomerBuildModel* model = [CustomerBuildModel mj_objectWithKeyValues:dic];
             [_buildList addObject:model];
         }
@@ -124,24 +133,6 @@
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg];
     }];
-}
-
-#pragma mark 赋值
-- (void)setupInterFace
-{
-    _nameLabel.text = _detailModel.customerName;
-    _phoneLabel.text = _detailModel.customerMobile;
-    switch (_detailModel.intention) {
-        case 0:
-            _intendImageView.image = GetIMAGE(@"强.png");
-            break;
-        case 1:
-            _intendImageView.image = GetIMAGE(@"中.png");
-            break;
-        default:
-            _intendImageView.image = GetIMAGE(@"弱.png");
-            break;
-    }
 }
 
 @end

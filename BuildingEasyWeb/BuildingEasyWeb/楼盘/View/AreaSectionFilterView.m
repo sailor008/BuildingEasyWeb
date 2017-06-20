@@ -74,7 +74,7 @@
 
 - (void)setCurrentCity:(NSString *)city
 {
-    [_cityButton setTitle:@"深圳" forState:UIControlStateNormal];
+    [_cityButton setTitle:city forState:UIControlStateNormal];
     [_cityButton setImage:GetIMAGE(@"定位.png") forState:UIControlStateNormal];
     _cityButton.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, -6);
     [_cityButton sizeToFit];

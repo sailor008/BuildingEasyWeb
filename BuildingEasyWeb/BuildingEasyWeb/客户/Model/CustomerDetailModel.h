@@ -35,6 +35,6 @@
 @property (nonatomic, assign) NSInteger intention;
 
 @property (nonatomic, copy) NSArray* stateList;
-@property (nonatomic, copy) NSArray* adviser;
+@property (nonatomic, strong) Adviser* adviser;
 
 @end
