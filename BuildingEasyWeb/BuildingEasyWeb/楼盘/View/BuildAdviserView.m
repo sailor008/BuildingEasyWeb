@@ -41,8 +41,15 @@
     
     NSInteger index = 0;
     if (model.selectedAdviser) {
-        index = [model.adviserList indexOfObject:model.selectedAdviser];
+        for (int i = 0; i < model.adviserList.count; i ++) {
+            BuildAdviser* adviser = model.adviserList[i];
+            if ([adviser.adviserId isEqualToString:model.selectedAdviser.adviserId]) {
+                index = i;
+                break;
+            }
+        }
     }
+    
     [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 

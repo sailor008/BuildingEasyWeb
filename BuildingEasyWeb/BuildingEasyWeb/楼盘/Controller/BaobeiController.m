@@ -18,8 +18,9 @@
 #import "NetworkManager.h"
 #import "BuildAdviserView.h"
 #import "UIView+MBProgressHUD.h"
-
+#import "User.h"
 #import "BuildBaobeiModel.h"
+#import "CustomerBaobeiModel.h"
 
 static NSInteger const kIntentionButtonBaseTag = 1000;
 
@@ -34,12 +35,16 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 @property (weak, nonatomic) IBOutlet UIButton *importButton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *intendButtonArr;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray* bulidList;
 @property (nonatomic, strong) BuildBaobeiModel* selectedModel;
 
 @property (nonatomic, assign) NSInteger intend;// 意向，初始未选是-1
+
+@property (nonatomic, strong) CustomerBaobeiModel* beobeiInfoModel;
 
 @end
 
@@ -55,6 +60,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     _bulidList = [NSMutableArray array];
     
     [self setupUI];
+    
+    if (_isModify) {
+        [self requestBaobeiInfo];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -82,6 +91,13 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     _addButton.layer.cornerRadius = 5;
     _addButton.layer.borderWidth = 1;
     _addButton.layer.borderColor = Hex(0xff4c00).CGColor;
+    
+    if (_isModify) {
+        _nameLabel.enabled = NO;
+        _phoneLabel.enabled = NO;
+        _importButton.enabled = NO;
+        _addButton.enabled = NO;
+    }
     
     _headerView.frame = CGRectMake(0, 0, ScreenWidth, 200);
     
@@ -158,41 +174,19 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         return;
     }
     
-    
-    if (_tempIndex >= _bulidList.count) {
-        [MBProgressHUD showSuccess:@"报备成功" toView:self.view];
-        _tempIndex = 0;
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
+    if (_isModify) {
+        [self commitModifyBaobeiInfo];
+    } else {
+        [self commitBaobeiNewCustomer];
     }
-    
-    BuildBaobeiModel* model = _bulidList[_tempIndex];
-    
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    parameters[@"name"] = _nameLabel.text;
-    parameters[@"mobile"] = _phoneLabel.text;
-    parameters[@"intention"] = @(_intend);
-    parameters[@"buildId"] = model.buildModel.buildId;
-    parameters[@"adviserId"] = model.selectedAdviser.adviserId;
-
-    [NetworkManager postWithUrl:@"wx/addCustomer" parameters:parameters success:^(id reponse) {
-        NSLog(@"reponse:%@", reponse);
-        
-        _tempIndex++;
-        [self baobei];
-        
-    } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error:%@", error);
-        
-        _tempIndex++;
-        [self baobei];
-    }];
 }
 
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (_isModify) {
+        return 1;
+    }
     return _bulidList.count;
 }
 
@@ -201,7 +195,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     BaobeiCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BaobeiCell" forIndexPath:indexPath];
     cell.delegate = self;
     cell.index = indexPath.row;
-    cell.model = _bulidList[indexPath.row];
+    if (indexPath.row < _bulidList.count) {
+        cell.model = _bulidList[indexPath.row];
+    }
+    cell.isModify = _isModify;
     return cell;
 }
 
@@ -293,6 +290,105 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         _tempIndex ++;
         [self requestAdviserList];
     }];
+}
+// 报备新客户
+- (void)commitBaobeiNewCustomer
+{
+    if (_tempIndex >= _bulidList.count) {
+        [MBProgressHUD showSuccess:@"报备成功" toView:self.view];
+        _tempIndex = 0;
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(baobeiSuccess)]) {
+            [_delegate baobeiSuccess];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+    BuildBaobeiModel* model = _bulidList[_tempIndex];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"name"] = _nameLabel.text;
+    parameters[@"mobile"] = _phoneLabel.text;
+    parameters[@"intention"] = @(_intend);
+    parameters[@"buildId"] = model.buildModel.buildId;
+    parameters[@"adviserId"] = model.selectedAdviser.adviserId;
+    
+    [NetworkManager postWithUrl:@"wx/addCustomer" parameters:parameters success:^(id reponse) {
+        NSLog(@"reponse:%@", reponse);
+        
+        _tempIndex++;
+        [self baobei];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@", error);
+        
+        _tempIndex++;
+        [self commitBaobeiNewCustomer];
+    }];
+}
+// 提交修改报备信息
+- (void)commitModifyBaobeiInfo
+{
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    parameters[@"intention"] = @(_intend);
+    BuildBaobeiModel* baobeiModel = _bulidList[0];
+    parameters[@"adviserId"] = baobeiModel.selectedAdviser.adviserId;
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/modifyCustomer" parameters:nil success:^(id reponse) {
+        [MBProgressHUD showSuccess:@"报备成功" toView:self.view];
+        [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
+- (void)requestBaobeiInfo
+{
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+//    parameters[@"lat"] = @([User shareUser].lat);
+//    parameters[@"lon"] = @([User shareUser].lng);
+    parameters[@"lat"] = @113.26;
+    parameters[@"lon"] = @23.14;
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getModifyCustomer" parameters:parameters success:^(id reponse) {
+        NSLog(@"reponse:%@", reponse);
+        
+        _beobeiInfoModel = [CustomerBaobeiModel mj_objectWithKeyValues:reponse];
+        [self setupUIWithData];
+        
+        [self requestAdviserList];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
+#pragma mark 赋值
+- (void)setupUIWithData
+{
+    _nameLabel.text = _beobeiInfoModel.customerName;
+    _phoneLabel.text = _beobeiInfoModel.customerMobile;
+    UIButton* intendButton = _intendButtonArr[_beobeiInfoModel.intention];
+    intendButton.selected = YES;
+    
+    BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
+    baobeiModel.buildModel = [[BuildingListModel alloc] init];
+    baobeiModel.buildModel.buildId = _beobeiInfoModel.buildId;
+    baobeiModel.buildModel.name = _beobeiInfoModel.buildName;
+    baobeiModel.buildModel.commission = _beobeiInfoModel.commission;
+    baobeiModel.buildModel.distance = _beobeiInfoModel.distance;
+    
+    baobeiModel.selectedAdviser = [[BuildAdviser alloc] init];
+    baobeiModel.selectedAdviser.adviserId = _beobeiInfoModel.adviserId;
+    baobeiModel.selectedAdviser.name = _beobeiInfoModel.name;
+    baobeiModel.selectedAdviser.mobile = _beobeiInfoModel.mobile;
+    
+    [_bulidList addObject:baobeiModel];
+    
+    [_tableView reloadData];
 }
 
 @end

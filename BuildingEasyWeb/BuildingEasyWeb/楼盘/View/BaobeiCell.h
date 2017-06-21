@@ -24,4 +24,6 @@
 
 @property (nonatomic, strong) BuildBaobeiModel* model;
 
+@property (nonatomic, assign) BOOL isModify;
+
 @end

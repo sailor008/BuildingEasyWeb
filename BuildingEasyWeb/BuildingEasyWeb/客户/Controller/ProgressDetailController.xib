@@ -62,6 +62,9 @@
                                                 <constraint firstAttribute="width" constant="50" id="Rxp-Yw-4jd"/>
                                             </constraints>
                                             <state key="normal" image="修改"/>
+                                            <connections>
+                                                <action selector="modifyBaobei:" destination="-1" eventType="touchUpInside" id="XhJ-yJ-pQU"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrG-T2-uS9">
                                             <rect key="frame" x="169" y="64" width="37" height="21"/>

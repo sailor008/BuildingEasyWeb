@@ -8,9 +8,20 @@
 
 #import "BaseController.h"
 
+@protocol BaobeiControllerDelegate <NSObject>
+
+- (void)baobeiSuccess;
+
+@end
+
 @interface BaobeiController : BaseController
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* phone;
+
+@property (nonatomic, assign) BOOL isModify;
+@property (nonatomic, copy) NSString* customerId;
+
+@property (nonatomic, weak) id<BaobeiControllerDelegate> delegate;
 
 @end
