@@ -16,8 +16,9 @@
 #import <MJExtension.h>
 #import "CustomerDetailController.h"
 #import <CYLTableViewPlaceHolder.h>
+#import "BaobeiController.h"
 
-@interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate>
+@interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate, BaobeiControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -37,6 +38,7 @@
     
     UIButton* addCustomerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addCustomerButton setImage:GetIMAGE(@"添加客户.png") forState:UIControlStateNormal];
+    [addCustomerButton addTarget:self action:@selector(addNewCustomer) forControlEvents:UIControlEventTouchUpInside];
     addCustomerButton.frame = CGRectMake(0, 0, 16, 17);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:addCustomerButton];
     
@@ -161,6 +163,12 @@
     return emptyImageView;
 }
 
+#pragma mark BaobeiControllerDelegate
+- (void)baobeiSuccess
+{
+    [self requestData];
+}
+
 #pragma mark Action
 - (void)textFieldDidChange:(UITextField *)textField
 {
@@ -192,6 +200,14 @@
     }
     
     [_tableView cyl_reloadData];
+}
+
+- (void)addNewCustomer
+{
+    BaobeiController* baobeiVC = [[BaobeiController alloc] init];
+    baobeiVC.hidesBottomBarWhenPushed = YES;
+    baobeiVC.delegate = self;
+    [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 
 #pragma mark RequestData

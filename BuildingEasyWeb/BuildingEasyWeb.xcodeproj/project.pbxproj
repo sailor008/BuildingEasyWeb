@@ -99,6 +99,7 @@
 		CF99FBFB1EF3E2ED001C8A9C /* CustomerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF99FBFA1EF3E2ED001C8A9C /* CustomerListModel.m */; };
 		CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB630081EE250DC00AE5919 /* NetworkManager.m */; };
 		CFD016931EED353F003E1BF8 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD016921EED353F003E1BF8 /* CityModel.m */; };
+		CFDC57681EFA5645004658CE /* CustomerBaobeiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDC57671EFA5645004658CE /* CustomerBaobeiModel.m */; };
 		CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD367A1EEBCAB5007497AC /* SelectBuildingController.m */; };
 		CFDD367D1EEBCAB5007497AC /* SelectBuildingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDD367B1EEBCAB5007497AC /* SelectBuildingController.xib */; };
 		CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD367F1EEBCF38007497AC /* CALayer+Addition.m */; };
@@ -277,6 +278,8 @@
 		CFB630081EE250DC00AE5919 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		CFD016911EED353F003E1BF8 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
 		CFD016921EED353F003E1BF8 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		CFDC57661EFA5645004658CE /* CustomerBaobeiModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerBaobeiModel.h; sourceTree = "<group>"; };
+		CFDC57671EFA5645004658CE /* CustomerBaobeiModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerBaobeiModel.m; sourceTree = "<group>"; };
 		CFDD36791EEBCAB5007497AC /* SelectBuildingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectBuildingController.h; sourceTree = "<group>"; };
 		CFDD367A1EEBCAB5007497AC /* SelectBuildingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectBuildingController.m; sourceTree = "<group>"; };
 		CFDD367B1EEBCAB5007497AC /* SelectBuildingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectBuildingController.xib; sourceTree = "<group>"; };
@@ -592,6 +595,8 @@
 				CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */,
 				CF8F80901EF7C652009A6C3E /* CustomerBuildModel.h */,
 				CF8F80911EF7C652009A6C3E /* CustomerBuildModel.m */,
+				CFDC57661EFA5645004658CE /* CustomerBaobeiModel.h */,
+				CFDC57671EFA5645004658CE /* CustomerBaobeiModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -986,6 +991,7 @@
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
+				CFDC57681EFA5645004658CE /* CustomerBaobeiModel.m in Sources */,
 				C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */,
 				CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */,
 				CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */,

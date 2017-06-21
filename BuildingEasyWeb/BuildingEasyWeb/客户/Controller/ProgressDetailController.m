@@ -17,6 +17,7 @@
 #import "NSDate+Addition.h"
 #import "OpenSystemUrlManager.h"
 #import "EditController.h"
+#import "BaobeiController.h"
 
 const NSInteger kCustomProgressImageViewTag = 1000;
 const NSInteger kCustomProgressLabelTag = 2000;
@@ -84,6 +85,14 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (IBAction)callPhone:(id)sender
 {
     [OpenSystemUrlManager callPhone:_detailModel.adviser.mobile];
+}
+
+- (IBAction)modifyBaobei:(id)sender
+{
+    BaobeiController* baobeiVC = [[BaobeiController alloc] init];
+    baobeiVC.isModify = YES;
+    baobeiVC.customerId = _customerId;
+    [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 
 #pragma mark UITableViewDataSource

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *workIDLabel;
 @property (weak, nonatomic) IBOutlet UIButton *changeButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end
 
@@ -48,6 +49,12 @@
     BuildAdviser* advierModel = model.selectedAdviser;
     _nameLabel.text = advierModel.name;
     _workIDLabel.text = advierModel.adviserId;
+}
+
+- (void)setIsModify:(BOOL)isModify
+{
+    _isModify = isModify;
+    _deleteButton.hidden = isModify;
 }
 
 #pragma mark Action

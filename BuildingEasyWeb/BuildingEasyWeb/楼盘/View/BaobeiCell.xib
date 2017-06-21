@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,28 +55,28 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="ecs-HL-iOC">
-                        <rect key="frame" x="10" y="73" width="44" height="44"/>
+                        <rect key="frame" x="10" y="73" width="60" height="60"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSH-TU-WYS">
-                        <rect key="frame" x="62" y="73" width="14" height="18"/>
+                        <rect key="frame" x="78" y="81" width="14" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wb-3y-sHE">
-                        <rect key="frame" x="62" y="99" width="43" height="17"/>
+                        <rect key="frame" x="78" y="107" width="43" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-5Z-cMv">
-                        <rect key="frame" x="105" y="99" width="13" height="17"/>
+                        <rect key="frame" x="121" y="107" width="13" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gly-wB-Z9r">
-                        <rect key="frame" x="230" y="75" width="80" height="40"/>
+                        <rect key="frame" x="230" y="83" width="80" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="ijQ-wr-7p4"/>
                             <constraint firstAttribute="width" constant="80" id="jdB-Jb-lXf"/>
@@ -126,6 +126,7 @@
                 <outlet property="buildingLabel" destination="de1-PM-aMS" id="dXS-uq-e8P"/>
                 <outlet property="changeButton" destination="gly-wB-Z9r" id="a5I-iV-l5S"/>
                 <outlet property="commissionLabel" destination="OYd-zc-rnF" id="YjY-dt-D7B"/>
+                <outlet property="deleteButton" destination="kaj-Hb-KNd" id="2m8-z9-ek4"/>
                 <outlet property="distanceLabel" destination="f4e-69-E67" id="iyh-Ea-R8Q"/>
                 <outlet property="nameLabel" destination="FSH-TU-WYS" id="N23-rR-gEc"/>
                 <outlet property="workIDLabel" destination="8Vz-5Z-cMv" id="JTx-dY-XCA"/>
@@ -134,6 +135,6 @@
     </objects>
     <resources>
         <image name="删" width="12" height="12"/>
-        <image name="头像" width="44" height="44"/>
+        <image name="头像" width="60" height="60"/>
     </resources>
 </document>
