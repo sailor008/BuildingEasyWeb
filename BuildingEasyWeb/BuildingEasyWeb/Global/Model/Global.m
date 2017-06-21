@@ -8,6 +8,20 @@
 
 #import "Global.h"
 
+#import "MainTabController.h"
+#import "CustomerListController.h"
+
 @implementation Global
+
++ (void)tranToCustomerListVCFromVC:(UIViewController *)currentVC
+{
+    [currentVC.navigationController popToRootViewControllerAnimated:NO];
+    MainTabController* mainTabVC = (MainTabController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    mainTabVC.selectedIndex = 1;
+    
+    UINavigationController* navi = mainTabVC.viewControllers[1];
+    CustomerListController* customerListVC = navi.viewControllers[0];
+    [customerListVC requestData];
+}
 
 @end

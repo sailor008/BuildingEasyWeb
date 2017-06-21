@@ -10,4 +10,6 @@
 
 @interface CustomerListController : BaseController
 
+- (void)requestData;
+
 @end

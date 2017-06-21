@@ -82,6 +82,9 @@
 #pragma mark Action
 - (void)commitSelectedBuildIdsResult
 {
+    if (_buildIdArr.count == 0) {
+        return;
+    }
     if (_delegate && [_delegate respondsToSelector:@selector(selectBuildingResult:)]) {
         [_delegate selectBuildingResult:_buildIdArr];
     }
@@ -127,12 +130,20 @@
 {
     BuildingListModel* model = _buildingArr[indexPath.row];
     [_buildIdArr addObject:model];
+    
+    self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildingListModel* model = _buildingArr[indexPath.row];
     [_buildIdArr removeObject:model];
+    
+    if (_buildIdArr.count) {
+        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+    } else {
+        self.navigationItem.rightBarButtonItem.title = @"确定";
+    }
 }
 
 #pragma mark AreaSectionFilterViewDelegate

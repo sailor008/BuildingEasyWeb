@@ -96,6 +96,9 @@
 {
     _sourceArray = sourceArray;
     
+    if (_sourceArray.count == 0) {
+        return;
+    }
     [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
     
     if (_timer) {
