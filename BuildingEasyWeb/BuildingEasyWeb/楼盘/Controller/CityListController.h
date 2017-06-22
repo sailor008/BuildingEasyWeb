@@ -8,8 +8,16 @@
 
 #import "BaseController.h"
 
+@protocol CityListControllerDelegate <NSObject>
+
+- (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode;
+
+@end
+
 @interface CityListController : BaseController
 
 @property (nonatomic, copy) NSString* currentCity;
+
+@property (nonatomic, weak) id<CityListControllerDelegate> delegate;
 
 @end

@@ -15,6 +15,7 @@
 #import <MJExtension.h>
 #import "BaobeiController.h"
 #import "ProgressDetailController.h"
+#import "OpenSystemUrlManager.h"
 
 @interface CustomerDetailController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -67,19 +68,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)editProgress:(id)sender
-{
-    
-}
-
 - (IBAction)sendMessage:(id)sender
 {
-    
+    [OpenSystemUrlManager sendMessage:_phone];
 }
 
 - (IBAction)callPhone:(id)sender
 {
-    
+    [OpenSystemUrlManager callPhone:_phone];
 }
 
 - (IBAction)recommendOthers:(id)sender

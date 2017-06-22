@@ -13,5 +13,6 @@
 @interface ProgressCell : UITableViewCell
 
 @property (nonatomic, strong) StateList* model;
+@property (nonatomic, assign) NSInteger index;
 
 @end

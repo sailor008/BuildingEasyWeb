@@ -17,6 +17,7 @@
 #import "CustomerDetailController.h"
 #import <CYLTableViewPlaceHolder.h>
 #import "BaobeiController.h"
+#import "TableRefreshManager.h"
 
 @interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate, BaobeiControllerDelegate>
 
@@ -48,13 +49,23 @@
     
     [_searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
+    _needRefreshList = NO;
     [self requestData];
+    
+    kWeakSelf(weakSelf);
+    [TableRefreshManager tableView:_tableView refresh:^{
+        [weakSelf requestData];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    
+    if (_needRefreshList) {
+        [_tableView.mj_header beginRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -217,6 +228,8 @@
     [NetworkManager postWithUrl:@"wx/getCustomerList" parameters:nil success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         
+        [TableRefreshManager tableViewEndRefresh:_tableView];
+        
         _customerList = [NSMutableArray array];
         NSArray* array = (NSArray *)reponse;
         for (NSDictionary* dic in array) {
@@ -226,7 +239,8 @@
         [_tableView cyl_reloadData];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD dissmissWithError:msg];
+        [TableRefreshManager tableViewEndRefresh:_tableView];
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
     }];
 }
 

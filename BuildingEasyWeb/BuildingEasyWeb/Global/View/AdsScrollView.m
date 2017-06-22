@@ -8,7 +8,8 @@
 
 #import "AdsScrollView.h"
 
-#import <UIImageView+WebCache.h>
+//#import <UIImageView+WebCache.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface AdsScrollView ()  <UIScrollViewDelegate>
 {
@@ -96,7 +97,11 @@
 {
     _sourceArray = sourceArray;
     
-    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
+    if (_sourceArray.count == 0) {
+        return;
+    }
+//    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
+    [_currentImageView setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
     
     if (_timer) {
         
@@ -125,7 +130,8 @@
 {
     _currentIndex = _anotherIndex;
     
-    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_currentIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
+//    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_currentIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
+    [_currentImageView setImageWithURL:[NSURL URLWithString:_sourceArray[_currentIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
     
     _scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.bounds), 0);
 }
@@ -154,7 +160,8 @@
         }
         
         _anotherImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
-        [_anotherImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
+//        [_anotherImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
+        [_anotherImageView setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
         
         if (scrollView.contentOffset.x <= 0) {
             [self configSubViews];
@@ -168,7 +175,8 @@
         }
         
         _anotherImageView.frame = CGRectMake(CGRectGetWidth(self.bounds) * 2, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
-        [_anotherImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
+//        [_anotherImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
+        [_anotherImageView setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
         
         if (scrollView.contentOffset.x >= CGRectGetWidth(self.bounds) * 2) {
             [self configSubViews];

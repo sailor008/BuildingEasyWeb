@@ -43,4 +43,18 @@
     _timeLabel.text = [NSDate dateStrWithTimeInterval:timeInterval];
 }
 
+- (void)setIndex:(NSInteger)index
+{
+    _index = index;
+    if (index == 0) {
+        _progressImageView.hidden = NO;
+        _stateLabel.textColor = Hex(0xff4c00);
+        _timeLabel.textColor = Hex(0xff4c00);
+    } else {
+        _progressImageView.hidden = YES;
+        _stateLabel.textColor = Hex(0x292929);
+        _timeLabel.textColor = Hex(0x292929);
+    }
+}
+
 @end

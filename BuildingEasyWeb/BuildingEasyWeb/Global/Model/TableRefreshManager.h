@@ -13,8 +13,8 @@
 
 @interface TableRefreshManager : NSObject
 
-+ (void)tableView:(UITableView *)tableView refresh:(MJRefreshComponentRefreshingBlock)refreshingBlock;
-+ (void)tableView:(UITableView *)tableView more:(MJRefreshComponentRefreshingBlock)refreshingBlock;
++ (void)tableView:(UITableView *)tableView refresh:(void(^)())refreshingBlock;
++ (void)tableView:(UITableView *)tableView more:(void(^)())refreshingBlock;
 
 + (void)tableView:(UITableView *)tableView loadData:(void(^)(BOOL isMore))block;
 

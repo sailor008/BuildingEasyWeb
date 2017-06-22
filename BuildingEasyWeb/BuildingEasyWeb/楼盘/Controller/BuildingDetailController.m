@@ -18,6 +18,7 @@
 #import <MJExtension.h>
 #import "AdsScrollView.h"
 #import "FormulaListCell.h"
+#import "TextDetailController.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -38,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *sellDetaillabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) IBOutlet UIView *shareView;
 
 @property (nonatomic, strong) BuildingDetailModel* detail;
 @property (nonatomic, strong) NSArray* baseInfoArray;
@@ -121,14 +124,25 @@
 }
 
 #pragma mark Action
-- (IBAction)analysis:(id)sender
+- (IBAction)share:(id)sender
 {
-    
+    _shareView.frame = self.view.bounds;
+    [self.view addSubview:_shareView];
 }
 
 - (IBAction)callPhone:(id)sender
 {
-    [OpenSystemUrlManager callPhone:_detail.buildInfo.phone];
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    NSString* adviserStr = [NSString stringWithFormat:@"%@:%@ %@", _detail.buildInfo.position, _detail.buildInfo.staff, _detail.buildInfo.phone];
+    UIAlertAction* importAction = [UIAlertAction actionWithTitle:adviserStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [OpenSystemUrlManager callPhone:_detail.buildInfo.phone];
+    }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [sheet addAction:importAction];
+    [sheet addAction:cancelAction];
+    [self presentViewController:sheet animated:YES completion:nil];
 }
 
 - (IBAction)baobei:(id)sender
@@ -139,12 +153,31 @@
 
 - (IBAction)typeDetail:(id)sender
 {
-    
+    TextDetailController* textDetailVC = [[TextDetailController alloc] init];
+    textDetailVC.textStr = _detail.buildInfo.houseType;
+    textDetailVC.title = @"楼盘户型";
+    [self.navigationController pushViewController:textDetailVC animated:YES];
 }
 
 - (IBAction)sellDetail:(id)sender
 {
-    
+    TextDetailController* textDetailVC = [[TextDetailController alloc] init];
+    textDetailVC.textStr = _detail.buildInfo.sellingPoint;
+    textDetailVC.title = @"楼盘卖点";
+    [self.navigationController pushViewController:textDetailVC animated:YES];
+}
+
+- (IBAction)cancelShare:(id)sender
+{
+    [_shareView removeFromSuperview];
+}
+
+- (IBAction)shareToWeChat:(UIButton *)sender
+{
+    [MBProgressHUD showMessage:@"还没接入微信分享" toView:self.view];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:self.view];
+    });
 }
 
 #pragma mark Request Data

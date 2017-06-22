@@ -21,6 +21,7 @@
 #import "User.h"
 #import "BuildBaobeiModel.h"
 #import "CustomerBaobeiModel.h"
+#import "Global.h"
 
 static NSInteger const kIntentionButtonBaseTag = 1000;
 
@@ -38,6 +39,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *intendButtonArr;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) IBOutlet UIView *successView;
 
 @property (nonatomic, strong) NSMutableArray* bulidList;
 @property (nonatomic, strong) BuildBaobeiModel* selectedModel;
@@ -82,8 +85,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     _nameLabel.text = _name;
     _phoneLabel.text = _phone;
     
-    _tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
-    
     _importButton.layer.cornerRadius = 5;
     _importButton.layer.borderWidth = 1;
     _importButton.layer.borderColor = Hex(0xff4c00).CGColor;
@@ -99,10 +100,11 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         _addButton.enabled = NO;
     }
     
-    _headerView.frame = CGRectMake(0, 0, ScreenWidth, 200);
+    _headerView.frame = CGRectMake(0, 10, ScreenWidth, 200);
     
     UIView* headerContainView = [[UIView alloc] init];
-    headerContainView.frame = CGRectMake(0, 0, ScreenWidth, 200);
+    headerContainView.frame = CGRectMake(0, 0, ScreenWidth, 210);
+    headerContainView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [headerContainView addSubview:_headerView];
     
     _tableView.tableHeaderView = headerContainView;
@@ -112,6 +114,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     [baobeiButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     baobeiButton.titleLabel.font = [UIFont systemFontOfSize:15];
     baobeiButton.backgroundColor = Hex(0xff4c00);
+    baobeiButton.layer.cornerRadius = 5;
     [baobeiButton addTarget:self action:@selector(baobei) forControlEvents:UIControlEventTouchUpInside];
     
     UIView* footerContainView = [[UIView alloc] init];
@@ -140,12 +143,23 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (IBAction)importContact:(id)sender
 {
-    ContactListController* contactVC = [[ContactListController alloc] init];
-    contactVC.selectedContact = ^(ContactModel *model) {
-        _nameLabel.text = model.name;
-        _phoneLabel.text = model.phone;
-    };
-    [self.navigationController pushViewController:contactVC animated:YES];
+    
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* importAction = [UIAlertAction actionWithTitle:@"从通讯录导入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ContactListController* contactVC = [[ContactListController alloc] init];
+        contactVC.selectedContact = ^(ContactModel *model) {
+            _nameLabel.text = model.name;
+            _phoneLabel.text = model.phone;
+        };
+        [self.navigationController pushViewController:contactVC animated:YES];
+    }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [sheet addAction:importAction];
+    [sheet addAction:cancelAction];
+    [self presentViewController:sheet animated:YES completion:nil];
+    
 }
 
 - (IBAction)addIntentBuilding:(id)sender
@@ -153,6 +167,39 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
     buildingVC.delegate = self;
     [self.navigationController pushViewController:buildingVC animated:YES];
+}
+
+- (IBAction)backToCustomerList:(id)sender
+{
+    [_successView removeFromSuperview];
+    [Global tranToCustomerListVCFromVC:self];
+}
+
+- (IBAction)continuRecommend:(id)sender
+{
+    [_successView removeFromSuperview];
+    
+    // 当前界面清空使用
+    self.isModify = NO;
+    self.name = nil;
+    self.phone = nil;
+    self.customerId = nil;
+    self.delegate = nil;
+    
+    _intend = -1;
+    _bulidList = [NSMutableArray array];
+    _nameLabel.text = nil;
+    _phoneLabel.text = nil;
+    
+    _nameLabel.enabled = YES;
+    _phoneLabel.enabled = YES;
+    _importButton.enabled = YES;
+    _addButton.enabled = YES;
+    
+    for (UIButton* button in _intendButtonArr) {
+        button.selected = NO;
+    }
+    [_tableView reloadData];
 }
 
 - (void)baobei
@@ -295,13 +342,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 - (void)commitBaobeiNewCustomer
 {
     if (_tempIndex >= _bulidList.count) {
-        [MBProgressHUD showSuccess:@"报备成功" toView:self.view];
+        [MBProgressHUD hideHUDForView:self.view];
         _tempIndex = 0;
         
-        if (_delegate && [_delegate respondsToSelector:@selector(baobeiSuccess)]) {
-            [_delegate baobeiSuccess];
-        }
-        [self.navigationController popViewControllerAnimated:YES];
+        [self showBaobeiSuccess];
         return;
     }
     
@@ -336,9 +380,9 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     BuildBaobeiModel* baobeiModel = _bulidList[0];
     parameters[@"adviserId"] = baobeiModel.selectedAdviser.adviserId;
     [MBProgressHUD showLoadingToView:self.view];
-    [NetworkManager postWithUrl:@"wx/modifyCustomer" parameters:nil success:^(id reponse) {
-        [MBProgressHUD showSuccess:@"报备成功" toView:self.view];
-        [self.navigationController popViewControllerAnimated:YES];
+    [NetworkManager postWithUrl:@"wx/modifyCustomer" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        [self showBaobeiSuccess];
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg toView:self.view];
     }];
@@ -348,14 +392,12 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"customerId"] = _customerId;
-//    parameters[@"lat"] = @([User shareUser].lat);
-//    parameters[@"lon"] = @([User shareUser].lng);
-    parameters[@"lat"] = @113.26;
-    parameters[@"lon"] = @23.14;
+    parameters[@"lat"] = @([User shareUser].lat);
+    parameters[@"lon"] = @([User shareUser].lng);
+//    parameters[@"lat"] = @23.14;
+//    parameters[@"lon"] = @113.26;
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getModifyCustomer" parameters:parameters success:^(id reponse) {
-        NSLog(@"reponse:%@", reponse);
-        
         _beobeiInfoModel = [CustomerBaobeiModel mj_objectWithKeyValues:reponse];
         [self setupUIWithData];
         
@@ -374,6 +416,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     UIButton* intendButton = _intendButtonArr[_beobeiInfoModel.intention];
     intendButton.selected = YES;
     
+    _intend = _beobeiInfoModel.intention;
+    
     BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
     baobeiModel.buildModel = [[BuildingListModel alloc] init];
     baobeiModel.buildModel.buildId = _beobeiInfoModel.buildId;
@@ -389,6 +433,13 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     [_bulidList addObject:baobeiModel];
     
     [_tableView reloadData];
+}
+
+#pragma mark 成功界面
+- (void)showBaobeiSuccess
+{
+    _successView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    [[UIApplication sharedApplication].keyWindow addSubview:_successView];
 }
 
 @end

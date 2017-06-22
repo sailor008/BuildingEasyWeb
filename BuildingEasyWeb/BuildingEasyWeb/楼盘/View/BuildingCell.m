@@ -8,7 +8,8 @@
 
 #import "BuildingCell.h"
 
-#import <UIImageView+WebCache.h>
+//#import <UIImageView+WebCache.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface BuildingCell ()
 
@@ -47,7 +48,8 @@
     _distanceLabel.text = model.distance;
     _commissionLabel.text = model.commission;
     _priceLabel.text = model.average;
-    [_buildingImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:GetIMAGE(@"logo.png")];
+//    [_buildingImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:GetIMAGE(@"logo.png")];
+    [_buildingImageView setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:GetIMAGE(@"logo.png")];
     
     if (model.isHot) {
         _hotImageView.hidden = NO;

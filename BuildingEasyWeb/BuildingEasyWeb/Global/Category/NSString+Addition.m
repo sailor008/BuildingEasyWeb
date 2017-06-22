@@ -9,6 +9,7 @@
 #import "NSString+Addition.h"
 
 #import <CommonCrypto/CommonDigest.h>
+#import <UIKit/UIKit.h>
 
 @implementation NSString (Addition)
 
@@ -47,6 +48,12 @@
     }
     
     return @"#";
+}
+
+- (NSAttributedString *)htmlAttStr
+{
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[self dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    return attrStr;
 }
 
 @end

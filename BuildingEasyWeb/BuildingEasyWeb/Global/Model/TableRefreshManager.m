@@ -10,14 +10,22 @@
 
 @implementation TableRefreshManager
 
-+ (void)tableView:(UITableView *)tableView refresh:(MJRefreshComponentRefreshingBlock)refreshingBlock
++ (void)tableView:(UITableView *)tableView refresh:(void(^)())refreshingBlock
 {
-    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:refreshingBlock];
+    __weak typeof(tableView) weakTableView = tableView;
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakTableView.page = 1;
+        refreshingBlock();
+    }];
 }
 
-+ (void)tableView:(UITableView *)tableView more:(MJRefreshComponentRefreshingBlock)refreshingBlock
++ (void)tableView:(UITableView *)tableView more:(void(^)())refreshingBlock
 {
-    
+    __weak typeof(tableView) weakTableView = tableView;
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakTableView.page ++;
+        refreshingBlock();
+    }];
 }
 
 + (void)tableView:(UITableView *)tableView loadData:(void(^)(BOOL isMore))block

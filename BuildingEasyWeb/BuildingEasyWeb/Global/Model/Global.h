@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <UIKit/UIKit.h>
+
 typedef NS_ENUM(NSInteger, BEWUserRole) {
     kPersonRole = 1,
     kAgencyRole
@@ -26,5 +28,8 @@ typedef NS_ENUM(NSInteger, BEWProgressState) {
 typedef void(^Callback)();
 
 @interface Global : NSObject
+
+// 切换到客户列表首页
++ (void)tranToCustomerListVCFromVC:(UIViewController *)currentVC;
 
 @end
