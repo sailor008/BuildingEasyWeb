@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		466DFF75999E037E2EF0D274 /* libPods-BuildingEasyWeb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */; };
+		C717494F1EFAE7630085E590 /* MyInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C717494E1EFAE7630085E590 /* MyInfoModel.m */; };
 		C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F47E1EE9B9DD0067C07F /* MeCellBase.m */; };
 		C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */; };
 		C782F4851EE9B9FC0067C07F /* MeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4831EE9B9FC0067C07F /* MeController.m */; };
@@ -29,6 +30,7 @@
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
 		C7BBCE741EF66761000EF857 /* EditMyInfoBaseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */; };
+		C7BBCE771EF98CB0000EF857 /* QUYunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE761EF98CB0000EF857 /* QUYunManager.m */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
@@ -133,6 +135,8 @@
 /* Begin PBXFileReference section */
 		5512E8F545C3BB390F7AACE0 /* Pods-BuildingEasyWeb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuildingEasyWeb.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuildingEasyWeb/Pods-BuildingEasyWeb.release.xcconfig"; sourceTree = "<group>"; };
 		885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuildingEasyWeb.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C717494D1EFAE7630085E590 /* MyInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoModel.h; sourceTree = "<group>"; };
+		C717494E1EFAE7630085E590 /* MyInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoModel.m; sourceTree = "<group>"; };
 		C782F47D1EE9B9DD0067C07F /* MeCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCellBase.h; sourceTree = "<group>"; };
 		C782F47E1EE9B9DD0067C07F /* MeCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCellBase.m; sourceTree = "<group>"; };
 		C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCellBase.xib; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 		C7BBCE701EF66761000EF857 /* EditMyInfoBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMyInfoBaseController.h; sourceTree = "<group>"; };
 		C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMyInfoBaseController.m; sourceTree = "<group>"; };
 		C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditMyInfoBaseController.xib; sourceTree = "<group>"; };
+		C7BBCE751EF98CB0000EF857 /* QUYunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUYunManager.h; sourceTree = "<group>"; };
+		C7BBCE761EF98CB0000EF857 /* QUYunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUYunManager.m; sourceTree = "<group>"; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -512,6 +518,8 @@
 				CFDD36941EEBEB4D007497AC /* ContactModel.m */,
 				CF5785D51EE59D2100994741 /* Global.h */,
 				CF5785D61EE59D2100994741 /* Global.m */,
+				C7BBCE751EF98CB0000EF857 /* QUYunManager.h */,
+				C7BBCE761EF98CB0000EF857 /* QUYunManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -647,6 +655,8 @@
 			children = (
 				C782F4AA1EEEF78B0067C07F /* MsgModel.h */,
 				C782F4AB1EEEF78B0067C07F /* MsgModel.m */,
+				C717494D1EFAE7630085E590 /* MyInfoModel.h */,
+				C717494E1EFAE7630085E590 /* MyInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -819,8 +829,8 @@
 				TargetAttributes = {
 					CF5A4C4D1EE04769002A281B = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 52UZPMCUC5;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = QD5JT3AFJU;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -954,6 +964,7 @@
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
 				CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */,
+				C717494F1EFAE7630085E590 /* MyInfoModel.m in Sources */,
 				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
@@ -964,6 +975,7 @@
 				CF30C3C71EF4BFCC0070D124 /* BuildingProgressCell.m in Sources */,
 				CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */,
 				CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */,
+				C7BBCE771EF98CB0000EF857 /* QUYunManager.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CFDD36951EEBEB4D007497AC /* ContactModel.m in Sources */,
@@ -1116,7 +1128,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QD5JT3AFJU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/Required",
@@ -1144,7 +1156,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6c3acd09-7375-4219-898e-3c6cea11c22c";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = louyi_developer;
 			};
 			name = Debug;
 		};
@@ -1155,7 +1167,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = QD5JT3AFJU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/Required",
@@ -1183,7 +1195,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6c3acd09-7375-4219-898e-3c6cea11c22c";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = louyi_developer;
 			};
 			name = Release;
 		};
