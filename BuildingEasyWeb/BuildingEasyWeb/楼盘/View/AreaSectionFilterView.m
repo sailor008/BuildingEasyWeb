@@ -12,7 +12,7 @@
 
 @interface AreaSectionFilterView () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UIButton* cityButton;
+@property (nonatomic, strong) IBOutlet UIButton* cityButton;
 @property (nonatomic, strong) UITableView* filterTableView;
 @property (nonatomic, copy) NSArray* contentArray;
 @property (weak, nonatomic) IBOutlet UIButton *areaButton;
@@ -33,23 +33,6 @@
     return self;
 }
 
-- (UIView *)sectionTitleView
-{
-    if (_cityButton == nil) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:@"深圳" forState:UIControlStateNormal];
-        [button setTitleColor:Hex(0x747474) forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:13];
-        [button setImage:GetIMAGE(@"定位.png") forState:UIControlStateNormal];
-        button.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, -6);
-        button.frame = CGRectMake(0, 0, 104, 38);
-        [button addTarget:self action:@selector(selectCity) forControlEvents:UIControlEventTouchUpInside];
-        
-        _cityButton = button;
-    }
-    return _cityButton;
-}
-
 - (void)showFilterContent:(NSArray<NSString *> *)content
 {
     self.contentArray = content;
@@ -66,7 +49,7 @@
     }
     
     [UIView animateWithDuration:0.25 animations:^{
-        _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64 - filterY - tableView.frame.origin.y);
     }];
     
     [_filterTableView reloadData];
@@ -75,9 +58,6 @@
 - (void)setCurrentCity:(NSString *)city
 {
     [_cityButton setTitle:city forState:UIControlStateNormal];
-    [_cityButton setImage:GetIMAGE(@"定位.png") forState:UIControlStateNormal];
-    _cityButton.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, -6);
-    [_cityButton sizeToFit];
 }
 
 #pragma mark Action

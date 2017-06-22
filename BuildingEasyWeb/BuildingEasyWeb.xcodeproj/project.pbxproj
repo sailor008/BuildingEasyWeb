@@ -27,6 +27,8 @@
 		C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4AB1EEEF78B0067C07F /* MsgModel.m */; };
 		C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE691EF0414B000EF857 /* MyInfoController.m */; };
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
+		CF0BE8531EFBFE360003DFC7 /* TextDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */; };
+		CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
 		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
@@ -160,6 +162,9 @@
 		C7BBCE681EF0414B000EF857 /* MyInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoController.h; sourceTree = "<group>"; };
 		C7BBCE691EF0414B000EF857 /* MyInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoController.m; sourceTree = "<group>"; };
 		C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoController.xib; sourceTree = "<group>"; };
+		CF0BE8501EFBFE360003DFC7 /* TextDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDetailController.h; sourceTree = "<group>"; };
+		CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDetailController.m; sourceTree = "<group>"; };
+		CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextDetailController.xib; sourceTree = "<group>"; };
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -683,6 +688,9 @@
 				CFDD368E1EEBE52F007497AC /* ContactListController.h */,
 				CFDD368F1EEBE52F007497AC /* ContactListController.m */,
 				CFDD36901EEBE52F007497AC /* ContactListController.xib */,
+				CF0BE8501EFBFE360003DFC7 /* TextDetailController.h */,
+				CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */,
+				CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -861,6 +869,7 @@
 				CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */,
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
+				CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */,
 				C782F49A1EEBCAD80067C07F /* AboutMeController.xib in Resources */,
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
 				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
@@ -979,6 +988,7 @@
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
+				CF0BE8531EFBFE360003DFC7 /* TextDetailController.m in Sources */,
 				CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */,
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
 				CFDC57681EFA5645004658CE /* CustomerBaobeiModel.m in Sources */,

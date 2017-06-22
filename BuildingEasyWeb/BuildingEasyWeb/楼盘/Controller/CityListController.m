@@ -168,6 +168,18 @@
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CityModel* model;
+    if (_isSearch) {
+        CityListByInitial* citysByInitial = _searchList[indexPath.section];
+        model = citysByInitial.city[indexPath.row];
+    } else {
+        CityListByInitial* citysByInitial = _cityList[indexPath.section];
+        model = citysByInitial.city[indexPath.row];
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(selectedCity:cityCode:)]) {
+        [_delegate selectedCity:model.cityName cityCode:model.cityCode];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

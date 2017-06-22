@@ -20,7 +20,7 @@
 #import "CityModel.h"
 #import "User.h"
 
-@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate>
+@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AreaSectionFilterView* areaSectionView;
@@ -31,7 +31,7 @@
 
 @property (nonatomic, strong) NSMutableArray* buildIdArr;
 
-//@property (nonatomic, copy) NSString* city;
+@property (nonatomic, copy) NSString* city;
 @property (nonatomic, copy) NSString* areaCode;
 
 @end
@@ -69,6 +69,7 @@
     _areaSectionView.delegate = self;
     
     [_areaSectionView setCurrentCity:[User shareUser].city];
+    _city = [User shareUser].city;
 }
 
 - (void)addTableViewRefresh
@@ -150,6 +151,7 @@
 - (void)selectCity
 {
     CityListController* cityVC = [[CityListController alloc] init];
+    cityVC.delegate = self;
     [self.navigationController pushViewController:cityVC animated:YES];
 }
 
@@ -166,6 +168,13 @@
     [_tableView.mj_header beginRefreshing];
 }
 
+#pragma mark CityListControllerDelegate
+- (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
+{
+    _city = city;
+    [_areaSectionView setCurrentCity:city];
+}
+
 #pragma mark RequestData
 - (void)requestData
 {
@@ -174,8 +183,8 @@
                                  @"distanceId":@0,
                                  @"classifyId":@0,
                                  @"areaCode":_areaCode,
-                                 @"lon":@113.26,
-                                 @"lat":@23.14,
+                                 @"lon":@([User shareUser].lng),//@113.26,
+                                 @"lat":@([User shareUser].lat),//@23.14,
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":keyWord};
@@ -205,7 +214,7 @@
 - (void)requestAreaList
 {
     [MBProgressHUD showLoadingToView:self.view];
-    [NetworkManager getWithUrl:@"wx/getAreaList" parameters:@{@"cityName":@"广州市"} success:^(id reponse) {
+    [NetworkManager getWithUrl:@"wx/getAreaList" parameters:@{@"cityName":_city} success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         
         NSArray* array = (NSArray *)reponse;

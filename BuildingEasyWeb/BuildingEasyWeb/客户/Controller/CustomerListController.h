@@ -10,6 +10,6 @@
 
 @interface CustomerListController : BaseController
 
-- (void)requestData;
+@property (nonatomic, assign) BOOL needRefreshList;
 
 @end

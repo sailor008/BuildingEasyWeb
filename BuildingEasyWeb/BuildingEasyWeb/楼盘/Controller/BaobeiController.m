@@ -85,8 +85,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     _nameLabel.text = _name;
     _phoneLabel.text = _phone;
     
-    _tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
-    
     _importButton.layer.cornerRadius = 5;
     _importButton.layer.borderWidth = 1;
     _importButton.layer.borderColor = Hex(0xff4c00).CGColor;
@@ -102,10 +100,11 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         _addButton.enabled = NO;
     }
     
-    _headerView.frame = CGRectMake(0, 0, ScreenWidth, 200);
+    _headerView.frame = CGRectMake(0, 10, ScreenWidth, 200);
     
     UIView* headerContainView = [[UIView alloc] init];
-    headerContainView.frame = CGRectMake(0, 0, ScreenWidth, 200);
+    headerContainView.frame = CGRectMake(0, 0, ScreenWidth, 210);
+    headerContainView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [headerContainView addSubview:_headerView];
     
     _tableView.tableHeaderView = headerContainView;
@@ -115,6 +114,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     [baobeiButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     baobeiButton.titleLabel.font = [UIFont systemFontOfSize:15];
     baobeiButton.backgroundColor = Hex(0xff4c00);
+    baobeiButton.layer.cornerRadius = 5;
     [baobeiButton addTarget:self action:@selector(baobei) forControlEvents:UIControlEventTouchUpInside];
     
     UIView* footerContainView = [[UIView alloc] init];
@@ -143,12 +143,23 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (IBAction)importContact:(id)sender
 {
-    ContactListController* contactVC = [[ContactListController alloc] init];
-    contactVC.selectedContact = ^(ContactModel *model) {
-        _nameLabel.text = model.name;
-        _phoneLabel.text = model.phone;
-    };
-    [self.navigationController pushViewController:contactVC animated:YES];
+    
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* importAction = [UIAlertAction actionWithTitle:@"从通讯录导入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ContactListController* contactVC = [[ContactListController alloc] init];
+        contactVC.selectedContact = ^(ContactModel *model) {
+            _nameLabel.text = model.name;
+            _phoneLabel.text = model.phone;
+        };
+        [self.navigationController pushViewController:contactVC animated:YES];
+    }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [sheet addAction:importAction];
+    [sheet addAction:cancelAction];
+    [self presentViewController:sheet animated:YES completion:nil];
+    
 }
 
 - (IBAction)addIntentBuilding:(id)sender
@@ -381,10 +392,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"customerId"] = _customerId;
-//    parameters[@"lat"] = @([User shareUser].lat);
-//    parameters[@"lon"] = @([User shareUser].lng);
-    parameters[@"lat"] = @23.14;
-    parameters[@"lon"] = @113.26;
+    parameters[@"lat"] = @([User shareUser].lat);
+    parameters[@"lon"] = @([User shareUser].lng);
+//    parameters[@"lat"] = @23.14;
+//    parameters[@"lon"] = @113.26;
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getModifyCustomer" parameters:parameters success:^(id reponse) {
         _beobeiInfoModel = [CustomerBaobeiModel mj_objectWithKeyValues:reponse];

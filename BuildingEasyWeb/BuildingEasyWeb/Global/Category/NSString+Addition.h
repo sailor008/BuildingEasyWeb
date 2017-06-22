@@ -12,5 +12,6 @@
 
 - (NSString *)md5;
 - (NSString *)firstPinyin;
+- (NSAttributedString *)htmlAttStr;
 
 @end

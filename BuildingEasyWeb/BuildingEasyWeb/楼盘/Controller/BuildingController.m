@@ -27,7 +27,7 @@
 #import "CityModel.h"
 #import "BuildingFilterModel.h"
 
-@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate>
+@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -44,6 +44,7 @@
 @property (nonatomic, strong) NSMutableArray* priceList;
 @property (nonatomic, strong) NSMutableArray* distanceList;
 
+@property (nonatomic, copy) NSString* cityName;
 @property (nonatomic, copy) NSString* averAgeId;
 @property (nonatomic, copy) NSString* distanceId;
 @property (nonatomic, copy) NSString* classifyId;
@@ -65,10 +66,12 @@
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
         [LoginManager login:mobile password:pwd callback:^{
-            [_tableView.mj_header beginRefreshing];
+//            [_tableView.mj_header beginRefreshing];
+            [self requestDataWithCheckLocation];
         }];
     } else {
-        [_tableView.mj_header beginRefreshing];
+//        [_tableView.mj_header beginRefreshing];
+        [self requestDataWithCheckLocation];
     }
 }
 
@@ -135,10 +138,27 @@
     }];
 }
 
+- (void)requestDataWithCheckLocation
+{
+    kWeakSelf(weakSelf);
+    [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
+        weakSelf.lat = lat;
+        weakSelf.lng = lng;
+        [weakSelf setupLocationButtonFace:city];
+        
+        [User shareUser].city = city;
+        [User shareUser].lat = lat;
+        [User shareUser].lng = lng;
+        
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
+}
+
 - (void)selectCity
 {
     CityListController* cityListVC = [[CityListController alloc] init];
     cityListVC.currentCity = _currentCity;
+    cityListVC.delegate = self;
     cityListVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:cityListVC animated:YES];
 }
@@ -177,8 +197,8 @@
                                  @"distanceId":_distanceId,
                                  @"classifyId":_classifyId,
                                  @"areaCode":[User shareUser].areaCode,
-                                 @"lon":@113.26,
-                                 @"lat":@23.14,
+                                 @"lon":@([User shareUser].lng),//@113.26,
+                                 @"lat":@([User shareUser].lat),//@23.14,
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":@""};
@@ -222,7 +242,7 @@
 - (void)requestAreaList
 {
     [MBProgressHUD showLoadingToView:self.view];
-    [NetworkManager getWithUrl:@"wx/getAreaList" parameters:@{@"cityName":@"广州市"} success:^(id reponse) {
+    [NetworkManager getWithUrl:@"wx/getAreaList" parameters:@{@"cityName":[User shareUser].city} success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         
         NSArray* array = (NSArray *)reponse;
@@ -416,6 +436,14 @@
     }
     
     [_tableView.mj_header beginRefreshing];
+}
+
+#pragma mark CityListControllerDelegate
+- (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
+{
+    [self setupLocationButtonFace:city];
+    
+    [User shareUser].city = city;
 }
 
 #pragma mark Action
