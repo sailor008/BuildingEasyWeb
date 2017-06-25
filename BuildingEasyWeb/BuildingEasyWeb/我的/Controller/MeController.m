@@ -18,8 +18,11 @@
 #import "MyMessageController.h"
 #import "MyInfoController.h"
 
+//import model
+#import "User.h"
 
-typedef void (^onListCell)(void);
+
+typedef void (^onTabVCell)(void);
 
 
 @interface MeController ()<UITableViewDataSource, UITableViewDelegate>
@@ -28,6 +31,8 @@ typedef void (^onListCell)(void);
 
 @property (nonatomic, copy) NSArray *viewCfgData;
 
+
+//inner private func
 - (void)initViewCfg;
 - (void)onAboutMe;
 - (void)onFeedback;
@@ -52,16 +57,16 @@ typedef void (^onListCell)(void);
 }
 
 - (void)initViewCfg {
-    onListCell func_onAboutMe = ^() {
+    onTabVCell func_onAboutMe = ^() {
         [self onAboutMe];
     };
-    onListCell func_onFeedback = ^() {
+    onTabVCell func_onFeedback = ^() {
         [self onFeedback];
     };
-    onListCell func_onMyMsg = ^() {
+    onTabVCell func_onMyMsg = ^() {
         [self onMyMsg];
     };
-    onListCell func_onCustomerExt = ^() {
+    onTabVCell func_onCustomerExt = ^() {
         [self onCustomerExt];
     };
     
@@ -187,6 +192,10 @@ typedef void (^onListCell)(void);
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0) {
         MeCellInfo* cell = [tableView dequeueReusableCellWithIdentifier:@"MeCellInfo" forIndexPath:indexPath];
+        NSString* name = [User shareUser].name;
+        NSString* mobile = [User shareUser].mobile;
+        NSString* headImgUrl = [User shareUser].headImg;
+        [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
         return cell;
     }else if(indexPath.section == 1) {
         if(indexPath.row == 0) {
@@ -221,7 +230,7 @@ typedef void (^onListCell)(void);
         }
         
     }else {
-        onListCell func_block = _viewCfgData[indexPath.row][2];
+        onTabVCell func_block = _viewCfgData[indexPath.row][2];
         func_block();
     }
 }

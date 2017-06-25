@@ -16,10 +16,10 @@
                 <frame key="frameInset" width="342" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
+                    <imageView opaque="NO" multipleTouchEnabled="YES" contentMode="center" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
                         <constraints>
-                            <constraint firstAttribute="height" constant="60" id="5IO-c2-CzI"/>
-                            <constraint firstAttribute="width" constant="60" id="KdI-Am-a8M"/>
+                            <constraint firstAttribute="width" constant="60" id="Xgg-Ec-gLX"/>
+                            <constraint firstAttribute="height" constant="60" id="jQj-SD-HBc"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号：15234534545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0j-s0-oux" userLabel="手机号">
@@ -42,9 +42,14 @@
                     <constraint firstItem="p0j-s0-oux" firstAttribute="top" secondItem="cB5-zK-mXk" secondAttribute="bottom" constant="4" id="t5U-SK-A9F"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="headImgView" destination="sba-4q-6Qz" id="i7T-Ng-uVB"/>
+                <outlet property="mobileLabel" destination="p0j-s0-oux" id="H2z-to-IpT"/>
+                <outlet property="nameLabel" destination="cB5-zK-mXk" id="1Ux-UI-Bxy"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="头像" width="44" height="44"/>
+        <image name="头像" width="60" height="60"/>
     </resources>
 </document>

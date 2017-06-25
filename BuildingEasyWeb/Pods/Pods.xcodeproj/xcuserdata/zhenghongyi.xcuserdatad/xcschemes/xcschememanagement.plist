@@ -8,46 +8,77 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>CYLTableViewPlaceHolder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>HappyDNS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>IQKeyboardManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>Pods-BuildingEasyWeb.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>Qiniu.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2B5FB59E389127CA83947D4BD68C6AD2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -58,6 +89,16 @@
 			<true/>
 		</dict>
 		<key>3CAF99E525444760E4006B7C19E0D5E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53B2B897D64E4516E75AC86348B86622</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5603B35454F6936D7C8BA050454A470F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +124,11 @@
 			<true/>
 		</dict>
 		<key>A316B54C67E947D23CECD230FA5BFAEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC6B8ED3E6E4F9A65AB1C0E2BFF92781</key>
 		<dict>
 			<key>primary</key>
 			<true/>
