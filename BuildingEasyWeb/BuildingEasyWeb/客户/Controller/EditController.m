@@ -10,9 +10,11 @@
 
 #import "PlaceholderTextView.h"
 
-@interface EditController ()
+@interface EditController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet PlaceholderTextView *textView;
+
+@property (nonatomic,strong) UIImagePickerController *imagePicker;
 
 @end
 
@@ -29,6 +31,8 @@
     
     _textView.placeholder = @"编辑进度";
     _textView.placeholderColor = Hex(0xababab);
+    
+    _imagePicker = [[UIImagePickerController alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,11 +51,15 @@
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        _imagePicker.delegate = self;
+        [self presentViewController:_imagePicker animated:YES completion:nil];
     }];
     
     UIAlertAction* albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        _imagePicker.delegate = self;
+        [self presentViewController:_imagePicker animated:YES completion:nil];
     }];
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -61,6 +69,15 @@
     [sheet addAction:cancelAction];
     
     [self presentViewController:sheet animated:YES completion:nil];
+}
+
+#pragma mark UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage * image =info[UIImagePickerControllerOriginalImage];
+    NSLog(@"image=%@",image);
+    
+    [_imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

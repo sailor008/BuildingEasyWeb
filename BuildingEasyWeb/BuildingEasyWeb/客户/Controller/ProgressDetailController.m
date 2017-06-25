@@ -18,6 +18,7 @@
 #import "OpenSystemUrlManager.h"
 #import "EditController.h"
 #import "BaobeiController.h"
+#import "TakeUpEditController.h"
 
 const NSInteger kCustomProgressImageViewTag = 1000;
 const NSInteger kCustomProgressLabelTag = 2000;
@@ -73,8 +74,10 @@ const NSInteger kCustomProgressLabelTag = 2000;
 
 - (IBAction)editProgress:(id)sender
 {
-    EditController* editVC = [[EditController alloc] init];
-    [self.navigationController pushViewController:editVC animated:YES];
+//    EditController* editVC = [[EditController alloc] init];
+//    [self.navigationController pushViewController:editVC animated:YES];
+    TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+    [self.navigationController pushViewController:takeEdit animated:YES];
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -145,6 +148,8 @@ const NSInteger kCustomProgressLabelTag = 2000;
     
     NSArray* stateArr = @[@"报备", @"带看", @"认购", @"签约", @"回款", @"结清", @"失效"];
     _stateLabel.text = stateArr[_detailModel.currentState];
+    
+    _descLabel.text = _detailModel.desc;
     
     NSTimeInterval timeInterval = _detailModel.createTime / 1000;
     _timeLabel.text = [NSDate dateStrWithTimeInterval:timeInterval];

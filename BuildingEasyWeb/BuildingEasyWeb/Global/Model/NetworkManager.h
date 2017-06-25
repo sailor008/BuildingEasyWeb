@@ -18,11 +18,3 @@ typedef void(^RequestFailure)(NSError* error, NSString* msg);
 + (void)getWithUrl:(NSString *)urlStr parameters:(NSDictionary *)parameters success:(RequestSuccess)successBlock failure:(RequestFailure)failureBlock;
 
 @end
-
-typedef void(^MyBlock)(id obj);
-
-@interface A : NSObject
-
-@property (nonatomic, copy) MyBlock block;
-
-@end

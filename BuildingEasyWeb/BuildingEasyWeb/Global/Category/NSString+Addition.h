@@ -13,5 +13,6 @@
 - (NSString *)md5;
 - (NSString *)firstPinyin;
 - (NSAttributedString *)htmlAttStr;
++ (NSString *)dateStr:(NSDate *)date;
 
 @end
