@@ -7,4 +7,5 @@ pod 'MJExtension'
 pod 'MBProgressHUD'
 pod 'CYLTableViewPlaceHolder'
 pod 'SDWebImage'
+pod "Qiniu", "~> 7.1"
 end
