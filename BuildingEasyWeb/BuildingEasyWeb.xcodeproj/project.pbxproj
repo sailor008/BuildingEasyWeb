@@ -125,6 +125,8 @@
 		CFDD36951EEBEB4D007497AC /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD36941EEBEB4D007497AC /* ContactModel.m */; };
 		CFDD36991EEBF297007497AC /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD36971EEBF297007497AC /* ContactCell.m */; };
 		CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDD36981EEBF297007497AC /* ContactCell.xib */; };
+		CFE2AF8A1EFFB84B004A98B3 /* DealEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE2AF881EFFB84B004A98B3 /* DealEditController.m */; };
+		CFE2AF8B1EFFB84B004A98B3 /* DealEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */; };
 		CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */; };
 		CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF681EF66618000EEB27 /* BuildAdviser.m */; };
 		CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF6B1EF66971000EEB27 /* BuildAdviserView.m */; };
@@ -331,6 +333,9 @@
 		CFDD36961EEBF297007497AC /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
 		CFDD36971EEBF297007497AC /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		CFDD36981EEBF297007497AC /* ContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
+		CFE2AF871EFFB84B004A98B3 /* DealEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealEditController.h; sourceTree = "<group>"; };
+		CFE2AF881EFFB84B004A98B3 /* DealEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealEditController.m; sourceTree = "<group>"; };
+		CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealEditController.xib; sourceTree = "<group>"; };
 		CFE828D31EE39B2F00290C79 /* UIViewController+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MBProgressHUD.h"; sourceTree = "<group>"; };
 		CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MBProgressHUD.m"; sourceTree = "<group>"; };
 		CFEAFF671EF66618000EEB27 /* BuildAdviser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildAdviser.h; sourceTree = "<group>"; };
@@ -615,6 +620,9 @@
 				CF0CEB101EFEA8D20018B35B /* TakeUpEditController.h */,
 				CF0CEB111EFEA8D20018B35B /* TakeUpEditController.m */,
 				CF0CEB121EFEA8D20018B35B /* TakeUpEditController.xib */,
+				CFE2AF871EFFB84B004A98B3 /* DealEditController.h */,
+				CFE2AF881EFFB84B004A98B3 /* DealEditController.m */,
+				CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -913,6 +921,7 @@
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
+				CFE2AF8B1EFFB84B004A98B3 /* DealEditController.xib in Resources */,
 				CF0CEB191EFEA9E40018B35B /* EditTextCell.xib in Resources */,
 				CFDD36851EEBD4B9007497AC /* SelectBuildingCell.xib in Resources */,
 				CF99FBF81EF3DFC0001C8A9C /* CustomerListCell.xib in Resources */,
@@ -1056,6 +1065,7 @@
 				CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
+				CFE2AF8A1EFFB84B004A98B3 /* DealEditController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
 				C782F48F1EE9D7430067C07F /* MeCellStatus.m in Sources */,
 				CF5A4CB71EE065C6002A281B /* LoginController.m in Sources */,

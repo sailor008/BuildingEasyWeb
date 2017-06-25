@@ -40,6 +40,8 @@
 
 - (void)setupInterFace
 {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    
     [_tableView registerNib:[UINib nibWithNibName:@"EditSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"kEditSectionView"];
     [_tableView registerNibWithName:@"EditTextCell"];
     [_tableView registerNibWithName:@"PayTypeCell"];
@@ -143,7 +145,7 @@
 }
 
 #pragma mark PhotoViewDelegate
-- (void)photoViewResetHeight:(CGFloat)height
+- (void)photoView:(PhotoView *)photoView resetHeight:(CGFloat)height
 {
     _photoView.height = height;
     
@@ -152,6 +154,12 @@
     [footerView addSubview:_photoView];
     
     _tableView.tableFooterView = footerView;
+}
+
+#pragma mark Action
+- (void)commit
+{
+    
 }
 
 @end
