@@ -126,16 +126,16 @@
     _sectionView = [[[NSBundle mainBundle] loadNibNamed:@"BuildingSectionView" owner:nil options:nil] lastObject];
     _sectionView.delegate = self;
     
-    kWeakSelf(weakSelf);
-    [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
-        weakSelf.lat = lat;
-        weakSelf.lng = lng;
-        [weakSelf setupLocationButtonFace:city];
-        
-        [User shareUser].city = city;
-        [User shareUser].lat = lat;
-        [User shareUser].lng = lng;
-    }];
+//    kWeakSelf(weakSelf);
+//    [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
+//        weakSelf.lat = lat;
+//        weakSelf.lng = lng;
+//        [weakSelf setupLocationButtonFace:city];
+//        
+//        [User shareUser].city = city;
+//        [User shareUser].lat = lat;
+//        [User shareUser].lng = lng;
+//    }];
 }
 
 - (void)requestDataWithCheckLocation

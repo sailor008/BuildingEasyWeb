@@ -21,6 +21,7 @@ const NSInteger kProgressLabelTag = 2000;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentStateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *progressView;
 
@@ -65,6 +66,7 @@ const NSInteger kProgressLabelTag = 2000;
     NSArray* stateArr = @[@"报备", @"带看", @"认购", @"签约", @"回款", @"结清", @"失效"];
     _currentStateLabel.text = stateArr[model.currentState];
     
+    _descLabel.text = model.desc;
     NSTimeInterval timeInterval = model.createTime / 1000;
     _timeLabel.text = [NSDate dateStrWithTimeInterval:timeInterval];
     

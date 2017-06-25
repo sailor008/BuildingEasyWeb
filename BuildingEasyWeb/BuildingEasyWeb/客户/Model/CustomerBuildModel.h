@@ -20,6 +20,7 @@
 @property (nonatomic, assign) NSInteger createTime;
 @property (nonatomic, copy) NSString* buildId;
 @property (nonatomic, copy) NSString* buildName;
+@property (nonatomic, copy) NSString* desc;
 
 @property (nonatomic, strong) BuildAdviser* adviser;
 

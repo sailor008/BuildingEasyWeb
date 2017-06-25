@@ -340,6 +340,7 @@
             <connections>
                 <outlet property="buildNameLabel" destination="UYo-di-TWB" id="sq5-D3-asK"/>
                 <outlet property="currentStateLabel" destination="gn7-ph-4Ux" id="5Of-HS-DDc"/>
+                <outlet property="descLabel" destination="8EE-XH-6xh" id="WTl-uK-SQv"/>
                 <outlet property="intendImageView" destination="Guz-eE-CBr" id="l14-oJ-cFC"/>
                 <outlet property="nameLabel" destination="3qQ-Lf-fkM" id="bqu-81-s5F"/>
                 <outlet property="phoneLabel" destination="Ug5-ut-CEa" id="qcU-xU-WC8"/>

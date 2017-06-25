@@ -30,6 +30,7 @@
 @property (nonatomic, copy) NSString* customerId;
 @property (nonatomic, copy) NSString* customerMobile;
 @property (nonatomic, copy) NSString* customerName;
+@property (nonatomic, copy) NSString* desc;
 @property (nonatomic, assign) NSInteger createTime;
 @property (nonatomic, assign) NSInteger currentState;
 @property (nonatomic, assign) NSInteger intention;
