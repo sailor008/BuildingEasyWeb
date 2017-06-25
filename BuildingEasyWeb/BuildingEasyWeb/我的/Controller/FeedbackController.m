@@ -79,7 +79,7 @@
             [MBProgressHUD dissmissWithError:@"输入的内容有误！"];
         } else {
             [NetworkManager postWithUrl:@"wx/feedBack" parameters:@{@"content": contentStr}success:^(id reponse) {
-                NSLog(@"response:%@", reponse);
+                NSLog(@"反馈成功！！！response:%@", reponse);
                 _txtContent.text = nil;
                 
             } failure:^(NSError *error, NSString *msg) {

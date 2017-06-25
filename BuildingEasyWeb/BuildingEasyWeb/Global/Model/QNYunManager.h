@@ -1,5 +1,5 @@
 //
-//  QUYunManager.h
+//  QNYunManager.h
 //  BuildingEasyWeb
 //
 //  Created by SeekMac on 2017/6/21.
@@ -13,7 +13,7 @@ typedef void(^UploadReqSuccess)(id reponseObj);
 typedef void(^UploadReqFailure)(NSError* error, NSString* reqId);
 
 
-@interface QUYunManager : NSObject
+@interface QNYunManager : NSObject
 
 
 +(void)uploadData:(NSData*)data key:(NSString*) key token:(NSString*) token success:(UploadReqSuccess)successBlock failure:(UploadReqFailure)failureBlock;

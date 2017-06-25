@@ -194,8 +194,8 @@ typedef void (^onTabVCell)(void);
         MeCellInfo* cell = [tableView dequeueReusableCellWithIdentifier:@"MeCellInfo" forIndexPath:indexPath];
         NSString* name = [User shareUser].name;
         NSString* mobile = [User shareUser].mobile;
-        NSString* strImgData = [User shareUser].headImg;
-        [cell updateWithData:name phone:mobile imgData:strImgData];
+        NSString* headImgUrl = [User shareUser].headImg;
+        [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
         return cell;
     }else if(indexPath.section == 1) {
         if(indexPath.row == 0) {

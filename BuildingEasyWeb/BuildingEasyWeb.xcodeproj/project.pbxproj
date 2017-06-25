@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		466DFF75999E037E2EF0D274 /* libPods-BuildingEasyWeb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */; };
 		C717494F1EFAE7630085E590 /* MyInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C717494E1EFAE7630085E590 /* MyInfoModel.m */; };
+		C71749531EFEB5AB0085E590 /* ModifyMyPwdController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749511EFEB5AB0085E590 /* ModifyMyPwdController.m */; };
+		C71749541EFEB5AB0085E590 /* ModifyMyPwdController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749521EFEB5AB0085E590 /* ModifyMyPwdController.xib */; };
+		C71749571EFF68C00085E590 /* EditMyEmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749561EFF68C00085E590 /* EditMyEmailController.m */; };
+		C717495D1EFF74400085E590 /* EditMyNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = C717495C1EFF74400085E590 /* EditMyNickNameController.m */; };
+		C71749691EFF815E0085E590 /* AuthIdentityController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749671EFF815E0085E590 /* AuthIdentityController.m */; };
+		C717496A1EFF815E0085E590 /* AuthIdentityController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749681EFF815E0085E590 /* AuthIdentityController.xib */; };
 		C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F47E1EE9B9DD0067C07F /* MeCellBase.m */; };
 		C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */; };
 		C782F4851EE9B9FC0067C07F /* MeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4831EE9B9FC0067C07F /* MeController.m */; };
@@ -30,7 +36,7 @@
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
 		C7BBCE741EF66761000EF857 /* EditMyInfoBaseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */; };
-		C7BBCE771EF98CB0000EF857 /* QUYunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE761EF98CB0000EF857 /* QUYunManager.m */; };
+		C7BBCE771EF98CB0000EF857 /* QNYunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE761EF98CB0000EF857 /* QNYunManager.m */; };
 		CF0BE8531EFBFE360003DFC7 /* TextDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */; };
 		CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
@@ -139,6 +145,16 @@
 		885945DC87E6AF2F42F4C9AA /* libPods-BuildingEasyWeb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BuildingEasyWeb.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C717494D1EFAE7630085E590 /* MyInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoModel.h; sourceTree = "<group>"; };
 		C717494E1EFAE7630085E590 /* MyInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoModel.m; sourceTree = "<group>"; };
+		C71749501EFEB5AB0085E590 /* ModifyMyPwdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyMyPwdController.h; sourceTree = "<group>"; };
+		C71749511EFEB5AB0085E590 /* ModifyMyPwdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyMyPwdController.m; sourceTree = "<group>"; };
+		C71749521EFEB5AB0085E590 /* ModifyMyPwdController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyMyPwdController.xib; sourceTree = "<group>"; };
+		C71749551EFF68C00085E590 /* EditMyEmailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMyEmailController.h; sourceTree = "<group>"; };
+		C71749561EFF68C00085E590 /* EditMyEmailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMyEmailController.m; sourceTree = "<group>"; };
+		C717495B1EFF74400085E590 /* EditMyNickNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMyNickNameController.h; sourceTree = "<group>"; };
+		C717495C1EFF74400085E590 /* EditMyNickNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMyNickNameController.m; sourceTree = "<group>"; };
+		C71749661EFF815E0085E590 /* AuthIdentityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthIdentityController.h; sourceTree = "<group>"; };
+		C71749671EFF815E0085E590 /* AuthIdentityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthIdentityController.m; sourceTree = "<group>"; };
+		C71749681EFF815E0085E590 /* AuthIdentityController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthIdentityController.xib; sourceTree = "<group>"; };
 		C782F47D1EE9B9DD0067C07F /* MeCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCellBase.h; sourceTree = "<group>"; };
 		C782F47E1EE9B9DD0067C07F /* MeCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCellBase.m; sourceTree = "<group>"; };
 		C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCellBase.xib; sourceTree = "<group>"; };
@@ -171,8 +187,8 @@
 		C7BBCE701EF66761000EF857 /* EditMyInfoBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMyInfoBaseController.h; sourceTree = "<group>"; };
 		C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMyInfoBaseController.m; sourceTree = "<group>"; };
 		C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditMyInfoBaseController.xib; sourceTree = "<group>"; };
-		C7BBCE751EF98CB0000EF857 /* QUYunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUYunManager.h; sourceTree = "<group>"; };
-		C7BBCE761EF98CB0000EF857 /* QUYunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUYunManager.m; sourceTree = "<group>"; };
+		C7BBCE751EF98CB0000EF857 /* QNYunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNYunManager.h; sourceTree = "<group>"; };
+		C7BBCE761EF98CB0000EF857 /* QNYunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNYunManager.m; sourceTree = "<group>"; };
 		CF0BE8501EFBFE360003DFC7 /* TextDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDetailController.h; sourceTree = "<group>"; };
 		CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDetailController.m; sourceTree = "<group>"; };
 		CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextDetailController.xib; sourceTree = "<group>"; };
@@ -523,8 +539,8 @@
 				CFDD36941EEBEB4D007497AC /* ContactModel.m */,
 				CF5785D51EE59D2100994741 /* Global.h */,
 				CF5785D61EE59D2100994741 /* Global.m */,
-				C7BBCE751EF98CB0000EF857 /* QUYunManager.h */,
-				C7BBCE761EF98CB0000EF857 /* QUYunManager.m */,
+				C7BBCE751EF98CB0000EF857 /* QNYunManager.h */,
+				C7BBCE761EF98CB0000EF857 /* QNYunManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -651,6 +667,16 @@
 				C7BBCE701EF66761000EF857 /* EditMyInfoBaseController.h */,
 				C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */,
 				C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */,
+				C71749501EFEB5AB0085E590 /* ModifyMyPwdController.h */,
+				C71749511EFEB5AB0085E590 /* ModifyMyPwdController.m */,
+				C71749521EFEB5AB0085E590 /* ModifyMyPwdController.xib */,
+				C71749551EFF68C00085E590 /* EditMyEmailController.h */,
+				C71749561EFF68C00085E590 /* EditMyEmailController.m */,
+				C717495B1EFF74400085E590 /* EditMyNickNameController.h */,
+				C717495C1EFF74400085E590 /* EditMyNickNameController.m */,
+				C71749661EFF815E0085E590 /* AuthIdentityController.h */,
+				C71749671EFF815E0085E590 /* AuthIdentityController.m */,
+				C71749681EFF815E0085E590 /* AuthIdentityController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -868,6 +894,7 @@
 				CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */,
 				CF665BFA1EEB9AB200028B1B /* BaobeiCell.xib in Resources */,
 				CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */,
+				C717496A1EFF815E0085E590 /* AuthIdentityController.xib in Resources */,
 				CF2FCA871EF91079001E974C /* ProgressDetailController.xib in Resources */,
 				CFEAFF731EF66E00000EEB27 /* BuildAdviserCell.xib in Resources */,
 				CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */,
@@ -889,6 +916,7 @@
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */,
+				C71749541EFEB5AB0085E590 /* ModifyMyPwdController.xib in Resources */,
 				C782F49A1EEBCAD80067C07F /* AboutMeController.xib in Resources */,
 				CFEEC0191EE2B0DD00E1DB74 /* RegisterController.xib in Resources */,
 				CF5785DC1EE5A3C400994741 /* FindPassWordController.xib in Resources */,
@@ -966,12 +994,15 @@
 				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
 				CF8F7FE81EF77803009A6C3E /* FormulaListCell.m in Sources */,
+				C71749531EFEB5AB0085E590 /* ModifyMyPwdController.m in Sources */,
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
 				CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */,
 				CFEEC01D1EE2B5B800E1DB74 /* BuildingController.m in Sources */,
+				C71749691EFF815E0085E590 /* AuthIdentityController.m in Sources */,
 				CFD016931EED353F003E1BF8 /* CityModel.m in Sources */,
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
+				C717495D1EFF74400085E590 /* EditMyNickNameController.m in Sources */,
 				CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */,
 				C717494F1EFAE7630085E590 /* MyInfoModel.m in Sources */,
 				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
@@ -984,7 +1015,7 @@
 				CF30C3C71EF4BFCC0070D124 /* BuildingProgressCell.m in Sources */,
 				CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */,
 				CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */,
-				C7BBCE771EF98CB0000EF857 /* QUYunManager.m in Sources */,
+				C7BBCE771EF98CB0000EF857 /* QNYunManager.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CFDD36951EEBEB4D007497AC /* ContactModel.m in Sources */,
@@ -995,6 +1026,7 @@
 				CF55FF181EE8316B00B0ACD9 /* BuildingDetailController.m in Sources */,
 				CF53E8EA1EF96747008D0322 /* EditController.m in Sources */,
 				CF7721181EE6DEF200DD5AE2 /* BuildingCell.m in Sources */,
+				C71749571EFF68C00085E590 /* EditMyEmailController.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,

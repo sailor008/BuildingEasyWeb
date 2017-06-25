@@ -1,27 +1,22 @@
 //
-//  EditMyInfoBaseController.m
+//  AuthIdentityController.m
 //  BuildingEasyWeb
 //
-//  Created by SeekMac on 2017/6/18.
+//  Created by SeekMac on 2017/6/25.
 //  Copyright © 2017年 zhenghongyi. All rights reserved.
 //
 
-#import "EditMyInfoBaseController.h"
+#import "AuthIdentityController.h"
 
-
-@interface EditMyInfoBaseController ()
-
+@interface AuthIdentityController ()
 
 @end
 
-@implementation EditMyInfoBaseController
+@implementation AuthIdentityController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _btnEnsure.layer.masksToBounds = YES;
-    _btnEnsure.layer.cornerRadius = 2.5f;
-    [_btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,9 +33,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (void)onBtnEnsure:(id)sender{
-        
-}
 
 @end

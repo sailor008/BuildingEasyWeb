@@ -10,6 +10,6 @@
 
 @interface MeCellInfo : UITableViewCell
 
-- (void)updateWithData:(NSString*)name phone:(NSString*)mobile imgData:(NSString*)strImgData;
+- (void)updateWithData:(NSString*)name phone:(NSString*)mobile imgUrl:(NSString*)url;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "MeCellInfo.h"
+#import "UIImageView+WebCache.h"
+
 
 @interface MeCellInfo()
 
@@ -21,6 +23,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    _headImgView.layer.masksToBounds = YES;
+    _headImgView.layer.cornerRadius = 30.0f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -29,16 +33,12 @@
     // Configure the view for the selected state
 }
 
-- (void)updateWithData:(NSString*)name phone:(NSString*)mobile imgData:(NSString*)strImgData {
+- (void)updateWithData:(NSString*)name phone:(NSString*)mobile imgUrl:(NSString*)url {
     _nameLabel.text = name;
     _mobileLabel.text = mobile;
     
-    if(strImgData.length <= 0) {
-        _headImgView.image = GetIMAGE(@"头像");
-    } else {
-        NSData *imgData = [strImgData dataUsingEncoding:NSUTF8StringEncoding];
-        _headImgView.image = [UIImage imageWithData:imgData];
-    }
+    [_headImgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:GetIMAGE(@"头像")];
+    
 }
 
 @end
