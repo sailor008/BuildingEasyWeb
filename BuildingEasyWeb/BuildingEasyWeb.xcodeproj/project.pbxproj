@@ -70,6 +70,7 @@
 		CF30C3C71EF4BFCC0070D124 /* BuildingProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF30C3C51EF4BFCC0070D124 /* BuildingProgressCell.m */; };
 		CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */; };
 		CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */; };
+		CF32760B1EFFF5EB00018294 /* EditInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF32760A1EFFF5EB00018294 /* EditInfoModel.m */; };
 		CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */; };
 		CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */; };
 		CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D541EEAE9A0009A1B50 /* BaobeiController.m */; };
@@ -252,6 +253,8 @@
 		CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingProgressCell.xib; sourceTree = "<group>"; };
 		CF30C3C91EF5140E0070D124 /* CustomerDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerDetailModel.h; sourceTree = "<group>"; };
 		CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerDetailModel.m; sourceTree = "<group>"; };
+		CF3276091EFFF5EB00018294 /* EditInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoModel.h; sourceTree = "<group>"; };
+		CF32760A1EFFF5EB00018294 /* EditInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoModel.m; sourceTree = "<group>"; };
 		CF413D4E1EEADDE7009A1B50 /* BuildingBaseInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingBaseInfoCell.h; sourceTree = "<group>"; };
 		CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingBaseInfoCell.m; sourceTree = "<group>"; };
 		CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingBaseInfoCell.xib; sourceTree = "<group>"; };
@@ -667,6 +670,8 @@
 				CF8F80911EF7C652009A6C3E /* CustomerBuildModel.m */,
 				CFDC57661EFA5645004658CE /* CustomerBaobeiModel.h */,
 				CFDC57671EFA5645004658CE /* CustomerBaobeiModel.m */,
+				CF3276091EFFF5EB00018294 /* EditInfoModel.h */,
+				CF32760A1EFFF5EB00018294 /* EditInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1061,6 +1066,7 @@
 				C71749531EFEB5AB0085E590 /* ModifyMyPwdController.m in Sources */,
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
 				CF5785D41EE59B6700994741 /* UIView+MBProgressHUD.m in Sources */,
+				CF32760B1EFFF5EB00018294 /* EditInfoModel.m in Sources */,
 				CFEEC01D1EE2B5B800E1DB74 /* BuildingController.m in Sources */,
 				C71749691EFF815E0085E590 /* AuthIdentityController.m in Sources */,
 				CFD016931EED353F003E1BF8 /* CityModel.m in Sources */,

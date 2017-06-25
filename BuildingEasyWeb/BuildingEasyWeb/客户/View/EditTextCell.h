@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EditInfoModel.h"
+
 @interface EditTextCell : UITableViewCell
+
+@property (nonatomic, strong) EditInfoModel* model;
 
 - (void)setUIWithData:(NSDictionary *)dic;
 

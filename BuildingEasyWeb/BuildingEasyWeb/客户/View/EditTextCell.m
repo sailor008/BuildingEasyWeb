@@ -36,6 +36,16 @@
     // Configure the view for the selected state
 }
 
+- (void)setModel:(EditInfoModel *)model
+{
+    _model = model;
+    
+    _editTitleLabel.text = [NSString stringWithFormat:@"%@：", model.title];
+    _textField.placeholder = model.placeholder;
+    _dateButton.hidden = !model.isDate;
+    _percenLabel.hidden = !model.isPercen;
+}
+
 - (void)setUIWithData:(NSDictionary *)dic
 {
     _editTitleLabel.text = [NSString stringWithFormat:@"%@：", dic.allKeys[0]];
