@@ -10,6 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
+static NSString* const kShareSuccess = @"ShareToWXSuccess";
+
 typedef NS_ENUM(NSInteger, BEWUserRole) {
     kPersonRole = 1,
     kAgencyRole

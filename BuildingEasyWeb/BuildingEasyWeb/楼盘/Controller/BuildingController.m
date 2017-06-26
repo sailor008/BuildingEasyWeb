@@ -27,12 +27,15 @@
 #import "CityModel.h"
 #import "BuildingFilterModel.h"
 
-@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate>
+@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AdsScrollView* adsView;
 @property (nonatomic, strong) BuildingSectionView* sectionView;
+
+@property (strong, nonatomic) IBOutlet UIView *searchBarView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @property (nonatomic, strong) NSMutableArray* buildingArr;
 @property (nonatomic, copy) NSString* currentCity;
@@ -48,7 +51,7 @@
 @property (nonatomic, copy) NSString* averAgeId;
 @property (nonatomic, copy) NSString* distanceId;
 @property (nonatomic, copy) NSString* classifyId;
-//@property (nonatomic, copy) NSString* areaCode;
+@property (nonatomic, copy) NSString* keyword;
 
 @end
 
@@ -66,11 +69,9 @@
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
         [LoginManager login:mobile password:pwd callback:^{
-//            [_tableView.mj_header beginRefreshing];
             [self requestDataWithCheckLocation];
         }];
     } else {
-//        [_tableView.mj_header beginRefreshing];
         [self requestDataWithCheckLocation];
     }
 }
@@ -92,7 +93,7 @@
     _averAgeId = @"0";
     _distanceId = @"0";
     _classifyId = @"0";
-//    _areaCode = @"0";
+    _keyword = @"";
     
     [_tableView registerNibWithName:@"BuildingCell"];
     
@@ -116,7 +117,7 @@
     
     _adsView = [[AdsScrollView alloc] init];
     _adsView.frame = CGRectMake(0, 0, ScreenWidth, 105);
-    _adsView.backgroundColor = [UIColor redColor];
+    _adsView.placeholderImage = @"logo.png";
     UIView* headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, ScreenWidth, 115);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -125,17 +126,6 @@
     
     _sectionView = [[[NSBundle mainBundle] loadNibNamed:@"BuildingSectionView" owner:nil options:nil] lastObject];
     _sectionView.delegate = self;
-    
-//    kWeakSelf(weakSelf);
-//    [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
-//        weakSelf.lat = lat;
-//        weakSelf.lng = lng;
-//        [weakSelf setupLocationButtonFace:city];
-//        
-//        [User shareUser].city = city;
-//        [User shareUser].lat = lat;
-//        [User shareUser].lng = lng;
-//    }];
 }
 
 - (void)requestDataWithCheckLocation
@@ -201,7 +191,7 @@
                                  @"lat":@([User shareUser].lat),//@23.14,
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
-                                 @"keyword":@""};
+                                 @"keyword":_keyword};
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
         if (_buildingArr.count > 0) {
             _tableView.page ++;
@@ -446,10 +436,38 @@
     [User shareUser].city = city;
 }
 
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    _keyword = textField.text;
+    if (_keyword == nil) {
+        _keyword = @"";
+    }
+    [_tableView.mj_header beginRefreshing];
+    return YES;
+}
+
 #pragma mark Action
 - (void)searchBuilding
 {
+    if (!_searchBarView.superview) {
+        _searchBarView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, _searchBarView.height);
+        [self.navigationController.navigationBar addSubview:_searchBarView];
+    }
     
+    [UIView animateWithDuration:0.5 animations:^{
+        _searchBarView.left = 0;
+    } completion:^(BOOL finished) {
+        [_searchTextField becomeFirstResponder];
+    }];
+}
+
+- (IBAction)dismissSearch:(id)sender
+{
+    [_searchTextField resignFirstResponder];
+    [UIView animateWithDuration:0.5 animations:^{
+        _searchBarView.left = ScreenWidth;
+    }];
 }
 
 @end

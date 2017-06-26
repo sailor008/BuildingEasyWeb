@@ -14,6 +14,7 @@
 #import "EditSectionView.h"
 #import "PhotoView.h"
 #import "UIView+Addition.h"
+#import "EditInfoModel.h"
 
 @interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate>
 
@@ -40,6 +41,8 @@
 
 - (void)setupInterFace
 {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    
     [_tableView registerNib:[UINib nibWithNibName:@"EditSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"kEditSectionView"];
     [_tableView registerNibWithName:@"EditTextCell"];
     [_tableView registerNibWithName:@"PayTypeCell"];
@@ -65,6 +68,31 @@
                    @[@{@"委托代理人(选填)":@"请输入委托代理人"}, @{@"身份证/护照号码(选填)":@"请输入身份证/护照号码"}],
                    @[@{@"楼盘名":@"请输入楼盘名"}, @{@"具体地址":@"请输入具体地址"}, @{@"套内面积":@"请输入套内面积"}, @{@"建筑面积":@"请输入建筑面积"}, @{@"单价":@"请输入单价"}, @{@"总价":@"请输入总价"}, @{@"支付定金":@"请输入支付的定金"}, @{@"当前日期":@"请输入总价"}, @{@"签订正式合同日期":@"请选择日期"}],
                    @[@{@"付款方式":@""}, @{@"支付房款百分比":@"请输入百分数"}, @{@"金额":@"请输入金额"}, @{@"签约日期":@"请选择签约日期"}]];
+    
+    // 拼合成数据模型
+    NSMutableArray* tempArr = [NSMutableArray array];
+    for (NSArray* arr in _dataArray) {
+        
+        NSMutableArray* subTempArr = [NSMutableArray array];
+        for (NSDictionary* dic in arr) {
+            EditInfoModel* model = [[EditInfoModel alloc] init];
+            model.title = dic.allKeys[0];
+            model.placeholder = dic.allValues[0];
+            if ([model.title rangeOfString:@"日期"].location != NSNotFound) {
+                model.isDate = YES;
+            }
+            if ([model.title rangeOfString:@"百分比"].location != NSNotFound) {
+                model.isPercen = YES;
+            }
+            if ([model.title isEqualToString:@"付款方式"]) {
+                model.isRadio = YES;
+            }
+            [subTempArr addObject:model];
+        }
+        [tempArr addObject:subTempArr];
+    }
+    
+    _dataArray = [tempArr copy];
     
     _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"", @"合同信息", @""];
 }
@@ -96,15 +124,14 @@
 {
     NSArray* rowArray = _dataArray[indexPath.section];
     
-    NSDictionary* dic = rowArray[indexPath.row];
-    NSString* titleStr = dic.allKeys[0];
-    if ([titleStr isEqualToString:@"付款方式"]) {
+    EditInfoModel* model = rowArray[indexPath.row];
+    
+    if (model.isRadio) {
         PayTypeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PayTypeCell" forIndexPath:indexPath];
         return cell;
-        
     } else {
         EditTextCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EditTextCell" forIndexPath:indexPath];
-        [cell setUIWithData:dic];
+        cell.model = model;
         return cell;
     }
 }
@@ -143,7 +170,7 @@
 }
 
 #pragma mark PhotoViewDelegate
-- (void)photoViewResetHeight:(CGFloat)height
+- (void)photoView:(PhotoView *)photoView resetHeight:(CGFloat)height
 {
     _photoView.height = height;
     
@@ -152,6 +179,12 @@
     [footerView addSubview:_photoView];
     
     _tableView.tableFooterView = footerView;
+}
+
+#pragma mark Action
+- (void)commit
+{
+    
 }
 
 @end

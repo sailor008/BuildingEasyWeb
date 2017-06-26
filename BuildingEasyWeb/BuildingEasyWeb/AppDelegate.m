@@ -12,10 +12,10 @@
 #import "LoginManager.h"
 #import "MainTabController.h"
 #import "User.h"
-
+#import "Global.h"
 #import "WXApi.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <WXApiDelegate>
 
 @end
 
@@ -39,7 +39,7 @@
         self.window.rootViewController = naviVC;
     }
     
-    [WXApi registerApp:@""];
+    [WXApi registerApp:@"wx393b4a816ff23299"];
     
     [self.window makeKeyAndVisible];
     
@@ -71,6 +71,25 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+#pragma mark WXApiDelegate
+
+-(void) onResp:(BaseResp*)resp
+{
+    if (resp.errStr == WXSuccess) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShareSuccess object:nil];
+    }
 }
 
 @end

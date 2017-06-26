@@ -19,6 +19,9 @@
 #import "AdsScrollView.h"
 #import "FormulaListCell.h"
 #import "TextDetailController.h"
+#import "Global.h"
+#import "WXApiObject.h"
+#import "WXApi.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -55,6 +58,8 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"楼盘详情";
+    
+    _adsView.placeholderImage = @"logo.png";
     
     // 预设基本信息模型
     NSArray* array = @[@"区域", @"开发商", @"开盘时间", @"交房时间", @"装修", @"建筑面积", @"总户数", @"车位数", @"车位比", @"绿化率", @"产权年限", @"面积率", @"合作按揭银行", @"物业公司", @"物业费"];
@@ -174,10 +179,19 @@
 
 - (IBAction)shareToWeChat:(UIButton *)sender
 {
-    [MBProgressHUD showMessage:@"还没接入微信分享" toView:self.view];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBProgressHUD hideHUDForView:self.view];
-    });
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareSuccess) name:kShareSuccess object:nil];
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.text = @"单纯分享文本";
+    req.bText = YES;
+    req.scene = WXSceneSession;
+    
+    [WXApi sendReq:req];
+    
+//    [MBProgressHUD showMessage:@"还没接入微信分享" toView:self.view];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [MBProgressHUD hideHUDForView:self.view];
+//    });
 }
 
 #pragma mark Request Data
@@ -282,6 +296,16 @@
     dic[@"物业费"] = _detail.buildInfo.propertyMoney;
     
     [_tableView reloadData];
+}
+
+- (void)shareSuccess
+{
+    [_shareView removeFromSuperview];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

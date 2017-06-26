@@ -114,8 +114,8 @@
     
     [_collectionView reloadData];
     [_imagePicker dismissViewControllerAnimated:YES completion:^{
-        if (_delegate && [_delegate respondsToSelector:@selector(photoViewResetHeight:)]) {
-            [_delegate photoViewResetHeight:_collectionView.contentSize.height + 40];
+        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
+            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
         }
     }];
 }

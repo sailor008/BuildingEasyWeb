@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PhotoView;
 @protocol PhotoViewDelegate <NSObject>
 
-- (void)photoViewResetHeight:(CGFloat)height;
+- (void)photoView:(PhotoView *)photoView resetHeight:(CGFloat)height;
 
 @end
 

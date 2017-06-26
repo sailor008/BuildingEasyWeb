@@ -166,7 +166,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注：上述佣金非个人所得佣金，个人应得佣金需按合同协议与所在经济公司结算后确认" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlg-6Z-EyF">
-                                            <rect key="frame" x="17" y="160" width="478" height="14.5"/>
+                                            <rect key="frame" x="17" y="160" width="341" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -214,6 +214,7 @@
                                     <constraints>
                                         <constraint firstItem="zlg-6Z-EyF" firstAttribute="top" secondItem="lJi-Ki-4Ay" secondAttribute="bottom" constant="14" id="3JH-YO-qlc"/>
                                         <constraint firstItem="438-iU-9mT" firstAttribute="centerY" secondItem="D0E-WV-v1Y" secondAttribute="centerY" id="3dp-aG-mjA"/>
+                                        <constraint firstAttribute="trailing" secondItem="zlg-6Z-EyF" secondAttribute="trailing" constant="17" id="5Vd-o5-VJv"/>
                                         <constraint firstAttribute="bottom" secondItem="h37-s9-PE4" secondAttribute="bottom" constant="10" id="BFf-pD-FeY"/>
                                         <constraint firstItem="7C8-P0-f8S" firstAttribute="leading" secondItem="Bsb-gp-OAG" secondAttribute="leading" constant="17" id="C4p-hb-qXb"/>
                                         <constraint firstAttribute="trailing" secondItem="lJi-Ki-4Ay" secondAttribute="trailing" constant="17" id="GWo-M2-84P"/>
@@ -257,7 +258,7 @@
                                             <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1、两房一厅" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKD-yB-RsF">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1、两房一厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKD-yB-RsF">
                                             <rect key="frame" x="17" y="75" width="328" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -291,7 +292,7 @@
                                             <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1、两房一厅" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWv-Aa-5kZ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1、两房一厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWv-Aa-5kZ">
                                             <rect key="frame" x="17" y="156" width="328" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
