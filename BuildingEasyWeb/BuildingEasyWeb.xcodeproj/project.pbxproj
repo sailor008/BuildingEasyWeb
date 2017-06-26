@@ -402,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */,
 				CF8F808A1EF7B428009A6C3E /* SystemConfiguration.framework in Frameworks */,
 				CF8F80881EF7B3F2009A6C3E /* CoreTelephony.framework in Frameworks */,
 				CF8F80811EF7B10C009A6C3E /* libsqlite3.tbd in Frameworks */,
@@ -410,7 +411,6 @@
 				CF8F807B1EF7B0E3009A6C3E /* libz.tbd in Frameworks */,
 				CF8F80791EF7B0D0009A6C3E /* libicucore.tbd in Frameworks */,
 				CF8F80861EF7B3DB009A6C3E /* libWeChatSDK.a in Frameworks */,
-				CF3061CD1EE3FDC100D3FC7E /* AddressBook.framework in Frameworks */,
 				CF3061CB1EE3FDAA00D3FC7E /* Contacts.framework in Frameworks */,
 				CF3061C61EE3F85E00D3FC7E /* MapKit.framework in Frameworks */,
 				CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */,

@@ -24,6 +24,8 @@
     self.navigationItem.backBarButtonItem = backItem;
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)didReceiveMemoryWarning {

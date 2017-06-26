@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BuildingController">
             <connections>
+                <outlet property="searchBarView" destination="ZnH-90-uup" id="Uib-fZ-mdV"/>
+                <outlet property="searchTextField" destination="wGT-lU-ays" id="Xcl-dz-lee"/>
                 <outlet property="tableView" destination="3TV-wT-omS" id="cdU-n2-OU2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,5 +39,76 @@
                 <constraint firstAttribute="trailing" secondItem="3TV-wT-omS" secondAttribute="trailing" id="hCV-si-AvX"/>
             </constraints>
         </view>
+        <view contentMode="scaleToFill" id="ZnH-90-uup">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDA-ya-0zY">
+                    <rect key="frame" x="332" y="6" width="33" height="32"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="33" id="WrN-FM-yCF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="dismissSearch:" destination="-1" eventType="touchUpInside" id="HWn-R5-wb6"/>
+                    </connections>
+                </button>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut2-yp-6Kr">
+                    <rect key="frame" x="10" y="7" width="312" height="30"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="auM-Tk-G76">
+                            <rect key="frame" x="9" y="7" width="16" height="16"/>
+                        </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索楼盘名称、地址" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wGT-lU-ays">
+                            <rect key="frame" x="35" y="0.0" width="277" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="qQf-Qy-RTr"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="wGT-lU-ays" firstAttribute="top" secondItem="ut2-yp-6Kr" secondAttribute="top" id="MbJ-Qv-y67"/>
+                        <constraint firstAttribute="bottom" secondItem="wGT-lU-ays" secondAttribute="bottom" id="PtX-iG-Hyr"/>
+                        <constraint firstAttribute="trailing" secondItem="wGT-lU-ays" secondAttribute="trailing" id="fRW-Vs-Vg7"/>
+                        <constraint firstItem="auM-Tk-G76" firstAttribute="leading" secondItem="ut2-yp-6Kr" secondAttribute="leading" constant="9" id="gJN-wA-PDo"/>
+                        <constraint firstItem="auM-Tk-G76" firstAttribute="centerY" secondItem="ut2-yp-6Kr" secondAttribute="centerY" id="iUN-Oi-4WQ"/>
+                        <constraint firstItem="wGT-lU-ays" firstAttribute="leading" secondItem="auM-Tk-G76" secondAttribute="trailing" constant="10" id="ucK-4p-Zaw"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.bordUIColor">
+                            <color key="value" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="JDA-ya-0zY" firstAttribute="leading" secondItem="ut2-yp-6Kr" secondAttribute="trailing" constant="10" id="7nJ-Cy-Y4h"/>
+                <constraint firstItem="ut2-yp-6Kr" firstAttribute="leading" secondItem="ZnH-90-uup" secondAttribute="leading" constant="10" id="Hcp-t7-l5y"/>
+                <constraint firstAttribute="trailing" secondItem="JDA-ya-0zY" secondAttribute="trailing" constant="10" id="Pqo-LS-tPh"/>
+                <constraint firstItem="JDA-ya-0zY" firstAttribute="centerY" secondItem="ZnH-90-uup" secondAttribute="centerY" id="Qno-Tg-eDq"/>
+                <constraint firstItem="ut2-yp-6Kr" firstAttribute="top" secondItem="ZnH-90-uup" secondAttribute="top" constant="7" id="XL1-iO-wnW"/>
+                <constraint firstAttribute="bottom" secondItem="ut2-yp-6Kr" secondAttribute="bottom" constant="7" id="xCB-Lg-Hzs"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="541.5" y="-182"/>
+        </view>
     </objects>
+    <resources>
+        <image name="搜索" width="16" height="16"/>
+    </resources>
 </document>

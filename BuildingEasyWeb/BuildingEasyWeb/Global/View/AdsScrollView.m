@@ -92,14 +92,26 @@
     
 }
 
+- (void)setPlaceholderImage:(NSString *)placeholderImage
+{
+    _placeholderImage = placeholderImage;
+    _currentImageView.image = GetIMAGE(placeholderImage);
+    _anotherImageView.image = GetIMAGE(placeholderImage);
+}
+
 // 刷新内容
 - (void)setSourceArray:(NSArray<NSString *> *)sourceArray
 {
     _sourceArray = sourceArray;
     
     if (_sourceArray.count == 0) {
+        _scrollView.scrollEnabled = NO;
+        _currentImageView.image = GetIMAGE(_placeholderImage);
+        _anotherImageView.image = GetIMAGE(_placeholderImage);
         return;
     }
+    
+    _scrollView.scrollEnabled = YES;
 //    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
     [_currentImageView setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
     
