@@ -138,6 +138,7 @@
 		CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDD36981EEBF297007497AC /* ContactCell.xib */; };
 		CFE2AF8A1EFFB84B004A98B3 /* DealEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE2AF881EFFB84B004A98B3 /* DealEditController.m */; };
 		CFE2AF8B1EFFB84B004A98B3 /* DealEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */; };
+		CFE578AD1F04033700ADCABC /* GetImageTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */; };
 		CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */; };
 		CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF681EF66618000EEB27 /* BuildAdviser.m */; };
 		CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF6B1EF66971000EEB27 /* BuildAdviserView.m */; };
@@ -366,6 +367,8 @@
 		CFE2AF871EFFB84B004A98B3 /* DealEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealEditController.h; sourceTree = "<group>"; };
 		CFE2AF881EFFB84B004A98B3 /* DealEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealEditController.m; sourceTree = "<group>"; };
 		CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealEditController.xib; sourceTree = "<group>"; };
+		CFE578AB1F04033700ADCABC /* GetImageTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetImageTokenManager.h; sourceTree = "<group>"; };
+		CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetImageTokenManager.m; sourceTree = "<group>"; };
 		CFE828D31EE39B2F00290C79 /* UIViewController+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MBProgressHUD.h"; sourceTree = "<group>"; };
 		CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MBProgressHUD.m"; sourceTree = "<group>"; };
 		CFEAFF671EF66618000EEB27 /* BuildAdviser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildAdviser.h; sourceTree = "<group>"; };
@@ -579,6 +582,8 @@
 				CF5785D61EE59D2100994741 /* Global.m */,
 				C7BBCE751EF98CB0000EF857 /* QNYunManager.h */,
 				C7BBCE761EF98CB0000EF857 /* QNYunManager.m */,
+				CFE578AB1F04033700ADCABC /* GetImageTokenManager.h */,
+				CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1078,6 +1083,7 @@
 				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
+				CFE578AD1F04033700ADCABC /* GetImageTokenManager.m in Sources */,
 				C782F4851EE9B9FC0067C07F /* MeController.m in Sources */,
 				CFEEC0211EE2BBD100E1DB74 /* TableRefreshManager.m in Sources */,
 				CF8F80951EF7D564009A6C3E /* NSDate+Addition.m in Sources */,

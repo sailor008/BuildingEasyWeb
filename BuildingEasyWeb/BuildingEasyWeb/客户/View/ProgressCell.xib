@@ -60,11 +60,35 @@
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="原点" translatesAutoresizingMaskIntoConstraints="NO" id="yGC-Ql-PaA">
                         <rect key="frame" x="25" y="13" width="12" height="12"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhV-LD-5gc">
+                        <rect key="frame" x="242.5" y="19" width="67.5" height="17"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="箭头" translatesAutoresizingMaskIntoConstraints="NO" id="Ssa-zg-iLL">
+                                <rect key="frame" x="62.5" y="4" width="5" height="8"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC8-mb-ZaY">
+                                <rect key="frame" x="0.0" y="0.0" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vC8-mb-ZaY" firstAttribute="leading" secondItem="dhV-LD-5gc" secondAttribute="leading" id="1y3-u6-pzy"/>
+                            <constraint firstItem="Ssa-zg-iLL" firstAttribute="centerY" secondItem="vC8-mb-ZaY" secondAttribute="centerY" id="73h-za-iqF"/>
+                            <constraint firstItem="vC8-mb-ZaY" firstAttribute="top" secondItem="dhV-LD-5gc" secondAttribute="top" id="USj-gl-eUk"/>
+                            <constraint firstAttribute="bottom" secondItem="vC8-mb-ZaY" secondAttribute="bottom" id="ZBo-xZ-mWA"/>
+                            <constraint firstAttribute="trailing" secondItem="Ssa-zg-iLL" secondAttribute="trailing" id="djy-Lh-QYm"/>
+                            <constraint firstItem="Ssa-zg-iLL" firstAttribute="leading" secondItem="vC8-mb-ZaY" secondAttribute="trailing" constant="5" id="sur-0o-D43"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="yGC-Ql-PaA" firstAttribute="centerY" secondItem="ayr-hU-xxs" secondAttribute="centerY" id="2mW-BM-quA"/>
                     <constraint firstItem="PC2-04-O7D" firstAttribute="leading" secondItem="ayr-hU-xxs" secondAttribute="trailing" constant="19" id="6M8-mk-C5I"/>
                     <constraint firstAttribute="bottom" secondItem="LWh-ro-9bR" secondAttribute="bottom" id="7uu-Mc-CSS"/>
+                    <constraint firstItem="dhV-LD-5gc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8V0-0R-weE"/>
                     <constraint firstItem="ayr-hU-xxs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="E5N-YC-eju"/>
                     <constraint firstItem="PC2-04-O7D" firstAttribute="centerY" secondItem="ayr-hU-xxs" secondAttribute="centerY" id="E9o-6H-EIJ"/>
                     <constraint firstAttribute="bottom" secondItem="366-l7-A7k" secondAttribute="bottom" id="HFk-hT-pEU"/>
@@ -75,10 +99,12 @@
                     <constraint firstItem="6v3-e2-K9G" firstAttribute="leading" secondItem="PC2-04-O7D" secondAttribute="leading" id="VQu-Kf-Anu"/>
                     <constraint firstItem="6v3-e2-K9G" firstAttribute="top" secondItem="PC2-04-O7D" secondAttribute="bottom" constant="7" id="f0W-HV-xe2"/>
                     <constraint firstItem="ayr-hU-xxs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="jxa-1l-Es8"/>
+                    <constraint firstAttribute="trailing" secondItem="dhV-LD-5gc" secondAttribute="trailing" constant="10" id="p53-GB-PmN"/>
                     <constraint firstItem="yGC-Ql-PaA" firstAttribute="centerX" secondItem="ayr-hU-xxs" secondAttribute="centerX" id="sFG-Uv-94U"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lookUpDetailView" destination="dhV-LD-5gc" id="aCn-gE-gd5"/>
                 <outlet property="progressImageView" destination="yGC-Ql-PaA" id="c2y-AV-k2n"/>
                 <outlet property="stateLabel" destination="PC2-04-O7D" id="EIA-ug-SNA"/>
                 <outlet property="timeLabel" destination="6v3-e2-K9G" id="xoV-yy-6re"/>
@@ -88,5 +114,6 @@
     </objects>
     <resources>
         <image name="原点" width="12" height="12"/>
+        <image name="箭头" width="5" height="8"/>
     </resources>
 </document>

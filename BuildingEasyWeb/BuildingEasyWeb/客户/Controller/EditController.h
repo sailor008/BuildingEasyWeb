@@ -10,4 +10,6 @@
 
 @interface EditController : BaseController
 
+@property (nonatomic, copy) NSString* customerId;
+
 @end

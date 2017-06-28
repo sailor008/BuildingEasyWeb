@@ -116,9 +116,9 @@
 #pragma mark RequestData
 - (void)requestData
 {
-    [MBProgressHUD showLoadingToView:self.view];
-    [NetworkManager postWithUrl:@"wx/getCustomerListByName" parameters:@{@"customerName":_customerName} success:^(id reponse) {
-        [MBProgressHUD hideHUDForView:self.view];
+    [MBProgressHUD showLoadingToView:self.tableView];
+    [NetworkManager postWithUrl:@"wx/getCustomerListByName" parameters:@{@"customerName":_customerName, @"customerMobile":_phone} success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.tableView];
         NSArray* list = [reponse objectForKey:@"list"];
         for (NSDictionary* dic in list) {
             CustomerBuildModel* model = [CustomerBuildModel mj_objectWithKeyValues:dic];
@@ -127,7 +127,7 @@
         [_tableView reloadData];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD dissmissWithError:msg];
+        [MBProgressHUD dissmissWithError:msg toView:self.tableView];
     }];
 }
 

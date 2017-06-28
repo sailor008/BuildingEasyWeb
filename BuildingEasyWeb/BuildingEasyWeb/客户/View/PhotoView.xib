@@ -48,6 +48,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="collectionView" destination="kVI-oE-dzd" id="5sR-qp-s6c"/>
+                <outlet property="collectionViewLeft" destination="UMN-Ju-xvA" id="tPc-mj-W6g"/>
                 <outlet property="photoTitleLabel" destination="1c2-ME-WP8" id="FIu-dC-IwG"/>
             </connections>
             <point key="canvasLocation" x="34.5" y="82.5"/>

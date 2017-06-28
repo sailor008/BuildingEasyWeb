@@ -10,4 +10,6 @@
 
 @interface TakeUpEditController : BaseController
 
+@property (nonatomic, copy) NSString* customerId;
+
 @end

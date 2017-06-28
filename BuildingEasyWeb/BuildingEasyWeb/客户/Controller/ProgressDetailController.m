@@ -112,6 +112,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
     ProgressCell* cell = [tableView dequeueReusableCellWithIdentifier:@"ProgressCell" forIndexPath:indexPath];
     cell.model = _detailModel.stateList[indexPath.row];
     cell.index = indexPath.row;
+    cell.canLookUpDetail = _detailModel.currentState > 1;
     return cell;
 }
 

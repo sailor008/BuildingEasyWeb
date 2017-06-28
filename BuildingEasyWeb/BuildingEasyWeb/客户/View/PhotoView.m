@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *photoTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewLeft;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 
@@ -30,6 +31,9 @@
     if (self) {
         _imagePicker = [[UIImagePickerController alloc] init];
         _photoArray = [NSMutableArray arrayWithObjects:GetIMAGE(@"图片.png"), nil];
+        _photoLeft = 0.0;
+        _limitNum = 1;
+        _canSelectedPhoto = YES;
     }
     return self;
 }
@@ -41,12 +45,23 @@
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     
+    if (_photoLeft > 0.0) {
+        _collectionViewLeft.constant = _photoLeft + 10.0;
+    }
+    
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc]init];
     layout.minimumInteritemSpacing = 13;
     layout.minimumLineSpacing = 13;
     layout.itemSize = CGSizeMake(78, 78);
     
     _collectionView.collectionViewLayout = layout;
+}
+
+- (void)setPhotoLeft:(CGFloat)photoLeft
+{
+    if (photoLeft > 0.0) {
+        _collectionViewLeft.constant = photoLeft + 10.0;
+    }
 }
 
 - (void)setSectionTitle:(NSString *)sectionTitle
@@ -72,6 +87,10 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row != _photoArray.count - 1 || _canSelectedPhoto == NO) {
+        return;
+    }
+    
     UIResponder* obj = self.superview.nextResponder;
     while (![obj isKindOfClass:[UIViewController class]]) {
         obj = obj.nextResponder;
@@ -110,7 +129,9 @@
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
     [_photoArray replaceObjectAtIndex:selectedIndexPath.row withObject:image];
     
-    [_photoArray addObject:GetIMAGE(@"图片.png")];
+    if (_photoArray.count < _limitNum) {
+        [_photoArray addObject:GetIMAGE(@"图片.png")];
+    }
     
     [_collectionView reloadData];
     [_imagePicker dismissViewControllerAnimated:YES completion:^{

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *progressImageView;
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIView *lookUpDetailView;
 
 @end
 
@@ -54,6 +55,16 @@
         _progressImageView.hidden = YES;
         _stateLabel.textColor = Hex(0x292929);
         _timeLabel.textColor = Hex(0x292929);
+    }
+}
+
+- (void)setCanLookUpDetail:(BOOL)canLookUpDetail
+{
+    _canLookUpDetail = canLookUpDetail;
+    if (_index == 0 && canLookUpDetail) {
+        _lookUpDetailView.hidden = !canLookUpDetail;
+    } else {
+        _lookUpDetailView.hidden = YES;
     }
 }
 

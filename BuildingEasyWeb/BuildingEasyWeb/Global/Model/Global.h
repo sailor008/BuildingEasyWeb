@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, BEWProgressState) {
 
 typedef void(^Callback)();
 
+typedef void(^FailureBlock)(NSError* error, NSString* msg);
+
 @interface Global : NSObject
 
 // 切换到客户列表首页
