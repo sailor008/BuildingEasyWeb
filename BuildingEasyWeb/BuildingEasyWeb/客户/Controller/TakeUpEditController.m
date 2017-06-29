@@ -15,6 +15,7 @@
 #import "PhotoView.h"
 #import "UIView+Addition.h"
 #import "EditInfoModel.h"
+#import "TakeUpModel.h"
 
 @interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate>
 
@@ -145,13 +146,13 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString* sectionTitle = _sectionArray[section];
-    if (sectionTitle.length) {
+//    if (sectionTitle.length) {
         EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
         sectionView.sectionTitle = sectionTitle;
         return sectionView;
-    } else {
-        return nil;
-    }
+//    } else {
+//        return nil;
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -184,7 +185,8 @@
 #pragma mark Action
 - (void)commit
 {
-    
+    TakeUpModel* takeUpModel = [[TakeUpModel alloc] init];
+    takeUpModel.customerId = _customerId;
 }
 
 @end

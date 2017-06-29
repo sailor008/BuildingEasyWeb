@@ -12,6 +12,7 @@
 #import "MyInfoModel.h"
 #import <MJExtension.h>
 #import "QNYunManager.h"
+#import "UIImage+Addition.h"
 
 @implementation UploadImageManager
 
@@ -23,7 +24,9 @@
         NSString* imgKey = uptokenModel.key;
         NSString* uptoken = uptokenModel.upToken;
         
-        NSData* imageData = UIImagePNGRepresentation(image);
+        UIImage* compressImg = [image compressImageWithTargetSize:CGSizeMake(120.0, 120.0)];
+        
+        NSData* imageData = UIImagePNGRepresentation(compressImg);
         [QNYunManager uploadData:imageData key:imgKey token:uptoken success:^(id qnResponse) {
             NSString* newKey = [qnResponse objectForKey:@"key"];
             imageKey(newKey);
