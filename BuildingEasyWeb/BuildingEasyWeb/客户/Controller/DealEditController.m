@@ -14,7 +14,7 @@
 #import "PhotoView.h"
 #import "UIView+Addition.h"
 #import "EditInfoModel.h"
-#import "GetImageTokenManager.h"
+#import "UploadImageManager.h"
 
 static const NSInteger kPhotoViewTag = 1000;
 
@@ -220,6 +220,18 @@ static const NSInteger kPhotoViewTag = 1000;
     
     _footerView.height = footerHeight + 10;
     _tableView.tableFooterView = _footerView;
+}
+
+#pragma mark Action
+- (void)commit
+{
+    NSArray* imageArr = _idPhotoView.resultArray;
+    
+    [UploadImageManager uploadImage:imageArr[0] type:@"5" imageKey:^(NSString *key) {
+        NSLog(@"key:%@", key);
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error:%@---%@", error, msg);
+    }];
 }
 
 @end

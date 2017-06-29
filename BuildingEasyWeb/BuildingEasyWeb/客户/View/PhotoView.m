@@ -70,6 +70,15 @@
     _photoTitleLabel.text = sectionTitle;
 }
 
+- (NSArray<UIImage *> *)resultArray
+{
+    NSMutableArray* array = [NSMutableArray arrayWithArray:_photoArray];
+    if (_photoArray.count < _limitNum) {
+        [array removeLastObject];
+    }
+    return [array copy];
+}
+
 #pragma mark UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

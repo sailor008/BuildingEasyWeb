@@ -77,6 +77,7 @@
 		CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */; };
 		CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D591EEAF44E009A1B50 /* NSString+Addition.m */; };
 		CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */; };
+		CF52681B1F05400A00166E2F /* UploadImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF52681A1F05400A00166E2F /* UploadImageManager.m */; };
 		CF53E8EA1EF96747008D0322 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E8E81EF96747008D0322 /* EditController.m */; };
 		CF53E8EB1EF96747008D0322 /* EditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF53E8E91EF96747008D0322 /* EditController.xib */; };
 		CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E8ED1EF96E17008D0322 /* PlaceholderTextView.m */; };
@@ -266,6 +267,8 @@
 		CF413D591EEAF44E009A1B50 /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
 		CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingListModel.h; sourceTree = "<group>"; };
 		CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingListModel.m; sourceTree = "<group>"; };
+		CF5268191F05400A00166E2F /* UploadImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageManager.h; sourceTree = "<group>"; };
+		CF52681A1F05400A00166E2F /* UploadImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageManager.m; sourceTree = "<group>"; };
 		CF53E8E71EF96747008D0322 /* EditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditController.h; sourceTree = "<group>"; };
 		CF53E8E81EF96747008D0322 /* EditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditController.m; sourceTree = "<group>"; };
 		CF53E8E91EF96747008D0322 /* EditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditController.xib; sourceTree = "<group>"; };
@@ -584,6 +587,8 @@
 				C7BBCE761EF98CB0000EF857 /* QNYunManager.m */,
 				CFE578AB1F04033700ADCABC /* GetImageTokenManager.h */,
 				CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */,
+				CF5268191F05400A00166E2F /* UploadImageManager.h */,
+				CF52681A1F05400A00166E2F /* UploadImageManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1064,6 +1069,7 @@
 			files = (
 				CFEAFF761EF6C255000EEB27 /* BuildBaobeiModel.m in Sources */,
 				CF0524861EFF64F200BE8840 /* PayTypeCell.m in Sources */,
+				CF52681B1F05400A00166E2F /* UploadImageManager.m in Sources */,
 				CF2FCA861EF91079001E974C /* ProgressDetailController.m in Sources */,
 				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
