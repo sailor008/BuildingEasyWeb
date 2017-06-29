@@ -18,7 +18,9 @@
 @interface PhotoView : UIView
 
 @property (nonatomic, copy) NSString* sectionTitle;
-@property (nonatomic, assign) NSInteger limitNum;
+@property (nonatomic, assign) int limitNum;
 @property (nonatomic, weak) id<PhotoViewDelegate> delegate;
+@property (nonatomic, assign) CGFloat photoLeft;
+@property (nonatomic, assign) BOOL canSelectedPhoto;
 
 @end

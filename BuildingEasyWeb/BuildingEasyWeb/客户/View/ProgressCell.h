@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) StateList* model;
 @property (nonatomic, assign) NSInteger index;
+@property (nonatomic, assign) BOOL canLookUpDetail;
 
 @end
