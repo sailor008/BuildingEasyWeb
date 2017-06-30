@@ -34,11 +34,11 @@
 @property (nonatomic, copy) NSString* price;
 @property (nonatomic, copy) NSString* total;
 @property (nonatomic, copy) NSString* earnest;
-@property (nonatomic, assign) NSInteger type;
-@property (nonatomic, assign) NSInteger recordTime;
+@property (nonatomic, strong) NSNumber* type;
+@property (nonatomic, copy) NSString* recordTime;
 @property (nonatomic, copy) NSString* percent;
 @property (nonatomic, copy) NSString* money;
-@property (nonatomic, assign) NSInteger signTime;
+@property (nonatomic, copy) NSString* signTime;
 
 @property (nonatomic, copy) NSArray* buyers;
 

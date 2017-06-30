@@ -53,7 +53,10 @@
 		CF0CEB1E1EFEABEE0018B35B /* EditSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0CEB1D1EFEABEE0018B35B /* EditSectionView.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
+		CF2B6DC31F0682B300CCF32F /* BuyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2B6DC11F0682B300CCF32F /* BuyerCell.m */; };
+		CF2B6DC41F0682B300CCF32F /* BuyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2B6DC21F0682B300CCF32F /* BuyerCell.xib */; };
 		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
+		CF2BEA4F1F062A5E00D0368C /* TakeUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BEA4E1F062A5E00D0368C /* TakeUpManager.m */; };
 		CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */; };
 		CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */; };
 		CF2FCA861EF91079001E974C /* ProgressDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2FCA841EF91079001E974C /* ProgressDetailController.m */; };
@@ -232,7 +235,12 @@
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CF2B6DC01F0682B300CCF32F /* BuyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyerCell.h; sourceTree = "<group>"; };
+		CF2B6DC11F0682B300CCF32F /* BuyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyerCell.m; sourceTree = "<group>"; };
+		CF2B6DC21F0682B300CCF32F /* BuyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyerCell.xib; sourceTree = "<group>"; };
 		CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AreaSectionFilterView.xib; sourceTree = "<group>"; };
+		CF2BEA4D1F062A5E00D0368C /* TakeUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeUpManager.h; sourceTree = "<group>"; };
+		CF2BEA4E1F062A5E00D0368C /* TakeUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeUpManager.m; sourceTree = "<group>"; };
 		CF2F53A21EF184AA00A2DADD /* BuildingSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingSectionView.h; sourceTree = "<group>"; };
 		CF2F53A31EF184AA00A2DADD /* BuildingSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingSectionView.m; sourceTree = "<group>"; };
 		CF2F53A51EF184B600A2DADD /* BuildingSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingSectionView.xib; sourceTree = "<group>"; };
@@ -690,6 +698,8 @@
 				CF32760A1EFFF5EB00018294 /* EditInfoModel.m */,
 				CF52681F1F05500900166E2F /* TakeUpModel.h */,
 				CF5268201F05500900166E2F /* TakeUpModel.m */,
+				CF2BEA4D1F062A5E00D0368C /* TakeUpManager.h */,
+				CF2BEA4E1F062A5E00D0368C /* TakeUpManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -721,6 +731,9 @@
 				CF0524831EFF64F200BE8840 /* PayTypeCell.h */,
 				CF0524841EFF64F200BE8840 /* PayTypeCell.m */,
 				CF0524851EFF64F200BE8840 /* PayTypeCell.xib */,
+				CF2B6DC01F0682B300CCF32F /* BuyerCell.h */,
+				CF2B6DC11F0682B300CCF32F /* BuyerCell.m */,
+				CF2B6DC21F0682B300CCF32F /* BuyerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -993,6 +1006,7 @@
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
 				CFE2AF8B1EFFB84B004A98B3 /* DealEditController.xib in Resources */,
+				CF2B6DC41F0682B300CCF32F /* BuyerCell.xib in Resources */,
 				CF0CEB191EFEA9E40018B35B /* EditTextCell.xib in Resources */,
 				CFDD36851EEBD4B9007497AC /* SelectBuildingCell.xib in Resources */,
 				CF99FBF81EF3DFC0001C8A9C /* CustomerListCell.xib in Resources */,
@@ -1109,10 +1123,12 @@
 				CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */,
 				CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */,
 				C7BBCE771EF98CB0000EF857 /* QNYunManager.m in Sources */,
+				CF2BEA4F1F062A5E00D0368C /* TakeUpManager.m in Sources */,
 				CFEEC0131EE2A84000E1DB74 /* UINavigationController+Addition.m in Sources */,
 				CF3061C91EE3F96500D3FC7E /* OpenSystemUrlManager.m in Sources */,
 				CFDD36951EEBEB4D007497AC /* ContactModel.m in Sources */,
 				CF5785D71EE59D2100994741 /* Global.m in Sources */,
+				CF2B6DC31F0682B300CCF32F /* BuyerCell.m in Sources */,
 				CFEAFF721EF66E00000EEB27 /* BuildAdviserCell.m in Sources */,
 				CFDD36991EEBF297007497AC /* ContactCell.m in Sources */,
 				CF5A4CC41EE0663C002A281B /* User.m in Sources */,

@@ -8,6 +8,10 @@
 
 #import "PayTypeCell.h"
 
+@interface PayTypeCell ()
+
+@end
+
 @implementation PayTypeCell
 
 - (void)awakeFromNib {
@@ -22,10 +26,19 @@
     // Configure the view for the selected state
 }
 
+- (void)setModel:(EditInfoModel *)model
+{
+    _model = model;
+    UIButton* button = [self.contentView viewWithTag:1000 + model.type];
+    button.selected = YES;
+}
+
 #pragma mark Action
 - (IBAction)seletedPayType:(UIButton *)sender
 {
     sender.selected = !sender.isSelected;
+    
+    _model.type = sender.tag - 1000;
 }
 
 @end

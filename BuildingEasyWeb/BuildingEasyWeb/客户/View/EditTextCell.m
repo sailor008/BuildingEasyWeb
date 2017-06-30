@@ -11,6 +11,9 @@
 #import "NSString+Addition.h"
 
 @interface EditTextCell ()
+{
+    BOOL _obserTextField;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *editTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -28,6 +31,11 @@
     [super awakeFromNib];
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (_obserTextField == NO) {
+        [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        _obserTextField = YES;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -36,12 +44,19 @@
     // Configure the view for the selected state
 }
 
+- (void)prepareForReuse
+{
+    _model.text = _textField.text;
+    [super prepareForReuse];
+}
+
 - (void)setModel:(EditInfoModel *)model
 {
     _model = model;
     
     _editTitleLabel.text = [NSString stringWithFormat:@"%@：", model.title];
     _textField.placeholder = model.placeholder;
+    _textField.text = model.text;
     _dateButton.hidden = !model.isDate;
     _percenLabel.hidden = !model.isPercen;
 }
@@ -113,6 +128,11 @@
 - (void)dismissDateView
 {
     [_dateView removeFromSuperview];
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    _model.text = _textField.text;
 }
 
 @end
