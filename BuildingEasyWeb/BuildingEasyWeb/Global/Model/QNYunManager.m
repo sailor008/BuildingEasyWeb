@@ -42,10 +42,13 @@
         if(info.ok)
         {
             NSLog(@"请求成功");
+            
+            successBlock(responseObj);
         }
         else{
             NSLog(@"失败");
             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+            failureBlock(info.error, info.reqId);
         }
         NSLog(@"info ===== %@", info);
         NSLog(@"resp ===== %@", responseObj);

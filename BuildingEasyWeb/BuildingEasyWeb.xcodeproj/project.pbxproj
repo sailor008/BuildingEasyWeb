@@ -78,6 +78,8 @@
 		CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D591EEAF44E009A1B50 /* NSString+Addition.m */; };
 		CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */; };
 		CF52681B1F05400A00166E2F /* UploadImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF52681A1F05400A00166E2F /* UploadImageManager.m */; };
+		CF52681E1F054C5A00166E2F /* UIImage+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF52681D1F054C5A00166E2F /* UIImage+Addition.m */; };
+		CF5268211F05500900166E2F /* TakeUpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5268201F05500900166E2F /* TakeUpModel.m */; };
 		CF53E8EA1EF96747008D0322 /* EditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E8E81EF96747008D0322 /* EditController.m */; };
 		CF53E8EB1EF96747008D0322 /* EditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF53E8E91EF96747008D0322 /* EditController.xib */; };
 		CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF53E8ED1EF96E17008D0322 /* PlaceholderTextView.m */; };
@@ -269,6 +271,10 @@
 		CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingListModel.m; sourceTree = "<group>"; };
 		CF5268191F05400A00166E2F /* UploadImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageManager.h; sourceTree = "<group>"; };
 		CF52681A1F05400A00166E2F /* UploadImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageManager.m; sourceTree = "<group>"; };
+		CF52681C1F054C5A00166E2F /* UIImage+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Addition.h"; sourceTree = "<group>"; };
+		CF52681D1F054C5A00166E2F /* UIImage+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Addition.m"; sourceTree = "<group>"; };
+		CF52681F1F05500900166E2F /* TakeUpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeUpModel.h; sourceTree = "<group>"; };
+		CF5268201F05500900166E2F /* TakeUpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeUpModel.m; sourceTree = "<group>"; };
 		CF53E8E71EF96747008D0322 /* EditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditController.h; sourceTree = "<group>"; };
 		CF53E8E81EF96747008D0322 /* EditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditController.m; sourceTree = "<group>"; };
 		CF53E8E91EF96747008D0322 /* EditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditController.xib; sourceTree = "<group>"; };
@@ -682,6 +688,8 @@
 				CFDC57671EFA5645004658CE /* CustomerBaobeiModel.m */,
 				CF3276091EFFF5EB00018294 /* EditInfoModel.h */,
 				CF32760A1EFFF5EB00018294 /* EditInfoModel.m */,
+				CF52681F1F05500900166E2F /* TakeUpModel.h */,
+				CF5268201F05500900166E2F /* TakeUpModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -896,6 +904,8 @@
 				CFDD367F1EEBCF38007497AC /* CALayer+Addition.m */,
 				CF8F80931EF7D564009A6C3E /* NSDate+Addition.h */,
 				CF8F80941EF7D564009A6C3E /* NSDate+Addition.m */,
+				CF52681C1F054C5A00166E2F /* UIImage+Addition.h */,
+				CF52681D1F054C5A00166E2F /* UIImage+Addition.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1121,6 +1131,7 @@
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,
+				CF52681E1F054C5A00166E2F /* UIImage+Addition.m in Sources */,
 				C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */,
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
@@ -1153,6 +1164,7 @@
 				CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
 				CFDD36911EEBE52F007497AC /* ContactListController.m in Sources */,
+				CF5268211F05500900166E2F /* TakeUpModel.m in Sources */,
 				CF30C3C21EF4B9E80070D124 /* CustomerDetailController.m in Sources */,
 				C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */,
 			);

@@ -77,10 +77,10 @@ const NSInteger kCustomProgressLabelTag = 2000;
 {
 //    EditController* editVC = [[EditController alloc] init];
 //    [self.navigationController pushViewController:editVC animated:YES];
-//    TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-//    [self.navigationController pushViewController:takeEdit animated:YES];
-    DealEditController* dealEdit = [[DealEditController alloc] init];
-    [self.navigationController pushViewController:dealEdit animated:YES];
+    TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+    [self.navigationController pushViewController:takeEdit animated:YES];
+//    DealEditController* dealEdit = [[DealEditController alloc] init];
+//    [self.navigationController pushViewController:dealEdit animated:YES];
 }
 
 - (IBAction)sendMessage:(id)sender
