@@ -12,4 +12,7 @@
 
 + (NSString *)dateStrWithTimeInterval:(NSTimeInterval)timeInterval;
 
++ (NSDate *)localDate;
+- (NSDate *)toLocalDate;
+
 @end

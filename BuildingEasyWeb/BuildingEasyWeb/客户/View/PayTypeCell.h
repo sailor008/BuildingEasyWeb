@@ -10,8 +10,15 @@
 
 #import "EditInfoModel.h"
 
+@protocol PayTypeCellDelegate <NSObject>
+
+- (void)selectedPayType:(BOOL)allPay;
+
+@end
+
 @interface PayTypeCell : UITableViewCell
 
 @property (nonatomic, strong) EditInfoModel* model;
+@property (nonatomic, weak) id<PayTypeCellDelegate> delegate;
 
 @end

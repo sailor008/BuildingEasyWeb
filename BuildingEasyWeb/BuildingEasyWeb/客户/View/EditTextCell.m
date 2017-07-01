@@ -59,6 +59,13 @@
     _textField.text = model.text;
     _dateButton.hidden = !model.isDate;
     _percenLabel.hidden = !model.isPercen;
+    _textField.enabled = !model.isDate;
+    
+    if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"] || [_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"]) {
+        _textField.keyboardType = UIKeyboardTypeNumberPad;
+    } else {
+        _textField.keyboardType = UIKeyboardTypeDefault;
+    }
 }
 
 - (void)setUIWithData:(NSDictionary *)dic
@@ -115,6 +122,7 @@
     }
     
     _textField.text = [NSString dateStr:[NSDate date]];
+    _model.text = _textField.text;
     
     UIViewController* vc = (UIViewController *)obj;
     [vc.view addSubview:self.dateView];
@@ -123,6 +131,7 @@
 - (void)dateChanged
 {
     _textField.text = [NSString dateStr:_datePicker.date];
+    _model.text = _textField.text;
 }
 
 - (void)dismissDateView

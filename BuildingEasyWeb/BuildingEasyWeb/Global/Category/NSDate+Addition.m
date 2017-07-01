@@ -19,4 +19,28 @@
     return [formatter stringFromDate:date];
 }
 
++ (NSDate *)localDate
+{
+    NSDate* date = [NSDate date];
+    
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    
+    NSInteger interval = [zone secondsFromGMTForDate:date];
+    
+    NSDate *localeDate = [date dateByAddingTimeInterval:interval];
+    
+    return localeDate;
+}
+
+- (NSDate *)toLocalDate
+{
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    
+    NSInteger interval = [zone secondsFromGMTForDate:self];
+    
+    NSDate *realDate = [self dateByAddingTimeInterval:interval];
+    
+    return realDate;
+}
+
 @end

@@ -13,6 +13,6 @@
 @interface TakeUpManager : NSObject
 
 + (NSArray *)originalTakeUpArray;
-+ (TakeUpModel *)tranToCommitModel:(NSArray *)originalTakeUpArray;
++ (TakeUpModel *)tranToCommitModel:(NSArray *)originalTakeUpArray tranResult:(BOOL *)result;
 
 @end

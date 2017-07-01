@@ -10,6 +10,7 @@
 
 #import <CommonCrypto/CommonDigest.h>
 #import <UIKit/UIKit.h>
+#import "NSDate+Addition.h"
 
 @implementation NSString (Addition)
 
@@ -61,6 +62,31 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"YYYY-MM-dd";
     return [dateFormatter stringFromDate:date];
+}
+
+- (NSString *)timeIntervalWithDateStr
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"YYYY-MM-dd";
+    NSDate* date = [dateFormatter dateFromString:self];
+    date = [date toLocalDate];
+    NSTimeInterval timeInterval = [date timeIntervalSince1970];
+    return [NSString stringWithFormat:@"%ld", (NSInteger)timeInterval];
+}
+
++ (NSString*)dataTojsonString:(id)object
+{
+    NSString *jsonString = nil;
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else { 
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    } 
+    return jsonString; 
 }
 
 @end

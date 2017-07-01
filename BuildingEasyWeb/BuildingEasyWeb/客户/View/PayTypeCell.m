@@ -36,9 +36,21 @@
 #pragma mark Action
 - (IBAction)seletedPayType:(UIButton *)sender
 {
+    if (sender.tag - 1000 == _model.type) {
+        return;
+    }
+    UIButton* button = [self.contentView viewWithTag:1000];
+    button.selected = NO;
+    
+    button = [self.contentView viewWithTag:1001];
+    button.selected = NO;
+    
     sender.selected = !sender.isSelected;
     
     _model.type = sender.tag - 1000;
+    if (_delegate && [_delegate respondsToSelector:@selector(selectedPayType:)]) {
+        [_delegate selectedPayType:!_model.type];
+    }
 }
 
 @end
