@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EditSectionViewDelegate <NSObject>
+
+- (void)addNewBuyer;
+
+@end
+
 @interface EditSectionView : UITableViewHeaderFooterView
 
 @property (nonatomic, copy) NSString* sectionTitle;
+@property (nonatomic, assign) BOOL canAdd;
+@property (nonatomic, weak) id<EditSectionViewDelegate> delegate;
 
 @end

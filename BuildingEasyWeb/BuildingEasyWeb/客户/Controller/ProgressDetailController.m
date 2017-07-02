@@ -42,6 +42,8 @@ const NSInteger kCustomProgressLabelTag = 2000;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 
+@property (weak, nonatomic) IBOutlet UIButton *nextStateButton;
+
 @property (nonatomic, strong) CustomerDetailModel* detailModel;
 
 @end
@@ -75,12 +77,32 @@ const NSInteger kCustomProgressLabelTag = 2000;
 
 - (IBAction)editProgress:(id)sender
 {
-//    EditController* editVC = [[EditController alloc] init];
-//    [self.navigationController pushViewController:editVC animated:YES];
-    TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-    [self.navigationController pushViewController:takeEdit animated:YES];
-//    DealEditController* dealEdit = [[DealEditController alloc] init];
-//    [self.navigationController pushViewController:dealEdit animated:YES];
+    switch (_detailModel.currentState) {
+        case 0:// 报备、带看不可点击
+        case 1:
+            break;
+        case 2:// 认购
+        {
+            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+            takeEdit.customerId = _customerId;
+            [self.navigationController pushViewController:takeEdit animated:YES];
+        }
+            break;
+        case 3:// 签约
+        {
+            DealEditController* dealEdit = [[DealEditController alloc] init];
+            dealEdit.customerId = _customerId;
+            [self.navigationController pushViewController:dealEdit animated:YES];
+        }
+            break;
+        default:// 回款、结清
+        {
+            EditController* editVC = [[EditController alloc] init];
+            editVC.customerId = _customerId;
+            [self.navigationController pushViewController:editVC animated:YES];
+        }
+            break;
+    }
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -101,6 +123,24 @@ const NSInteger kCustomProgressLabelTag = 2000;
     [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 
+- (IBAction)nextStateAction:(id)sender
+{
+    StateList* lastState = [_detailModel.stateList lastObject];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    parameters[@"state"] = @(lastState.state);
+    
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/nextStep" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        [self requestData];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -110,7 +150,10 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProgressCell* cell = [tableView dequeueReusableCellWithIdentifier:@"ProgressCell" forIndexPath:indexPath];
-    cell.model = _detailModel.stateList[indexPath.row];
+    // 倒序显示，服务器返回的是正序
+    NSInteger i = _detailModel.stateList.count - 1 - indexPath.row;
+    cell.model = _detailModel.stateList[i];
+    
     cell.index = indexPath.row;
     cell.canLookUpDetail = _detailModel.currentState > 1;
     return cell;
@@ -133,7 +176,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
         [self setupInterFace];
 
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD dissmissWithError:msg];
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
     }];
 }
 
@@ -154,6 +197,9 @@ const NSInteger kCustomProgressLabelTag = 2000;
     _stateLabel.text = stateArr[_detailModel.currentState];
     
     _descLabel.text = _detailModel.desc;
+    
+    NSArray* nextStateArr = @[@"发起带看", @"发起认购", @"发起签约", @"发起回款", @"发起结清"];
+    [_nextStateButton setTitle:nextStateArr[_detailModel.currentState] forState:UIControlStateNormal];
     
     NSTimeInterval timeInterval = _detailModel.createTime / 1000;
     _timeLabel.text = [NSDate dateStrWithTimeInterval:timeInterval];

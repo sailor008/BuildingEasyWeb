@@ -24,10 +24,22 @@
                             <color key="textColor" red="0.6705882352941176" green="0.6705882352941176" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5w-dh-UPa">
+                            <rect key="frame" x="335" y="6.5" width="30" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="6C9-Gf-1qa"/>
+                            </constraints>
+                            <state key="normal" image="添加"/>
+                            <connections>
+                                <action selector="tapAddNewBuyer:" destination="iN0-l3-epB" eventType="touchUpInside" id="j99-uq-ywp"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="q5w-dh-UPa" secondAttribute="trailing" constant="10" id="65z-4D-0Tf"/>
                         <constraint firstItem="lbH-pc-1wY" firstAttribute="leading" secondItem="yWE-Bz-USa" secondAttribute="leading" constant="20" id="8M0-nA-3s5"/>
+                        <constraint firstItem="q5w-dh-UPa" firstAttribute="centerY" secondItem="yWE-Bz-USa" secondAttribute="centerY" id="HLb-TF-H2U"/>
                         <constraint firstItem="lbH-pc-1wY" firstAttribute="centerY" secondItem="yWE-Bz-USa" secondAttribute="centerY" id="ZYv-oH-vL2"/>
                     </constraints>
                 </view>
@@ -41,9 +53,13 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addButton" destination="q5w-dh-UPa" id="A2x-ii-iax"/>
                 <outlet property="sectionTitleLabel" destination="lbH-pc-1wY" id="YW6-Io-c33"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="82.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="添加" width="17" height="17"/>
+    </resources>
 </document>

@@ -14,5 +14,7 @@
 - (NSString *)firstPinyin;
 - (NSAttributedString *)htmlAttStr;
 + (NSString *)dateStr:(NSDate *)date;
+- (NSString *)timeIntervalWithDateStr;
++ (NSString*)dataTojsonString:(id)object;
 
 @end

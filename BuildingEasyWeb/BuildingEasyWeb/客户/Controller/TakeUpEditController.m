@@ -16,8 +16,15 @@
 #import "UIView+Addition.h"
 #import "EditInfoModel.h"
 #import "TakeUpModel.h"
+#import "BuyerCell.h"
+#import "TakeUpManager.h"
+#import "EditInfoModel.h"
+#import "NetworkManager.h"
+#import <MJExtension.h>
+#import "UIView+MBProgressHUD.h"
+#import "NSString+Addition.h"
 
-@interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate>
+@interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate, EditSectionViewDelegate, PayTypeCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -47,6 +54,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"EditSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"kEditSectionView"];
     [_tableView registerNibWithName:@"EditTextCell"];
     [_tableView registerNibWithName:@"PayTypeCell"];
+    [_tableView registerNibWithName:@"BuyerCell"];
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     _photoView = [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
@@ -63,39 +71,9 @@
 
 - (void)setupProperty
 {
-    _dataArray = @[@[@{@"卖方":@"请输入卖方"}, @{@"联系人":@"请输入联系人"}, @{@"联系电话":@"请输入联系电话"}],
-                   @[@{@"委托代理机构":@"请输入委托代理机构"}, @{@"联系人":@"请输入联系人"}, @{@"联系电话":@"请输入联系电话"}],
-                   @[@{@"身份证/护照号码":@"请输入身份证/护照号码"}, @{@"联系人":@"请输入联系人"}, @{@"联系电话":@"请输入联系电话"}],
-                   @[@{@"委托代理人(选填)":@"请输入委托代理人"}, @{@"身份证/护照号码(选填)":@"请输入身份证/护照号码"}],
-                   @[@{@"楼盘名":@"请输入楼盘名"}, @{@"具体地址":@"请输入具体地址"}, @{@"套内面积":@"请输入套内面积"}, @{@"建筑面积":@"请输入建筑面积"}, @{@"单价":@"请输入单价"}, @{@"总价":@"请输入总价"}, @{@"支付定金":@"请输入支付的定金"}, @{@"当前日期":@"请输入总价"}, @{@"签订正式合同日期":@"请选择日期"}],
-                   @[@{@"付款方式":@""}, @{@"支付房款百分比":@"请输入百分数"}, @{@"金额":@"请输入金额"}, @{@"签约日期":@"请选择签约日期"}]];
+    _dataArray = [TakeUpManager originalTakeUpArray];
     
-    // 拼合成数据模型
-    NSMutableArray* tempArr = [NSMutableArray array];
-    for (NSArray* arr in _dataArray) {
-        
-        NSMutableArray* subTempArr = [NSMutableArray array];
-        for (NSDictionary* dic in arr) {
-            EditInfoModel* model = [[EditInfoModel alloc] init];
-            model.title = dic.allKeys[0];
-            model.placeholder = dic.allValues[0];
-            if ([model.title rangeOfString:@"日期"].location != NSNotFound) {
-                model.isDate = YES;
-            }
-            if ([model.title rangeOfString:@"百分比"].location != NSNotFound) {
-                model.isPercen = YES;
-            }
-            if ([model.title isEqualToString:@"付款方式"]) {
-                model.isRadio = YES;
-            }
-            [subTempArr addObject:model];
-        }
-        [tempArr addObject:subTempArr];
-    }
-    
-    _dataArray = [tempArr copy];
-    
-    _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"", @"合同信息", @""];
+    _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"合同信息", @""];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,18 +95,38 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    id item = _dataArray[section];
+    if ([item isKindOfClass:[EditInfoModel class]]) {
+        return 1;
+    }
     NSArray* rowArray = _dataArray[section];
     return rowArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray* rowArray = _dataArray[indexPath.section];
+    EditInfoModel* model;
     
-    EditInfoModel* model = rowArray[indexPath.row];
+    id item = _dataArray[indexPath.section];
+    if ([item isKindOfClass:[EditInfoModel class]]) {
+        model = _dataArray[indexPath.section];
+    } else {
+        NSArray* rowArray = _dataArray[indexPath.section];
+        model = rowArray[indexPath.row];
+    }
+    
+    if (indexPath.section == 4) {
+        NSLog(@"here");
+    }
     
     if (model.isRadio) {
         PayTypeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PayTypeCell" forIndexPath:indexPath];
+        cell.model = model;
+        cell.delegate = self;
+        return cell;
+    } else if (model.isBuyer) {
+        BuyerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuyerCell" forIndexPath:indexPath];
+        cell.model = model;
         return cell;
     } else {
         EditTextCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EditTextCell" forIndexPath:indexPath];
@@ -140,19 +138,25 @@
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id item = _dataArray[indexPath.section];
+    if ([item isKindOfClass:[EditInfoModel class]]) {
+        return 260;
+    }
     return 50;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString* sectionTitle = _sectionArray[section];
-//    if (sectionTitle.length) {
-        EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
-        sectionView.sectionTitle = sectionTitle;
-        return sectionView;
-//    } else {
-//        return nil;
-//    }
+    EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
+    sectionView.delegate = self;
+    sectionView.sectionTitle = sectionTitle;
+    if (section == 2) {
+        sectionView.canAdd = YES;
+    } else {
+        sectionView.canAdd = NO;
+    }
+    return sectionView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -182,11 +186,107 @@
     _tableView.tableFooterView = footerView;
 }
 
+#pragma mark EditSectionViewDelegate
+- (void)addNewBuyer
+{
+    EditInfoModel* model = [[EditInfoModel alloc] init];
+    model.isBuyer = YES;
+    
+    NSMutableArray* tempArr = [NSMutableArray arrayWithArray:_dataArray];
+    [tempArr insertObject:model atIndex:3];
+    
+    _dataArray = [tempArr copy];
+    [_tableView reloadData];
+}
+
+#pragma mark PayTypeCellDelegate
+- (void)selectedPayType:(BOOL)allPay
+{
+    if (allPay) {
+        NSMutableArray* tempArr = [_dataArray mutableCopy];
+        NSArray* itemArr = [tempArr lastObject];
+        NSMutableArray* tempItemArr = [itemArr mutableCopy];
+        [tempItemArr removeObjectAtIndex:1];
+        [tempItemArr removeObjectAtIndex:1];
+        
+        itemArr = [tempItemArr copy];
+        tempArr[tempArr.count - 1] = itemArr;
+        
+        _dataArray = [tempArr copy];
+        
+        NSIndexPath* indexPath1 = [NSIndexPath indexPathForRow:1 inSection:_dataArray.count - 1];
+        NSIndexPath* indexPath2 = [NSIndexPath indexPathForRow:2 inSection:_dataArray.count - 1];
+        
+        [_tableView beginUpdates];
+        [_tableView deleteRowsAtIndexPaths:@[indexPath1, indexPath2] withRowAnimation:UITableViewRowAnimationNone];
+        [_tableView endUpdates];
+    } else {
+        NSMutableArray* tempArr = [_dataArray mutableCopy];
+        NSArray* itemArr = [tempArr lastObject];
+        NSMutableArray* tempItemArr = [itemArr mutableCopy];
+        {
+            EditInfoModel* model = [[EditInfoModel alloc] initWithTitle:@"支付房款百分比" placeholder:@"请输入百分数" text:nil commitStr:@"percent"];
+            model.isPercen = YES;
+            [tempItemArr insertObject:model atIndex:1];
+        }
+        {
+            EditInfoModel* model = [[EditInfoModel alloc] initWithTitle:@"金额" placeholder:@"请输入金额" text:nil commitStr:@"money"];
+            [tempItemArr insertObject:model atIndex:2];
+        }
+        itemArr = [tempItemArr copy];
+        tempArr[tempArr.count - 1] = itemArr;
+        
+        _dataArray = [tempArr copy];
+        
+        NSIndexPath* indexPath1 = [NSIndexPath indexPathForRow:1 inSection:_dataArray.count - 1];
+        NSIndexPath* indexPath2 = [NSIndexPath indexPathForRow:2 inSection:_dataArray.count - 1];
+        
+        [_tableView beginUpdates];
+        [_tableView insertRowsAtIndexPaths:@[indexPath1, indexPath2] withRowAnimation:UITableViewRowAnimationNone];
+        [_tableView endUpdates];
+    }
+}
+
 #pragma mark Action
 - (void)commit
 {
-    TakeUpModel* takeUpModel = [[TakeUpModel alloc] init];
+    BOOL result = YES;
+    TakeUpModel* takeUpModel = [TakeUpManager tranToCommitModel:_dataArray tranResult:&result];
     takeUpModel.customerId = _customerId;
+    
+    NSMutableDictionary* parameters = [takeUpModel mj_keyValues];
+    
+    NSMutableString* buyersStr = [NSMutableString string];
+    NSArray* buyers = parameters[@"buyers"];
+    [buyersStr appendString:@"["];
+    
+    for (int i = 0; i < buyers.count; i ++) {
+        NSDictionary* dic = buyers[i];
+        [buyersStr appendString:@"{"];
+        [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
+            [buyersStr appendFormat:@"\"%@\":\"%@\",", key, obj];
+        }];
+        [buyersStr deleteCharactersInRange:NSMakeRange(buyersStr.length - 1, 1)];
+        [buyersStr appendString:@"}"];
+        if (i < buyers.count - 1) {
+            [buyersStr appendString:@","];
+        }
+    }
+    [buyersStr appendString:@"]"];
+    
+    parameters[@"buyers"] = buyersStr;
+    
+    if (result == YES) {
+        NSLog(@"parameters:%@", parameters);
+        [MBProgressHUD showLoadingToView:self.view];
+        [NetworkManager postWithUrl:@"wx/saveSubInfo" parameters:parameters success:^(id reponse) {
+            NSLog(@"成功:%@", reponse);
+            [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+        } failure:^(NSError *error, NSString *msg) {
+            NSLog(@"失败:%@---%@", error, msg);
+            [MBProgressHUD dissmissWithError:msg toView:self.view];
+        }];
+    }
 }
 
 @end
