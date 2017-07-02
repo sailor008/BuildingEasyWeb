@@ -7,7 +7,8 @@
 //
 
 #import "MeCellInfo.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
+#import "UIImageView+AFNetworking.h"
 
 
 @interface MeCellInfo()
@@ -37,8 +38,13 @@
     _nameLabel.text = name;
     _mobileLabel.text = mobile;
     
-    [_headImgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:GetIMAGE(@"头像")];
-    
+//    [_headImgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:GetIMAGE(@"头像")];
+    [_headImgView setImageWithURL:[NSURL URLWithString:url] placeholderImage:GetIMAGE(@"头像")];
+}
+
+- (void)setHeadImage:(UIImage*)img
+{
+    _headImgView.image = img;
 }
 
 @end

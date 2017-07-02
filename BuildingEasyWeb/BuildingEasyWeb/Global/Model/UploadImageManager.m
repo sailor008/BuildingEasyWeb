@@ -14,6 +14,7 @@
 #import "QNYunManager.h"
 #import "UIImage+Addition.h"
 
+
 @implementation UploadImageManager
 
 + (void)uploadImage:(UIImage *)image type:(NSString *)type imageKey:(void(^)(NSString* key))imageKey failure:(FailureBlock)failureBlock
@@ -32,6 +33,27 @@
             imageKey(newKey);
         } failure:^(NSError *error, NSString *reqId) {
             failureBlock(error, @"上传七牛出错");
+        }];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        failureBlock(error, msg);
+    }];
+}
+
++ (void)uploadImageFile:(NSString*)imgPath type:(NSNumber*)type success:(void(^)(NSString* key))success failure:(FailureBlock)failureBlock
+{
+    [NetworkManager postWithUrl:@"wx/getUpToken" parameters:@{@"type":type} success:^(id response) {
+        
+        ImgUpTokenModel* uptokenModel = [ImgUpTokenModel mj_objectWithKeyValues: response];
+        NSString* imgKey = uptokenModel.key;
+        NSString* uptoken = uptokenModel.upToken;
+        
+        [QNYunManager uploadFileWithPath:imgPath key:imgKey token:uptoken success:^(id qnResponse) {
+            NSString* newKey = [qnResponse objectForKey:@"key"];
+            NSLog(@"上传七牛云成功，newkey = %@", newKey);
+            success(newKey);
+        } failure:^(NSError *error, NSString *reqId) {
+            failureBlock(error, @"上传七牛失败！");
         }];
         
     } failure:^(NSError *error, NSString *msg) {

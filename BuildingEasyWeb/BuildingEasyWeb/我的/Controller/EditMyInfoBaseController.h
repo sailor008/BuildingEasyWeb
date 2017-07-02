@@ -8,12 +8,7 @@
 
 #import "BaseController.h"
 
-
-@protocol EditMyInfoDelegate <NSObject>
-
-- (void)finishEidtMyInfo:(NSString*)tag desc:(NSString*)resultMsg;
-
-@end
+#import "EditMyInfoDelegate.h"
 
 @interface EditMyInfoBaseController : BaseController
 

@@ -15,4 +15,5 @@
 
 + (void)uploadImage:(UIImage *)image type:(NSString *)type imageKey:(void(^)(NSString* key))imageKey failure:(FailureBlock)failureBlock;
 
++ (void)uploadImageFile:(NSString*)imgPath type:(NSNumber*)type success:(void(^)(NSString* key))success failure:(FailureBlock)failureBlock;
 @end

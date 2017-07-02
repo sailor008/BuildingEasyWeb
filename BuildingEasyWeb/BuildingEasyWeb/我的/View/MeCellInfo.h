@@ -12,4 +12,5 @@
 
 - (void)updateWithData:(NSString*)name phone:(NSString*)mobile imgUrl:(NSString*)url;
 
+- (void)setHeadImage:(UIImage*)img;
 @end

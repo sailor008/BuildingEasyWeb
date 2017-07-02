@@ -56,8 +56,8 @@
     if([self isValidateEmail: emailVal]) {
         NSDictionary* parameters = @{@"email": emailVal};
         [NetworkManager postWithUrl:@"wx/modifyUserEmail" parameters:parameters success:^(id reponse) {
-            
-            NSLog(@"修改邮箱成功！！！");
+
+            [MBProgressHUD showSuccess:@"修改邮箱成功!"];
             self.txtEdit.text = nil;
             [self.navigationController popViewControllerAnimated:YES];
             [self.delegate finishEidtMyInfo: @"wx/modifyUserEmail" desc:emailVal];

@@ -13,7 +13,7 @@
 static NSString* const kShareSuccess = @"ShareToWXSuccess";
 
 typedef NS_ENUM(NSInteger, BEWUserRole) {
-    kPersonRole = 1,
+    kPersonRole = 0,
     kAgencyRole
 };
 
