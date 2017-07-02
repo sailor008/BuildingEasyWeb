@@ -36,6 +36,10 @@
 #pragma mark Action
 - (IBAction)seletedPayType:(UIButton *)sender
 {
+    if (_model.canEdit == NO) {
+        return;
+    }
+    
     if (sender.tag - 1000 == _model.type) {
         return;
     }

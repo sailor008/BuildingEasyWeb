@@ -15,4 +15,6 @@
 + (NSArray *)originalTakeUpArray;
 + (TakeUpModel *)tranToCommitModel:(NSArray *)originalTakeUpArray tranResult:(BOOL *)result;
 
++ (NSArray *)detailTakeUpArrayWithData:(NSDictionary *)data canEdit:(BOOL)canEdit;
+
 @end

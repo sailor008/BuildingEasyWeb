@@ -187,7 +187,7 @@
  */
 + (void)dismissWithSuccess:(NSString *)success toView:(UIView *)view
 {
-    [MBProgressHUD hideHUD];
+    [MBProgressHUD hideHUDForView:view animated:NO];
     [MBProgressHUD showSuccess:success toView:view];
 }
 

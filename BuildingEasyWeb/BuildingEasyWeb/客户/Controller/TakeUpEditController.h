@@ -12,4 +12,7 @@
 
 @property (nonatomic, copy) NSString* customerId;
 
+@property (nonatomic, assign) NSInteger state;
+@property (nonatomic, assign) BOOL isDetail;
+
 @end

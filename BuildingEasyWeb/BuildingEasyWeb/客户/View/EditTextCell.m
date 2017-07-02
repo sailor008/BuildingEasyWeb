@@ -9,6 +9,7 @@
 #import "EditTextCell.h"
 
 #import "NSString+Addition.h"
+#import "NSDate+Addition.h"
 
 @interface EditTextCell ()
 {
@@ -61,6 +62,8 @@
     _percenLabel.hidden = !model.isPercen;
     _textField.enabled = !model.isDate;
     
+    _textField.enabled = model.canEdit;
+        
     if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"] || [_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"]) {
         _textField.keyboardType = UIKeyboardTypeNumberPad;
     } else {
@@ -116,6 +119,10 @@
 #pragma mark Action
 - (IBAction)selectDate:(id)sender
 {
+    if (_model.canEdit == NO) {
+        return;
+    }
+    
     UIResponder* obj = self.superview.nextResponder;
     while (![obj isKindOfClass:[UIViewController class]]) {
         obj = obj.nextResponder;
