@@ -17,6 +17,8 @@
 #import "FeedbackController.h"
 #import "MyMessageController.h"
 #import "MyInfoController.h"
+#import "BaobeiController.h"
+
 
 //import model
 #import "User.h"
@@ -25,7 +27,7 @@
 typedef void (^onTabVCell)(void);
 
 
-@interface MeController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MeController ()<UITableViewDataSource, UITableViewDelegate, EditMyInfoDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -56,6 +58,21 @@ typedef void (^onTabVCell)(void);
     [self initViewCfg];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+
 - (void)initViewCfg {
     onTabVCell func_onAboutMe = ^() {
         [self onAboutMe];
@@ -79,24 +96,18 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)onAboutMe {
-    NSLog(@"is on About me!!!!!!!!!!!");
     AboutMeController* aboutMeVC = [[AboutMeController alloc] init];
     aboutMeVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:aboutMeVC animated:YES];
 }
 
 - (void)onFeedback{
-    NSLog(@"is on onFeedback!!!!!!!!!!!");
-    
     FeedbackController* feedbackVC = [[FeedbackController alloc]init];
     feedbackVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:feedbackVC animated:YES];
 }
 
 - (void)onMyMsg{
-    NSLog(@"is onMyMsg!!!!!!!!!!!");
-    
-    
     NSString* tmpStr = @"测试内容：6月8日举行的英国大选再次飞出“黑天鹅”，本来在议会中占多数议席的保守党非但没能如愿扩大领先优势，反而失去了多数议席，要拉拢小党才能勉强维持执政地位，这意味着首相特雷莎·梅不但没能在脱欧问题上获得民众更清晰确定的授权，而且弄巧成拙，引火烧身，将自身的领袖地位、英国政局和英国在脱欧谈判上的处境都置于险境。";
     
     NSMutableArray* listData = [[NSMutableArray alloc]init];
@@ -119,31 +130,32 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)onCustomerExt{
-    NSLog(@"is onCustomerExt!!!!!!!!!!!");
+    BaobeiController* baobeiVC = [[BaobeiController alloc]init];
+    baobeiVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 
 - (void)onMyInfo{
-    NSLog(@"is onMyInfo!!!!!!!!!!!");
     MyInfoController* myInfoVC = [[MyInfoController alloc]init];
+    myInfoVC.delegate = self;
     myInfoVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:myInfoVC animated:YES];
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark EditMyInfoDelegate
+- (void)finishEidtMyInfo:(NSString*)tag desc:(NSString*)descStr
+{
+    NSLog(@"MeController>>>>> finishEidtMyInfo : %@", descStr);
+    MeCellInfo* cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSString* name = [User shareUser].name;
+    NSString* mobile = [User shareUser].mobile;
+    NSString* headImgUrl = [User shareUser].headImg;
+    [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
+//    NSString* headImgUrl = @"";
+//    [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
+//    [cell setHeadImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:descStr]]];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
@@ -221,6 +233,7 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(indexPath.section == 0) {
         [self onMyInfo];
     }else if(indexPath.section == 1) {

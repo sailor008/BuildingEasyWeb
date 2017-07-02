@@ -15,6 +15,13 @@
 		C717495D1EFF74400085E590 /* EditMyNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = C717495C1EFF74400085E590 /* EditMyNickNameController.m */; };
 		C71749691EFF815E0085E590 /* AuthIdentityController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749671EFF815E0085E590 /* AuthIdentityController.m */; };
 		C717496A1EFF815E0085E590 /* AuthIdentityController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749681EFF815E0085E590 /* AuthIdentityController.xib */; };
+		C717497D1F0688940085E590 /* EditTxtTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C717497B1F0688940085E590 /* EditTxtTVCell.m */; };
+		C717497E1F0688940085E590 /* EditTxtTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C717497C1F0688940085E590 /* EditTxtTVCell.xib */; };
+		C71749811F068B140085E590 /* EditTxtModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749801F068B140085E590 /* EditTxtModel.m */; };
+		C71749851F07D1B70085E590 /* SampleEditTxtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749831F07D1B70085E590 /* SampleEditTxtCell.m */; };
+		C71749861F07D1B70085E590 /* SampleEditTxtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749841F07D1B70085E590 /* SampleEditTxtCell.xib */; };
+		C71749901F09029A0085E590 /* EditMyNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = C717498F1F09029A0085E590 /* EditMyNameController.m */; };
+		C71749931F0905F40085E590 /* MyImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749921F0905F40085E590 /* MyImageHelper.m */; };
 		C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F47E1EE9B9DD0067C07F /* MeCellBase.m */; };
 		C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */; };
 		C782F4851EE9B9FC0067C07F /* MeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4831EE9B9FC0067C07F /* MeController.m */; };
@@ -174,6 +181,19 @@
 		C71749661EFF815E0085E590 /* AuthIdentityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthIdentityController.h; sourceTree = "<group>"; };
 		C71749671EFF815E0085E590 /* AuthIdentityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthIdentityController.m; sourceTree = "<group>"; };
 		C71749681EFF815E0085E590 /* AuthIdentityController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthIdentityController.xib; sourceTree = "<group>"; };
+		C717497A1F0688940085E590 /* EditTxtTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTxtTVCell.h; sourceTree = "<group>"; };
+		C717497B1F0688940085E590 /* EditTxtTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTxtTVCell.m; sourceTree = "<group>"; };
+		C717497C1F0688940085E590 /* EditTxtTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTxtTVCell.xib; sourceTree = "<group>"; };
+		C717497F1F068B140085E590 /* EditTxtModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTxtModel.h; sourceTree = "<group>"; };
+		C71749801F068B140085E590 /* EditTxtModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTxtModel.m; sourceTree = "<group>"; };
+		C71749821F07D1B70085E590 /* SampleEditTxtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleEditTxtCell.h; sourceTree = "<group>"; };
+		C71749831F07D1B70085E590 /* SampleEditTxtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleEditTxtCell.m; sourceTree = "<group>"; };
+		C71749841F07D1B70085E590 /* SampleEditTxtCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleEditTxtCell.xib; sourceTree = "<group>"; };
+		C717498A1F08E3710085E590 /* EditMyInfoDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditMyInfoDelegate.h; sourceTree = "<group>"; };
+		C717498E1F09029A0085E590 /* EditMyNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditMyNameController.h; sourceTree = "<group>"; };
+		C717498F1F09029A0085E590 /* EditMyNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMyNameController.m; sourceTree = "<group>"; };
+		C71749911F0905F40085E590 /* MyImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageHelper.h; sourceTree = "<group>"; };
+		C71749921F0905F40085E590 /* MyImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageHelper.m; sourceTree = "<group>"; };
 		C782F47D1EE9B9DD0067C07F /* MeCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCellBase.h; sourceTree = "<group>"; };
 		C782F47E1EE9B9DD0067C07F /* MeCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCellBase.m; sourceTree = "<group>"; };
 		C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCellBase.xib; sourceTree = "<group>"; };
@@ -756,6 +776,9 @@
 				C71749661EFF815E0085E590 /* AuthIdentityController.h */,
 				C71749671EFF815E0085E590 /* AuthIdentityController.m */,
 				C71749681EFF815E0085E590 /* AuthIdentityController.xib */,
+				C717498A1F08E3710085E590 /* EditMyInfoDelegate.h */,
+				C717498E1F09029A0085E590 /* EditMyNameController.h */,
+				C717498F1F09029A0085E590 /* EditMyNameController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -763,10 +786,14 @@
 		CF5A4CBD1EE065FF002A281B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C71749911F0905F40085E590 /* MyImageHelper.h */,
+				C71749921F0905F40085E590 /* MyImageHelper.m */,
 				C782F4AA1EEEF78B0067C07F /* MsgModel.h */,
 				C782F4AB1EEEF78B0067C07F /* MsgModel.m */,
 				C717494D1EFAE7630085E590 /* MyInfoModel.h */,
 				C717494E1EFAE7630085E590 /* MyInfoModel.m */,
+				C717497F1F068B140085E590 /* EditTxtModel.h */,
+				C71749801F068B140085E590 /* EditTxtModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -786,6 +813,12 @@
 				C782F48C1EE9D7430067C07F /* MeCellStatus.h */,
 				C782F48D1EE9D7430067C07F /* MeCellStatus.m */,
 				C782F48E1EE9D7430067C07F /* MeCellStatus.xib */,
+				C717497A1F0688940085E590 /* EditTxtTVCell.h */,
+				C717497B1F0688940085E590 /* EditTxtTVCell.m */,
+				C717497C1F0688940085E590 /* EditTxtTVCell.xib */,
+				C71749821F07D1B70085E590 /* SampleEditTxtCell.h */,
+				C71749831F07D1B70085E590 /* SampleEditTxtCell.m */,
+				C71749841F07D1B70085E590 /* SampleEditTxtCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -974,6 +1007,7 @@
 			files = (
 				CF5A4C5E1EE04769002A281B /* Assets.xcassets in Resources */,
 				CF0524871EFF64F200BE8840 /* PayTypeCell.xib in Resources */,
+				C717497E1F0688940085E590 /* EditTxtTVCell.xib in Resources */,
 				CF665BFA1EEB9AB200028B1B /* BaobeiCell.xib in Resources */,
 				CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */,
 				C717496A1EFF815E0085E590 /* AuthIdentityController.xib in Resources */,
@@ -987,6 +1021,7 @@
 				CFEAFF6E1EF6697A000EEB27 /* BuildAdviserView.xib in Resources */,
 				CF2F53A61EF184B600A2DADD /* BuildingSectionView.xib in Resources */,
 				CF99FBF31EF3DD0C001C8A9C /* CustomerListController.xib in Resources */,
+				C71749861F07D1B70085E590 /* SampleEditTxtCell.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
 				CF53E8EB1EF96747008D0322 /* EditController.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
@@ -1077,12 +1112,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C71749811F068B140085E590 /* EditTxtModel.m in Sources */,
 				CFEAFF761EF6C255000EEB27 /* BuildBaobeiModel.m in Sources */,
 				CF0524861EFF64F200BE8840 /* PayTypeCell.m in Sources */,
 				CF52681B1F05400A00166E2F /* UploadImageManager.m in Sources */,
 				CF2FCA861EF91079001E974C /* ProgressDetailController.m in Sources */,
 				CF99FBF21EF3DD0C001C8A9C /* CustomerListController.m in Sources */,
 				CFDD36801EEBCF38007497AC /* CALayer+Addition.m in Sources */,
+				C71749851F07D1B70085E590 /* SampleEditTxtCell.m in Sources */,
 				CF8F7FE81EF77803009A6C3E /* FormulaListCell.m in Sources */,
 				C71749531EFEB5AB0085E590 /* ModifyMyPwdController.m in Sources */,
 				CFDD36841EEBD4B9007497AC /* SelectBuildingCell.m in Sources */,
@@ -1132,6 +1169,7 @@
 				CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */,
 				CFEEC0101EE2A79800E1DB74 /* UIView+Addition.m in Sources */,
 				CF52681E1F054C5A00166E2F /* UIImage+Addition.m in Sources */,
+				C71749931F0905F40085E590 /* MyImageHelper.m in Sources */,
 				C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */,
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
@@ -1141,6 +1179,7 @@
 				CF5A4C561EE04769002A281B /* AppDelegate.m in Sources */,
 				CF05247B1EFF51FB00BE8840 /* PhotoView.m in Sources */,
 				CFDC57681EFA5645004658CE /* CustomerBaobeiModel.m in Sources */,
+				C71749901F09029A0085E590 /* EditMyNameController.m in Sources */,
 				C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */,
 				CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */,
 				CF0CEB131EFEA8D20018B35B /* TakeUpEditController.m in Sources */,
@@ -1161,6 +1200,7 @@
 				CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */,
 				CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */,
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
+				C717497D1F0688940085E590 /* EditTxtTVCell.m in Sources */,
 				CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
 				CFDD36911EEBE52F007497AC /* ContactListController.m in Sources */,

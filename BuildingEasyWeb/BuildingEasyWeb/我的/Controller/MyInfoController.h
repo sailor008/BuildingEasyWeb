@@ -7,7 +7,10 @@
 //
 
 #import "BaseController.h"
+#import "EditMyInfoDelegate.h"
 
 @interface MyInfoController : BaseController
+
+@property (nonatomic, weak) id<EditMyInfoDelegate> delegate;
 
 @end

@@ -49,19 +49,33 @@
 
 - (void)onBtnEnsure:(id)sender{
     [super onBtnEnsure:sender];
-    NSLog(@"昵称的内容：%@", self.txtEdit.text);
     
     NSString* nickNameVal = self.txtEdit.text;
+    if([self isNickNameFormatVaild: nickNameVal]) {
+        [MBProgressHUD showLoading];
         NSDictionary* parameters = @{@"nickName": nickNameVal};
         [NetworkManager postWithUrl:@"wx/modifyUserNickName" parameters:parameters success:^(id reponse) {
-            
+            [MBProgressHUD hideHUD];
             NSLog(@"修改昵称成功！！！");
             self.txtEdit.text = nil;
             [self.navigationController popViewControllerAnimated:YES];
             [self.delegate finishEidtMyInfo: @"wx/modifyUserNickName" desc:nickNameVal];
         } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showError:msg];
         }];
+    } else {
+        
+    }
+}
+
+- (BOOL)isNickNameFormatVaild:(NSString*) txtVal
+{
+    if(txtVal.length){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 @end

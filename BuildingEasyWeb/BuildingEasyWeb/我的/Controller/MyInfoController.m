@@ -9,36 +9,28 @@
 #import "MyInfoController.h"
 
 #import "UIView+MBProgressHUD.h"
+#import "UIImage+Addition.h"
 #import "UITableView+Addition.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
+#import "UIImageView+AFNetworking.h"
 #import "NetworkManager.h"
-#import "QNYunManager.h"
+#import "UploadImageManager.h"
+
 
 #import "EditMyInfoBaseController.h"
 #import "ModifyMyPwdController.h"
 #import "EditMyInfoBaseController.h"
 #import "EditMyEmailController.h"
 #import "EditMyNickNameController.h"
+#import "EditMyNameController.h"
 #import "AuthIdentityController.h"
-
+#import "MeCellInfo.h"
 
 #import <MJExtension.h>
-#import "MeCellInfo.h"
-#import "User.h"
 #import "Global.h"
+#import "User.h"
 #import "MyInfoModel.h"
-
-
-
-//#import "QNUrlSafeBase64.h"
-//#import "QNUpToken.h"
-//        NSArray *array = [uptoken componentsSeparatedByString:@":"];
-//        NSData *data = [QNUrlSafeBase64 decodeString:array[2]];
-//        NSError *tmp = nil;
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&tmp];
-//        NSLog(@">>>>>>>>>>>>>>>>>>>> dict = %@", dict);
-
-
+#import "MyImageHelper.h"
 
 
 typedef void (^onTabVCell)(void);
@@ -196,10 +188,10 @@ typedef void (^onTabVCell)(void);
             _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(285.0, 8.0, 60.0, 60.0)];
             _headImgView.layer.masksToBounds = YES;
             _headImgView.layer.cornerRadius = 30.0f;
-//            if([User shareUser].headImg != nil && [User shareUser].headImg.length > 0) {
-//                
-//            }
-            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+
+//            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+            [_headImgView setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+
             [cell addSubview:_headImgView];
         }
     }
@@ -207,6 +199,7 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(indexPath.section == 0) {
         switch (indexPath.row) {
             case 0:
@@ -238,10 +231,10 @@ typedef void (^onTabVCell)(void);
 };
 
 - (void)onName {
-//    EditMyInfoBaseController* editNameVC = [[EditMyInfoBaseController alloc] init];
-//    editNameVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:editNameVC animated:YES];
-
+    EditMyNameController* editNameVC = [[EditMyNameController alloc] init];
+    editNameVC.delegate = self;
+    editNameVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:editNameVC animated:YES];
 };
 
 - (void)onNickName {
@@ -253,9 +246,17 @@ typedef void (^onTabVCell)(void);
 };
 
 - (void)onAuthentication {
-    AuthIdentityController* authVC = [[AuthIdentityController alloc]init];
-    authVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:authVC animated:YES];
+    [MBProgressHUD showLoading];
+    [NetworkManager postWithUrl:@"wx/getUserOtherInfo" parameters:@{} success:^(id reponse) {
+        NSLog(@"Success：获取已填写的认证信息 [wx/getUserOtherInfo] 成功！");
+        [MBProgressHUD hideHUD];
+        AuthIdentityController* authVC = [[AuthIdentityController alloc]init];
+        authVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:authVC animated:YES];
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"Error：获取已填写的认证信息 [wx/getUserOtherInfo] 失败。detail：%@", msg);
+        [MBProgressHUD hideHUD];
+    }];
 };
 
 - (void)onModifyPassword {   
@@ -264,7 +265,7 @@ typedef void (^onTabVCell)(void);
     [self.navigationController pushViewController:editPasswordVC animated:YES];
 };
 
-//achieve the func from EditMyInfoDelegate
+#pragma mark EditMyInfoDelegate
 - (void)finishEidtMyInfo:(NSString*)tag desc:(NSString*)descStr
 {
     NSLog(@"finishEidtMyInfo : %@",descStr);
@@ -274,11 +275,15 @@ typedef void (^onTabVCell)(void);
     } else if([tag isEqualToString: @"wx/modifyUserNickName"]) {
         [User shareUser].nickname = descStr;
         NSLog(@"昵称：%@", [User shareUser].nickname);
+    } else if([tag isEqualToString: @"wx/modifyUserName"]) {
+        [User shareUser].name = descStr;
+        NSLog(@"姓名：%@", [User shareUser].name);
+//        kWeakSelf(weakSelf);
+        [self.delegate finishEidtMyInfo:@"wx/modifyUserName" desc:descStr];
     }
 
     [self initViewCfg];
     [_tableView reloadData];
-    
 }
 
 /////////////////////////////
@@ -291,10 +296,11 @@ typedef void (^onTabVCell)(void);
     UIAlertAction *camera = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         }
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = YES;
         [self presentViewController:imagePicker animated:YES completion:nil];
         
     }];
@@ -305,7 +311,6 @@ typedef void (^onTabVCell)(void);
         UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
             pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
         }
         pickerImage.delegate = self;
         pickerImage.allowsEditing = YES;
@@ -332,9 +337,9 @@ typedef void (^onTabVCell)(void);
     if ([type isEqualToString:@"public.image"])
     {
         //取出选取的图片
-        UIImage* pickImg = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        UIImage* pickImg = info[UIImagePickerControllerEditedImage];
         //把图片按size 压缩
-        UIImage *compressImg = [self compressImageWithTargetSize:pickImg size:CGSizeMake(120.0, 120.0)];
+        UIImage *compressImg = [pickImg compressImageWithTargetSize:CGSizeMake(120.0, 120.0)];
         //把图片转成NSData
         NSData *imgData;
         if (UIImagePNGRepresentation(compressImg) == nil)
@@ -345,9 +350,8 @@ typedef void (^onTabVCell)(void);
         {
             imgData = UIImagePNGRepresentation(compressImg);
         }
-        NSString* headImgPath = [self saveImageData:imgData withName: @"user_head.png"];
+        NSString* headImgPath = [MyImageHelper saveImageData:imgData withName: @"user_head.png"];
         NSLog(@"头像的完整路径：%@", headImgPath);
-        
         
         kWeakSelf(weakSelf);
         [weakSelf requestUpdateHeadImage:headImgPath callback:^{
@@ -355,6 +359,8 @@ typedef void (^onTabVCell)(void);
             NSData *imgDa = [NSData dataWithContentsOfFile:headImgPath];
             NSLog(@"读取的图片大小：data.length %ld kb", imgDa.length/1024);
             _headImgView.image = [UIImage imageWithData:imgDa];
+            
+            [weakSelf.delegate finishEidtMyInfo:@"wx/updateHeadImg" desc:headImgPath];
         }];
 
         //关闭相册界面
@@ -369,117 +375,62 @@ typedef void (^onTabVCell)(void);
 
 - (void)requestUpdateHeadImage:(NSString*)filePath callback:(Callback)callback
 {
-    kWeakSelf(weakSelf);
-    [weakSelf requestUpLoadImageFile:(NSString*)filePath withTag:@4 success:^(NSString* imgKey){
-        
+    [MBProgressHUD showLoading];
+    [UploadImageManager uploadImageFile: filePath type:@4 success:^(NSString* imgKey){
         NSDictionary* parameters = @{@"resourceKey": imgKey};
         [NetworkManager postWithUrl:@"wx/updateHeadImg" parameters:parameters success:^(id reponse) {
-            NSLog(@"更新updateHeadImg 成功！！！");
-
+            NSLog(@"Success:更新updateHeadImg 成功！");
+            [MBProgressHUD hideHUD];
             callback();
         } failure:^(NSError *error, NSString *msg) {
-            NSLog(@"更新个人头像的resourceKey失败！detail：%@", msg);
+            NSLog(@"Error:更新个人头像的resourceKey失败！detail：%@", msg);
+            [MBProgressHUD hideHUD];
             [MBProgressHUD showError:msg];
         }];
-        
-    }];
-}
-
-- (void)requestUpLoadImageFile:(NSString*)filePath withTag:(NSNumber*)imgTag success:(void(^)(NSString* strkey)) success
-{
-//    [MBProgressHUD showLoading];
-    NSDictionary* parameters = @{@"type": imgTag};
-    [NetworkManager postWithUrl:@"wx/getUpToken" parameters:parameters success:^(id response) {
-        
-        NSLog(@"getUpToken成功，打印数据： %@", response);
-        ImgUpTokenModel* uptokenModel = [ImgUpTokenModel mj_objectWithKeyValues: response];
-        NSString* imgKey = uptokenModel.key;
-        NSString* uptoken = uptokenModel.upToken;
-
-//        NSArray *array = [uptoken componentsSeparatedByString:@":"];
-//        NSData *data = [QNUrlSafeBase64 decodeString:array[2]];
-//        NSError *tmp = nil;
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&tmp];
-//        NSLog(@">>>>>>>>>>>>>>>>>>>> dict = %@", dict);
-
-        [QNYunManager uploadFileWithPath:filePath key:imgKey token:uptoken success:^(id qnResponse) {
-            NSString* newKey = [qnResponse objectForKey:@"key"];
-            NSLog(@"上传七牛云成功，newkey = %@", newKey);
-            success(newKey);
-        } failure:^(NSError *error, NSString *reqId) {
-            [MBProgressHUD showError:@"更新头像失败！"];
-        }];
-
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"获取用户上传图片的七牛yuntoken失败！！！detail：%@", msg);
-        [MBProgressHUD showError:msg];
+        NSLog(@"error:%@---%@", error, msg);
+        [MBProgressHUD hideHUD];
     }];
 }
 
-//2.保持原来的长宽比，生成一个缩略图
-- (UIImage *)compressImageWithTargetSize:(UIImage *)image size:(CGSize)targetSize
-{
-    UIImage *newimage;
-    if (nil == image) {
-        newimage = nil;
-        return newimage;
-    }
 
-    CGSize oriSize = image.size;
-    //计算目标的绘制区域
-    CGRect rect;
-    if (targetSize.width/targetSize.height > oriSize.width/oriSize.height) {
-        rect.size.width = targetSize.height * oriSize.width/oriSize.height;
-        rect.size.height = targetSize.height;
-        rect.origin.x = (targetSize.width - rect.size.width)/2;
-        rect.origin.y = 0;
-    }
-    else{
-        rect.size.width = targetSize.width;
-        rect.size.height = targetSize.width * oriSize.height/oriSize.width;
-        rect.origin.x = 0;
-        rect.origin.y = (targetSize.height - rect.size.height)/2;
-    }
-    NSLog(@"压缩之后的图片size：w = %f , h = %f", rect.size.width, rect.size.height);
-    
-    // 创建一个bitmap的context
-    // 并把它设置成为当前正在使用的context
-    UIGraphicsBeginImageContext(targetSize);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
-    UIRectFill(CGRectMake(0, 0, targetSize.width, targetSize.height));//clear background
-    //按照目标size绘制
-    [image drawInRect:rect];
-    
-    // 从当前context中创建一个改变大小后的图片
-    newimage = UIGraphicsGetImageFromCurrentImageContext();
-    // 使当前的context出堆栈
-    UIGraphicsEndImageContext();
-    
-    return newimage;
-}
+//NSString* headImgPath = [MyImageHelper saveImageData:imgData withName: @"user_head.png"];
+//NSLog(@"头像的完整路径：%@", headImgPath);
+//kWeakSelf(weakSelf);
+//[weakSelf requestUpdateHeadImage:headImgPath callback:^{
+//    //更新个人头像成功，显示最新的头像
+//    NSData *imgDa = [NSData dataWithContentsOfFile:headImgPath];
+//    NSLog(@"读取的图片大小：data.length %ld kb", imgDa.length/1024);
+//    _headImgView.image = [UIImage imageWithData:imgDa];
+//}];
 
-- (NSString*)saveImageData:(NSData*) imageData withName:(NSString*) imgName {
-    //图片保存的路径
-    //这里将图片放在沙盒的documents文件夹中
-    NSString *DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-    //文件管理器
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    //把刚刚图片转换的data对象拷贝至沙盒中
-    [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-    //拼接保存到沙盒的图片完整路径
-    NSString *imagePath = [DocumentsPath stringByAppendingString:[NSString stringWithFormat: @"/%@", imgName]];
-    [fileManager changeCurrentDirectoryPath:imagePath];
-    BOOL ret = [fileManager createFileAtPath:imagePath contents:imageData attributes:nil];
-    
-    NSLog(@"保存图片：path = %@", imagePath);
-    if (!ret)
-        NSLog(@"图片 文件 创建失败！！！");
-    else
-        NSLog(@"Good 图片创建成功！！！");
-    
-    return imagePath;
-}
+//- (void)requestUpdateHeadImage:(NSString*)filePath callback:(Callback)callback
+//{
+//    [UploadImageManager uploadImageFile: filePath type:@4 success:^(NSString* imgKey){
+//        NSDictionary* parameters = @{@"resourceKey": imgKey};
+//        [NetworkManager postWithUrl:@"wx/updateHeadImg" parameters:parameters success:^(id reponse) {
+//            NSLog(@"更新updateHeadImg 成功！！！");
+//            
+//            callback();
+//        } failure:^(NSError *error, NSString *msg) {
+//            NSLog(@"更新个人头像的resourceKey失败！detail：%@", msg);
+//            [MBProgressHUD showError:msg];
+//        }];
+//    } failure:^(NSError *error, NSString *msg) {
+//        NSLog(@"error:%@---%@", error, msg);
+//    }];
+//}
+
+
+////--------------------- 此处为调试七牛云的代码 --------------------------------
+//#import "QNUrlSafeBase64.h"
+//#import "QNUpToken.h"
+////        NSArray *array = [uptoken componentsSeparatedByString:@":"];
+////        NSData *data = [QNUrlSafeBase64 decodeString:array[2]];
+////        NSError *tmp = nil;
+////        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&tmp];
+////        NSLog(@">>>>>>>>>>>>>>>>>>>> dict = %@", dict);
+////--------------------- 此处为调试七牛云的代码 --------------------------------
+
 
 @end
