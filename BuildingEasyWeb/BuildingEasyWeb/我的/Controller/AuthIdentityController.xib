@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthIdentityController">
             <connections>
+                <outlet property="tableView" destination="ZyP-4x-xH2" id="D7y-eF-809"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,6 +16,22 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZyP-4x-xH2">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ZiY-ub-z89"/>
+                        <outlet property="delegate" destination="-1" id="dYp-Tw-7Td"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ZyP-4x-xH2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Zbz-op-9Ac"/>
+                <constraint firstAttribute="bottom" secondItem="ZyP-4x-xH2" secondAttribute="bottom" id="Zvm-g2-lSo"/>
+                <constraint firstItem="ZyP-4x-xH2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="u8Y-DX-daq"/>
+                <constraint firstAttribute="trailing" secondItem="ZyP-4x-xH2" secondAttribute="trailing" id="yI7-oS-uJc"/>
+            </constraints>
         </view>
     </objects>
 </document>
