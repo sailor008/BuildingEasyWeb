@@ -77,32 +77,32 @@ const NSInteger kCustomProgressLabelTag = 2000;
 
 - (IBAction)editProgress:(id)sender
 {
-    switch (_detailModel.currentState) {
-        case 0:// 报备、带看不可点击
-        case 1:
-            break;
-        case 2:// 认购
-        {
-            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-            takeEdit.customerId = _customerId;
-            [self.navigationController pushViewController:takeEdit animated:YES];
-        }
-            break;
-        case 3:// 签约
-        {
+//    switch (_detailModel.currentState) {
+//        case 0:// 报备、带看不可点击
+//        case 1:
+//            break;
+//        case 2:// 认购
+//        {
+//            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+//            takeEdit.customerId = _customerId;
+//            [self.navigationController pushViewController:takeEdit animated:YES];
+//        }
+//            break;
+//        case 3:// 签约
+//        {
             DealEditController* dealEdit = [[DealEditController alloc] init];
             dealEdit.customerId = _customerId;
             [self.navigationController pushViewController:dealEdit animated:YES];
-        }
-            break;
-        default:// 回款、结清
-        {
-            EditController* editVC = [[EditController alloc] init];
-            editVC.customerId = _customerId;
-            [self.navigationController pushViewController:editVC animated:YES];
-        }
-            break;
-    }
+//        }
+//            break;
+//        default:// 回款、结清
+//        {
+//            EditController* editVC = [[EditController alloc] init];
+//            editVC.customerId = _customerId;
+//            [self.navigationController pushViewController:editVC animated:YES];
+//        }
+//            break;
+//    }
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -163,6 +163,42 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 55;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row != 0) {
+        return;
+    }
+    switch (_detailModel.currentState) {
+        case 0:// 报备、带看不可点击
+        case 1:
+            break;
+        case 2:// 认购
+        {
+            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+            takeEdit.customerId = _customerId;
+            takeEdit.isDetail = YES;
+            StateList* lastState = [_detailModel.stateList lastObject];
+            takeEdit.state = lastState.state;
+            [self.navigationController pushViewController:takeEdit animated:YES];
+        }
+            break;
+        case 3:// 签约
+        {
+            DealEditController* dealEdit = [[DealEditController alloc] init];
+            dealEdit.customerId = _customerId;
+            [self.navigationController pushViewController:dealEdit animated:YES];
+        }
+            break;
+        default:// 回款、结清
+        {
+            EditController* editVC = [[EditController alloc] init];
+            editVC.customerId = _customerId;
+            [self.navigationController pushViewController:editVC animated:YES];
+        }
+            break;
+    }
 }
 
 #pragma mark RequestData

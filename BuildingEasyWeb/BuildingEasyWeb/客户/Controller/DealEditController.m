@@ -15,6 +15,9 @@
 #import "UIView+Addition.h"
 #import "EditInfoModel.h"
 #import "UploadImageManager.h"
+#import "NSString+Addition.h"
+#import "UIView+MBProgressHUD.h"
+#import "NetworkManager.h"
 
 static const NSInteger kPhotoViewTag = 1000;
 
@@ -110,6 +113,7 @@ static const NSInteger kPhotoViewTag = 1000;
     _dealPhotoView = [self getPhotoView];
     _dealPhotoView.delegate = self;
     _dealPhotoView.sectionTitle = @"合同:";
+    _dealPhotoView.limitNum = 9;
     
     tempLabel.text = @"辅助啊";
     [tempLabel sizeToFit];
@@ -152,6 +156,7 @@ static const NSInteger kPhotoViewTag = 1000;
         if ([model.title isEqualToString:@"付款方式"]) {
             model.isRadio = YES;
         }
+        model.canEdit = YES;
         [tempArr addObject:model];
     }
     _dataArray = [tempArr copy];
@@ -175,6 +180,7 @@ static const NSInteger kPhotoViewTag = 1000;
     
     if (model.isRadio) {
         PayTypeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PayTypeCell" forIndexPath:indexPath];
+        cell.model = model;
         return cell;
     } else {
         EditTextCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EditTextCell" forIndexPath:indexPath];
@@ -225,13 +231,149 @@ static const NSInteger kPhotoViewTag = 1000;
 #pragma mark Action
 - (void)commit
 {
-    NSArray* imageArr = _idPhotoView.resultArray;
+    NSMutableArray* imagArr = [NSMutableArray array];
     
-    [UploadImageManager uploadImage:imageArr[0] type:@"5" imageKey:^(NSString *key) {
-        NSLog(@"key:%@", key);
+    if (_idPhotoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
+        return;
+    }
+    if (_firstFormPhotoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请上传首付单" toView:self.view];
+        return;
+    }
+    if (_posFormPhotoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
+        return;
+    }
+    if (_depositPhotoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请上传定金单" toView:self.view];
+        return;
+    }
+    if (_takeupPhotoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请上传认购书" toView:self.view];
+        return;
+    }
+    if (_dealPhotoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请上传合同" toView:self.view];
+        return;
+    }
+    [imagArr addObjectsFromArray:_idPhotoView.resultArray];
+    [imagArr addObjectsFromArray:_firstFormPhotoView.resultArray];
+    [imagArr addObjectsFromArray:_posFormPhotoView.resultArray];
+    [imagArr addObjectsFromArray:_depositPhotoView.resultArray];
+    [imagArr addObjectsFromArray:_takeupPhotoView.resultArray];
+    [imagArr addObjectsFromArray:_dealPhotoView.resultArray];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    {
+        EditInfoModel* model = _dataArray[0];
+        if (model.text.length == 0) {
+            [MBProgressHUD showError:@"请选择开始日期" toView:self.view];
+            return;
+        }
+        parameters[@"startTime"] = [model.text timeIntervalWithDateStr];
+    }
+    {
+        EditInfoModel* model = _dataArray[1];
+        if (model.text.length == 0) {
+            [MBProgressHUD showError:@"请选择结束日期" toView:self.view];
+            return;
+        }
+        parameters[@"endTime"] = [model.text timeIntervalWithDateStr];
+    }
+    {
+        EditInfoModel* model = _dataArray[2];
+        parameters[@"type"] = @(model.type);
+    }
+    {
+        EditInfoModel* model = _dataArray[3];
+        if (model.text.length == 0) {
+            [MBProgressHUD showError:@"请填写单价" toView:self.view];
+            return;
+        }
+        parameters[@"price"] = model.text;
+    }
+    {
+        EditInfoModel* model = _dataArray[4];
+        if (model.text.length == 0) {
+            [MBProgressHUD showError:@"请填写总价" toView:self.view];
+            return;
+        }
+        parameters[@"total"] = model.text;
+    }
+    {
+        EditInfoModel* model = _dataArray[5];
+        if (model.text.length == 0) {
+            [MBProgressHUD showError:@"请选择交付日期" toView:self.view];
+            return;
+        }
+        parameters[@"leadTime"] = [model.text timeIntervalWithDateStr];
+    }
+    
+    // 检验完毕
+    kWeakSelf(weakSelf);
+    dispatch_queue_t asyncQueue = dispatch_queue_create("BEWDealEdit", DISPATCH_QUEUE_CONCURRENT);
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (int i = 0; i < imagArr.count; i ++) {
+        dispatch_group_enter(group);
+        
+        [UploadImageManager uploadImage:imagArr[i] type:@"5" imageKey:^(NSString *key) {
+            
+            NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+            parameters[@"customerId"] = weakSelf.customerId;
+            parameters[@"resourceKey"] = key;
+            parameters[@"type"] = @(i);
+            if (i > 5) {
+                parameters[@"type"] = @(5);
+            }
+            [NetworkManager postWithUrl:@"wx/uploadSignImg" parameters:parameters success:^(id reponse) {
+                dispatch_group_leave(group);
+            } failure:^(NSError *error, NSString *msg) {
+                dispatch_group_leave(group);
+            }];
+            
+        } failure:^(NSError *error, NSString *msg) {
+            NSLog(@"error:%@---%@", error, msg);
+            dispatch_group_leave(group);
+        }];
+    }
+    dispatch_group_notify(group, asyncQueue, ^{
+        [MBProgressHUD showLoadingToView:self.view];
+        [NetworkManager postWithUrl:@"wx/saveSignInfo" parameters:parameters success:^(id reponse) {
+            [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD dissmissWithError:msg toView:self.view];
+        }];
+    });
+}
+
+#pragma mark RequestData
+- (void)reqeustData
+{
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    parameters[@"state"] = @(_state);
+    
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getSignInfo" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        [self dealWithData:reponse];
+        
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error:%@---%@", error, msg);
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
     }];
+}
+
+- (void)dealWithData:(NSDictionary *)data
+{
+    
 }
 
 @end

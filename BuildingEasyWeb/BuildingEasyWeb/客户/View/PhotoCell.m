@@ -8,6 +8,8 @@
 
 #import "PhotoCell.h"
 
+#import "UIImageView+AFNetworking.h"
+
 @interface PhotoCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -25,6 +27,12 @@
 {
     _photo = photo;
     _photoImageView.image = photo;
+}
+
+- (void)setImagUrlStr:(NSString *)imagUrlStr
+{
+    _imagUrlStr = imagUrlStr;
+    [_photoImageView setImageWithURL:[NSURL URLWithString:imagUrlStr] placeholderImage:GetIMAGE(@"logo.png")];
 }
 
 @end
