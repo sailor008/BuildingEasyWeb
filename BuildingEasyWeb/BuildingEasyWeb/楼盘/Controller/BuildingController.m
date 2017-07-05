@@ -374,6 +374,8 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     BuildingListModel* model = _buildingArr[indexPath.row];
     detailVC.buildId = model.buildId;
+    detailVC.commission = model.commission;
+    detailVC.distance = model.distance;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

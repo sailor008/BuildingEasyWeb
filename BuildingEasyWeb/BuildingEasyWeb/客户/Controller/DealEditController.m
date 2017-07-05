@@ -18,6 +18,7 @@
 #import "NSString+Addition.h"
 #import "UIView+MBProgressHUD.h"
 #import "NetworkManager.h"
+#import "NSDate+Addition.h"
 
 static const NSInteger kPhotoViewTag = 1000;
 
@@ -44,10 +45,12 @@ static const NSInteger kPhotoViewTag = 1000;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"编辑";
-    
     [self setupInterFace];
     [self setupProperty];
+    
+    if (_isDetail) {
+        [self reqeustData];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,7 +66,13 @@ static const NSInteger kPhotoViewTag = 1000;
 
 - (void)setupInterFace
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    if (_isDetail) {
+        self.title = @"查看详情";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+    } else {
+        self.title = @"编辑";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    }
     
     [_tableView registerNibWithName:@"EditTextCell"];
     [_tableView registerNibWithName:@"PayTypeCell"];
@@ -165,6 +174,17 @@ static const NSInteger kPhotoViewTag = 1000;
 - (PhotoView *)getPhotoView
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
+}
+
+- (void)editInfo
+{
+    self.title = @"编辑";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    for (EditInfoModel* model in _dataArray) {
+        model.canEdit = YES;
+    }
+    
+    [_tableView reloadData];
 }
 
 #pragma mark UITableViewDataSource
@@ -373,7 +393,56 @@ static const NSInteger kPhotoViewTag = 1000;
 
 - (void)dealWithData:(NSDictionary *)data
 {
+    {
+        EditInfoModel* model = _dataArray[0];
+        NSTimeInterval timeInterval = [data[@"startTime"] doubleValue];
+        model.canEdit = NO;
+        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+    }
+    {
+        EditInfoModel* model = _dataArray[1];
+        NSTimeInterval timeInterval = [data[@"endTime"] doubleValue];
+        model.canEdit = NO;
+        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+    }
+    {
+        EditInfoModel* model = _dataArray[2];
+        model.canEdit = NO;
+        model.text = data[@"price"];
+    }
+    {
+        EditInfoModel* model = _dataArray[3];
+        model.canEdit = NO;
+        model.text = data[@"total"];
+    }
+    {
+        EditInfoModel* model = _dataArray[4];
+        model.canEdit = NO;
+        NSTimeInterval timeInterval = [data[@"leadTime"] doubleValue];
+        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+    }
     
+    NSArray* imgList = data[@"imgList"];
+    NSUInteger count = imgList.count;
+    NSMutableArray* dealImgArr = [NSMutableArray array];
+    for (int i = 0; i < imgList.count; i ++) {
+        // 倒序
+        NSDictionary* dic = imgList[count - i];
+        
+        PhotoView* photoView = _footerView.subviews[i];
+        if (i < 5) {
+            NSString* imgUrl = dic[@"imgUrl"];
+            NSArray* imgArr = @[imgUrl];
+            photoView.sourceArray = imgArr;
+        } else {
+            NSString* imgUrl = dic[@"imgUrl"];
+            [dealImgArr addObject:imgUrl];
+        }
+    }
+    
+    _dealPhotoView.sourceArray = [dealImgArr copy];
+    
+    [_tableView reloadData];
 }
 
 @end

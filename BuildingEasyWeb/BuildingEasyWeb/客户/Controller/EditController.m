@@ -9,12 +9,19 @@
 #import "EditController.h"
 
 #import "PlaceholderTextView.h"
+#import "NetworkManager.h"
+#import "UploadImageManager.h"
+#import "UIView+MBProgressHUD.h"
+#import "PhotoView.h"
+#import "UIView+Addition.h"
 
-@interface EditController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface EditController () <PhotoViewDelegate>
 
 @property (weak, nonatomic) IBOutlet PlaceholderTextView *textView;
 
-@property (nonatomic,strong) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) PhotoView* photoView;
+@property (nonatomic, strong) UIView* footerView;
+@property (nonatomic, strong) UIView* line;
 
 @end
 
@@ -24,15 +31,40 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"编辑";
+    if (_isDetail) {
+        self.title = @"查看详情";
+    } else {
+        self.title = @"编辑";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    }
     
     self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
     
     _textView.placeholder = @"编辑进度";
     _textView.placeholderColor = Hex(0xababab);
     
-    _imagePicker = [[UIImagePickerController alloc] init];
+    UIView* footerView = [[UIView alloc] init];
+    footerView.frame = CGRectMake(0, 100, ScreenWidth, 118);
+    _footerView = footerView;
+    [self.view addSubview:footerView];
+    
+    _photoView = [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
+    _photoView.delegate = self;
+    _photoView.sectionTitle = @"";
+    _photoView.limitNum = 9;
+    _photoView.photoLeft = -10;
+    _photoView.frame = CGRectMake(-10, 0, ScreenWidth, 118);
+    [footerView addSubview:_photoView];
+    
+    _line = [[UIView alloc] init];
+    _line.backgroundColor = Hex(0xe2e2e2);
+    _line.frame = CGRectMake(0, _photoView.bottom, ScreenWidth, 1);
+    [footerView addSubview:_line];
+    
+    if (_isDetail) {
+        _textView.editable = NO;
+        [self requstData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,41 +75,92 @@
 #pragma mark Action
 - (void)commit
 {
+    if (_textView.text.length == 0) {
+        [MBProgressHUD showError:@"请填写内容" toView:self.view];
+        return;
+    }
+    if (_photoView.resultArray.count == 0) {
+        [MBProgressHUD showError:@"请选择上传图片" toView:self.view];
+        return;
+    }
     
+    kWeakSelf(weakSelf);
+    dispatch_queue_t asyncQueue = dispatch_queue_create("BEWEdit", DISPATCH_QUEUE_CONCURRENT);
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (int i = 0; i < _photoView.resultArray.count; i ++) {
+        dispatch_group_enter(group);
+        [UploadImageManager uploadImage:_photoView.resultArray[i] type:@"5" imageKey:^(NSString *key) {
+            
+            NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+            parameters[@"customerId"] = weakSelf.customerId;
+            parameters[@"resourceKey"] = key;
+            [NetworkManager postWithUrl:@"wx/addCustomerImg" parameters:parameters success:^(id reponse) {
+                dispatch_group_leave(group);
+            } failure:^(NSError *error, NSString *msg) {
+                dispatch_group_leave(group);
+            }];
+            
+        } failure:^(NSError *error, NSString *msg) {
+            NSLog(@"error:%@---%@", error, msg);
+            dispatch_group_leave(group);
+        }];
+    }
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    parameters[@"desc"] = _textView.text;
+    
+    dispatch_group_notify(group, asyncQueue, ^{
+        [MBProgressHUD showLoadingToView:self.view];
+        [NetworkManager postWithUrl:@"wx/submitAudit" parameters:parameters success:^(id reponse) {
+            [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
+                                                                      * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD dissmissWithError:msg toView:self.view];
+        }];
+        
+    });
 }
 
-- (IBAction)addPicture:(id)sender
+#pragma mark PhotoViewDelegate
+- (void)photoView:(PhotoView *)photoView resetHeight:(CGFloat)height
 {
-    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        _imagePicker.delegate = self;
-        [self presentViewController:_imagePicker animated:YES completion:nil];
-    }];
-    
-    UIAlertAction* albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        _imagePicker.delegate = self;
-        [self presentViewController:_imagePicker animated:YES completion:nil];
-    }];
-    
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    
-    [sheet addAction:cameraAction];
-    [sheet addAction:albumAction];
-    [sheet addAction:cancelAction];
-    
-    [self presentViewController:sheet animated:YES completion:nil];
+    photoView.height = height;
+    _footerView.height = height;
+    _line.top = height;
 }
 
-#pragma mark UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+#pragma mark RequestData
+- (void)requstData
 {
-    UIImage * image =info[UIImagePickerControllerOriginalImage];
-    NSLog(@"image=%@",image);
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    parameters[@"state"] = @(_state);
     
-    [_imagePicker dismissViewControllerAnimated:YES completion:nil];
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getAuthInfo" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+        _textView.text = [reponse objectForKey:@"desc"];
+        
+        NSArray* imgList = [reponse objectForKey:@"imgList"];
+        NSMutableArray* imgArr = [NSMutableArray array];
+        for (int i = 0; i < imgList.count; i ++) {
+            NSDictionary* dic = imgList[i];
+            NSString* imgUrl = dic[@"imgUrl"];
+            [imgArr addObject:imgUrl];
+        }
+        
+        _photoView.sourceArray = [imgArr copy];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
 }
 
 @end

@@ -83,16 +83,16 @@ const NSInteger kCustomProgressLabelTag = 2000;
 //            break;
 //        case 2:// 认购
 //        {
-//            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-//            takeEdit.customerId = _customerId;
-//            [self.navigationController pushViewController:takeEdit animated:YES];
+            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+            takeEdit.customerId = _customerId;
+            [self.navigationController pushViewController:takeEdit animated:YES];
 //        }
 //            break;
 //        case 3:// 签约
 //        {
-            DealEditController* dealEdit = [[DealEditController alloc] init];
-            dealEdit.customerId = _customerId;
-            [self.navigationController pushViewController:dealEdit animated:YES];
+//            DealEditController* dealEdit = [[DealEditController alloc] init];
+//            dealEdit.customerId = _customerId;
+//            [self.navigationController pushViewController:dealEdit animated:YES];
 //        }
 //            break;
 //        default:// 回款、结清

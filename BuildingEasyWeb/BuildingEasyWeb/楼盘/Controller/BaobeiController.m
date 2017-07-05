@@ -19,7 +19,6 @@
 #import "BuildAdviserView.h"
 #import "UIView+MBProgressHUD.h"
 #import "User.h"
-#import "BuildBaobeiModel.h"
 #import "CustomerBaobeiModel.h"
 #import "Global.h"
 
@@ -66,6 +65,13 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     
     if (_isModify) {
         [self requestBaobeiInfo];
+        _importButton.hidden = YES;
+        _addButton.hidden = YES;
+    }
+    
+    if (_baobeiModel) {
+        [self selectBuildingResult:@[_baobeiModel.buildModel]];
+        _addButton.hidden = YES;
     }
 }
 
