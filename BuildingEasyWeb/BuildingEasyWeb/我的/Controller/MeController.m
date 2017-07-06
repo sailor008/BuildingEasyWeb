@@ -18,6 +18,7 @@
 #import "MyMessageController.h"
 #import "MyInfoController.h"
 #import "BaobeiController.h"
+#import "CustomerStatisticController.h"
 
 
 //import model
@@ -238,7 +239,7 @@ typedef void (^onTabVCell)(void);
         [self onMyInfo];
     }else if(indexPath.section == 1) {
         if(indexPath.row == 0) {
-
+            [self onCustomerStatistic];
         }else { //if(indexPath.row == 1)
         }
         
@@ -248,6 +249,12 @@ typedef void (^onTabVCell)(void);
     }
 }
 
+- (void)onCustomerStatistic
+{
+    CustomerStatisticController* customerStatisticVC = [[CustomerStatisticController alloc]init];
+    customerStatisticVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:customerStatisticVC animated:YES];
+}
 
 
 
