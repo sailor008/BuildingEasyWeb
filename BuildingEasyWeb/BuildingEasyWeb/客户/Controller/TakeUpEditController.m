@@ -50,7 +50,7 @@
     [self setupInterFace];
     [self setupProperty];
     
-    if (_isDetail) {
+    if (_type > kEditTypeNew) {
         _canEdit = NO;
         [self requestData];
     }
@@ -58,9 +58,12 @@
 
 - (void)setupInterFace
 {
-    if (_isDetail) {
+    if (_type > kEditTypeNew) {
         self.title = @"查看详情";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+        if (_type == kEditTypeAgain) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+        }
+        
     } else {
         self.title = @"编辑";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
@@ -267,8 +270,9 @@
 #pragma mark Action
 - (void)commit
 {
-    NSArray* imageArr = _photoView.resultArray;
-    if (_isDetail == NO) {
+    NSArray* imageArr = [NSArray array];
+    if (_type == kEditTypeNew) {// 新建编辑才上传图片
+        imageArr = _photoView.resultArray;
         if (imageArr.count == 0) {
             [MBProgressHUD showError:@"请添加认购书" toView:self.view];
             return;
@@ -328,7 +332,7 @@
         parameters[@"buyers"] = buyersStr;
         
         NSString* urlStr = nil;
-        if (_isDetail) {
+        if (_type > kEditTypeNew) {
             urlStr = @"wx/updateSubInfo";
         } else {
             urlStr = @"wx/saveSubInfo";

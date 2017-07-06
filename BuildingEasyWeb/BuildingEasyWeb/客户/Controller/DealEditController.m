@@ -48,7 +48,7 @@ static const NSInteger kPhotoViewTag = 1000;
     [self setupInterFace];
     [self setupProperty];
     
-    if (_isDetail) {
+    if (_type > kEditTypeNew) {
         [self reqeustData];
     }
 }
@@ -66,9 +66,12 @@ static const NSInteger kPhotoViewTag = 1000;
 
 - (void)setupInterFace
 {
-    if (_isDetail) {
+    if (_type > kEditTypeNew) {
         self.title = @"查看详情";
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+        if (_type == kEditTypeAgain) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+        }
+        
     } else {
         self.title = @"编辑";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
@@ -253,36 +256,38 @@ static const NSInteger kPhotoViewTag = 1000;
 {
     NSMutableArray* imagArr = [NSMutableArray array];
     
-    if (_idPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
-        return;
+    if (_type == kEditTypeAgain) {// 新建编辑才上传图片
+        if (_idPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
+            return;
+        }
+        if (_firstFormPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传首付单" toView:self.view];
+            return;
+        }
+        if (_posFormPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
+            return;
+        }
+        if (_depositPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传定金单" toView:self.view];
+            return;
+        }
+        if (_takeupPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传认购书" toView:self.view];
+            return;
+        }
+        if (_dealPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传合同" toView:self.view];
+            return;
+        }
+        [imagArr addObjectsFromArray:_idPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_firstFormPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_posFormPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_depositPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_takeupPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_dealPhotoView.resultArray];
     }
-    if (_firstFormPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传首付单" toView:self.view];
-        return;
-    }
-    if (_posFormPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
-        return;
-    }
-    if (_depositPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传定金单" toView:self.view];
-        return;
-    }
-    if (_takeupPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传认购书" toView:self.view];
-        return;
-    }
-    if (_dealPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传合同" toView:self.view];
-        return;
-    }
-    [imagArr addObjectsFromArray:_idPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_firstFormPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_posFormPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_depositPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_takeupPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_dealPhotoView.resultArray];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"customerId"] = _customerId;
@@ -360,9 +365,17 @@ static const NSInteger kPhotoViewTag = 1000;
             dispatch_group_leave(group);
         }];
     }
+    
+    NSString* urlStr = nil;
+    if (_type > kEditTypeNew) {
+        urlStr = @"wx/updateSignInfo";
+    } else {
+        urlStr = @"wx/saveSignInfo";
+    }
+    
     dispatch_group_notify(group, asyncQueue, ^{
         [MBProgressHUD showLoadingToView:self.view];
-        [NetworkManager postWithUrl:@"wx/saveSignInfo" parameters:parameters success:^(id reponse) {
+        [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];

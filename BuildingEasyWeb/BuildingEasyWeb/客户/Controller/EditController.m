@@ -31,8 +31,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    if (_isDetail) {
+    if (_type > kEditTypeNew) {
         self.title = @"查看详情";
+        if (_type == kEditTypeAgain) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+        }
     } else {
         self.title = @"编辑";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
@@ -61,7 +64,7 @@
     _line.frame = CGRectMake(0, _photoView.bottom, ScreenWidth, 1);
     [footerView addSubview:_line];
     
-    if (_isDetail) {
+    if (_type > kEditTypeNew) {
         _textView.editable = NO;
         [self requstData];
     }
@@ -72,6 +75,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)editInfo
+{
+    self.title = @"编辑";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    _textView.editable = YES;
+}
+
 #pragma mark Action
 - (void)commit
 {
@@ -79,9 +89,14 @@
         [MBProgressHUD showError:@"请填写内容" toView:self.view];
         return;
     }
-    if (_photoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请选择上传图片" toView:self.view];
-        return;
+    
+    NSArray* imageArr = [NSArray array];
+    if (_type == kEditTypeNew) {// 新建编辑才上传图片
+        imageArr = _photoView.resultArray;
+        if (_photoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请选择上传图片" toView:self.view];
+            return;
+        }
     }
     
     kWeakSelf(weakSelf);
@@ -89,9 +104,9 @@
     
     dispatch_group_t group = dispatch_group_create();
     
-    for (int i = 0; i < _photoView.resultArray.count; i ++) {
+    for (int i = 0; i < imageArr.count; i ++) {
         dispatch_group_enter(group);
-        [UploadImageManager uploadImage:_photoView.resultArray[i] type:@"5" imageKey:^(NSString *key) {
+        [UploadImageManager uploadImage:imageArr[i] type:@"5" imageKey:^(NSString *key) {
             
             NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
             parameters[@"customerId"] = weakSelf.customerId;
@@ -112,9 +127,16 @@
     parameters[@"customerId"] = _customerId;
     parameters[@"desc"] = _textView.text;
     
+    NSString* urlStr = nil;
+    if (_type > kEditTypeNew) {
+        urlStr = @"wx/updateSubmitInfo";
+    } else {
+        urlStr = @"wx/submitAudit";
+    }
+    
     dispatch_group_notify(group, asyncQueue, ^{
         [MBProgressHUD showLoadingToView:self.view];
-        [NetworkManager postWithUrl:@"wx/submitAudit" parameters:parameters success:^(id reponse) {
+        [NetworkManager postWithUrl:nil parameters:parameters success:^(id reponse) {
             [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
                                                                       * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

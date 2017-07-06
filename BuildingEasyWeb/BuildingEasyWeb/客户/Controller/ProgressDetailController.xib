@@ -11,11 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProgressDetailController">
             <connections>
+                <outlet property="bottomView" destination="Om0-XE-K2o" id="ZWa-6M-6MZ"/>
                 <outlet property="buildIntendImageView" destination="iVr-X7-ozb" id="pqs-9g-wYX"/>
                 <outlet property="buildNameLabel" destination="MmL-Vm-iN8" id="Lqj-FB-fPd"/>
                 <outlet property="customerNameLabel" destination="Quu-zY-yKJ" id="Pjo-ga-cVj"/>
                 <outlet property="customerPhoneLabel" destination="YV4-vh-Nz2" id="BTL-gO-Lbd"/>
                 <outlet property="descLabel" destination="Dul-hN-iSN" id="SSb-Pr-UUh"/>
+                <outlet property="editButton" destination="CpH-hK-W7i" id="0kT-rX-fPd"/>
                 <outlet property="intendImageView" destination="JTb-H6-oj1" id="VSh-Tg-ezi"/>
                 <outlet property="nameLabel" destination="wrG-T2-uS9" id="XHV-7j-x2A"/>
                 <outlet property="nextStateButton" destination="9AU-68-jX0" id="cfY-1p-A2c"/>
@@ -535,39 +537,51 @@
                         <constraint firstItem="CHn-Pp-Vxd" firstAttribute="centerX" secondItem="G4m-dw-paz" secondAttribute="centerX" id="wta-NS-L0Z"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AU-68-jX0">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Om0-XE-K2o">
                     <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AU-68-jX0">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="PbD-jq-9Nc"/>
+                            </constraints>
+                            <state key="normal" title="联系顾问">
+                                <color key="titleColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="nextStateAction:" destination="-1" eventType="touchUpInside" id="xMe-9e-6wl"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCF-1p-16Q" userLabel="按钮顶部线">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="IH5-eU-dTa"/>
+                            </constraints>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="PbD-jq-9Nc"/>
-                    </constraints>
-                    <state key="normal" title="联系顾问">
-                        <color key="titleColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="nextStateAction:" destination="-1" eventType="touchUpInside" id="xMe-9e-6wl"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCF-1p-16Q" userLabel="按钮顶部线">
-                    <rect key="frame" x="0.0" y="617" width="375" height="1"/>
-                    <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="IH5-eU-dTa"/>
+                        <constraint firstAttribute="trailing" secondItem="9AU-68-jX0" secondAttribute="trailing" id="AXA-nj-KFz"/>
+                        <constraint firstAttribute="height" constant="50" id="CnX-Bn-gIO"/>
+                        <constraint firstItem="rCF-1p-16Q" firstAttribute="leading" secondItem="Om0-XE-K2o" secondAttribute="leading" id="W6h-bq-bqd"/>
+                        <constraint firstItem="9AU-68-jX0" firstAttribute="leading" secondItem="Om0-XE-K2o" secondAttribute="leading" id="WFM-PW-uip"/>
+                        <constraint firstAttribute="trailing" secondItem="rCF-1p-16Q" secondAttribute="trailing" id="tgV-lS-9X8"/>
+                        <constraint firstItem="rCF-1p-16Q" firstAttribute="top" secondItem="Om0-XE-K2o" secondAttribute="top" id="wen-a4-SxX"/>
+                        <constraint firstItem="9AU-68-jX0" firstAttribute="top" secondItem="Om0-XE-K2o" secondAttribute="top" id="xdw-CO-dag"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="9AU-68-jX0" secondAttribute="trailing" id="769-SO-P60"/>
-                <constraint firstItem="rCF-1p-16Q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GKa-zr-WjQ"/>
+                <constraint firstAttribute="bottom" secondItem="Om0-XE-K2o" secondAttribute="bottom" id="7iz-ZV-ynP"/>
                 <constraint firstAttribute="trailing" secondItem="G4m-dw-paz" secondAttribute="trailing" id="KQS-SV-2vY"/>
-                <constraint firstAttribute="bottom" secondItem="9AU-68-jX0" secondAttribute="bottom" id="Ps6-26-mSw"/>
                 <constraint firstItem="G4m-dw-paz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WDq-Op-DUp"/>
-                <constraint firstAttribute="trailing" secondItem="rCF-1p-16Q" secondAttribute="trailing" id="fjO-nj-4aI"/>
                 <constraint firstAttribute="bottom" secondItem="G4m-dw-paz" secondAttribute="bottom" id="grm-2s-M1T"/>
-                <constraint firstItem="9AU-68-jX0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="puA-zd-cxr"/>
+                <constraint firstItem="Om0-XE-K2o" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lqy-dZ-oMQ"/>
+                <constraint firstAttribute="trailing" secondItem="Om0-XE-K2o" secondAttribute="trailing" id="tfB-PB-yOv"/>
                 <constraint firstItem="G4m-dw-paz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tpV-cT-WzE"/>
-                <constraint firstItem="rCF-1p-16Q" firstAttribute="top" secondItem="9AU-68-jX0" secondAttribute="top" id="vHb-AO-z0U"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="82.5"/>
         </view>
