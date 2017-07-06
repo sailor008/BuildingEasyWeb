@@ -8,8 +8,14 @@
 
 #import "BaseController.h"
 
+#import "Global.h"
+
 @interface EditController : BaseController
 
 @property (nonatomic, copy) NSString* customerId;
+
+@property (nonatomic, assign) NSInteger state;
+
+@property (nonatomic, assign) BEWEditType type;
 
 @end

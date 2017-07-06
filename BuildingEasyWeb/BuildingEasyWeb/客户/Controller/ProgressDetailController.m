@@ -25,6 +25,9 @@ const NSInteger kCustomProgressImageViewTag = 1000;
 const NSInteger kCustomProgressLabelTag = 2000;
 
 @interface ProgressDetailController () <UITableViewDataSource, UITableViewDelegate>
+{
+    BOOL _canLookDetail;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
@@ -39,10 +42,13 @@ const NSInteger kCustomProgressLabelTag = 2000;
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 
 @property (weak, nonatomic) IBOutlet UIButton *nextStateButton;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (nonatomic, strong) CustomerDetailModel* detailModel;
 
@@ -54,6 +60,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _canLookDetail = YES;
     [_tableView registerNibWithName:@"ProgressCell"];
     [self requestData];
 }
@@ -77,6 +84,39 @@ const NSInteger kCustomProgressLabelTag = 2000;
 
 - (IBAction)editProgress:(id)sender
 {
+    StateList* lastState = [_detailModel.stateList lastObject];
+    if (lastState.state > 3 && lastState.state < 7) {// 带看
+        EditController* editVC = [[EditController alloc] init];
+        editVC.customerId = _customerId;
+        editVC.state = lastState.state;
+        editVC.type = lastState.state - 4;
+        [self.navigationController pushViewController:editVC animated:YES];
+    } else if (lastState.state > 7 && lastState.state < 11) {// 认购
+        TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+        takeEdit.customerId = _customerId;
+        takeEdit.state = lastState.state;
+        takeEdit.type = lastState.state - 8;
+        [self.navigationController pushViewController:takeEdit animated:YES];
+    } else if (lastState.state > 11 && lastState.state < 15) {// 签约
+        DealEditController* dealEdit = [[DealEditController alloc] init];
+        dealEdit.customerId = _customerId;
+        dealEdit.state = lastState.state;
+        dealEdit.type = lastState.state - 12;
+        [self.navigationController pushViewController:dealEdit animated:YES];
+    } else if (lastState.state > 15 && lastState.state < 19) {// 回款
+        EditController* editVC = [[EditController alloc] init];
+        editVC.customerId = _customerId;
+        editVC.state = lastState.state;
+        editVC.type = lastState.state - 16;
+        [self.navigationController pushViewController:editVC animated:YES];
+    } else if (lastState.state > 19 && lastState.state < 23) {// 结清
+        EditController* editVC = [[EditController alloc] init];
+        editVC.customerId = _customerId;
+        editVC.state = lastState.state;
+        editVC.type = lastState.state - 20;
+        [self.navigationController pushViewController:editVC animated:YES];
+    }
+    
 //    switch (_detailModel.currentState) {
 //        case 0:// 报备、带看不可点击
 //        case 1:
@@ -90,9 +130,9 @@ const NSInteger kCustomProgressLabelTag = 2000;
 //            break;
 //        case 3:// 签约
 //        {
-            DealEditController* dealEdit = [[DealEditController alloc] init];
-            dealEdit.customerId = _customerId;
-            [self.navigationController pushViewController:dealEdit animated:YES];
+//            DealEditController* dealEdit = [[DealEditController alloc] init];
+//            dealEdit.customerId = _customerId;
+//            [self.navigationController pushViewController:dealEdit animated:YES];
 //        }
 //            break;
 //        default:// 回款、结清
@@ -155,7 +195,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
     cell.model = _detailModel.stateList[i];
     
     cell.index = indexPath.row;
-    cell.canLookUpDetail = _detailModel.currentState > 1;
+    cell.canLookUpDetail = _canLookDetail;
     return cell;
 }
 
@@ -170,35 +210,37 @@ const NSInteger kCustomProgressLabelTag = 2000;
     if (indexPath.row != 0) {
         return;
     }
-    switch (_detailModel.currentState) {
-        case 0:// 报备、带看不可点击
-        case 1:
-            break;
-        case 2:// 认购
-        {
-            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-            takeEdit.customerId = _customerId;
-            takeEdit.isDetail = YES;
-            StateList* lastState = [_detailModel.stateList lastObject];
-            takeEdit.state = lastState.state;
-            [self.navigationController pushViewController:takeEdit animated:YES];
-        }
-            break;
-        case 3:// 签约
-        {
-            DealEditController* dealEdit = [[DealEditController alloc] init];
-            dealEdit.customerId = _customerId;
-            [self.navigationController pushViewController:dealEdit animated:YES];
-        }
-            break;
-        default:// 回款、结清
-        {
-            EditController* editVC = [[EditController alloc] init];
-            editVC.customerId = _customerId;
-            [self.navigationController pushViewController:editVC animated:YES];
-        }
-            break;
-    }
+    
+    [self editProgress:nil];
+//    switch (_detailModel.currentState) {
+//        case 0:// 报备、带看不可点击
+//        case 1:
+//            break;
+//        case 2:// 认购
+//        {
+//            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
+//            takeEdit.customerId = _customerId;
+//            takeEdit.isDetail = YES;
+//            StateList* lastState = [_detailModel.stateList lastObject];
+//            takeEdit.state = lastState.state;
+//            [self.navigationController pushViewController:takeEdit animated:YES];
+//        }
+//            break;
+//        case 3:// 签约
+//        {
+//            DealEditController* dealEdit = [[DealEditController alloc] init];
+//            dealEdit.customerId = _customerId;
+//            [self.navigationController pushViewController:dealEdit animated:YES];
+//        }
+//            break;
+//        default:// 回款、结清
+//        {
+//            EditController* editVC = [[EditController alloc] init];
+//            editVC.customerId = _customerId;
+//            [self.navigationController pushViewController:editVC animated:YES];
+//        }
+//            break;
+//    }
 }
 
 #pragma mark RequestData
@@ -234,8 +276,28 @@ const NSInteger kCustomProgressLabelTag = 2000;
     
     _descLabel.text = _detailModel.desc;
     
-    NSArray* nextStateArr = @[@"发起带看", @"发起认购", @"发起签约", @"发起回款", @"发起结清"];
-    [_nextStateButton setTitle:nextStateArr[_detailModel.currentState] forState:UIControlStateNormal];
+    StateList* lastState = [_detailModel.stateList lastObject];
+    NSString* nextStepStr = nil;
+    if (lastState.state == 2) {
+        nextStepStr = @"发起带看";
+    } else if (lastState.state == 6) {
+        nextStepStr = @"发起认购";
+    } else if (lastState.state == 10) {
+        nextStepStr = @"发起签约";
+    } else if (lastState.state == 14) {
+        nextStepStr = @"发起回款";
+    } else if (lastState.state == 18) {
+        nextStepStr = @"发起结清";
+    } else {
+        _bottomView.hidden = YES;
+    }
+    
+    [_nextStateButton setTitle:nextStepStr forState:UIControlStateNormal];
+    
+    if (lastState.state < 4 || lastState.state == 7 || lastState.state == 11 || lastState.state == 15 || lastState.state == 19 || lastState.state == 23) {
+        _editButton.hidden = YES;
+        _canLookDetail = NO;
+    }
     
     NSTimeInterval timeInterval = _detailModel.createTime / 1000;
     _timeLabel.text = [NSDate dateStrWithTimeInterval:timeInterval];

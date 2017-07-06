@@ -153,6 +153,18 @@
 - (IBAction)baobei:(id)sender
 {
     BaobeiController* baobeiVC = [[BaobeiController alloc] init];
+    
+    BuildingListModel* buildListModel = [[BuildingListModel alloc] init];
+    buildListModel.buildId = _buildId;
+    buildListModel.name = _detail.buildInfo.name;
+    buildListModel.commission = _commission;
+    buildListModel.distance = _distance;
+    
+    BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
+    baobeiModel.buildModel = buildListModel;
+    
+    baobeiVC.baobeiModel = baobeiModel;
+    
     [self.navigationController pushViewController:baobeiVC animated:YES];
 }
 

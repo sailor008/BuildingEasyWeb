@@ -77,6 +77,12 @@
 {
     _sourceArray = [sourceArray copy];
     _isShow = YES;
+    [_collectionView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
+            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+        }
+    });
 }
 
 - (NSArray<UIImage *> *)resultArray

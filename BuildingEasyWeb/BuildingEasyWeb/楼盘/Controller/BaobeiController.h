@@ -8,6 +8,8 @@
 
 #import "BaseController.h"
 
+#import "BuildBaobeiModel.h"
+
 @protocol BaobeiControllerDelegate <NSObject>
 
 - (void)baobeiSuccess;
@@ -23,5 +25,7 @@
 @property (nonatomic, copy) NSString* customerId;
 
 @property (nonatomic, weak) id<BaobeiControllerDelegate> delegate;
+
+@property (nonatomic, strong) BuildBaobeiModel* baobeiModel;
 
 @end
