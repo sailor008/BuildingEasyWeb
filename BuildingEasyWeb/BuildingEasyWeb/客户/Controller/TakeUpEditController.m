@@ -23,8 +23,12 @@
 #import <MJExtension.h>
 #import "UIView+MBProgressHUD.h"
 #import "NSString+Addition.h"
+#import "UploadImageManager.h"
 
 @interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate, EditSectionViewDelegate, PayTypeCellDelegate>
+{
+    BOOL _canEdit;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -32,6 +36,8 @@
 
 @property (nonatomic, copy) NSArray* dataArray;
 @property (nonatomic, copy) NSArray* sectionArray;
+
+@property (nonatomic, copy) NSDictionary* takeUpInfo;
 
 @end
 
@@ -41,15 +47,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"编辑";
-    
     [self setupInterFace];
     [self setupProperty];
+    
+    if (_isDetail) {
+        _canEdit = NO;
+        [self requestData];
+    }
 }
 
 - (void)setupInterFace
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    if (_isDetail) {
+        self.title = @"查看详情";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+    } else {
+        self.title = @"编辑";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    }
     
     [_tableView registerNib:[UINib nibWithNibName:@"EditSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"kEditSectionView"];
     [_tableView registerNibWithName:@"EditTextCell"];
@@ -60,6 +75,7 @@
     _photoView = [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
     _photoView.delegate = self;
     _photoView.sectionTitle = @"认购书";
+    _photoView.limitNum = 9;
     _photoView.frame = CGRectMake(0, 10, ScreenWidth, 118);
     
     UIView* footerView = [[UIView alloc] init];
@@ -115,10 +131,6 @@
         model = rowArray[indexPath.row];
     }
     
-    if (indexPath.section == 4) {
-        NSLog(@"here");
-    }
-    
     if (model.isRadio) {
         PayTypeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PayTypeCell" forIndexPath:indexPath];
         cell.model = model;
@@ -151,7 +163,7 @@
     EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
     sectionView.delegate = self;
     sectionView.sectionTitle = sectionTitle;
-    if (section == 2) {
+    if (section == 2 && _canEdit == YES) {
         sectionView.canAdd = YES;
     } else {
         sectionView.canAdd = NO;
@@ -196,6 +208,11 @@
     [tempArr insertObject:model atIndex:3];
     
     _dataArray = [tempArr copy];
+    
+    NSMutableArray* tempSectionArr = [_sectionArray mutableCopy];
+    [tempSectionArr insertObject:@"" atIndex:3];
+    _sectionArray = [tempSectionArr copy];
+    
     [_tableView reloadData];
 }
 
@@ -250,43 +267,126 @@
 #pragma mark Action
 - (void)commit
 {
+    NSArray* imageArr = _photoView.resultArray;
+    if (_isDetail == NO) {
+        if (imageArr.count == 0) {
+            [MBProgressHUD showError:@"请添加认购书" toView:self.view];
+            return;
+        }
+    }
+    
     BOOL result = YES;
     TakeUpModel* takeUpModel = [TakeUpManager tranToCommitModel:_dataArray tranResult:&result];
     takeUpModel.customerId = _customerId;
     
-    NSMutableDictionary* parameters = [takeUpModel mj_keyValues];
+    kWeakSelf(weakSelf);
+    dispatch_queue_t asyncQueue = dispatch_queue_create("BEWTakeUpEdit", DISPATCH_QUEUE_CONCURRENT);
     
-    NSMutableString* buyersStr = [NSMutableString string];
-    NSArray* buyers = parameters[@"buyers"];
-    [buyersStr appendString:@"["];
+    dispatch_group_t group = dispatch_group_create();
     
-    for (int i = 0; i < buyers.count; i ++) {
-        NSDictionary* dic = buyers[i];
-        [buyersStr appendString:@"{"];
-        [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
-            [buyersStr appendFormat:@"\"%@\":\"%@\",", key, obj];
-        }];
-        [buyersStr deleteCharactersInRange:NSMakeRange(buyersStr.length - 1, 1)];
-        [buyersStr appendString:@"}"];
-        if (i < buyers.count - 1) {
-            [buyersStr appendString:@","];
-        }
-    }
-    [buyersStr appendString:@"]"];
-    
-    parameters[@"buyers"] = buyersStr;
-    
-    if (result == YES) {
-        NSLog(@"parameters:%@", parameters);
-        [MBProgressHUD showLoadingToView:self.view];
-        [NetworkManager postWithUrl:@"wx/saveSubInfo" parameters:parameters success:^(id reponse) {
-            NSLog(@"成功:%@", reponse);
-            [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+    for (int i = 0; i < imageArr.count; i ++) {
+        dispatch_group_enter(group);
+        
+        [UploadImageManager uploadImage:imageArr[i] type:@"5" imageKey:^(NSString *key) {
+            
+            NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+            parameters[@"customerId"] = weakSelf.customerId;
+            parameters[@"resourceKey"] = key;
+            [NetworkManager postWithUrl:@"wx/addCustomerImg" parameters:parameters success:^(id reponse) {
+                dispatch_group_leave(group);
+            } failure:^(NSError *error, NSString *msg) {
+                dispatch_group_leave(group);
+            }];
+            
         } failure:^(NSError *error, NSString *msg) {
-            NSLog(@"失败:%@---%@", error, msg);
-            [MBProgressHUD dissmissWithError:msg toView:self.view];
+            NSLog(@"error:%@---%@", error, msg);
+            dispatch_group_leave(group);
         }];
     }
+    dispatch_group_notify(group, asyncQueue, ^{
+        
+        NSMutableDictionary* parameters = [takeUpModel mj_keyValues];
+        
+        NSMutableString* buyersStr = [NSMutableString string];
+        NSArray* buyers = parameters[@"buyers"];
+        [buyersStr appendString:@"["];
+        
+        for (int i = 0; i < buyers.count; i ++) {
+            NSDictionary* dic = buyers[i];
+            [buyersStr appendString:@"{"];
+            [dic enumerateKeysAndObjectsUsingBlock:^(NSString*  _Nonnull key, NSString*  _Nonnull obj, BOOL * _Nonnull stop) {
+                [buyersStr appendFormat:@"\"%@\":\"%@\",", key, obj];
+            }];
+            [buyersStr deleteCharactersInRange:NSMakeRange(buyersStr.length - 1, 1)];
+            [buyersStr appendString:@"}"];
+            if (i < buyers.count - 1) {
+                [buyersStr appendString:@","];
+            }
+        }
+        [buyersStr appendString:@"]"];
+        
+        parameters[@"buyers"] = buyersStr;
+        
+        NSString* urlStr = nil;
+        if (_isDetail) {
+            urlStr = @"wx/updateSubInfo";
+        } else {
+            urlStr = @"wx/saveSubInfo";
+        }
+        
+        if (result == YES) {
+            [MBProgressHUD showLoadingToView:self.view];
+            [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
+                [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
+                                                                          * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            } failure:^(NSError *error, NSString *msg) {
+                [MBProgressHUD dissmissWithError:msg toView:self.view];
+            }];
+        }
+        
+    });
+}
+
+- (void)editInfo
+{
+    self.title = @"编辑";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    _canEdit = YES;
+    _dataArray = [TakeUpManager detailTakeUpArrayWithData:_takeUpInfo canEdit:YES];
+    [_tableView reloadData];
+}
+
+#pragma mark RequestData
+- (void)requestData
+{
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"customerId"] = _customerId;
+    parameters[@"state"] = @(_state);
+    
+    [MBProgressHUD showLoadingToView:self.view];
+    [NetworkManager postWithUrl:@"wx/getSubscribeInfo" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
+        NSLog(@"reponse:%@", reponse);
+        
+        _takeUpInfo = reponse;
+        
+        NSArray* imgArr = [reponse objectForKey:@"imgInfos"];
+        NSMutableArray* tempArr = [NSMutableArray array];
+        for (NSDictionary* dic in imgArr) {
+            NSString* imgUrl = dic[@"imgUrl"];
+            [tempArr addObject:imgUrl];
+        }
+        _photoView.sourceArray = [tempArr copy];
+        
+        _dataArray = [TakeUpManager detailTakeUpArrayWithData:reponse canEdit:NO];
+        [_tableView reloadData];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
 }
 
 @end

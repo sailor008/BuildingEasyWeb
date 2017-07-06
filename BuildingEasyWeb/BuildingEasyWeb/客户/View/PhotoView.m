@@ -11,6 +11,9 @@
 #import "PhotoCell.h"
 
 @interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+{
+    BOOL _isShow;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *photoTitleLabel;
 
@@ -70,6 +73,12 @@
     _photoTitleLabel.text = sectionTitle;
 }
 
+- (void)setSourceArray:(NSArray *)sourceArray
+{
+    _sourceArray = [sourceArray copy];
+    _isShow = YES;
+}
+
 - (NSArray<UIImage *> *)resultArray
 {
     NSMutableArray* array = [NSMutableArray arrayWithArray:_photoArray];
@@ -83,19 +92,30 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (_isShow) {
+        return _sourceArray.count;
+    }
     return _photoArray.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
-    cell.photo = _photoArray[indexPath.row];
+    if (_isShow) {
+        cell.imagUrlStr = _sourceArray[indexPath.row];
+    } else {
+        cell.photo = _photoArray[indexPath.row];
+    }
+    
     return cell;
 }
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (_isShow) {
+        return;
+    }
     if (indexPath.row != _photoArray.count - 1 || _canSelectedPhoto == NO) {
         return;
     }

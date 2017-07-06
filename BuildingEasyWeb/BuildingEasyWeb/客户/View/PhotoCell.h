@@ -11,5 +11,6 @@
 @interface PhotoCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImage* photo;
+@property (nonatomic, copy) NSString* imagUrlStr;
 
 @end
