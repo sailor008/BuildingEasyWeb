@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "StatisticStateModel.h"
+
 @protocol SelectStatusDelegate <NSObject>
 
-- (void)finishSelectStatus:(NSString*)desc;
+- (void)finishSelectStatus:(StatisticStateModel*)model;
 
 @end
 
 @interface StatusListView : UIView
 
 @property (nonatomic, weak) id<SelectStatusDelegate> delegate;
+
+-(void)showWithListData: (NSArray*)listdata;
 
 @end

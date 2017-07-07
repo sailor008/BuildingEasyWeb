@@ -10,7 +10,12 @@
 
 #import "StatusListView.h"
 
+#import "StatisticStateModel.h"
+
 @interface CustomerStatisticController ()<SelectStatusDelegate>
+
+@property (nonatomic, assign) const float cellHeight;
+@property (nonatomic, copy) StatisticStateModel* nowStateModel;
 
 @end
 
@@ -20,11 +25,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _nowStateModel = self.stateList[0];
+    
     [self initBtnNavTitle];
-    
-    
-    
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,34 +53,44 @@
     btnNavTitle.titleLabel.font = [UIFont systemFontOfSize:18.0f];
     [btnNavTitle setTitleColor:Hex(0x292929) forState:UIControlStateNormal];
     [btnNavTitle setTitle:@"标题" forState:UIControlStateNormal];
-    CGSize titleSize = [@"标题" sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:btnNavTitle.titleLabel.font.fontName size:btnNavTitle.titleLabel.font.pointSize]}];
+    self.navigationItem.titleView = btnNavTitle;
+    
+    [self updateBtnNavTitle];
+}
+
+- (void)updateBtnNavTitle
+{
+    UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;
+    //更新标题的文本
+    [btnNavTitle setTitle:[_nowStateModel getStateDetailStr] forState:UIControlStateNormal];
+    //更新标题的大小
+    CGSize titleSize = [[_nowStateModel getStateDetailStr] sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:btnNavTitle.titleLabel.font.fontName size:btnNavTitle.titleLabel.font.pointSize]}];
     titleSize.width = titleSize.width + 20.0;
     btnNavTitle.frame = CGRectMake(0, 100, titleSize.width, titleSize.height);
-//    btnNavTitle.backgroundColor = [UIColor redColor];
-    
+    //更新标题的大小
     btnNavTitle.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [btnNavTitle setTitleEdgeInsets:UIEdgeInsetsMake(0, -btnNavTitle.imageView.frame.size.width - 5.0, 0, btnNavTitle.imageView.frame.size.width)];
     [btnNavTitle setImageEdgeInsets:UIEdgeInsetsMake(0.0, btnNavTitle.titleLabel.bounds.size.width + 5.0, 0, -btnNavTitle.titleLabel.bounds.size.width)];
-    
-    self.navigationItem.titleView = btnNavTitle;
+    //重置指示图标的方向为：收起列表
+    btnNavTitle.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
 }
 
 - (void)onBtnNavTitle:(UIButton*)btn
 {
+    //修改指示图标的方向为：打开列表
     UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;
     btnNavTitle.imageView.transform = CGAffineTransformMakeScale(1.0, -1.0);
-    
-    
+    //显示可选择的状态列表
     StatusListView* listView = [[StatusListView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     listView.delegate = self;
     [self.view addSubview:listView];
+    [listView showWithListData:self.stateList];
 }
 
-- (void)finishSelectStatus:(NSString *)desc
+- (void)finishSelectStatus:(StatisticStateModel*)model
 {
-    UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;
-    btnNavTitle.titleLabel.text = desc;
-//    [btnNavTitle setTitle:desc forState:UIControlStateNormal];
+    _nowStateModel = model;
+    [self updateBtnNavTitle];
 }
 
 @end

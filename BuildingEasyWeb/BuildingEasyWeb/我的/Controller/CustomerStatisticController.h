@@ -10,4 +10,6 @@
 
 @interface CustomerStatisticController : BaseController
 
+@property (nonatomic, copy)NSArray* stateList;
+
 @end

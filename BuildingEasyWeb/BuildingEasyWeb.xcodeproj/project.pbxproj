@@ -47,6 +47,7 @@
 		C7BBCE741EF66761000EF857 /* EditMyInfoBaseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */; };
 		C7BBCE771EF98CB0000EF857 /* QNYunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE761EF98CB0000EF857 /* QNYunManager.m */; };
 		C7CA42221F0E9A5F00112216 /* StatusListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CA42211F0E9A5F00112216 /* StatusListView.m */; };
+		C7CA42251F0FCDC300112216 /* StatisticStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CA42241F0FCDC300112216 /* StatisticStateModel.m */; };
 		CF05247B1EFF51FB00BE8840 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05247A1EFF51FB00BE8840 /* PhotoView.m */; };
 		CF05247D1EFF523F00BE8840 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF05247C1EFF523F00BE8840 /* PhotoView.xib */; };
 		CF0524811EFF54A400BE8840 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05247F1EFF54A400BE8840 /* PhotoCell.m */; };
@@ -239,6 +240,8 @@
 		C7BBCE761EF98CB0000EF857 /* QNYunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNYunManager.m; sourceTree = "<group>"; };
 		C7CA42201F0E9A5F00112216 /* StatusListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusListView.h; sourceTree = "<group>"; };
 		C7CA42211F0E9A5F00112216 /* StatusListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusListView.m; sourceTree = "<group>"; };
+		C7CA42231F0FCDC300112216 /* StatisticStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticStateModel.h; sourceTree = "<group>"; };
+		C7CA42241F0FCDC300112216 /* StatisticStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticStateModel.m; sourceTree = "<group>"; };
 		CF0524791EFF51FB00BE8840 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
 		CF05247A1EFF51FB00BE8840 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		CF05247C1EFF523F00BE8840 /* PhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
@@ -818,6 +821,8 @@
 				C717494E1EFAE7630085E590 /* MyInfoModel.m */,
 				C717497F1F068B140085E590 /* EditTxtModel.h */,
 				C71749801F068B140085E590 /* EditTxtModel.m */,
+				C7CA42231F0FCDC300112216 /* StatisticStateModel.h */,
+				C7CA42241F0FCDC300112216 /* StatisticStateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1162,6 +1167,7 @@
 				CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */,
 				C717494F1EFAE7630085E590 /* MyInfoModel.m in Sources */,
 				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
+				C7CA42251F0FCDC300112216 /* StatisticStateModel.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
 				CFE578AD1F04033700ADCABC /* GetImageTokenManager.m in Sources */,
