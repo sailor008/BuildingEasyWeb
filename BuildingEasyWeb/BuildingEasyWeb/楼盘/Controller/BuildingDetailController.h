@@ -12,4 +12,7 @@
 
 @property (nonatomic, copy) NSString* buildId;
 
+@property (nonatomic, copy) NSString* commission;
+@property (nonatomic, copy) NSString* distance;
+
 @end

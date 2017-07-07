@@ -27,6 +27,13 @@ typedef NS_ENUM(NSInteger, BEWProgressState) {
     kInvalidState// 失效
 };
 
+// 编辑页面的三种状态
+typedef NS_ENUM(NSInteger, BEWEditType) {
+    kEditTypeNew,   // 新建
+    kEditTypeAgain, // 编辑
+    kEditTypeDetail // 查看
+};
+
 typedef void(^Callback)();
 
 typedef void(^FailureBlock)(NSError* error, NSString* msg);

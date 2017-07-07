@@ -18,6 +18,7 @@
 #import "NSString+Addition.h"
 #import "UIView+MBProgressHUD.h"
 #import "NetworkManager.h"
+#import "NSDate+Addition.h"
 
 static const NSInteger kPhotoViewTag = 1000;
 
@@ -44,10 +45,12 @@ static const NSInteger kPhotoViewTag = 1000;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"编辑";
-    
     [self setupInterFace];
     [self setupProperty];
+    
+    if (_type > kEditTypeNew) {
+        [self reqeustData];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,7 +66,16 @@ static const NSInteger kPhotoViewTag = 1000;
 
 - (void)setupInterFace
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    if (_type > kEditTypeNew) {
+        self.title = @"查看详情";
+        if (_type == kEditTypeAgain) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
+        }
+        
+    } else {
+        self.title = @"编辑";
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    }
     
     [_tableView registerNibWithName:@"EditTextCell"];
     [_tableView registerNibWithName:@"PayTypeCell"];
@@ -167,6 +179,17 @@ static const NSInteger kPhotoViewTag = 1000;
     return [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
 }
 
+- (void)editInfo
+{
+    self.title = @"编辑";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+    for (EditInfoModel* model in _dataArray) {
+        model.canEdit = YES;
+    }
+    
+    [_tableView reloadData];
+}
+
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -233,36 +256,38 @@ static const NSInteger kPhotoViewTag = 1000;
 {
     NSMutableArray* imagArr = [NSMutableArray array];
     
-    if (_idPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
-        return;
+    if (_type == kEditTypeAgain) {// 新建编辑才上传图片
+        if (_idPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
+            return;
+        }
+        if (_firstFormPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传首付单" toView:self.view];
+            return;
+        }
+        if (_posFormPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
+            return;
+        }
+        if (_depositPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传定金单" toView:self.view];
+            return;
+        }
+        if (_takeupPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传认购书" toView:self.view];
+            return;
+        }
+        if (_dealPhotoView.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传合同" toView:self.view];
+            return;
+        }
+        [imagArr addObjectsFromArray:_idPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_firstFormPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_posFormPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_depositPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_takeupPhotoView.resultArray];
+        [imagArr addObjectsFromArray:_dealPhotoView.resultArray];
     }
-    if (_firstFormPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传首付单" toView:self.view];
-        return;
-    }
-    if (_posFormPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
-        return;
-    }
-    if (_depositPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传定金单" toView:self.view];
-        return;
-    }
-    if (_takeupPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传认购书" toView:self.view];
-        return;
-    }
-    if (_dealPhotoView.resultArray.count == 0) {
-        [MBProgressHUD showError:@"请上传合同" toView:self.view];
-        return;
-    }
-    [imagArr addObjectsFromArray:_idPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_firstFormPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_posFormPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_depositPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_takeupPhotoView.resultArray];
-    [imagArr addObjectsFromArray:_dealPhotoView.resultArray];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"customerId"] = _customerId;
@@ -340,9 +365,17 @@ static const NSInteger kPhotoViewTag = 1000;
             dispatch_group_leave(group);
         }];
     }
+    
+    NSString* urlStr = nil;
+    if (_type > kEditTypeNew) {
+        urlStr = @"wx/updateSignInfo";
+    } else {
+        urlStr = @"wx/saveSignInfo";
+    }
+    
     dispatch_group_notify(group, asyncQueue, ^{
         [MBProgressHUD showLoadingToView:self.view];
-        [NetworkManager postWithUrl:@"wx/saveSignInfo" parameters:parameters success:^(id reponse) {
+        [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -373,7 +406,56 @@ static const NSInteger kPhotoViewTag = 1000;
 
 - (void)dealWithData:(NSDictionary *)data
 {
+    {
+        EditInfoModel* model = _dataArray[0];
+        NSTimeInterval timeInterval = [data[@"startTime"] doubleValue];
+        model.canEdit = NO;
+        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+    }
+    {
+        EditInfoModel* model = _dataArray[1];
+        NSTimeInterval timeInterval = [data[@"endTime"] doubleValue];
+        model.canEdit = NO;
+        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+    }
+    {
+        EditInfoModel* model = _dataArray[2];
+        model.canEdit = NO;
+        model.text = data[@"price"];
+    }
+    {
+        EditInfoModel* model = _dataArray[3];
+        model.canEdit = NO;
+        model.text = data[@"total"];
+    }
+    {
+        EditInfoModel* model = _dataArray[4];
+        model.canEdit = NO;
+        NSTimeInterval timeInterval = [data[@"leadTime"] doubleValue];
+        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+    }
     
+    NSArray* imgList = data[@"imgList"];
+    NSUInteger count = imgList.count;
+    NSMutableArray* dealImgArr = [NSMutableArray array];
+    for (int i = 0; i < imgList.count; i ++) {
+        // 倒序
+        NSDictionary* dic = imgList[count - i];
+        
+        PhotoView* photoView = _footerView.subviews[i];
+        if (i < 5) {
+            NSString* imgUrl = dic[@"imgUrl"];
+            NSArray* imgArr = @[imgUrl];
+            photoView.sourceArray = imgArr;
+        } else {
+            NSString* imgUrl = dic[@"imgUrl"];
+            [dealImgArr addObject:imgUrl];
+        }
+    }
+    
+    _dealPhotoView.sourceArray = [dealImgArr copy];
+    
+    [_tableView reloadData];
 }
 
 @end
