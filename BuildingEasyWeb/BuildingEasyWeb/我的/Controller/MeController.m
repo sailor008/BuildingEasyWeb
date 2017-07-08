@@ -8,6 +8,7 @@
 
 #import "MeController.h"
 #import "UITableView+Addition.h"
+#import "UIView+MBProgressHUD.h"
 
 #import "MeCellBase.h"
 #import "MeCellInfo.h"
@@ -18,10 +19,15 @@
 #import "MyMessageController.h"
 #import "MyInfoController.h"
 #import "BaobeiController.h"
+#import "CustomerStatisticController.h"
 
 
 //import model
+#import <MJExtension.h>
+#import "NetworkManager.h"
 #import "User.h"
+#import "StatisticStateModel.h"
+
 
 
 typedef void (^onTabVCell)(void);
@@ -238,7 +244,7 @@ typedef void (^onTabVCell)(void);
         [self onMyInfo];
     }else if(indexPath.section == 1) {
         if(indexPath.row == 0) {
-
+            [self onCustomerStatistic];
         }else { //if(indexPath.row == 1)
         }
         
@@ -248,6 +254,33 @@ typedef void (^onTabVCell)(void);
     }
 }
 
+- (void)onCustomerStatistic
+{
+    
+    [MBProgressHUD showLoading];
+    [NetworkManager postWithUrl:@"wx/getStateNumList" parameters:@{} success:^(id reponse) {
+        NSLog(@"Success：获取统计筛选条件 [wx/getStateNumList] 成功！");
+        NSLog(@">>>>>>>>>>>>>>>>> %@", reponse);
+        NSArray* tmpArray = (NSArray *)reponse;
+        NSMutableArray* statelist = [NSMutableArray array];
+        [statelist removeAllObjects];
+        for (NSDictionary* dic in tmpArray) {
+            StatisticStateModel *model = [StatisticStateModel mj_objectWithKeyValues:dic];
+            [statelist addObject:model];
+        }
+        
+        [MBProgressHUD hideHUD];
+        CustomerStatisticController* customerStatisticVC = [[CustomerStatisticController alloc]init];
+        customerStatisticVC.hidesBottomBarWhenPushed = YES;
+        customerStatisticVC.stateList = statelist;
+        [self.navigationController pushViewController:customerStatisticVC animated:YES];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"Error：获取统计筛选条件 [wx/getStateNumList] 失败。detail：%@", msg);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:msg];
+    }];
+}
 
 
 

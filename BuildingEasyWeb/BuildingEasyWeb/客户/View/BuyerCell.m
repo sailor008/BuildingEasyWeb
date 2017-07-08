@@ -53,6 +53,12 @@
     _phoneTextField.text = model.mobile;
     _clientTextField.text = model.client;
     _clientIdcardTextField.text = model.clientIdcard;
+    
+    _idCardTextField.enabled = model.canEdit;
+    _nameTextField.enabled = model.canEdit;
+    _phoneTextField.enabled = model.canEdit;
+    _clientTextField.enabled = model.canEdit;
+    _clientIdcardTextField.enabled = model.canEdit;
 }
 
 #pragma mark Action

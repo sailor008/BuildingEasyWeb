@@ -54,6 +54,14 @@
     }
 }
 
+- (void)setText:(NSString *)text
+{
+    [super setText:text];
+    if (text.length) {
+        _placeholderLabel.hidden = YES;
+    }
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

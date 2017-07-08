@@ -22,6 +22,8 @@
 		C71749861F07D1B70085E590 /* SampleEditTxtCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749841F07D1B70085E590 /* SampleEditTxtCell.xib */; };
 		C71749901F09029A0085E590 /* EditMyNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = C717498F1F09029A0085E590 /* EditMyNameController.m */; };
 		C71749931F0905F40085E590 /* MyImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749921F0905F40085E590 /* MyImageHelper.m */; };
+		C71749971F09404D0085E590 /* CustomerStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749951F09404D0085E590 /* CustomerStatisticController.m */; };
+		C71749981F09404D0085E590 /* CustomerStatisticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749961F09404D0085E590 /* CustomerStatisticController.xib */; };
 		C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F47E1EE9B9DD0067C07F /* MeCellBase.m */; };
 		C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */; };
 		C782F4851EE9B9FC0067C07F /* MeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4831EE9B9FC0067C07F /* MeController.m */; };
@@ -44,6 +46,8 @@
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
 		C7BBCE741EF66761000EF857 /* EditMyInfoBaseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */; };
 		C7BBCE771EF98CB0000EF857 /* QNYunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE761EF98CB0000EF857 /* QNYunManager.m */; };
+		C7CA42221F0E9A5F00112216 /* StatusListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CA42211F0E9A5F00112216 /* StatusListView.m */; };
+		C7CA42251F0FCDC300112216 /* StatisticStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CA42241F0FCDC300112216 /* StatisticStateModel.m */; };
 		CF05247B1EFF51FB00BE8840 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05247A1EFF51FB00BE8840 /* PhotoView.m */; };
 		CF05247D1EFF523F00BE8840 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF05247C1EFF523F00BE8840 /* PhotoView.xib */; };
 		CF0524811EFF54A400BE8840 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05247F1EFF54A400BE8840 /* PhotoCell.m */; };
@@ -199,6 +203,9 @@
 		C717498F1F09029A0085E590 /* EditMyNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditMyNameController.m; sourceTree = "<group>"; };
 		C71749911F0905F40085E590 /* MyImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImageHelper.h; sourceTree = "<group>"; };
 		C71749921F0905F40085E590 /* MyImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImageHelper.m; sourceTree = "<group>"; };
+		C71749941F09404D0085E590 /* CustomerStatisticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerStatisticController.h; sourceTree = "<group>"; };
+		C71749951F09404D0085E590 /* CustomerStatisticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerStatisticController.m; sourceTree = "<group>"; };
+		C71749961F09404D0085E590 /* CustomerStatisticController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerStatisticController.xib; sourceTree = "<group>"; };
 		C782F47D1EE9B9DD0067C07F /* MeCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCellBase.h; sourceTree = "<group>"; };
 		C782F47E1EE9B9DD0067C07F /* MeCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCellBase.m; sourceTree = "<group>"; };
 		C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCellBase.xib; sourceTree = "<group>"; };
@@ -233,6 +240,10 @@
 		C7BBCE721EF66761000EF857 /* EditMyInfoBaseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditMyInfoBaseController.xib; sourceTree = "<group>"; };
 		C7BBCE751EF98CB0000EF857 /* QNYunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QNYunManager.h; sourceTree = "<group>"; };
 		C7BBCE761EF98CB0000EF857 /* QNYunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QNYunManager.m; sourceTree = "<group>"; };
+		C7CA42201F0E9A5F00112216 /* StatusListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusListView.h; sourceTree = "<group>"; };
+		C7CA42211F0E9A5F00112216 /* StatusListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusListView.m; sourceTree = "<group>"; };
+		C7CA42231F0FCDC300112216 /* StatisticStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticStateModel.h; sourceTree = "<group>"; };
+		C7CA42241F0FCDC300112216 /* StatisticStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticStateModel.m; sourceTree = "<group>"; };
 		CF0524791EFF51FB00BE8840 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
 		CF05247A1EFF51FB00BE8840 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		CF05247C1EFF523F00BE8840 /* PhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
@@ -800,6 +811,9 @@
 				C717498A1F08E3710085E590 /* EditMyInfoDelegate.h */,
 				C717498E1F09029A0085E590 /* EditMyNameController.h */,
 				C717498F1F09029A0085E590 /* EditMyNameController.m */,
+				C71749941F09404D0085E590 /* CustomerStatisticController.h */,
+				C71749951F09404D0085E590 /* CustomerStatisticController.m */,
+				C71749961F09404D0085E590 /* CustomerStatisticController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -815,6 +829,8 @@
 				C717494E1EFAE7630085E590 /* MyInfoModel.m */,
 				C717497F1F068B140085E590 /* EditTxtModel.h */,
 				C71749801F068B140085E590 /* EditTxtModel.m */,
+				C7CA42231F0FCDC300112216 /* StatisticStateModel.h */,
+				C7CA42241F0FCDC300112216 /* StatisticStateModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -840,6 +856,8 @@
 				C71749821F07D1B70085E590 /* SampleEditTxtCell.h */,
 				C71749831F07D1B70085E590 /* SampleEditTxtCell.m */,
 				C71749841F07D1B70085E590 /* SampleEditTxtCell.xib */,
+				C7CA42201F0E9A5F00112216 /* StatusListView.h */,
+				C7CA42211F0E9A5F00112216 /* StatusListView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1050,6 +1068,7 @@
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
 				CFE2AF8B1EFFB84B004A98B3 /* DealEditController.xib in Resources */,
+				C71749981F09404D0085E590 /* CustomerStatisticController.xib in Resources */,
 				CF2B6DC41F0682B300CCF32F /* BuyerCell.xib in Resources */,
 				CF0CEB191EFEA9E40018B35B /* EditTextCell.xib in Resources */,
 				CFDD36851EEBD4B9007497AC /* SelectBuildingCell.xib in Resources */,
@@ -1158,6 +1177,7 @@
 				CF53E8EE1EF96E17008D0322 /* PlaceholderTextView.m in Sources */,
 				C717494F1EFAE7630085E590 /* MyInfoModel.m in Sources */,
 				CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */,
+				C7CA42251F0FCDC300112216 /* StatisticStateModel.m in Sources */,
 				CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */,
 				C782F4A31EED51BE0067C07F /* MyMessageController.m in Sources */,
 				CFE578AD1F04033700ADCABC /* GetImageTokenManager.m in Sources */,
@@ -1184,6 +1204,7 @@
 				CF7721181EE6DEF200DD5AE2 /* BuildingCell.m in Sources */,
 				C71749571EFF68C00085E590 /* EditMyEmailController.m in Sources */,
 				CF5A4C7D1EE053EE002A281B /* LoginManager.m in Sources */,
+				C7CA42221F0E9A5F00112216 /* StatusListView.m in Sources */,
 				CF5785DB1EE5A3C400994741 /* FindPassWordController.m in Sources */,
 				CFDD367C1EEBCAB5007497AC /* SelectBuildingController.m in Sources */,
 				CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */,
@@ -1210,6 +1231,7 @@
 				CF99FBE61EF385D8001C8A9C /* BuildingFilterModel.m in Sources */,
 				CF0CEB131EFEA8D20018B35B /* TakeUpEditController.m in Sources */,
 				CF0524811EFF54A400BE8840 /* PhotoCell.m in Sources */,
+				C71749971F09404D0085E590 /* CustomerStatisticController.m in Sources */,
 				CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
@@ -1261,7 +1283,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Li (UVKA39B4R2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1309,7 +1332,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Li Li (UVKA39B4R2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1361,6 +1385,7 @@
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/WeChatSDK",
 				);
+				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6c3acd09-7375-4219-898e-3c6cea11c22c";
@@ -1400,6 +1425,7 @@
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/WeChatSDK",
 				);
+				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6c3acd09-7375-4219-898e-3c6cea11c22c";

@@ -210,6 +210,11 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (void)baobei
 {
+    if (![[User shareUser].auth isEqualToNumber:@1]) {
+        [MBProgressHUD showError:@"请先进行用户认证"];
+        return;
+    }
+    
     if (!_nameLabel.text.length) {
         [MBProgressHUD showError:@"请填写客户姓名"];
         return;

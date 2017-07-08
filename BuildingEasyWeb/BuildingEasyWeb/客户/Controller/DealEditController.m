@@ -37,6 +37,8 @@ static const NSInteger kPhotoViewTag = 1000;
 
 @property (nonatomic, strong) UIView* footerView;
 
+@property (nonatomic, copy) NSString* signId;
+
 @end
 
 @implementation DealEditController
@@ -155,7 +157,7 @@ static const NSInteger kPhotoViewTag = 1000;
                       @{@"付款方式":@""},
                       @{@"单价":@"请输入单价"},
                       @{@"总价":@"请输入总价"},
-                      @{@"支付定金":@"请输入支付的定金"}];
+                      @{@"交付时间":@"请选择交付时间"}];
     
     NSMutableArray* tempArr = [NSMutableArray array];
     for (NSDictionary* dic in _dataArray) {
@@ -163,6 +165,9 @@ static const NSInteger kPhotoViewTag = 1000;
         model.title = dic.allKeys[0];
         model.placeholder = dic.allValues[0];
         if ([model.title rangeOfString:@"日期"].location != NSNotFound) {
+            model.isDate = YES;
+        }
+        if ([model.title rangeOfString:@"时间"].location != NSNotFound) {
             model.isDate = YES;
         }
         if ([model.title isEqualToString:@"付款方式"]) {
@@ -256,7 +261,8 @@ static const NSInteger kPhotoViewTag = 1000;
 {
     NSMutableArray* imagArr = [NSMutableArray array];
     
-    if (_type == kEditTypeAgain) {// 新建编辑才上传图片
+    [MBProgressHUD showLoadingToView:self.view];
+    if (_type == kEditTypeNew) {// 新建编辑才上传图片
         if (_idPhotoView.resultArray.count == 0) {
             [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
             return;
@@ -369,12 +375,13 @@ static const NSInteger kPhotoViewTag = 1000;
     NSString* urlStr = nil;
     if (_type > kEditTypeNew) {
         urlStr = @"wx/updateSignInfo";
+        parameters[@"signId"] = _signId;
     } else {
         urlStr = @"wx/saveSignInfo";
     }
     
     dispatch_group_notify(group, asyncQueue, ^{
-        [MBProgressHUD showLoadingToView:self.view];
+        
         [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -396,7 +403,6 @@ static const NSInteger kPhotoViewTag = 1000;
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getSignInfo" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
-        
         [self dealWithData:reponse];
         
     } failure:^(NSError *error, NSString *msg) {
@@ -406,33 +412,44 @@ static const NSInteger kPhotoViewTag = 1000;
 
 - (void)dealWithData:(NSDictionary *)data
 {
+    NSDictionary* signInfo = [data objectForKey:@"signInfo"];
+    _signId = signInfo[@"id"];
     {
         EditInfoModel* model = _dataArray[0];
-        NSTimeInterval timeInterval = [data[@"startTime"] doubleValue];
+        NSTimeInterval timeInterval = [signInfo[@"startTime"] doubleValue];
         model.canEdit = NO;
-        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+        NSString* dateStr = [NSDate dateStrWithTimeInterval:timeInterval];
+        model.text = [dateStr substringToIndex:10];
     }
     {
         EditInfoModel* model = _dataArray[1];
-        NSTimeInterval timeInterval = [data[@"endTime"] doubleValue];
+        NSTimeInterval timeInterval = [signInfo[@"endTime"] doubleValue];
         model.canEdit = NO;
-        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+        NSString* dateStr = [NSDate dateStrWithTimeInterval:timeInterval];
+        model.text = [dateStr substringToIndex:10];
     }
     {
         EditInfoModel* model = _dataArray[2];
         model.canEdit = NO;
-        model.text = data[@"price"];
+        model.type = [signInfo[@"type"] boolValue];
     }
     {
         EditInfoModel* model = _dataArray[3];
         model.canEdit = NO;
-        model.text = data[@"total"];
+        model.text = [NSString stringWithFormat:@"%.2f", [signInfo[@"price"] doubleValue]];
     }
     {
         EditInfoModel* model = _dataArray[4];
         model.canEdit = NO;
-        NSTimeInterval timeInterval = [data[@"leadTime"] doubleValue];
-        model.text = [NSDate dateStrWithTimeInterval:timeInterval];
+        model.text = [NSString stringWithFormat:@"%.2f", [signInfo[@"total"] doubleValue]];
+    }
+    {
+        EditInfoModel* model = _dataArray[5];
+        model.canEdit = NO;
+        model.isDate = YES;
+        NSTimeInterval timeInterval = [signInfo[@"leadTime"] doubleValue];
+        NSString* dateStr = [NSDate dateStrWithTimeInterval:timeInterval];
+        model.text = [dateStr substringToIndex:10];
     }
     
     NSArray* imgList = data[@"imgList"];
@@ -440,10 +457,10 @@ static const NSInteger kPhotoViewTag = 1000;
     NSMutableArray* dealImgArr = [NSMutableArray array];
     for (int i = 0; i < imgList.count; i ++) {
         // 倒序
-        NSDictionary* dic = imgList[count - i];
+        NSDictionary* dic = imgList[count - i - 1];
         
-        PhotoView* photoView = _footerView.subviews[i];
         if (i < 5) {
+            PhotoView* photoView = _footerView.subviews[i];
             NSString* imgUrl = dic[@"imgUrl"];
             NSArray* imgArr = @[imgUrl];
             photoView.sourceArray = imgArr;
