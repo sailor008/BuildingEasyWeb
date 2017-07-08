@@ -138,12 +138,14 @@
     UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         _imagePicker.delegate = self;
+        _imagePicker.allowsEditing = YES;
         [vc presentViewController:_imagePicker animated:YES completion:nil];
     }];
     
     UIAlertAction* albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         _imagePicker.delegate = self;
+        _imagePicker.allowsEditing = YES;
         [vc presentViewController:_imagePicker animated:YES completion:nil];
     }];
     
@@ -159,7 +161,7 @@
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    UIImage * image =info[UIImagePickerControllerOriginalImage];
+    UIImage * image =info[UIImagePickerControllerEditedImage];
     
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
     [_photoArray replaceObjectAtIndex:selectedIndexPath.row withObject:image];
