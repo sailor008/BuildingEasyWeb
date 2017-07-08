@@ -199,7 +199,7 @@
                 model.isPercen = YES;
             }
             if ([model.title isEqualToString:@"付款方式"]) {
-                model.type = 1;
+                model.type = [value integerValue];
                 model.isRadio = YES;
             }
             

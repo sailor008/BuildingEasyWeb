@@ -47,7 +47,9 @@
 
 - (void)prepareForReuse
 {
-    _model.text = _textField.text;
+    if (_model.canEdit) {
+        _model.text = _textField.text;
+    }
     [super prepareForReuse];
 }
 
@@ -64,7 +66,7 @@
     
     _textField.enabled = model.canEdit;
         
-    if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"] || [_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"]) {
+    if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"] || [_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"] || [_editTitleLabel.text containsString:@"百分比"]) {
         _textField.keyboardType = UIKeyboardTypeNumberPad;
     } else {
         _textField.keyboardType = UIKeyboardTypeDefault;

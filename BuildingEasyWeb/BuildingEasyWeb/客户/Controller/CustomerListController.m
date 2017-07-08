@@ -18,6 +18,7 @@
 #import <CYLTableViewPlaceHolder.h>
 #import "BaobeiController.h"
 #import "TableRefreshManager.h"
+#import "EmptyTipView.h"
 
 @interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate, BaobeiControllerDelegate>
 
@@ -170,8 +171,10 @@
 #pragma mark CYLTableViewPlaceHolderDelegate
 - (UIView *)makePlaceHolderView
 {
-    UIImageView* emptyImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"为空.png")];
-    return emptyImageView;
+    EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
+    tipView.tip = @"还木有联系人";
+    tipView.backgroundColor = [UIColor clearColor];
+    return tipView;
 }
 
 #pragma mark BaobeiControllerDelegate

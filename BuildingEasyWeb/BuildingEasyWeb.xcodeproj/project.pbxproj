@@ -54,6 +54,8 @@
 		CF0524821EFF54A400BE8840 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0524801EFF54A400BE8840 /* PhotoCell.xib */; };
 		CF0524861EFF64F200BE8840 /* PayTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0524841EFF64F200BE8840 /* PayTypeCell.m */; };
 		CF0524871EFF64F200BE8840 /* PayTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0524851EFF64F200BE8840 /* PayTypeCell.xib */; };
+		CF08D0091F1067FF0078FB5F /* EmptyTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF08D0081F1067FF0078FB5F /* EmptyTipView.m */; };
+		CF08D00B1F10680B0078FB5F /* EmptyTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF08D00A1F10680B0078FB5F /* EmptyTipView.xib */; };
 		CF0BE8531EFBFE360003DFC7 /* TextDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */; };
 		CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */; };
 		CF0CEB131EFEA8D20018B35B /* TakeUpEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0CEB111EFEA8D20018B35B /* TakeUpEditController.m */; };
@@ -251,6 +253,9 @@
 		CF0524831EFF64F200BE8840 /* PayTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayTypeCell.h; sourceTree = "<group>"; };
 		CF0524841EFF64F200BE8840 /* PayTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayTypeCell.m; sourceTree = "<group>"; };
 		CF0524851EFF64F200BE8840 /* PayTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayTypeCell.xib; sourceTree = "<group>"; };
+		CF08D0071F1067FF0078FB5F /* EmptyTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTipView.h; sourceTree = "<group>"; };
+		CF08D0081F1067FF0078FB5F /* EmptyTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTipView.m; sourceTree = "<group>"; };
+		CF08D00A1F10680B0078FB5F /* EmptyTipView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTipView.xib; sourceTree = "<group>"; };
 		CF0BE8501EFBFE360003DFC7 /* TextDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDetailController.h; sourceTree = "<group>"; };
 		CF0BE8511EFBFE360003DFC7 /* TextDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDetailController.m; sourceTree = "<group>"; };
 		CF0BE8521EFBFE360003DFC7 /* TextDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextDetailController.xib; sourceTree = "<group>"; };
@@ -647,6 +652,9 @@
 				CF7721371EE6F32100DD5AE2 /* SectionFilterView.m */,
 				CF53E8EC1EF96E17008D0322 /* PlaceholderTextView.h */,
 				CF53E8ED1EF96E17008D0322 /* PlaceholderTextView.m */,
+				CF08D0071F1067FF0078FB5F /* EmptyTipView.h */,
+				CF08D0081F1067FF0078FB5F /* EmptyTipView.m */,
+				CF08D00A1F10680B0078FB5F /* EmptyTipView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1041,6 +1049,7 @@
 				C717497E1F0688940085E590 /* EditTxtTVCell.xib in Resources */,
 				CF665BFA1EEB9AB200028B1B /* BaobeiCell.xib in Resources */,
 				CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */,
+				CF08D00B1F10680B0078FB5F /* EmptyTipView.xib in Resources */,
 				C717496A1EFF815E0085E590 /* AuthIdentityController.xib in Resources */,
 				CF2FCA871EF91079001E974C /* ProgressDetailController.xib in Resources */,
 				CFEAFF731EF66E00000EEB27 /* BuildAdviserCell.xib in Resources */,
@@ -1161,6 +1170,7 @@
 				CFEEC01D1EE2B5B800E1DB74 /* BuildingController.m in Sources */,
 				C71749691EFF815E0085E590 /* AuthIdentityController.m in Sources */,
 				CFD016931EED353F003E1BF8 /* CityModel.m in Sources */,
+				CF08D0091F1067FF0078FB5F /* EmptyTipView.m in Sources */,
 				CFDD368C1EEBE2C0007497AC /* CityListController.m in Sources */,
 				CFB630091EE250DC00AE5919 /* NetworkManager.m in Sources */,
 				C717495D1EFF74400085E590 /* EditMyNickNameController.m in Sources */,

@@ -74,15 +74,19 @@ static const NSString* host = @"39.108.58.165:11071";
 #pragma mark - 统一处理成功请求结果
 + (void)handleWithResponseObject:(id  _Nullable)responseObject success:(RequestSuccess)successBlock failure:(RequestFailure)failureBlock
 {
-//    NSDictionary* response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-    NSDictionary* response = (NSDictionary *)responseObject;
-    
-    NSNumber* code = response[@"code"];
-    if ([code isEqualToNumber:@(0)]) {
-        successBlock(response[@"data"]);
+    if (responseObject) {
+        NSDictionary* response = (NSDictionary *)responseObject;
+        
+        NSNumber* code = response[@"code"];
+        if ([code isEqualToNumber:@(0)]) {
+            successBlock(response[@"data"]);
+        } else {
+            NSError* error = [[NSError alloc] initWithDomain:response[@"msg"] code:[response[@"code"] integerValue] userInfo:responseObject];
+            failureBlock(error, response[@"msg"]);
+        }
     } else {
-        NSError* error = [[NSError alloc] initWithDomain:response[@"msg"] code:[response[@"code"] integerValue] userInfo:responseObject];
-        failureBlock(error, response[@"msg"]);
+        NSError* error = [[NSError alloc] initWithDomain:@"网络出错" code:1000 userInfo:nil];
+        failureBlock(error, @"网络出错");
     }
 }
 

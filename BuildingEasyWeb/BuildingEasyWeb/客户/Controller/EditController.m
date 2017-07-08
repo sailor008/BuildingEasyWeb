@@ -34,7 +34,7 @@
     if (_type > kEditTypeNew) {
         self.title = @"查看详情";
         if (_type == kEditTypeAgain) {
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editInfo)];
         }
     } else {
         self.title = @"编辑";
@@ -100,6 +100,7 @@
     }
     
     kWeakSelf(weakSelf);
+    [MBProgressHUD showLoadingToView:self.view];
     dispatch_queue_t asyncQueue = dispatch_queue_create("BEWEdit", DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_group_t group = dispatch_group_create();
@@ -135,8 +136,7 @@
     }
     
     dispatch_group_notify(group, asyncQueue, ^{
-        [MBProgressHUD showLoadingToView:self.view];
-        [NetworkManager postWithUrl:nil parameters:parameters success:^(id reponse) {
+        [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
                                                                       * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -145,7 +145,6 @@
         } failure:^(NSError *error, NSString *msg) {
             [MBProgressHUD dissmissWithError:msg toView:self.view];
         }];
-        
     });
 }
 

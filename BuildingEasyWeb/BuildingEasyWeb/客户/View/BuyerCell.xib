@@ -31,7 +31,7 @@
                                 <rect key="frame" x="137.5" y="16.5" width="172.5" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qf-uD-KGS" userLabel="分隔线">
                                 <rect key="frame" x="0.0" y="49" width="320" height="1"/>
@@ -105,7 +105,7 @@
                                 <rect key="frame" x="86.5" y="16.5" width="223.5" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D70-Uc-hGl" userLabel="分隔线">
                                 <rect key="frame" x="0.0" y="49" width="320" height="1"/>

@@ -90,6 +90,8 @@
 
 - (void)setupProperty
 {
+    _canEdit = YES;
+    
     _dataArray = [TakeUpManager originalTakeUpArray];
     
     _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"合同信息", @""];
@@ -247,10 +249,12 @@
         {
             EditInfoModel* model = [[EditInfoModel alloc] initWithTitle:@"支付房款百分比" placeholder:@"请输入百分数" text:nil commitStr:@"percent"];
             model.isPercen = YES;
+            model.canEdit = YES;
             [tempItemArr insertObject:model atIndex:1];
         }
         {
             EditInfoModel* model = [[EditInfoModel alloc] initWithTitle:@"金额" placeholder:@"请输入金额" text:nil commitStr:@"money"];
+            model.canEdit = YES;
             [tempItemArr insertObject:model atIndex:2];
         }
         itemArr = [tempItemArr copy];
@@ -284,6 +288,7 @@
     takeUpModel.customerId = _customerId;
     
     kWeakSelf(weakSelf);
+    [MBProgressHUD showLoadingToView:self.view];
     dispatch_queue_t asyncQueue = dispatch_queue_create("BEWTakeUpEdit", DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_group_t group = dispatch_group_create();
@@ -334,12 +339,12 @@
         NSString* urlStr = nil;
         if (_type > kEditTypeNew) {
             urlStr = @"wx/updateSubInfo";
+            parameters[@"subId"] = [_takeUpInfo objectForKey:@"id"];
         } else {
             urlStr = @"wx/saveSubInfo";
         }
         
         if (result == YES) {
-            [MBProgressHUD showLoadingToView:self.view];
             [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
                 [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
@@ -360,6 +365,19 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
     _canEdit = YES;
     _dataArray = [TakeUpManager detailTakeUpArrayWithData:_takeUpInfo canEdit:YES];
+    // 判断付款方式
+    if ([[_takeUpInfo objectForKey:@"type"] boolValue] == NO) {
+        NSMutableArray* tempArr = [_dataArray mutableCopy];
+        NSArray* itemArr = [tempArr lastObject];
+        NSMutableArray* tempItemArr = [itemArr mutableCopy];
+        [tempItemArr removeObjectAtIndex:1];
+        [tempItemArr removeObjectAtIndex:1];
+        
+        itemArr = [tempItemArr copy];
+        tempArr[tempArr.count - 1] = itemArr;
+        
+        _dataArray = [tempArr copy];
+    }
     [_tableView reloadData];
 }
 
@@ -386,6 +404,30 @@
         _photoView.sourceArray = [tempArr copy];
         
         _dataArray = [TakeUpManager detailTakeUpArrayWithData:reponse canEdit:NO];
+        NSMutableArray* tempSectionArr = [_sectionArray mutableCopy];
+        for (int i = 3; i < _dataArray.count; i ++) {
+            id obj = _dataArray[i];
+            if ([obj isKindOfClass:[EditInfoModel class]]) {
+                [tempSectionArr insertObject:@"" atIndex:i];
+            } else {
+                break;
+            }
+        }
+        _sectionArray = [tempSectionArr copy];
+        // 判断付款方式
+        if ([[_takeUpInfo objectForKey:@"type"] boolValue] == NO) {
+            NSMutableArray* tempArr = [_dataArray mutableCopy];
+            NSArray* itemArr = [tempArr lastObject];
+            NSMutableArray* tempItemArr = [itemArr mutableCopy];
+            [tempItemArr removeObjectAtIndex:1];
+            [tempItemArr removeObjectAtIndex:1];
+            
+            itemArr = [tempItemArr copy];
+            tempArr[tempArr.count - 1] = itemArr;
+            
+            _dataArray = [tempArr copy];
+        }
+        
         [_tableView reloadData];
         
     } failure:^(NSError *error, NSString *msg) {
