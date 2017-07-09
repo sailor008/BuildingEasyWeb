@@ -117,7 +117,7 @@ typedef void (^onTabVCell)(void);
 
 - (void)onBtnLogout:(UIButton*)btn {
     NSLog(@"退出按钮响应！！！！！！");
-    
+    [MBProgressHUD showError:@"暂未处理退出逻辑，正在加上！"];
 }
 
 - (void)didReceiveMemoryWarning {
