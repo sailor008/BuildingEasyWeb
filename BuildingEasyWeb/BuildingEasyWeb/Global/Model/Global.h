@@ -34,6 +34,40 @@ typedef NS_ENUM(NSInteger, BEWEditType) {
     kEditTypeDetail // 查看
 };
 
+typedef NS_ENUM(NSInteger, StatisticState) {
+    kStatisticStateAll         = -1,    // -1：全部
+    kStatisticStateBaobeiBegin = 0,     // 0：发起报备
+    kStatisticStateBaobeiVerify,        // 1：接受审核
+    kStatisticStateBaobeiSuccess,       // 2：接受成功
+    kStatisticStateWaitVisit,           // 3：待上门
+    kStatisticStateVisiting,            // 4：系统已确认带看
+    kStatisticStateVisitedVerify,       // 5：上传凭证带看后台审核
+    kStatisticStateVisitedSuccess,      // 6：已上门
+    kStatisticStateWaitSubscribe,       // 7：待认购
+    kStatisticStateInSubscribe,         // 8：系统已确认认购
+    kStatisticStateSubscribeVerify,     // 9：上传凭证后台审核
+    kStatisticStateSubscribed,          // 10：已认购
+    kStatisticStateWaitBuy,             // 11：待签约
+    kStatisticStateBuying,              // 12：系统已确认签约
+    kStatisticStateBuyVerify,           // 13：上传凭证后台审核
+    kStatisticStateBought,              // 14：已签约
+    kStatisticStateWaitPay,             // 15：待回款
+    kStatisticStatePaying,              // 16：系统已确认回款
+    kStatisticStatePayVerify,           // 17：上传凭证回款
+    kStatisticStatePaid,                // 18：已回款
+    kStatisticStateWaitCheckBill,       // 19：待结清
+    kStatisticStateCheckingBill,        // 20：系统已确认结清
+    kStatisticStateCheckBillVerify,     // 21：上传凭证确认结清
+    kStatisticStateCheckedBill,         // 22：已结清
+    kStatisticStateInvaild,             // 23：失效
+};
+
+typedef NS_ENUM(NSInteger, IntentionLevel) {
+    kIntentionLevelWeak,          // 0：弱（意向程度）
+    kIntentionLevelMiddle,        // 1：中（意向程度）
+    kIntentionLevelStrong,        // 2：强（意向程度）
+};
+
 typedef void(^Callback)();
 
 typedef void(^FailureBlock)(NSError* error, NSString* msg);

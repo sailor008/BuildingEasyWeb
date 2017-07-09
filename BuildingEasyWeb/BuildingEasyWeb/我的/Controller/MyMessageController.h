@@ -12,6 +12,6 @@
 
 @interface MyMessageController : BaseController
 
-@property (nonatomic,strong) NSArray *aryMsgData;
+@property(nonatomic, assign) NSUInteger maxMsgId;
 
 @end

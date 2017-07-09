@@ -18,3 +18,18 @@
 
 @end
 
+
+@interface BaobeiInfoModel : NSObject
+
+@property (nonatomic, copy) NSString* customerId;
+@property (nonatomic, copy) NSString* customerName;
+@property (nonatomic, copy) NSString* customerMobile;
+@property (nonatomic, assign) NSInteger intention;
+@property (nonatomic, assign) NSUInteger createTime;
+@property (nonatomic, copy) NSString* buildName;
+@property (nonatomic, assign) NSInteger invalidDay;
+@property (nonatomic, assign) NSInteger state;
+@property (nonatomic, assign) NSString* stateDesc;
+
+@end
+

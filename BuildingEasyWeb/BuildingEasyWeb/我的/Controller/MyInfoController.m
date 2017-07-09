@@ -95,8 +95,15 @@ typedef void (^onTabVCell)(void);
                         @[@"修改密码"],
                     ];
     User* m_user = [User shareUser];
-//    NSString* autoStr = [m_user.auth  isEqual: @1]? @"已认证":@"未认证";
-    NSString* autoStr = m_user.auth? @"已认证":@"未认证";
+    NSString* autoStr;
+    if([m_user.auth integerValue] == 1) {
+        autoStr = @"已认证";
+    }else if([m_user.auth integerValue] == 2) {
+        autoStr = @"未通过";
+    }else {
+        autoStr = @"未认证";
+    }
+    
     NSString* mobile = m_user.mobile == nil? @"": m_user.mobile;
     NSString* email = m_user.email == nil? @"": m_user.email;
     NSString* name = m_user.name == nil? @"": m_user.name;
@@ -127,6 +134,7 @@ typedef void (^onTabVCell)(void);
  // Pass the selected object to the new view controller.
  }
  */
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
@@ -188,10 +196,9 @@ typedef void (^onTabVCell)(void);
             _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(285.0, 8.0, 60.0, 60.0)];
             _headImgView.layer.masksToBounds = YES;
             _headImgView.layer.cornerRadius = 30.0f;
-
-//            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+            //            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
             [_headImgView setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
-
+            
             [cell addSubview:_headImgView];
         }
     }
@@ -355,12 +362,14 @@ typedef void (^onTabVCell)(void);
         
         kWeakSelf(weakSelf);
         [weakSelf requestUpdateHeadImage:headImgPath callback:^{
-            //更新个人头像成功，显示最新的头像
-            NSData *imgDa = [NSData dataWithContentsOfFile:headImgPath];
-            NSLog(@"读取的图片大小：data.length %ld kb", imgDa.length/1024);
-            _headImgView.image = [UIImage imageWithData:imgDa];
+//            //更新个人头像成功，显示最新的头像
+//            NSData *imgDa = [NSData dataWithContentsOfFile:headImgPath];
+//            NSLog(@"读取的图片大小：data.length %ld kb", imgDa.length/1024);
+//            _headImgView.image = [UIImage imageWithData:imgDa];
+//            [weakSelf.delegate finishEidtMyInfo:@"wx/updateHeadImg" desc:headImgPath];
             
-            [weakSelf.delegate finishEidtMyInfo:@"wx/updateHeadImg" desc:headImgPath];
+            //更新个人头像成功，显示最新的头像
+            [weakSelf refreshUserInfo];
         }];
 
         //关闭相册界面
@@ -383,13 +392,32 @@ typedef void (^onTabVCell)(void);
             [MBProgressHUD hideHUD];
             callback();
         } failure:^(NSError *error, NSString *msg) {
-            NSLog(@"Error:更新个人头像的resourceKey失败！detail：%@", msg);
+//            NSLog(@"Error:更新个人头像的resourceKey失败！detail：%@", msg);
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:msg];
         }];
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"error:%@---%@", error, msg);
         [MBProgressHUD hideHUD];
+    }];
+}
+
+- (void)refreshUserInfo
+{
+    kWeakSelf(weakSelf);
+    [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+        User* user = [User mj_objectWithKeyValues:reponse];
+        user.pwd = [User shareUser].pwd;
+        [user copyToShareUser];
+        [[User shareUser] saveUserInfoToFile];
+        
+//            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+        [_headImgView setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+        
+        //更新个人主界面的头像
+        [weakSelf.delegate finishEidtMyInfo:@"wx/updateHeadImg" desc:@""];
+    } failure:^(NSError *error, NSString *msg) {
+        
     }];
 }
 

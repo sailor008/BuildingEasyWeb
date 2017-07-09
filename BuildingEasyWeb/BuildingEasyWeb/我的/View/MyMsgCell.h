@@ -11,5 +11,6 @@
 
 @interface MyMsgCell : UITableViewCell
 
-- (void)initWithData:(MsgModel*) data;
+@property (nonatomic, strong) MsgModel* model;
+
 @end

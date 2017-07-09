@@ -11,5 +11,6 @@
 @interface CustomerStatisticController : BaseController
 
 @property (nonatomic, copy)NSArray* stateList;
+@property (nonatomic, assign) NSInteger initState;
 
 @end
