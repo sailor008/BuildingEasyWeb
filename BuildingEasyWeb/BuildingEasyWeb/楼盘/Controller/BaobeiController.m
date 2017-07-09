@@ -18,9 +18,11 @@
 #import "NetworkManager.h"
 #import "BuildAdviserView.h"
 #import "UIView+MBProgressHUD.h"
+#import "NSString+Addition.h"
 #import "User.h"
 #import "CustomerBaobeiModel.h"
 #import "Global.h"
+#import "BEWAlertAction.h"
 
 static NSInteger const kIntentionButtonBaseTag = 1000;
 
@@ -152,7 +154,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* importAction = [UIAlertAction actionWithTitle:@"从通讯录导入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    BEWAlertAction* importAction = [BEWAlertAction actionWithTitle:@"从通讯录导入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         ContactListController* contactVC = [[ContactListController alloc] init];
         contactVC.selectedContact = ^(ContactModel *model) {
             _nameLabel.text = model.name;
@@ -161,7 +163,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [self.navigationController pushViewController:contactVC animated:YES];
     }];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [sheet addAction:importAction];
     [sheet addAction:cancelAction];
     [self presentViewController:sheet animated:YES completion:nil];
@@ -214,13 +216,16 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [MBProgressHUD showError:@"请先进行用户认证"];
         return;
     }
-    
     if (!_nameLabel.text.length) {
         [MBProgressHUD showError:@"请填写客户姓名"];
         return;
     }
     if (!_phoneLabel.text.length) {
         [MBProgressHUD showError:@"请填写客户电话号码"];
+        return;
+    }
+    if (![_phoneLabel.text isMobile]) {
+        [MBProgressHUD showError:@"客户电话号码格式错误"];
         return;
     }
     if (_intend < 0) {
@@ -370,14 +375,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     parameters[@"adviserId"] = model.selectedAdviser.adviserId;
     
     [NetworkManager postWithUrl:@"wx/addCustomer" parameters:parameters success:^(id reponse) {
-        NSLog(@"reponse:%@", reponse);
-        
         _tempIndex++;
         [self baobei];
         
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error:%@", error);
-        
         _tempIndex++;
         [self commitBaobeiNewCustomer];
     }];
@@ -405,8 +406,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     parameters[@"customerId"] = _customerId;
     parameters[@"lat"] = @([User shareUser].lat);
     parameters[@"lon"] = @([User shareUser].lng);
-//    parameters[@"lat"] = @23.14;
-//    parameters[@"lon"] = @113.26;
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getModifyCustomer" parameters:parameters success:^(id reponse) {
         _beobeiInfoModel = [CustomerBaobeiModel mj_objectWithKeyValues:reponse];

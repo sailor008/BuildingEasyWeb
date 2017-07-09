@@ -17,4 +17,7 @@
 - (NSString *)timeIntervalWithDateStr;
 + (NSString*)dataTojsonString:(id)object;
 
+- (BOOL)isMobile;
+- (BOOL)isNumber;// 纯数字
+
 @end

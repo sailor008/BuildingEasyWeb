@@ -89,4 +89,20 @@
     return jsonString; 
 }
 
+- (BOOL)isMobile
+{
+    NSString *re = @"^1\\d{10}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", re];
+    
+    return [predicate evaluateWithObject:self];
+}
+
+- (BOOL)isNumber
+{
+    NSString *re = @"^[0-9]*$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", re];
+    
+    return [predicate evaluateWithObject:self];
+}
+
 @end
