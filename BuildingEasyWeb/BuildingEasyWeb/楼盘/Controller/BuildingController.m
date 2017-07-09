@@ -116,10 +116,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_locationButton];
     
     _adsView = [[AdsScrollView alloc] init];
-    _adsView.frame = CGRectMake(0, 0, ScreenWidth, 105);
+    _adsView.frame = CGRectMake(0, 0, ScreenWidth, 115);
     _adsView.placeholderImage = @"logo.png";
     UIView* headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(0, 0, ScreenWidth, 115);
+    headerView.frame = CGRectMake(0, 0, ScreenWidth, 125);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [headerView addSubview:_adsView];
     _tableView.tableHeaderView = headerView;

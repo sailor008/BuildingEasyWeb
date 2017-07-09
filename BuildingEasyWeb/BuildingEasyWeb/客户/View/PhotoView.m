@@ -9,6 +9,7 @@
 #import "PhotoView.h"
 
 #import "PhotoCell.h"
+#import "BEWAlertAction.h"
 
 @interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
@@ -135,21 +136,21 @@
     
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    BEWAlertAction* cameraAction = [BEWAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         _imagePicker.delegate = self;
         _imagePicker.allowsEditing = YES;
         [vc presentViewController:_imagePicker animated:YES completion:nil];
     }];
     
-    UIAlertAction* albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    BEWAlertAction* albumAction = [BEWAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         _imagePicker.delegate = self;
         _imagePicker.allowsEditing = YES;
         [vc presentViewController:_imagePicker animated:YES completion:nil];
     }];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     [sheet addAction:cameraAction];
     [sheet addAction:albumAction];
@@ -161,7 +162,7 @@
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    UIImage * image =info[UIImagePickerControllerEditedImage];
+    UIImage * image = info[UIImagePickerControllerEditedImage];
     
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
     [_photoArray replaceObjectAtIndex:selectedIndexPath.row withObject:image];

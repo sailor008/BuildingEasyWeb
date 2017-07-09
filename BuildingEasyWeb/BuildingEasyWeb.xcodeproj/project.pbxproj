@@ -87,6 +87,7 @@
 		CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF30C3C61EF4BFCC0070D124 /* BuildingProgressCell.xib */; };
 		CF30C3CB1EF5140E0070D124 /* CustomerDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */; };
 		CF32760B1EFFF5EB00018294 /* EditInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF32760A1EFFF5EB00018294 /* EditInfoModel.m */; };
+		CF38943E1F11C49000BDA6E8 /* BEWAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CF38943D1F11C49000BDA6E8 /* BEWAlertAction.m */; };
 		CF413D511EEADDE7009A1B50 /* BuildingBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */; };
 		CF413D521EEADDE7009A1B50 /* BuildingBaseInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */; };
 		CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D541EEAE9A0009A1B50 /* BaobeiController.m */; };
@@ -303,6 +304,8 @@
 		CF30C3CA1EF5140E0070D124 /* CustomerDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerDetailModel.m; sourceTree = "<group>"; };
 		CF3276091EFFF5EB00018294 /* EditInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoModel.h; sourceTree = "<group>"; };
 		CF32760A1EFFF5EB00018294 /* EditInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoModel.m; sourceTree = "<group>"; };
+		CF38943C1F11C49000BDA6E8 /* BEWAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEWAlertAction.h; sourceTree = "<group>"; };
+		CF38943D1F11C49000BDA6E8 /* BEWAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEWAlertAction.m; sourceTree = "<group>"; };
 		CF413D4E1EEADDE7009A1B50 /* BuildingBaseInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingBaseInfoCell.h; sourceTree = "<group>"; };
 		CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingBaseInfoCell.m; sourceTree = "<group>"; };
 		CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingBaseInfoCell.xib; sourceTree = "<group>"; };
@@ -639,6 +642,8 @@
 				CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */,
 				CF5268191F05400A00166E2F /* UploadImageManager.h */,
 				CF52681A1F05400A00166E2F /* UploadImageManager.m */,
+				CF38943C1F11C49000BDA6E8 /* BEWAlertAction.h */,
+				CF38943D1F11C49000BDA6E8 /* BEWAlertAction.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1219,6 +1224,7 @@
 				C71749931F0905F40085E590 /* MyImageHelper.m in Sources */,
 				C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */,
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
+				CF38943E1F11C49000BDA6E8 /* BEWAlertAction.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF0BE8531EFBFE360003DFC7 /* TextDetailController.m in Sources */,

@@ -22,6 +22,7 @@
 #import "Global.h"
 #import "WXApiObject.h"
 #import "WXApi.h"
+#import "BEWAlertAction.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -140,11 +141,11 @@
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     NSString* adviserStr = [NSString stringWithFormat:@"%@:%@ %@", _detail.buildInfo.position, _detail.buildInfo.staff, _detail.buildInfo.phone];
-    UIAlertAction* importAction = [UIAlertAction actionWithTitle:adviserStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    BEWAlertAction* importAction = [BEWAlertAction actionWithTitle:adviserStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [OpenSystemUrlManager callPhone:_detail.buildInfo.phone];
     }];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [sheet addAction:importAction];
     [sheet addAction:cancelAction];
     [self presentViewController:sheet animated:YES completion:nil];

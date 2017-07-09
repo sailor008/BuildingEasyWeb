@@ -104,6 +104,10 @@
                 [MBProgressHUD showError:@"联系电话不能为空"];
                 *result = NO;
             }
+            if (![model.mobile isMobile]) {
+                [MBProgressHUD showError:@"联系电话格式错误"];
+                *result = NO;
+            }
             model.client = itemModel.client;
             if (!itemModel.client.length) {
                 model.client = @"";
@@ -129,6 +133,13 @@
                         [MBProgressHUD showError:tipStr];
                         
                         break;
+                    }
+                    if ([itemModel.title containsString:@"电话"]) {
+                        if (![itemModel.text isMobile]) {
+                            [MBProgressHUD showError:@"联系电话格式错误"];
+                            *result = NO;
+                            break;
+                        }
                     }
                     if (itemModel.isDate) {
                         [commitModel setValue:[itemModel.text timeIntervalWithDateStr] forKey:itemModel.commitStr];
