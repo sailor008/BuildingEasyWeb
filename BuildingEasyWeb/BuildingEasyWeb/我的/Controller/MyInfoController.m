@@ -16,7 +16,6 @@
 #import "NetworkManager.h"
 #import "UploadImageManager.h"
 
-
 #import "EditMyInfoBaseController.h"
 #import "ModifyMyPwdController.h"
 #import "EditMyInfoBaseController.h"
@@ -25,6 +24,7 @@
 #import "EditMyNameController.h"
 #import "AuthIdentityController.h"
 #import "MeCellInfo.h"
+#import "LoginController.h"
 
 #import <MJExtension.h>
 #import "Global.h"
@@ -116,8 +116,9 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)onBtnLogout:(UIButton*)btn {
-    NSLog(@"退出按钮响应！！！！！！");
-    [MBProgressHUD showError:@"暂未处理退出逻辑，正在加上！"];
+    [[User shareUser]clearUserInfoInFile];
+    LoginController* loginVC = [[LoginController alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = loginVC;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -249,7 +250,6 @@ typedef void (^onTabVCell)(void);
     editNickNameVC.delegate = self;
     editNickNameVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:editNickNameVC animated:YES];
-
 };
 
 - (void)onAuthentication {
