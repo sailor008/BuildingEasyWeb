@@ -55,8 +55,8 @@
     NSDictionary* parameters = @{@"name": nameVal};
     [NetworkManager postWithUrl:@"wx/modifyUserName" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUD];
-        NSLog(@"修改姓名成功！！！");
         self.txtEdit.text = nil;
+        [MBProgressHUD showSuccess:@"修改姓名成功！"];
         [self.navigationController popViewControllerAnimated:YES];
         [self.delegate finishEidtMyInfo: @"wx/modifyUserName" desc:nameVal];
     } failure:^(NSError *error, NSString *msg) {
