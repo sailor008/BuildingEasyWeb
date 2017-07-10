@@ -15,3 +15,9 @@
 @implementation ImgUpTokenModel
 
 @end
+
+
+@implementation UserExtInfoModel
+
+@end
+
