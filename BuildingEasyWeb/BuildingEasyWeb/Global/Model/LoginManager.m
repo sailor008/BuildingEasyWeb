@@ -27,7 +27,7 @@
         
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = password;
-        [user copyToShareUser];
+        [user copyBaseInfoToShareUser];
         [[User shareUser] saveUserInfoToFile];
         
         [User shareUser].isLogin = YES;
@@ -49,7 +49,7 @@
         
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = info[@"pwd"];
-        [user copyToShareUser];
+        [user copyBaseInfoToShareUser];
         [[User shareUser] saveUserInfoToFile];
         
         [User shareUser].isLogin = YES;
@@ -67,7 +67,7 @@
         
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = [User shareUser].pwd;
-        [user copyToShareUser];
+        [user copyAnotherInfoToShareUser];
         [[User shareUser] saveUserInfoToFile];
         
     } failure:^(NSError *error, NSString *msg) {
@@ -86,7 +86,7 @@
         
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = pwd;
-        [user copyToShareUser];
+        [user copyBaseInfoToShareUser];
         [[User shareUser] saveUserInfoToFile];
         
         [User shareUser].isLogin = YES;

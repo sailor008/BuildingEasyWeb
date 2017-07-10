@@ -90,7 +90,7 @@ static NSString* const kUserName = @"Name";
     return [self saveUserInfoToFile];
 }
 
-- (void)copyToShareUser
+- (void)copyBaseInfoToShareUser
 {
     [User shareUser].userId = [self.userId copy];
     [User shareUser].nickname = [self.nickname copy];
@@ -99,6 +99,15 @@ static NSString* const kUserName = @"Name";
     [User shareUser].mobile = [self.mobile copy];
     [User shareUser].role = self.role;
     [User shareUser].pwd = self.pwd;
+}
+
+- (void)copyAnotherInfoToShareUser
+{
+    [User shareUser].userId = [self.userId copy];
+    [User shareUser].nickname = [self.nickname copy];
+    [User shareUser].token = [self.token copy];
+    [User shareUser].headImg = [self.headImg copy];
+    [User shareUser].mobile = [self.mobile copy];
     [User shareUser].name = self.name;
     [User shareUser].email = self.email;
     [User shareUser].auth = self.auth;
