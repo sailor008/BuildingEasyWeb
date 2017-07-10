@@ -62,7 +62,7 @@
         return;
     }
     [LoginManager login:_phoneTextField.text password:[_passWordTextField.text md5] callback:^{
-        
+        [LoginManager getUserInfo];
     }];
 }
 

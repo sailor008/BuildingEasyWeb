@@ -69,6 +69,7 @@
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
         [LoginManager login:mobile password:pwd callback:^{
+            [LoginManager getUserInfo];
             [self requestDataWithCheckLocation];
         }];
     } else {
@@ -83,7 +84,7 @@
 
 - (void)setupProperty
 {
-    _currentCity = @"深圳市";
+    _currentCity = @"";
     
     _areaList = [NSMutableArray array];
     _typeList = [NSMutableArray array];
@@ -112,7 +113,7 @@
     
     _locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_locationButton addTarget:self action:@selector(selectCity) forControlEvents:UIControlEventTouchUpInside];
-    [self setupLocationButtonFace:@"广州"];
+    [self setupLocationButtonFace:@""];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_locationButton];
     
     _adsView = [[AdsScrollView alloc] init];
@@ -243,6 +244,13 @@
             [_areaList addObject:model];
             [areaNameList addObject:model.areaName];
         }
+        if (_areaList.count > 0) {
+            AreaModel* model = [[AreaModel alloc] init];
+            model.areaCode = @"0";
+            model.areaName = @"全部";
+            [_areaList insertObject:model atIndex:0];
+            [areaNameList insertObject:model.areaName atIndex:0];
+        }
         [_sectionView showFilterContent:[areaNameList copy]];
         
     } failure:^(NSError *error, NSString *msg) {
@@ -272,6 +280,13 @@
             [_typeList addObject:model];
             [typeNameList addObject:model.classifyName];
         }
+        if (typeNameList.count > 0) {
+            BuildingTypeModel* model = [[BuildingTypeModel alloc] init];
+            model.classifyName = @"全部";
+            model.classifyId = @"0";
+            [_typeList insertObject:model atIndex:0];
+            [typeNameList insertObject:@"全部" atIndex:0];
+        }
         [_sectionView showFilterContent:[typeNameList copy]];
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg toView:self.view];
@@ -300,6 +315,13 @@
             [_priceList addObject:model];
             [priceNameList addObject:model.interval];
         }
+        if (_priceList.count > 0) {
+            BuildingPriceModel* model = [[BuildingPriceModel alloc] init];
+            model.interval = @"全部";
+            model.averageId = @"0";
+            [_priceList insertObject:model atIndex:0];
+            [priceNameList insertObject:model.interval atIndex:0];
+        }
         [_sectionView showFilterContent:[priceNameList copy]];
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg toView:self.view];
@@ -327,6 +349,13 @@
             BuildingDistanceModel* model = [BuildingDistanceModel mj_objectWithKeyValues:dic];
             [_distanceList addObject:model];
             [distanceNameList addObject:model.interval];
+        }
+        if (_distanceList.count > 0) {
+            BuildingDistanceModel* model = [[BuildingDistanceModel alloc] init];
+            model.interval = @"全部";
+            model.distanceId = @"0";
+            [_distanceList insertObject:model atIndex:0];
+            [distanceNameList insertObject:model.interval atIndex:0];
         }
         [_sectionView showFilterContent:[distanceNameList copy]];
     } failure:^(NSError *error, NSString *msg) {
@@ -370,6 +399,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self dismissSearch:nil];
+    
     BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
     detailVC.hidesBottomBarWhenPushed = YES;
     BuildingListModel* model = _buildingArr[indexPath.row];

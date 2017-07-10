@@ -19,9 +19,9 @@
     NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
     
     if (phoneVersion.integerValue > 8) {
-        [ContactManager requestContactIniOS8:contacts];
-    } else {
         [ContactManager requestContactIniOS9:contacts];
+    } else {
+        [ContactManager requestContactIniOS8:contacts];
     }
 }
 

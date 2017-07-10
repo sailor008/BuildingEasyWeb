@@ -20,6 +20,7 @@
     
     NSInteger _currentIndex;
     NSInteger _anotherIndex;
+    UIPageControl* _pageCtr;
 }
 
 @property (nonatomic, strong) NSTimer* timer;
@@ -60,6 +61,7 @@
     
     _currentImageView = [[UIImageView alloc] init];
     _currentImageView.clipsToBounds = YES;
+    _currentImageView.contentMode = UIViewContentModeScaleAspectFill;
     [_scrollView addSubview:_currentImageView];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAds)];
@@ -67,7 +69,13 @@
     
     _anotherImageView = [[UIImageView alloc] init];
     _anotherImageView.clipsToBounds = YES;
+    _currentImageView.contentMode = UIViewContentModeScaleAspectFill;
     [_scrollView addSubview:_anotherImageView];
+    
+    _pageCtr = [[UIPageControl alloc] init];
+    _pageCtr.pageIndicatorTintColor = [UIColor whiteColor];
+    _pageCtr.currentPageIndicatorTintColor = Hex(0xff4c00);
+    [self addSubview:_pageCtr];
 }
 
 - (void)layoutSubviews
@@ -80,6 +88,9 @@
     
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.bounds) * 3, CGRectGetHeight(self.bounds));
     _scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.bounds), 0);
+    
+    _pageCtr.frame = CGRectMake(0, _scrollView.bounds.size.height - 20, 200, 20);
+    _pageCtr.center = CGPointMake(_scrollView.center.x, _pageCtr.center.y);
     
     if (_timer == nil) {
         _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
@@ -108,10 +119,13 @@
         _scrollView.scrollEnabled = NO;
         _currentImageView.image = GetIMAGE(_placeholderImage);
         _anotherImageView.image = GetIMAGE(_placeholderImage);
+        _pageCtr.hidden = YES;
         return;
     }
     
+    _pageCtr.numberOfPages = sourceArray.count;
     _scrollView.scrollEnabled = YES;
+    _pageCtr.hidden = NO;
 //    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
     [_currentImageView setImageWithURL:[NSURL URLWithString:_sourceArray[0]] placeholderImage:GetIMAGE(_placeholderImage)];
     
@@ -141,7 +155,7 @@
 - (void)configSubViews
 {
     _currentIndex = _anotherIndex;
-    
+    _pageCtr.currentPage = _currentIndex;
 //    [_currentImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_currentIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
     [_currentImageView setImageWithURL:[NSURL URLWithString:_sourceArray[_currentIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
     
@@ -172,6 +186,7 @@
         }
         
         _anotherImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        _anotherImageView.contentMode = UIViewContentModeScaleAspectFill;
 //        [_anotherImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
         [_anotherImageView setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
         
@@ -187,6 +202,7 @@
         }
         
         _anotherImageView.frame = CGRectMake(CGRectGetWidth(self.bounds) * 2, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
+        _anotherImageView.contentMode = UIViewContentModeScaleAspectFill;
 //        [_anotherImageView sd_setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
         [_anotherImageView setImageWithURL:[NSURL URLWithString:_sourceArray[_anotherIndex]] placeholderImage:GetIMAGE(_placeholderImage)];
         
