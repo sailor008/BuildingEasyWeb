@@ -32,14 +32,6 @@ static NSString* const kUserName = @"Name";
     return user;
 }
 
-//- (NSString *)city
-//{
-//    if (!_city) {
-//        return @"广州";
-//    }
-//    return _city;
-//}
-
 - (NSString *)areaCode
 {
     if (!_areaCode) {

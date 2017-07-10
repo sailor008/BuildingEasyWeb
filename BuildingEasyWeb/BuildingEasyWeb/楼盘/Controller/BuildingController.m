@@ -117,10 +117,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_locationButton];
     
     _adsView = [[AdsScrollView alloc] init];
-    _adsView.frame = CGRectMake(0, 0, ScreenWidth, 115);
+    _adsView.frame = CGRectMake(0, 0, ScreenWidth, 165);
     _adsView.placeholderImage = @"logo.png";
     UIView* headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(0, 0, ScreenWidth, 125);
+    headerView.frame = CGRectMake(0, 0, ScreenWidth, 175);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [headerView addSubview:_adsView];
     _tableView.tableHeaderView = headerView;
@@ -188,15 +188,17 @@
                                  @"distanceId":_distanceId,
                                  @"classifyId":_classifyId,
                                  @"areaCode":[User shareUser].areaCode,
-                                 @"lon":@([User shareUser].lng),//@113.26,
-                                 @"lat":@([User shareUser].lat),//@23.14,
+                                 @"lon":@([User shareUser].lng),
+                                 @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":_keyword};
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
-        if (_buildingArr.count > 0) {
-            _tableView.page ++;
+        if (_tableView.page == 1) {
+            [_buildingArr removeAllObjects];
         }
+        
+        _tableView.page ++;
         
         _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
         NSArray* list = [reponse objectForKey:@"list"];
