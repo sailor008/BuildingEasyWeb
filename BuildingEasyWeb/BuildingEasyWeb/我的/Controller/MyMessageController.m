@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"我的消息";
+    [self initUI];
     
     [self setupProperty];
     [self addTableViewRefresh];
@@ -51,6 +51,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)initUI
+{
+    self.title = @"我的消息";
+    
+    UIView* view = [[UIView alloc]init];
+    _tableview.tableFooterView = view;
+}
 
 - (void)setupProperty
 {
