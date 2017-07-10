@@ -75,6 +75,7 @@
     _pageCtr = [[UIPageControl alloc] init];
     _pageCtr.pageIndicatorTintColor = [UIColor whiteColor];
     _pageCtr.currentPageIndicatorTintColor = Hex(0xff4c00);
+    _pageCtr.hidesForSinglePage = YES;
     [self addSubview:_pageCtr];
 }
 

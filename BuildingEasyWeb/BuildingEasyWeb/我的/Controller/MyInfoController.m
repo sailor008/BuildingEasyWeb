@@ -409,7 +409,7 @@ typedef void (^onTabVCell)(void);
     [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = [User shareUser].pwd;
-        [user copyToShareUser];
+        [user copyAnotherInfoToShareUser];
         [[User shareUser] saveUserInfoToFile];
         
 //            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];

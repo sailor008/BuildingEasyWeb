@@ -33,7 +33,9 @@
 
 + (instancetype)shareUser;
 
-- (void)copyToShareUser;
+//- (void)copyToShareUser;
+- (void)copyBaseInfoToShareUser;
+- (void)copyAnotherInfoToShareUser;
 
 - (BOOL)saveUserInfoToFile;
 - (BOOL)getUserInfoFromFile;

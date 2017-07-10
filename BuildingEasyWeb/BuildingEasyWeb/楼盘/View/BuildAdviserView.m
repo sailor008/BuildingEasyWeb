@@ -77,6 +77,12 @@
     return _adviserArray.count;
 }
 
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.0f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildAdviserCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuildAdviserCell" forIndexPath:indexPath];
