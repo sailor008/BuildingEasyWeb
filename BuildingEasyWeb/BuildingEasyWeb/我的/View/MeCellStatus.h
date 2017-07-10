@@ -10,4 +10,6 @@
 
 @interface MeCellStatus : UITableViewCell
 
+- (void)registerBtnClickEvent:(void(^)(NSInteger))click;
+
 @end

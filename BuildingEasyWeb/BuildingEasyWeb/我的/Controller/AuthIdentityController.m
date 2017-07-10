@@ -116,24 +116,27 @@
     [headerView addSubview:_editTxtCell.view];
     _tableView.tableHeaderView = headerView;
     
-    
-    UIButton* btnEnsure = [UIButton buttonWithType:UIButtonTypeSystem];
-    btnEnsure.frame = CGRectMake(10, 40, 355, 49);
-    btnEnsure.backgroundColor = Hex(0xff4c00);
-    btnEnsure.layer.masksToBounds = YES;
-    btnEnsure.layer.cornerRadius = 2.5f;
-    btnEnsure.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    [btnEnsure setTitle:@"保存" forState:UIControlStateNormal];
-    [btnEnsure setTitleColor:Hex(0xffffff) forState:UIControlStateNormal];
-    [btnEnsure setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIView* footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(0, 0, ScreenWidth, btnEnsure.frame.origin.y + btnEnsure.frame.size.height);
-    footerView.backgroundColor = [UIColor whiteColor];
-    [footerView addSubview:btnEnsure];
+    if([[User shareUser].auth integerValue] == 1) {
+        //已通过认证
+    } else {
+        UIButton* btnEnsure = [UIButton buttonWithType:UIButtonTypeSystem];
+        btnEnsure.frame = CGRectMake(10, 40, 355, 49);
+        btnEnsure.backgroundColor = Hex(0xff4c00);
+        btnEnsure.layer.masksToBounds = YES;
+        btnEnsure.layer.cornerRadius = 2.5f;
+        btnEnsure.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        [btnEnsure setTitle:@"保存" forState:UIControlStateNormal];
+        [btnEnsure setTitleColor:Hex(0xffffff) forState:UIControlStateNormal];
+        [btnEnsure setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIView* footerView = [[UIView alloc] init];
+        footerView.frame = CGRectMake(0, 0, ScreenWidth, btnEnsure.frame.origin.y + btnEnsure.frame.size.height);
+        footerView.backgroundColor = [UIColor whiteColor];
+        [footerView addSubview:btnEnsure];
 
-    _tableView.tableFooterView = footerView;
+        _tableView.tableFooterView = footerView;
+    }
 }
 
 - (void)onBtnEnsure:(UIButton*)btn
@@ -222,7 +225,7 @@
         if (weakSelf.successUploadCount == _photoViewArray.count) {
             // 返回主线程进行界面上的修改
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待认证！"];
+//                [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待认证！"];
             });
             [weakSelf confirmSaveAuthInfo];
         }else{

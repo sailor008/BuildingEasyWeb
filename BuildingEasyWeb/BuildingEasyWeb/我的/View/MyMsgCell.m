@@ -8,6 +8,9 @@
 
 #import "MyMsgCell.h"
 
+#import "NSDate+Addition.h"
+
+
 @interface MyMsgCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -21,6 +24,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    _contentLabel.numberOfLines = 0;//表示label可以多行显示
+    _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -29,14 +34,14 @@
     // Configure the view for the selected state
 }
 
-
-- (void)initWithData:(MsgModel*) data{
-    _contentLabel.numberOfLines = 0;//表示label可以多行显示
-    _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    
-    _titleLabel.text = data.title;
-    _contentLabel.text = data.content;
-    
+- (void)setModel:(MsgModel *)model
+{
+    if(model.title == nil || [model.title  isEqual: @""]){
+        model.title = @"标题为空！";
+    }
+    _titleLabel.text = model.title;
+    _contentLabel.text = model.content;
+    _timeLabel.text = [NSDate dateStrWithTimeInterval:model.time/1000];
 }
 
 @end

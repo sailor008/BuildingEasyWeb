@@ -8,6 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomerStatisticController">
             <connections>
+                <outlet property="searchBar" destination="bGp-ns-wj3" id="Zi4-GC-f1A"/>
+                <outlet property="tableview" destination="Y8N-Tv-N2j" id="EO8-KS-YIe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,26 +18,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" fixedFrame="YES" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="bGp-ns-wj3">
-                    <frame key="frameInset" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                <searchBar contentMode="redraw" placeholder="搜索" translatesAutoresizingMaskIntoConstraints="NO" id="bGp-ns-wj3">
                     <color key="backgroundColor" red="0.28602430555555558" green="0.26185438368055558" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="JbT-je-fB7"/>
+                    </connections>
                 </searchBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-Tv-N2j">
-                    <frame key="frameInset" minY="66" width="375" height="500"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y8N-Tv-N2j">
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="SeW-KN-Cst"/>
+                        <outlet property="delegate" destination="-1" id="6Jf-2A-OO1"/>
+                    </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="提示：正在全力开发此功能！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43w-4Y-R6t">
-                    <frame key="frameInset" minX="37" minY="323" width="300" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="bGp-ns-wj3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7dm-yX-iwD"/>
+                <constraint firstAttribute="trailing" secondItem="bGp-ns-wj3" secondAttribute="trailing" id="CBK-m4-ZJW"/>
+                <constraint firstAttribute="trailing" secondItem="Y8N-Tv-N2j" secondAttribute="trailing" id="Kas-RA-2dy"/>
+                <constraint firstItem="Y8N-Tv-N2j" firstAttribute="top" secondItem="bGp-ns-wj3" secondAttribute="bottom" id="gj9-T0-vG2"/>
+                <constraint firstItem="bGp-ns-wj3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="guG-96-bHW"/>
+                <constraint firstAttribute="bottom" secondItem="Y8N-Tv-N2j" secondAttribute="bottom" id="hKH-Sn-587"/>
+                <constraint firstItem="Y8N-Tv-N2j" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xT5-Ky-Jjv"/>
+            </constraints>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>

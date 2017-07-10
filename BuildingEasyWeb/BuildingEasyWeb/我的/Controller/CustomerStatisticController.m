@@ -8,11 +8,24 @@
 
 #import "CustomerStatisticController.h"
 
+#import "UITableView+Addition.h"
+#import "TableRefreshManager.h"
+#import "UIView+MBProgressHUD.h"
+
+#import "CustomerDetailController.h"
 #import "StatusListView.h"
+#import "CustomerStateTVCell.h"
 
-#import "StatisticStateModel.h"
+#import <MJExtension.h>
+#import "NetworkManager.h"
+#import "Global.h"
 
-@interface CustomerStatisticController ()<SelectStatusDelegate>
+
+@interface CustomerStatisticController ()<SelectStatusDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableview;
+
+@property (nonatomic, strong) NSMutableArray* baobeiInfoArr;
 
 @property (nonatomic, assign) const float cellHeight;
 @property (nonatomic, copy) StatisticStateModel* nowStateModel;
@@ -24,9 +37,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+//    _searchBar.showsCancelButton = YES;
     
-    _nowStateModel = self.stateList[0];
-    
+    [self setupProperty];
+    [self addTableViewRefresh];
+    [_tableview.mj_header beginRefreshing];
+
     [self initBtnNavTitle];
 }
 
@@ -91,6 +107,157 @@
 {
     _nowStateModel = model;
     [self updateBtnNavTitle];
+    
+    _baobeiInfoArr = [NSMutableArray array];
+    [_tableview.mj_header beginRefreshing];
 }
+
+- (void)setupProperty
+{
+    //获取当前默认的筛选条件
+    for (StatisticStateModel* stateModel in self.stateList){
+        if([stateModel.state integerValue] == self.initState){
+            _nowStateModel = stateModel;
+            break;
+        }
+    }
+    _baobeiInfoArr = [NSMutableArray array];
+
+    [_tableview registerNibWithName:@"CustomerStateTVCell"];
+}
+
+- (NSString*)getStateDesc:(NSInteger)state
+{
+    NSString* stateDesc = @"未知状态";
+    if(state == [_nowStateModel.state integerValue]){
+        stateDesc = _nowStateModel.stateDesc;
+    } else {
+        for (StatisticStateModel* model in self.stateList){
+            if([model.state integerValue] == state) {
+                stateDesc = model.stateDesc;
+                break;
+            }
+        }
+    }
+    return stateDesc;
+}
+
+- (void)addTableViewRefresh
+{
+    kWeakSelf(weakSelf);
+    [TableRefreshManager tableView:_tableview loadData:^(BOOL isMore) {
+        NSLog(@"loadData isMore = :%i", isMore);
+            [weakSelf requestData];
+    }];
+}
+
+#pragma mark Request - 网络请求
+- (void)requestData
+{
+    NSLog(@"当前搜索的关键词是：%@", _searchBar.text);
+//    NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
+
+    const NSInteger pageSize = 10;
+    NSDictionary* parameters = @{@"pageNo":@(_tableview.page),
+                                 @"pageSize":@(pageSize),
+                                 @"state":_nowStateModel.state,
+                                 @"name":_searchBar.text,
+                                 };
+    [NetworkManager postWithUrl:@"wx/getCustomerInfoByState" parameters:parameters success:^(id reponse) {
+        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
+        NSArray* tmpArray = (NSArray *)reponse;
+        NSInteger startIdx = (_tableview.page - 1) * pageSize;
+        for (NSDictionary* dic in tmpArray) {
+            BaobeiInfoModel* model = [BaobeiInfoModel mj_objectWithKeyValues:dic];
+            model.stateDesc = [self getStateDesc: model.state];
+            _baobeiInfoArr[startIdx] = model;
+            startIdx++;
+        }
+        if([_nowStateModel.num integerValue] > _baobeiInfoArr.count) {
+            _tableview.hasNext = YES;
+        } else {
+            _tableview.hasNext = NO;
+        }
+        if (_baobeiInfoArr.count > 0) {
+            ////下滑列表时，指定页数
+            _tableview.page = (NSInteger)ceil(_baobeiInfoArr.count / pageSize) + 1;
+        }
+        
+        [_tableview reloadData];
+        [TableRefreshManager tableViewEndRefresh:_tableview];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD showError:msg toView:self.view];
+        [TableRefreshManager tableViewEndRefresh:_tableview];
+    }];
+}
+
+#pragma mark UISearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    
+    _baobeiInfoArr = [NSMutableArray array];
+    [_tableview.mj_header beginRefreshing];
+}
+
+////支持空搜索
+- (void)searchBarTextDidBeginEditing:(UISearchBar *) searchBar
+{
+    UITextField *searchBarTextField = nil;
+    NSArray *views = ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) ? searchBar.subviews : [[searchBar.subviews objectAtIndex:0] subviews];
+    
+    for (UIView *subview in views)
+    {
+        if ([subview isKindOfClass:[UITextField class]])
+        {
+            searchBarTextField = (UITextField *)subview;
+            break;
+        }
+    }
+    searchBarTextField.enablesReturnKeyAutomatically = NO;
+}
+
+#pragma mark UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _baobeiInfoArr.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BaobeiInfoModel* model = _baobeiInfoArr[indexPath.row];
+    CustomerStateTVCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CustomerStateTVCell" forIndexPath:indexPath];
+    [cell setModel:model];
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 120.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BaobeiInfoModel* model = _baobeiInfoArr[indexPath.row];
+    CustomerDetailController* detailVC = [[CustomerDetailController alloc]init];
+    detailVC.customerId = model.customerId;
+    detailVC.customerName = model.customerName;
+    detailVC.phone = model.customerMobile;
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 
 @end

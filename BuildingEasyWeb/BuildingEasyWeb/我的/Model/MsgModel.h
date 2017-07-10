@@ -11,8 +11,11 @@
 
 @interface MsgModel : NSObject
 
+//@property (nonatomic, copy) NSString* id;
+@property (nonatomic, assign) NSUInteger id;
 @property (nonatomic, copy) NSString* title;
 @property (nonatomic, copy) NSString* content;
+@property (nonatomic, assign) NSUInteger time;
 @property (nonatomic, assign) CGFloat cellHeight;
 
 - (id)initWithTitle:(NSString*)title content:(NSString*) content;

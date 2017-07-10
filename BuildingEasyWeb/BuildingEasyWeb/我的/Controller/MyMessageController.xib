@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyMessageController">
             <connections>
-                <outlet property="tableView" destination="TRt-UH-xan" id="pJY-Rb-lWa"/>
+                <outlet property="tableview" destination="TRt-UH-xan" id="d1w-HX-npI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
