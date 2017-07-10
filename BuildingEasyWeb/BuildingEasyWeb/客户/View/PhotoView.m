@@ -14,6 +14,7 @@
 @interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     BOOL _isShow;
+    BOOL _isSelect;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *photoTitleLabel;
@@ -91,6 +92,10 @@
     NSMutableArray* array = [NSMutableArray arrayWithArray:_photoArray];
     if (_photoArray.count < _limitNum) {
         [array removeLastObject];
+    } else if (_photoArray.count == _limitNum) {
+        if (_isSelect == NO) {
+            [array removeLastObject];
+        }
     }
     return [array copy];
 }
@@ -162,6 +167,8 @@
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
+    _isSelect = YES;
+    
     UIImage * image = info[UIImagePickerControllerEditedImage];
     
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
