@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _phoneTextField.text = [User shareUser].mobile;
+    
     self.title = @"登录";
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
@@ -40,8 +42,6 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
-    
-    _phoneTextField.text = [User shareUser].mobile;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +62,7 @@
         return;
     }
     [LoginManager login:_phoneTextField.text password:[_passWordTextField.text md5] callback:^{
-        [LoginManager getUserInfo];
+        
     }];
 }
 

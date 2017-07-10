@@ -69,7 +69,6 @@
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
         [LoginManager login:mobile password:pwd callback:^{
-            [LoginManager getUserInfo];
             [self requestDataWithCheckLocation];
         }];
     } else {

@@ -448,6 +448,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 #pragma mark 成功界面
 - (void)showBaobeiSuccess
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kBaobeiNewSuccess object:nil];
+    
     _successView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
     [[UIApplication sharedApplication].keyWindow addSubview:_successView];
 }

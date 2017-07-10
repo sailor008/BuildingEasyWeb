@@ -165,6 +165,8 @@
     
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getAuthInfo" parameters:parameters success:^(id reponse) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
+        
         [MBProgressHUD hideHUDForView:self.view];
         
         _textView.text = [reponse objectForKey:@"desc"];

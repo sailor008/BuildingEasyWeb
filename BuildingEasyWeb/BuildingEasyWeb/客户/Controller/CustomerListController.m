@@ -19,6 +19,7 @@
 #import "BaobeiController.h"
 #import "TableRefreshManager.h"
 #import "EmptyTipView.h"
+#import "Global.h"
 
 @interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate, BaobeiControllerDelegate>
 
@@ -37,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kBaobeiNewSuccess object:nil];
     
     UIButton* addCustomerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addCustomerButton setImage:GetIMAGE(@"添加客户.png") forState:UIControlStateNormal];

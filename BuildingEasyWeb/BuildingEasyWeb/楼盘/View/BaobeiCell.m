@@ -25,6 +25,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     _changeButton.layer.cornerRadius = 5;
     _changeButton.layer.borderWidth = 1;

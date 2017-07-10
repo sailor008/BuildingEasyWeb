@@ -35,25 +35,29 @@
         
         callback();
         
+        [LoginManager getUserInfo];
+        
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD showError:msg];
+        [MBProgressHUD dissmissWithError:msg];
     }];
 }
 
 + (void)registerWithInfo:(NSDictionary *)info
 {
     [NetworkManager postWithUrl:@"wx/mobileRegister" parameters:info success:^(id reponse) {
+        [MBProgressHUD showSuccess:@"注册成功"];
         
-        [LoginManager changeRootControllerToMainTabVC];
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = info[@"pwd"];
         [user copyToShareUser];
         [[User shareUser] saveUserInfoToFile];
+        
+        [User shareUser].isLogin = YES;
+        [LoginManager getUserInfo];
         [LoginManager changeRootControllerToMainTabVC];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD showError:msg];
-        [LoginManager changeRootControllerToLoginVC];
+        [MBProgressHUD dissmissWithError:msg];
     }];
 }
 
@@ -86,6 +90,7 @@
         [[User shareUser] saveUserInfoToFile];
         
         [User shareUser].isLogin = YES;
+        [LoginManager getUserInfo];
         [LoginManager changeRootControllerToMainTabVC];
         
     } failure:^(NSError *error, NSString *msg) {
