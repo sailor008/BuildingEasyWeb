@@ -29,7 +29,6 @@
 #import <MJExtension.h>
 #import "Global.h"
 #import "User.h"
-#import "MyInfoModel.h"
 #import "MyImageHelper.h"
 
 
@@ -66,12 +65,10 @@ typedef void (^onTabVCell)(void);
     self.title = @"我的资料";
     
     [_tableView registerNibWithName: @"MeCellInfo"];
-
     
     [self setupUI];
     
     [self initViewCfg];
-
 }
 
 - (void)setupUI {
@@ -257,9 +254,14 @@ typedef void (^onTabVCell)(void);
     [MBProgressHUD showLoading];
     [NetworkManager postWithUrl:@"wx/getUserOtherInfo" parameters:@{} success:^(id reponse) {
         NSLog(@"Success：获取已填写的认证信息 [wx/getUserOtherInfo] 成功！");
+//        NSLog(@"reponse : %@", reponse);
         [MBProgressHUD hideHUD];
+        NSDictionary* tmpDic = (NSDictionary*)reponse;
+        UserExtInfoModel *model = [UserExtInfoModel mj_objectWithKeyValues:tmpDic];
+        
         AuthIdentityController* authVC = [[AuthIdentityController alloc]init];
         authVC.hidesBottomBarWhenPushed = YES;
+        authVC.userExtModel = model;
         [self.navigationController pushViewController:authVC animated:YES];
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"Error：获取已填写的认证信息 [wx/getUserOtherInfo] 失败。detail：%@", msg);

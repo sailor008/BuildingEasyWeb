@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) EditTxtModel* model;
 
+-(void)setTextEnable:(BOOL)isEnable;
+
 @end
