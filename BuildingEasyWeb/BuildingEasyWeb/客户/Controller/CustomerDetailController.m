@@ -16,6 +16,7 @@
 #import "BaobeiController.h"
 #import "ProgressDetailController.h"
 #import "OpenSystemUrlManager.h"
+#import "Global.h"
 
 @interface CustomerDetailController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -34,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kEditSuceess object:nil];
     
     _nameLabel.text = _customerName;
     _phoneLabel.text = _phone;
@@ -60,6 +63,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Action

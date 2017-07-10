@@ -74,6 +74,7 @@
 /** 不能获取位置信息时调用*/
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [manager stopUpdatingLocation];
     self.city(@"", 0.0, 0.0);
     NSLog(@"获取定位失败");
 }

@@ -20,6 +20,7 @@
 #import "BaobeiController.h"
 #import "TakeUpEditController.h"
 #import "DealEditController.h"
+#import "Global.h"
 
 const NSInteger kCustomProgressImageViewTag = 1000;
 const NSInteger kCustomProgressLabelTag = 2000;
@@ -60,6 +61,8 @@ const NSInteger kCustomProgressLabelTag = 2000;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kEditSuceess object:nil];
+    
     _canLookDetail = YES;
     [_tableView registerNibWithName:@"ProgressCell"];
     [self requestData];
@@ -74,6 +77,11 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Action

@@ -12,6 +12,10 @@
 
 static NSString* const kShareSuccess = @"ShareToWXSuccess";
 
+static NSString* const kBaobeiNewSuccess = @"BaobeiNewSuccess";
+
+static NSString* const kEditSuceess = @"EditSuceess";
+
 typedef NS_ENUM(NSInteger, BEWUserRole) {
     kPersonRole = 0,
     kAgencyRole

@@ -118,7 +118,8 @@ typedef void (^onTabVCell)(void);
 - (void)onBtnLogout:(UIButton*)btn {
     [[User shareUser]clearUserInfoInFile];
     LoginController* loginVC = [[LoginController alloc] init];
-    [UIApplication sharedApplication].keyWindow.rootViewController = loginVC;
+    UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    [UIApplication sharedApplication].keyWindow.rootViewController = naviVC;
 }
 
 - (void)didReceiveMemoryWarning {

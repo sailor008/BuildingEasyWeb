@@ -101,11 +101,7 @@
                                  @"regCode":_codeTextField.text,
                                  @"role":@(_userRole - 1),
                                  @"pwd":[_passwordTextField.text md5]};
-    [NetworkManager postWithUrl:@"wx/mobileRegister" parameters:parameters success:^(id reponse) {
-        NSLog(@"response:%@", reponse);
-    } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error:%@", msg);
-    }];
+    [LoginManager registerWithInfo:parameters];
 }
 
 @end
