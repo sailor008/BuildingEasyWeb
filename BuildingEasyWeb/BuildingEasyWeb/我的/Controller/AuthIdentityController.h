@@ -7,7 +7,10 @@
 //
 
 #import "BaseController.h"
+#import "MyInfoModel.h"
 
 @interface AuthIdentityController : BaseController
+
+@property(nonatomic, strong) UserExtInfoModel* userExtModel;
 
 @end

@@ -36,6 +36,10 @@
 }
 */
 
+-(void)setTextEnable:(BOOL)isEnable
+{
+    [_txtField setEnabled:isEnable];
+}
 
 - (void)setModel:(EditTxtModel *)model
 {

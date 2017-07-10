@@ -29,7 +29,7 @@
 @property (nonatomic, copy) NSMutableArray* photoViewArray;
 
 @property (nonatomic, assign)int successUploadCount;
-@property (nonatomic, assign)const int photoViewTag;
+//@property (nonatomic, assign)const int photoViewTag;
 @property (nonatomic, copy) NSArray* photoviewCfgArray;
 @property (nonatomic, copy) NSArray* editTxtCfgArray;
 
@@ -65,27 +65,30 @@
 
 - (void)initCfgData
 {
-    self.photoViewTag = 0;
- 
+    //更新个人数据中最新的认证状态
+    [User shareUser].auth = _userExtModel.authStatus;
+    
     if([[User shareUser].role intValue] == kAgencyRole) {
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
         firstCellModel.title = @"企业名称";
         firstCellModel.placeholder = @"请输入企业名称";
+        firstCellModel.text = _userExtModel.company;
         _editTxtCfgArray = @[firstCellModel];
         
         _photoviewCfgArray = @[
-                       @{@"title":@"营业执照：", @"tag":@3, @"desc":@"证件正面"},
+                       @{@"title":@"营业执照：", @"tag":@3, @"desc":@"证件正面", @"imgPath":_userExtModel.businessLicenceImg},
                        ];
     } else {
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
         firstCellModel.title = @"身份证号";
         firstCellModel.placeholder = @"请输入身份证号";
+        firstCellModel.text = _userExtModel.idCard;
         _editTxtCfgArray = @[firstCellModel];
 
         _photoviewCfgArray = @[
-                       @{@"title":@"身份证正面：", @"tag":@0, @"desc":@"证件正面"},
-                       @{@"title":@"身份证背面：", @"tag":@1, @"desc":@"证件反面"},
-                       @{@"title":@"手持身份证：", @"tag":@2, @"desc":@"手持证件"},
+                       @{@"title":@"身份证正面：", @"tag":@0, @"desc":@"证件正面", @"imgPath":_userExtModel.faceImg},
+                       @{@"title":@"身份证背面：", @"tag":@1, @"desc":@"证件反面", @"imgPath":_userExtModel.inverseImg},
+                       @{@"title":@"手持身份证：", @"tag":@2, @"desc":@"手持证件", @"imgPath":_userExtModel.handImg},
                        ];
     }
 }
@@ -101,6 +104,11 @@
         photoview.photoLeft = 0;
         photoview.tag = [(NSNumber*)[cfgInfo objectForKey:@"tag"] intValue];
         photoview.frame = CGRectMake(0, 0, ScreenWidth, 60);
+        NSString* initPath = [cfgInfo objectForKey:@"imgPath"];
+        if(initPath.length) {
+            NSLog(@"photoView 的初始图片：%@", initPath);
+            [photoview setSourceArray:[NSArray arrayWithObject:initPath]];
+        }
         [_photoViewArray insertObject:photoview atIndex:i];
     }
     
@@ -118,7 +126,10 @@
     
     if([[User shareUser].auth integerValue] == 1) {
         //已通过认证
+        [_editTxtCell setTextEnable:NO];
     } else {
+        [_editTxtCell setTextEnable:YES];
+
         UIButton* btnEnsure = [UIButton buttonWithType:UIButtonTypeSystem];
         btnEnsure.frame = CGRectMake(10, 40, 355, 49);
         btnEnsure.backgroundColor = Hex(0xff4c00);
@@ -134,7 +145,6 @@
         footerView.frame = CGRectMake(0, 0, ScreenWidth, btnEnsure.frame.origin.y + btnEnsure.frame.size.height);
         footerView.backgroundColor = [UIColor whiteColor];
         [footerView addSubview:btnEnsure];
-
         _tableView.tableFooterView = footerView;
     }
 }
@@ -152,17 +162,6 @@
             [MBProgressHUD showError:@"请输入身份证号码！"];
         }
     }
-//    //check images is select
-//    for (int i = 0; i < _photoViewArray.count; i++) {
-//        PhotoView* view = _photoViewArray[i];
-//        UIImage* image = view.resultArray[0];
-//        if(image == nil) {
-//            isCanSave = false;
-//            NSDictionary* viewCfg = _photoviewCfgArray[i];
-//            [MBProgressHUD showError:[NSString stringWithFormat:@"请导入%@照片", [viewCfg objectForKey:@"title"]]];
-//            break;
-//        }
-//    }
     
     if(isCanSave){
         [self requestSaveAuthImages];
@@ -220,7 +219,7 @@
     
     // 当所有队列执行完成之后
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSLog(@"完成认证图片的更新！！！");
+        NSLog(@"已更新认证图片的数量 = %i", weakSelf.successUploadCount);
         // 执行下面的判断代码
         if (weakSelf.successUploadCount == _photoViewArray.count) {
             // 返回主线程进行界面上的修改
