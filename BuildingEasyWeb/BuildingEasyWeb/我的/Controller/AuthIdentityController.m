@@ -151,25 +151,44 @@
 
 - (void)onBtnEnsure:(UIButton*)btn
 {
-    BOOL isCanSave = true;
     //check edit txt is nil
     EditTxtModel* editTxtModel = _editTxtCfgArray[0];
     if (!editTxtModel.text.length) {
-        isCanSave = false;
         if([[User shareUser].role intValue] == kAgencyRole) {
             [MBProgressHUD showError:@"请输入企业名称！"];
         } else {
             [MBProgressHUD showError:@"请输入身份证号码！"];
         }
+        return;
+    }
+    {
+        PhotoView* view = _photoViewArray[0];
+        if (view.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传身份证正面！"];
+            return;
+        }
+    }
+    {
+        PhotoView* view = _photoViewArray[1];
+        if (view.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传身份证背面！"];
+            return;
+        }
+    }
+    {
+        PhotoView* view = _photoViewArray[2];
+        if (view.resultArray.count == 0) {
+            [MBProgressHUD showError:@"请上传手持身份证！"];
+            return;
+        }
     }
     
-    if(isCanSave){
-        [self requestSaveAuthImages];
-    }
+    [self requestSaveAuthImages];
 }
 
 - (void)requestSaveAuthImages
 {
+    
     self.successUploadCount = 0;
     kWeakSelf(weakSelf);
     
