@@ -1377,19 +1377,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
 				DEVELOPMENT_TEAM = QD5JT3AFJU;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/Required",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Optional",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformConnector",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/QQSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Required",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/Optional",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/PlatformConnector",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/Required",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BuildingEasyWeb/PrefixHeader.pch";
 				INFOPLIST_FILE = BuildingEasyWeb/Info.plist;
@@ -1397,8 +1385,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/WeChatSDK",
 				);
 				OTHER_CODE_SIGN_FLAGS = "";
@@ -1417,19 +1403,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
 				DEVELOPMENT_TEAM = QD5JT3AFJU;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/Required",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Optional",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformConnector",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/QQSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/Required",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/Optional",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/PlatformConnector",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/Required",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BuildingEasyWeb/PrefixHeader.pch";
 				INFOPLIST_FILE = BuildingEasyWeb/Info.plist;
@@ -1437,8 +1411,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/SDK/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
-					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/BuildingEasyWeb/ThirdParty/WeChatSDK",
 				);
 				OTHER_CODE_SIGN_FLAGS = "";

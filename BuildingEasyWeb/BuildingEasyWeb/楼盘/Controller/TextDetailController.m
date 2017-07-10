@@ -12,7 +12,7 @@
 
 @interface TextDetailController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
@@ -22,8 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
-    _textLabel.attributedText = [_textStr htmlAttStr];
+    _textView.attributedText = [_textStr htmlAttStr];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -17,22 +17,24 @@
 {
     NSString* urlStr = [NSString stringWithFormat:@"sms://%@", phone];
     NSURL *url = [NSURL URLWithString:urlStr];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-        if (success) {
-            NSLog(@"调起发短信");
-        }
-    }];
+    [[UIApplication sharedApplication] openURL:url];
+//    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+//        if (success) {
+//            NSLog(@"调起发短信");
+//        }
+//    }];
 }
 
 + (void)callPhone:(NSString *)phone
 {
     NSString* urlStr = [NSString stringWithFormat:@"tel://%@", phone];
     NSURL *url = [NSURL URLWithString:urlStr];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-        if (success) {
-            NSLog(@"调起打电话");
-        }
-    }];
+    [[UIApplication sharedApplication] openURL:url];
+//    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+//        if (success) {
+//            NSLog(@"调起打电话");
+//        }
+//    }];
 }
 
 + (void)showMapGuideWithLat:(double)latitude lng:(double)longitude
