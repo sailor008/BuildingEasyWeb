@@ -76,7 +76,7 @@
         _editTxtCfgArray = @[firstCellModel];
         
         _photoviewCfgArray = @[
-                       @{@"title":@"营业执照：", @"tag":@3, @"desc":@"证件正面", @"imgPath":_userExtModel.businessLicenceImg},
+                       @{@"title":@"营业执照：", @"tag":@3, @"desc":@"请上传营业执照！", @"imgPath":_userExtModel.businessLicenceImg},
                        ];
     } else {
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
@@ -86,9 +86,9 @@
         _editTxtCfgArray = @[firstCellModel];
 
         _photoviewCfgArray = @[
-                       @{@"title":@"身份证正面：", @"tag":@0, @"desc":@"证件正面", @"imgPath":_userExtModel.faceImg},
-                       @{@"title":@"身份证背面：", @"tag":@1, @"desc":@"证件反面", @"imgPath":_userExtModel.inverseImg},
-                       @{@"title":@"手持身份证：", @"tag":@2, @"desc":@"手持证件", @"imgPath":_userExtModel.handImg},
+                       @{@"title":@"身份证正面：", @"tag":@0, @"desc":@"请上传身份证正面！", @"imgPath":_userExtModel.faceImg},
+                       @{@"title":@"身份证背面：", @"tag":@1, @"desc":@"请上传身份证背面！", @"imgPath":_userExtModel.inverseImg},
+                       @{@"title":@"手持身份证：", @"tag":@2, @"desc":@"请上传手持身份证！", @"imgPath":_userExtModel.handImg},
                        ];
     }
 }
@@ -161,24 +161,15 @@
         }
         return;
     }
-    {
-        PhotoView* view = _photoViewArray[0];
-        if (view.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传身份证正面！"];
-            return;
-        }
-    }
-    {
-        PhotoView* view = _photoViewArray[1];
-        if (view.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传身份证背面！"];
-            return;
-        }
-    }
-    {
-        PhotoView* view = _photoViewArray[2];
-        if (view.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传手持身份证！"];
+    //check image is select
+    for (int i = 0; i < _photoViewArray.count; i++) {
+        PhotoView* view = _photoViewArray[i];
+        NSDictionary* cfgInfo = _photoviewCfgArray[i];
+        NSString* imgInitPath = [cfgInfo objectForKey:@"imgPath"];
+        if (view.resultArray.count == 0 && !imgInitPath.length) {
+            //没有选取图片、且没有网络图片链接时，提示选取对应的图片类别
+            NSString* errMsg = [cfgInfo objectForKey:@"desc"];
+            [MBProgressHUD showError: errMsg];
             return;
         }
     }

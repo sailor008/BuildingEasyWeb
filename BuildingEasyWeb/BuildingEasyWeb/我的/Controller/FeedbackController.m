@@ -81,7 +81,8 @@
             [NetworkManager postWithUrl:@"wx/feedBack" parameters:@{@"content": contentStr}success:^(id reponse) {
                 NSLog(@"反馈成功！！！response:%@", reponse);
                 _txtContent.text = nil;
-                
+                [MBProgressHUD showSuccess:@"反馈成功！"];
+                [self.navigationController popViewControllerAnimated:YES];
             } failure:^(NSError *error, NSString *msg) {
                 NSLog(@"error:%@", msg);
                 [MBProgressHUD dissmissWithError: msg];

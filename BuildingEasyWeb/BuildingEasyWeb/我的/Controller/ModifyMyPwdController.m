@@ -73,6 +73,8 @@
         NSString* newPwd = [_resetPwd.text md5];
         NSDictionary* parameters = @{@"oldPwd": oldPwd, @"newPwd":newPwd};
         [NetworkManager postWithUrl:@"wx/modifyUserPwd" parameters:parameters success:^(id reponse) {
+            [MBProgressHUD showSuccess:@"修改密码成功，请重新登录!"];
+            [[User shareUser] clearUserInfoInFile];
             LoginController* loginVC = [[LoginController alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = loginVC;
         
