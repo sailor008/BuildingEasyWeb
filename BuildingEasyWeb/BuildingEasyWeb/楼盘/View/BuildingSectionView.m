@@ -55,7 +55,8 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
     }
     
     [UIView animateWithDuration:0.25 animations:^{
-        _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+//        _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, tableView.bounds.size.height - self.bounds.size.height);
     }];
     
     [_filterTableView reloadData];

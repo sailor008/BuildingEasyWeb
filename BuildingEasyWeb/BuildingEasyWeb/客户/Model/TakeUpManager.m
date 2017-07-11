@@ -220,6 +220,7 @@
         [tempArr addObject:subTempArr];
     }
     
+    NSMutableArray* tempBuyers = [NSMutableArray array];
     NSArray* buyerInfos = data[@"buyerInfos"];
     for (NSDictionary* dic in buyerInfos) {
         EditInfoModel* model = [[EditInfoModel alloc] init];
@@ -230,7 +231,10 @@
         model.name = dic[@"name"];
         model.client = dic[@"client"];
         model.canEdit = canEdit;
-        [tempArr insertObject:model atIndex:2];
+        [tempBuyers addObject:model];
+    }
+    if (tempBuyers.count > 0) {
+        [tempArr insertObjects:[tempBuyers copy] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, tempBuyers.count)]];
     }
     
     return [tempArr copy];

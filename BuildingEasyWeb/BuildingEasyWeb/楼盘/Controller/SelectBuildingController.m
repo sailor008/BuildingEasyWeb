@@ -20,7 +20,7 @@
 #import "CityModel.h"
 #import "User.h"
 
-@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate>
+@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AreaSectionFilterView* areaSectionView;
@@ -165,6 +165,7 @@
     AreaModel* model = _areaList[selectedIndex];
     _areaCode = model.areaCode;
 
+    _tableView.page = 1;
     [_tableView.mj_header beginRefreshing];
 }
 
@@ -172,7 +173,19 @@
 - (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
 {
     _city = city;
+    _areaCode = cityCode;
     [_areaSectionView setCurrentCity:city];
+    
+    [_tableView.mj_header beginRefreshing];
+}
+
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    _tableView.page = 1;
+    [self requestData];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark RequestData
@@ -183,17 +196,18 @@
                                  @"distanceId":@0,
                                  @"classifyId":@0,
                                  @"areaCode":_areaCode,
-                                 @"lon":@([User shareUser].lng),//@113.26,
-                                 @"lat":@([User shareUser].lat),//@23.14,
+                                 @"lon":@([User shareUser].lng),
+                                 @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":keyWord};
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
-        if (_buildingArr.count > 0) {
-            _tableView.page ++;
+        if (_tableView.page == 1) {
+            [_buildIdArr removeAllObjects];
         }
+        _tableView.page ++;
         
         _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
         NSArray* list = [reponse objectForKey:@"list"];
