@@ -39,6 +39,8 @@ static const NSInteger kPhotoViewTag = 1000;
 
 @property (nonatomic, copy) NSString* signId;
 
+@property (nonatomic, assign) CGFloat singlePhotoViewHeight;
+
 @end
 
 @implementation DealEditController
@@ -91,6 +93,7 @@ static const NSInteger kPhotoViewTag = 1000;
     
     _idPhotoView = [self getPhotoView];
     CGFloat photoViewHeight = _idPhotoView.height;
+    _singlePhotoViewHeight = photoViewHeight;
     _idPhotoView.delegate = self;
     _idPhotoView.sectionTitle = @"买方身份证:";
     _idPhotoView.tag = kPhotoViewTag;
@@ -238,21 +241,7 @@ static const NSInteger kPhotoViewTag = 1000;
 {
     photoView.height = height;
     
-    CGFloat footerHeight = 0.0;
-    for (NSInteger i = kPhotoViewTag; i < kPhotoViewTag + 6; i ++) {
-        PhotoView* view = [_footerView viewWithTag:i];
-        
-        footerHeight += view.height;
-        
-        if (i == kPhotoViewTag) {
-            continue;
-        }
-        
-        PhotoView* lastView = [_footerView viewWithTag:i - 1];
-        view.top = lastView.bottom;
-    }
-    
-    _footerView.height = footerHeight + 10;
+    _footerView.height = height + _singlePhotoViewHeight * 5 + 10;
     _tableView.tableFooterView = _footerView;
 }
 
@@ -264,27 +253,27 @@ static const NSInteger kPhotoViewTag = 1000;
     [MBProgressHUD showLoadingToView:self.view];
     if (_type == kEditTypeNew) {// 新建编辑才上传图片
         if (_idPhotoView.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请上传买方身份证" toView:self.view];
             return;
         }
         if (_firstFormPhotoView.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传首付单" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请上传首付单" toView:self.view];
             return;
         }
         if (_posFormPhotoView.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请上传Pos单" toView:self.view];
             return;
         }
         if (_depositPhotoView.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传定金单" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请上传定金单" toView:self.view];
             return;
         }
         if (_takeupPhotoView.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传认购书" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请上传认购书" toView:self.view];
             return;
         }
         if (_dealPhotoView.resultArray.count == 0) {
-            [MBProgressHUD showError:@"请上传合同" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请上传合同" toView:self.view];
             return;
         }
         [imagArr addObjectsFromArray:_idPhotoView.resultArray];
@@ -300,7 +289,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[0];
         if (model.text.length == 0) {
-            [MBProgressHUD showError:@"请选择开始日期" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请选择开始日期" toView:self.view];
             return;
         }
         parameters[@"startTime"] = [model.text timeIntervalWithDateStr];
@@ -308,7 +297,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[1];
         if (model.text.length == 0) {
-            [MBProgressHUD showError:@"请选择结束日期" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请选择结束日期" toView:self.view];
             return;
         }
         parameters[@"endTime"] = [model.text timeIntervalWithDateStr];
@@ -320,7 +309,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[3];
         if (model.text.length == 0) {
-            [MBProgressHUD showError:@"请填写单价" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请填写单价" toView:self.view];
             return;
         }
         parameters[@"price"] = model.text;
@@ -328,7 +317,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[4];
         if (model.text.length == 0) {
-            [MBProgressHUD showError:@"请填写总价" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请填写总价" toView:self.view];
             return;
         }
         parameters[@"total"] = model.text;
@@ -336,7 +325,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[5];
         if (model.text.length == 0) {
-            [MBProgressHUD showError:@"请选择交付日期" toView:self.view];
+            [MBProgressHUD dissmissWithError:@"请选择交付日期" toView:self.view];
             return;
         }
         parameters[@"leadTime"] = [model.text timeIntervalWithDateStr];

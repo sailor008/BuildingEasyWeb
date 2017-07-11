@@ -64,8 +64,11 @@
     _percenLabel.hidden = !model.isPercen;
     
     _textField.enabled = model.canEdit;
-    
-    _textField.enabled = !model.isDate;
+    if (model.isDate || model.canEdit == NO) {
+        _textField.enabled = NO;
+    } else {
+        _textField.enabled = YES;
+    }
         
     if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"] || [_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"] || [_editTitleLabel.text containsString:@"百分比"]) {
         _textField.keyboardType = UIKeyboardTypeNumberPad;

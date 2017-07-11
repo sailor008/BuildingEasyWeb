@@ -138,6 +138,8 @@
     dispatch_group_notify(group, asyncQueue, ^{
         [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
                                                                       * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -165,7 +167,6 @@
     
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getAuthInfo" parameters:parameters success:^(id reponse) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
         
         [MBProgressHUD hideHUDForView:self.view];
         

@@ -124,33 +124,6 @@ const NSInteger kCustomProgressLabelTag = 2000;
         editVC.type = lastState.state - 20;
         [self.navigationController pushViewController:editVC animated:YES];
     }
-    
-//    switch (_detailModel.currentState) {
-//        case 0:// 报备、带看不可点击
-//        case 1:
-//            break;
-//        case 2:// 认购
-//        {
-//            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-//            takeEdit.customerId = _customerId;
-//            [self.navigationController pushViewController:takeEdit animated:YES];
-//        }
-//            break;
-//        case 3:// 签约
-//        {
-//            DealEditController* dealEdit = [[DealEditController alloc] init];
-//            dealEdit.customerId = _customerId;
-//            [self.navigationController pushViewController:dealEdit animated:YES];
-//        }
-//            break;
-//        default:// 回款、结清
-//        {
-//            EditController* editVC = [[EditController alloc] init];
-//            editVC.customerId = _customerId;
-//            [self.navigationController pushViewController:editVC animated:YES];
-//        }
-//            break;
-//    }
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -220,35 +193,6 @@ const NSInteger kCustomProgressLabelTag = 2000;
     }
     
     [self editProgress:nil];
-//    switch (_detailModel.currentState) {
-//        case 0:// 报备、带看不可点击
-//        case 1:
-//            break;
-//        case 2:// 认购
-//        {
-//            TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
-//            takeEdit.customerId = _customerId;
-//            takeEdit.isDetail = YES;
-//            StateList* lastState = [_detailModel.stateList lastObject];
-//            takeEdit.state = lastState.state;
-//            [self.navigationController pushViewController:takeEdit animated:YES];
-//        }
-//            break;
-//        case 3:// 签约
-//        {
-//            DealEditController* dealEdit = [[DealEditController alloc] init];
-//            dealEdit.customerId = _customerId;
-//            [self.navigationController pushViewController:dealEdit animated:YES];
-//        }
-//            break;
-//        default:// 回款、结清
-//        {
-//            EditController* editVC = [[EditController alloc] init];
-//            editVC.customerId = _customerId;
-//            [self.navigationController pushViewController:editVC animated:YES];
-//        }
-//            break;
-//    }
 }
 
 #pragma mark RequestData
@@ -305,6 +249,9 @@ const NSInteger kCustomProgressLabelTag = 2000;
     if (lastState.state < 4 || lastState.state == 7 || lastState.state == 11 || lastState.state == 15 || lastState.state == 19 || lastState.state == 23) {
         _editButton.hidden = YES;
         _canLookDetail = NO;
+    } else {
+        _editButton.hidden = NO;
+        _canLookDetail = YES;
     }
     
     NSTimeInterval timeInterval = _detailModel.createTime / 1000;

@@ -256,6 +256,7 @@
     _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
     [_formulaTableView reloadData];
     
+    _typeDetailLabel.text = _detail.buildInfo.houseType;
     _sellDetaillabel.text = _detail.buildInfo.sellingPoint;
     [self analysisBaseInfoArray];
 }

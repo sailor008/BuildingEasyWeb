@@ -208,6 +208,7 @@
 {
     EditInfoModel* model = [[EditInfoModel alloc] init];
     model.isBuyer = YES;
+    model.canEdit = YES;
     
     NSMutableArray* tempArr = [NSMutableArray arrayWithArray:_dataArray];
     [tempArr insertObject:model atIndex:3];
@@ -286,6 +287,10 @@
     BOOL result = YES;
     TakeUpModel* takeUpModel = [TakeUpManager tranToCommitModel:_dataArray tranResult:&result];
     takeUpModel.customerId = _customerId;
+    
+    if (result == NO) {
+        return;
+    }
     
     kWeakSelf(weakSelf);
     [MBProgressHUD showLoadingToView:self.view];

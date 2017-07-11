@@ -173,6 +173,8 @@
 {
     _city = city;
     [_areaSectionView setCurrentCity:city];
+    
+    [_tableView.mj_header beginRefreshing];
 }
 
 #pragma mark RequestData
@@ -183,17 +185,18 @@
                                  @"distanceId":@0,
                                  @"classifyId":@0,
                                  @"areaCode":_areaCode,
-                                 @"lon":@([User shareUser].lng),//@113.26,
-                                 @"lat":@([User shareUser].lat),//@23.14,
+                                 @"lon":@([User shareUser].lng),
+                                 @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":keyWord};
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
-        if (_buildingArr.count > 0) {
-            _tableView.page ++;
+        if (_tableView.page == 1) {
+            [_buildIdArr removeAllObjects];
         }
+        _tableView.page ++;
         
         _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
         NSArray* list = [reponse objectForKey:@"list"];
