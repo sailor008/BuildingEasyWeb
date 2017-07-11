@@ -250,6 +250,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     BaobeiInfoModel* model = _baobeiInfoArr[indexPath.row];
     CustomerDetailController* detailVC = [[CustomerDetailController alloc]init];
     detailVC.customerId = model.customerId;

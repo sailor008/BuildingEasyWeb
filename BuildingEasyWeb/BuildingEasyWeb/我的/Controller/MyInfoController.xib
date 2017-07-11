@@ -8,6 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyInfoController">
             <connections>
+                <outlet property="btnLogout" destination="wYl-Ru-1EV" id="LIF-sd-5iA"/>
+                <outlet property="footView" destination="fuq-zW-d85" id="O2L-ec-6Sj"/>
                 <outlet property="tableView" destination="3px-Sv-U5M" id="b2G-dj-aw5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,6 +35,27 @@
                 <constraint firstItem="3px-Sv-U5M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Sy2-JQ-FK9"/>
                 <constraint firstAttribute="trailing" secondItem="3px-Sv-U5M" secondAttribute="trailing" id="tQo-gm-bz3"/>
             </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="fuq-zW-d85">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYl-Ru-1EV">
+                    <color key="backgroundColor" red="1" green="0.29803921568627451" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="退出">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wYl-Ru-1EV" firstAttribute="top" secondItem="fuq-zW-d85" secondAttribute="top" constant="51" id="0eD-hp-L96"/>
+                <constraint firstAttribute="bottom" secondItem="wYl-Ru-1EV" secondAttribute="bottom" id="YFI-sV-tdi"/>
+                <constraint firstItem="wYl-Ru-1EV" firstAttribute="leading" secondItem="fuq-zW-d85" secondAttribute="leading" constant="10" id="kWl-ia-sfe"/>
+                <constraint firstItem="wYl-Ru-1EV" firstAttribute="centerX" secondItem="fuq-zW-d85" secondAttribute="centerX" id="zCB-dK-aOw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>

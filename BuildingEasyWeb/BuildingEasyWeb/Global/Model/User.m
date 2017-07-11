@@ -58,7 +58,7 @@ static NSString* const kUserName = @"Name";
         
         if (userInfo) {
             User* shareUser = [User shareUser];
-            shareUser.nickname = userInfo.nickname;
+            shareUser.nickName = userInfo.nickName;
             shareUser.userId = userInfo.userId;
             shareUser.token = userInfo.token;
             shareUser.role = userInfo.role;
@@ -79,7 +79,7 @@ static NSString* const kUserName = @"Name";
     // 退出登录手机号码不清空
     User* userInfo = [User shareUser];
     userInfo.userId = @"";
-    userInfo.nickname = @"";
+    userInfo.nickName = @"";
     userInfo.token = @"";
     userInfo.headImg = @"";
     userInfo.role = @(0);
@@ -93,7 +93,7 @@ static NSString* const kUserName = @"Name";
 - (void)copyBaseInfoToShareUser
 {
     [User shareUser].userId = [self.userId copy];
-    [User shareUser].nickname = [self.nickname copy];
+    [User shareUser].nickName = [self.nickName copy];
     [User shareUser].token = [self.token copy];
     [User shareUser].headImg = [self.headImg copy];
     [User shareUser].mobile = [self.mobile copy];
@@ -104,7 +104,7 @@ static NSString* const kUserName = @"Name";
 - (void)copyAnotherInfoToShareUser
 {
     [User shareUser].userId = [self.userId copy];
-    [User shareUser].nickname = [self.nickname copy];
+    [User shareUser].nickName = [self.nickName copy];
     [User shareUser].token = [self.token copy];
     [User shareUser].headImg = [self.headImg copy];
     [User shareUser].mobile = [self.mobile copy];
@@ -119,7 +119,7 @@ static NSString* const kUserName = @"Name";
 {
     self = [super init];
     if (self) {
-        _nickname = [aDecoder decodeObjectForKey:kNickname];
+        _nickName = [aDecoder decodeObjectForKey:kNickname];
         _userId = [aDecoder decodeObjectForKey:kUserID];
         _mobile = [aDecoder decodeObjectForKey:kMobile];
         _token = [aDecoder decodeObjectForKey:kToken];
@@ -135,7 +135,7 @@ static NSString* const kUserName = @"Name";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:_nickname forKey:kNickname];
+    [aCoder encodeObject:_nickName forKey:kNickname];
     [aCoder encodeObject:_userId forKey:kUserID];
     [aCoder encodeObject:_mobile forKey:kMobile];
     [aCoder encodeObject:_token forKey:kToken];

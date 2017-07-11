@@ -41,6 +41,8 @@
 		C782F4A81EEDB5910067C07F /* MyMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4A61EEDB5910067C07F /* MyMsgCell.m */; };
 		C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F4A71EEDB5910067C07F /* MyMsgCell.xib */; };
 		C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4AB1EEEF78B0067C07F /* MsgModel.m */; };
+		C787FC031F152D08007F60A5 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C787FC011F152D08007F60A5 /* StatusCell.m */; };
+		C787FC041F152D08007F60A5 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C787FC021F152D08007F60A5 /* StatusCell.xib */; };
 		C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE691EF0414B000EF857 /* MyInfoController.m */; };
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
@@ -235,6 +237,9 @@
 		C782F4A71EEDB5910067C07F /* MyMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyMsgCell.xib; path = "BuildingEasyWeb/我的/View/MyMsgCell.xib"; sourceTree = SOURCE_ROOT; };
 		C782F4AA1EEEF78B0067C07F /* MsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgModel.h; sourceTree = "<group>"; };
 		C782F4AB1EEEF78B0067C07F /* MsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgModel.m; sourceTree = "<group>"; };
+		C787FC001F152D08007F60A5 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
+		C787FC011F152D08007F60A5 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
+		C787FC021F152D08007F60A5 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
 		C7BBCE681EF0414B000EF857 /* MyInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoController.h; sourceTree = "<group>"; };
 		C7BBCE691EF0414B000EF857 /* MyInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoController.m; sourceTree = "<group>"; };
 		C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoController.xib; sourceTree = "<group>"; };
@@ -871,6 +876,9 @@
 				C7CA42261F10769B00112216 /* CustomerStateTVCell.h */,
 				C7CA42271F10769B00112216 /* CustomerStateTVCell.m */,
 				C7CA42281F10769B00112216 /* CustomerStateTVCell.xib */,
+				C787FC001F152D08007F60A5 /* StatusCell.h */,
+				C787FC011F152D08007F60A5 /* StatusCell.m */,
+				C787FC021F152D08007F60A5 /* StatusCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1106,6 +1114,7 @@
 				CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */,
 				CF0CEB1E1EFEABEE0018B35B /* EditSectionView.xib in Resources */,
 				CF0CEB141EFEA8D20018B35B /* TakeUpEditController.xib in Resources */,
+				C787FC041F152D08007F60A5 /* StatusCell.xib in Resources */,
 				CF8F7FE91EF77803009A6C3E /* FormulaListCell.xib in Resources */,
 				C782F4861EE9B9FC0067C07F /* MeController.xib in Resources */,
 				CFDD367D1EEBCAB5007497AC /* SelectBuildingController.xib in Resources */,
@@ -1251,6 +1260,7 @@
 				CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,
+				C787FC031F152D08007F60A5 /* StatusCell.m in Sources */,
 				CFE2AF8A1EFFB84B004A98B3 /* DealEditController.m in Sources */,
 				C782F48A1EE9CDAD0067C07F /* MeCellInfo.m in Sources */,
 				C782F48F1EE9D7430067C07F /* MeCellStatus.m in Sources */,
