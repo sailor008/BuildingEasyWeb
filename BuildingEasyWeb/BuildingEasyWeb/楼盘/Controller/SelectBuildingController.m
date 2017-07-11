@@ -20,7 +20,7 @@
 #import "CityModel.h"
 #import "User.h"
 
-@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate>
+@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AreaSectionFilterView* areaSectionView;
@@ -165,6 +165,7 @@
     AreaModel* model = _areaList[selectedIndex];
     _areaCode = model.areaCode;
 
+    _tableView.page = 1;
     [_tableView.mj_header beginRefreshing];
 }
 
@@ -172,9 +173,19 @@
 - (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
 {
     _city = city;
+    _areaCode = cityCode;
     [_areaSectionView setCurrentCity:city];
     
     [_tableView.mj_header beginRefreshing];
+}
+
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    _tableView.page = 1;
+    [self requestData];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark RequestData

@@ -127,6 +127,7 @@
     [MBProgressHUD showLoadingToView:self.tableView];
     [NetworkManager postWithUrl:@"wx/getCustomerListByName" parameters:@{@"customerName":_customerName, @"customerMobile":_phone} success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.tableView];
+        [_buildList removeAllObjects];
         NSArray* list = [reponse objectForKey:@"list"];
         for (NSDictionary* dic in list) {
             CustomerBuildModel* model = [CustomerBuildModel mj_objectWithKeyValues:dic];
