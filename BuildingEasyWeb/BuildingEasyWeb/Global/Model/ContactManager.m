@@ -11,6 +11,7 @@
 #import <Contacts/Contacts.h>
 #import <AddressBook/AddressBook.h>
 #import <UIKit/UIKit.h>
+#import "OpenSystemUrlManager.h"
 
 @implementation ContactManager
 
@@ -161,7 +162,7 @@
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
     alertVc.title = @"请到设置>隐私>通讯录打开本应用的权限设置";
     UIAlertAction *actionEnsure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Privacy&path=CONTACTS"]];
+        [OpenSystemUrlManager jumpToContactSetting];
     }];
     [actionEnsure setValue:[UIColor blackColor] forKey:@"_titleTextColor"];
     

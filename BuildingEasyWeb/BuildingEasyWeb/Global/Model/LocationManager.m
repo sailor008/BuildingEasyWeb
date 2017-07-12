@@ -9,6 +9,8 @@
 #import "LocationManager.h"
 
 #import <CoreLocation/CoreLocation.h>
+#import <UIKit/UIKit.h>
+#import "OpenSystemUrlManager.h"
 
 @interface LocationManager () <CLLocationManagerDelegate>
 
@@ -35,11 +37,25 @@
 + (void)startGetLocation:(LocationCity)locationCity
 {
     if ([CLLocationManager locationServicesEnabled]) {
-        // 开始定位
-        //        [_locationManager requestLocation];
-        [LocationManager shareLocation].city = locationCity;
-        [[[LocationManager shareLocation] locationManager] requestWhenInUseAuthorization];
-        [[[LocationManager shareLocation] locationManager] startUpdatingLocation];
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+            // 开始定位
+            //        [_locationManager requestLocation];
+            [LocationManager shareLocation].city = locationCity;
+            [[[LocationManager shareLocation] locationManager] requestWhenInUseAuthorization];
+            [[[LocationManager shareLocation] locationManager] startUpdatingLocation];
+        } else {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"定位服务未开启" message:@"请前往「系统设置 > 隐私」开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* gotoAction = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [OpenSystemUrlManager jumpToLocationSetting];
+            }];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            [alert addAction:gotoAction];
+            [alert addAction:cancelAction];
+            
+            UIViewController* rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+            [rootVC presentViewController:alert animated:YES completion:nil];
+        }
+        
     }
 }
 
