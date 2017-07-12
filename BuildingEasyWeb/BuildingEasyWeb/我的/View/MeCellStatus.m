@@ -7,20 +7,15 @@
 //
 
 #import "MeCellStatus.h"
+#import "StatusCell.h"
 
-@interface MeCellStatus()
+@interface MeCellStatus()<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *btn1;
-@property (weak, nonatomic) IBOutlet UIButton *btn2;
-@property (weak, nonatomic) IBOutlet UIButton *btn3;
-@property (weak, nonatomic) IBOutlet UIButton *btn4;
-@property (weak, nonatomic) IBOutlet UIButton *btn5;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property (nonatomic, copy) void (^clickCB)(NSInteger btnTag);
 
-
-
--(void)initButton:(UIButton*)btn;
+@property (nonatomic, copy) NSArray* btnCfgArr;
 
 @end
 
@@ -29,11 +24,27 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self initButton:_btn1 withTag:1];
-    [self initButton:_btn2 withTag:2];
-    [self initButton:_btn3 withTag:3];
-    [self initButton:_btn4 withTag:4];
-    [self initButton:_btn5 withTag:5];
+    [self initViewCfg];
+    
+    [_collectionView registerNib:[UINib nibWithNibName:@"StatusCell" bundle:nil] forCellWithReuseIdentifier:@"StatusCell"];
+    _collectionView.dataSource = self;
+    _collectionView.delegate = self;
+    
+    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc]init];
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.itemSize = CGSizeMake(ScreenWidth/5, self.contentView.frame.size.height);
+    _collectionView.collectionViewLayout = layout;
+}
+
+-(void)initViewCfg
+{
+    _btnCfgArr = @[@{@"iconName":@"上门.png",@"title":@"已上门"},
+                   @{@"iconName":@"认购.png",@"title":@"已认购"},
+                   @{@"iconName":@"签约.png",@"title":@"已签约"},
+                   @{@"iconName":@"回款.png",@"title":@"已回款"},
+                   @{@"iconName":@"结清.png",@"title":@"已结清"},
+                  ];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -55,11 +66,35 @@
     _clickCB = click;
 }
 
--(void)onBtn:(UIButton*)btn
+-(void)onCellClick:(NSUInteger)cellTag
 {
-    NSInteger btnTag = btn.tag;
-    NSLog(@">>>>>>>>>>> btnTag = %li", btnTag);
-    _clickCB(btnTag);
+//    NSLog(@">>>>>>>>>>> btnTag = %li", cellTag);
+    _clickCB(cellTag);
+}
+
+
+#pragma mark UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return _btnCfgArr.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary* tmpDic = _btnCfgArr[indexPath.row];
+    StatusCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"StatusCell" forIndexPath:indexPath];
+    cell.title = [tmpDic objectForKey:@"title"];
+    cell.iconName = [tmpDic objectForKey:@"iconName"];
+    cell.tag = indexPath.row;
+    return cell;
+}
+
+#pragma mark UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger cellTag = indexPath.row + 1;
+    [self onCellClick:cellTag];
 }
 
 @end

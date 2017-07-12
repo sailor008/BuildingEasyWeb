@@ -37,6 +37,8 @@ typedef void (^onTabVCell)(void);
 @interface MyInfoController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EditMyInfoDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIButton *btnLogout;
 
 //uiview obj
 @property (nonatomic, copy) UIImageView* headImgView;
@@ -72,17 +74,17 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)setupUI {
-    UIButton* btnLogout = [UIButton buttonWithType:UIButtonTypeSystem];
-    btnLogout.frame = CGRectMake(10, 446, 355, 49);
-    btnLogout.backgroundColor = Hex(0xff4c00);
-    btnLogout.layer.masksToBounds = YES;
-    btnLogout.layer.cornerRadius = 2.5f;
-    btnLogout.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    [btnLogout setTitle:@"退出" forState:UIControlStateNormal];
-    [btnLogout setTitleColor:Hex(0xffffff) forState:UIControlStateNormal];
-    [btnLogout setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [btnLogout addTarget:self action:@selector(onBtnLogout:) forControlEvents:UIControlEventTouchUpInside];
-    [_tableView addSubview:btnLogout];
+    _footView.backgroundColor = _tableView.backgroundColor;
+    _tableView.tableFooterView = _footView;
+    
+    _btnLogout.backgroundColor = Hex(0xff4c00);
+    _btnLogout.layer.masksToBounds = YES;
+    _btnLogout.layer.cornerRadius = 2.5f;
+    _btnLogout.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    [_btnLogout setTitle:@"退出" forState:UIControlStateNormal];
+    [_btnLogout setTitleColor:Hex(0xffffff) forState:UIControlStateNormal];
+    [_btnLogout setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_btnLogout addTarget:self action:@selector(onBtnLogout:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initViewCfg {
@@ -104,7 +106,7 @@ typedef void (^onTabVCell)(void);
     NSString* mobile = m_user.mobile == nil? @"": m_user.mobile;
     NSString* email = m_user.email == nil? @"": m_user.email;
     NSString* name = m_user.name == nil? @"": m_user.name;
-    NSString* nickname = m_user.nickname == nil? @"": m_user.nickname;
+    NSString* nickname = m_user.nickName == nil? @"": m_user.nickName;
     _aryCellContent = @[
                         @[@"", mobile, email, name, nickname],
                         @[autoStr,],
@@ -283,8 +285,8 @@ typedef void (^onTabVCell)(void);
         [User shareUser].email = descStr;
         NSLog(@"邮箱：%@", [User shareUser].email);
     } else if([tag isEqualToString: @"wx/modifyUserNickName"]) {
-        [User shareUser].nickname = descStr;
-        NSLog(@"昵称：%@", [User shareUser].nickname);
+        [User shareUser].nickName = descStr;
+        NSLog(@"昵称：%@", [User shareUser].nickName);
     } else if([tag isEqualToString: @"wx/modifyUserName"]) {
         [User shareUser].name = descStr;
         NSLog(@"姓名：%@", [User shareUser].name);

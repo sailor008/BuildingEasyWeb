@@ -15,63 +15,31 @@
                 <frame key="frameInset" width="375" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ey0-m7-Khd">
-                        <frame key="frameInset" width="75" height="66"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="已上门" image="上门">
-                            <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Hb-qb-zbz" userLabel="已认购">
-                        <frame key="frameInset" minX="75" minY="-1" width="75" height="66"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="已认购" image="认购">
-                            <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYi-df-MeG" userLabel="已签约">
-                        <frame key="frameInset" minX="150" minY="-1" width="75" height="66"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="已签约" image="签约">
-                            <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYZ-lM-UrI" userLabel="已放款">
-                        <frame key="frameInset" minX="225" minY="-1" width="75" height="66"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="已回款" image="回款">
-                            <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4x-Fx-jVA" userLabel="已结清">
-                        <frame key="frameInset" minX="300" minY="-1" width="75" height="66"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="已结清" image="结清">
-                            <color key="titleColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                    </button>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ug7-Yi-hUo">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KrF-tl-AsZ">
+                            <size key="itemSize" width="50" height="66"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <connections>
+                            <outlet property="dataSource" destination="-1" id="7Zc-QU-uK2"/>
+                            <outlet property="delegate" destination="-1" id="G6e-R5-EN8"/>
+                        </connections>
+                    </collectionView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="ug7-Yi-hUo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="H1C-10-ZON"/>
+                    <constraint firstAttribute="trailing" secondItem="ug7-Yi-hUo" secondAttribute="trailing" id="KgF-kd-FiG"/>
+                    <constraint firstItem="ug7-Yi-hUo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qF2-w8-veM"/>
+                    <constraint firstItem="ug7-Yi-hUo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uww-y1-hqo"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="btn1" destination="Ey0-m7-Khd" id="K5T-Yd-6PJ"/>
-                <outlet property="btn2" destination="2Hb-qb-zbz" id="dft-V6-V1j"/>
-                <outlet property="btn3" destination="GYi-df-MeG" id="9SE-Lq-yMj"/>
-                <outlet property="btn4" destination="qYZ-lM-UrI" id="ukv-5c-sUs"/>
-                <outlet property="btn5" destination="A4x-Fx-jVA" id="8zF-Gv-nj4"/>
+                <outlet property="collectionView" destination="ug7-Yi-hUo" id="iZJ-LR-JUZ"/>
             </connections>
             <point key="canvasLocation" x="26.5" y="52"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="上门" width="20" height="20"/>
-        <image name="回款" width="20" height="20"/>
-        <image name="签约" width="20" height="20"/>
-        <image name="结清" width="20" height="20"/>
-        <image name="认购" width="20" height="20"/>
-    </resources>
 </document>
