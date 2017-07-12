@@ -24,6 +24,8 @@
 
 @interface AuthIdentityController ()<UITableViewDelegate, UITableViewDataSource, PhotoViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIButton *btnEnsure;
 
 @property (nonatomic, strong) SampleEditTxtCell* editTxtCell;
 @property (nonatomic, copy) NSMutableArray* photoViewArray;
@@ -109,6 +111,9 @@
             NSLog(@"photoView 的初始图片：%@", initPath);
             [photoview setSourceArray:[NSArray arrayWithObject:initPath]];
         }
+        if([[User shareUser].auth integerValue] == 1) {
+            photoview.canSelectedPhoto = NO;
+        }
         [_photoViewArray insertObject:photoview atIndex:i];
     }
     
@@ -130,22 +135,17 @@
     } else {
         [_editTxtCell setTextEnable:YES];
 
-        UIButton* btnEnsure = [UIButton buttonWithType:UIButtonTypeSystem];
-        btnEnsure.frame = CGRectMake(10, 40, 355, 49);
-        btnEnsure.backgroundColor = Hex(0xff4c00);
-        btnEnsure.layer.masksToBounds = YES;
-        btnEnsure.layer.cornerRadius = 2.5f;
-        btnEnsure.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-        [btnEnsure setTitle:@"保存" forState:UIControlStateNormal];
-        [btnEnsure setTitleColor:Hex(0xffffff) forState:UIControlStateNormal];
-        [btnEnsure setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
+        _btnEnsure.backgroundColor = Hex(0xff4c00);
+        _btnEnsure.layer.masksToBounds = YES;
+        _btnEnsure.layer.cornerRadius = 2.5f;
+        _btnEnsure.titleLabel.font = [UIFont systemFontOfSize:16.0f];
+        [_btnEnsure setTitle:@"保存" forState:UIControlStateNormal];
+        [_btnEnsure setTitleColor:Hex(0xffffff) forState:UIControlStateNormal];
+        [_btnEnsure setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [_btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIView* footerView = [[UIView alloc] init];
-        footerView.frame = CGRectMake(0, 0, ScreenWidth, btnEnsure.frame.origin.y + btnEnsure.frame.size.height);
-        footerView.backgroundColor = [UIColor whiteColor];
-        [footerView addSubview:btnEnsure];
-        _tableView.tableFooterView = footerView;
+        _footView.backgroundColor = [UIColor whiteColor];
+        _tableView.tableFooterView = _footView;
     }
 }
 

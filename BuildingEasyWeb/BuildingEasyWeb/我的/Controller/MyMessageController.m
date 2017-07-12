@@ -79,7 +79,7 @@
 - (void)requestMsgDataList
 {
 //    NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
-    const NSInteger pageSize = 20;
+    const NSInteger pageSize = 12;
     NSDictionary* parameters = @{@"pageNo":@(_tableview.page),
                                  @"pageSize":@(pageSize),
                                  };
@@ -96,14 +96,15 @@
             //记录已获得到的最大消息id
             _nowMaxMsgId = MAX(_nowMaxMsgId, model.id);
         }
+        if (_nowMaxMsgId > 0) {
+            ////下滑列表时，指定页数
+            _tableview.page = (NSInteger)ceil(_msgDataArr.count / pageSize);
+        }
+        NSLog(@"当前获取到的最大信息id = %lu", (unsigned long)_nowMaxMsgId);
         if(_nowMaxMsgId < self.maxMsgId) {
             _tableview.hasNext = YES;
         } else {
             _tableview.hasNext = NO;
-        }
-        if (_nowMaxMsgId > 0) {
-            ////下滑列表时，指定页数
-            _tableview.page = (NSInteger)ceil(_nowMaxMsgId / pageSize) + 1;
         }
         
         [_tableview reloadData];

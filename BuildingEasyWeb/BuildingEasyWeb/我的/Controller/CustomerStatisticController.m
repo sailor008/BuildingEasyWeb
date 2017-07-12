@@ -155,7 +155,7 @@
 - (void)requestData
 {
     NSLog(@"当前搜索的关键词是：%@", _searchBar.text);
-//    NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
+    NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
 
     const NSInteger pageSize = 10;
     NSDictionary* parameters = @{@"pageNo":@(_tableview.page),
@@ -164,7 +164,7 @@
                                  @"name":_searchBar.text,
                                  };
     [NetworkManager postWithUrl:@"wx/getCustomerInfoByState" parameters:parameters success:^(id reponse) {
-        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
+//        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
         NSArray* tmpArray = (NSArray *)reponse;
         NSInteger startIdx = (_tableview.page - 1) * pageSize;
         for (NSDictionary* dic in tmpArray) {
@@ -180,9 +180,10 @@
         }
         if (_baobeiInfoArr.count > 0) {
             ////下滑列表时，指定页数
-            _tableview.page = (NSInteger)ceil(_baobeiInfoArr.count / pageSize) + 1;
+            _tableview.page = (NSInteger)ceil(_baobeiInfoArr.count / pageSize);
+//            _tableview.page = (NSInteger)ceil(_baobeiInfoArr.count / pageSize) + 1;
         }
-        
+
         [_tableview reloadData];
         [TableRefreshManager tableViewEndRefresh:_tableview];
         
@@ -250,6 +251,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     BaobeiInfoModel* model = _baobeiInfoArr[indexPath.row];
     CustomerDetailController* detailVC = [[CustomerDetailController alloc]init];
     detailVC.customerId = model.customerId;
