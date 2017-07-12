@@ -19,8 +19,10 @@
 #import <MJExtension.h>
 #import "CityModel.h"
 #import "User.h"
+#import "EmptyTipView.h"
+#import <CYLTableViewPlaceHolder.h>
 
-@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate, UITextFieldDelegate>
+@interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate, UITextFieldDelegate, CYLTableViewPlaceHolderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) AreaSectionFilterView* areaSectionView;
@@ -51,7 +53,7 @@
     [self setupUI];
     [self addTableViewRefresh];
     
-    [_tableView.mj_header beginRefreshing];
+    [self requestData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,10 +149,25 @@
     }
 }
 
+#pragma mark CYLTableViewPlaceHolderDelegate
+- (UIView *)makePlaceHolderView
+{
+    EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
+    tipView.tip = @"木有楼盘";
+    tipView.backgroundColor = [UIColor clearColor];
+    return tipView;
+}
+
+- (BOOL)enableScrollWhenPlaceHolderViewShowing
+{
+    return YES;
+}
+
 #pragma mark AreaSectionFilterViewDelegate
 - (void)selectCity
 {
     CityListController* cityVC = [[CityListController alloc] init];
+    cityVC.currentCity = _city;
     cityVC.delegate = self;
     [self.navigationController pushViewController:cityVC animated:YES];
 }
@@ -216,7 +233,7 @@
             [_buildingArr addObject:model];
         }
         
-        [_tableView reloadData];
+        [_tableView cyl_reloadData];
         [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
