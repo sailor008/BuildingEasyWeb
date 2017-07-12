@@ -10,12 +10,14 @@
 
 #import "TableRefreshManager.h"
 #import "UIView+MBProgressHUD.h"
+#import "EmptyTipView.h"
+#import <CYLTableViewPlaceHolder.h>
 
 #import <MJExtension.h>
 #import "NetworkManager.h"
 #import "Global.h"
 
-@interface MyMessageController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MyMessageController ()<UITableViewDelegate, UITableViewDataSource, CYLTableViewPlaceHolderDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @property (nonatomic,strong) NSMutableArray *msgDataArr;
@@ -107,7 +109,7 @@
             _tableview.hasNext = NO;
         }
         
-        [_tableview reloadData];
+        [_tableview cyl_reloadData];
         [TableRefreshManager tableViewEndRefresh:_tableview];
         
     } failure:^(NSError *error, NSString *msg) {
@@ -116,13 +118,15 @@
     }];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _msgDataArr.count;
-}
-
+#pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     MsgModel* MsgModel = self.msgDataArr[indexPath.row];
     return MsgModel.cellHeight;
+}
+
+#pragma mark UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _msgDataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,5 +137,18 @@
     return cell;
 }
 
+#pragma mark CYLTableViewPlaceHolderDelegate
+- (UIView *)makePlaceHolderView
+{
+    EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
+    tipView.tip = @"没有消息";
+    tipView.backgroundColor = [UIColor clearColor];
+    return tipView;
+}
+
+- (BOOL)enableScrollWhenPlaceHolderViewShowing
+{
+    return YES;
+}
 
 @end

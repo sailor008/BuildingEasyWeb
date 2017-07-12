@@ -21,7 +21,7 @@
 #import "Global.h"
 
 
-@interface CustomerStatisticController ()<SelectStatusDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface CustomerStatisticController ()<SelectStatusDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITextField *searchTxtField;
 
@@ -43,8 +43,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+//    [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    _searchTxtField.returnKeyType = UIReturnKeySearch;
+    _searchTxtField.delegate = self;
     
     [self setupProperty];
     [self addTableViewRefresh];
@@ -121,6 +123,9 @@
 
 - (void)finishSelectStatus:(StatisticStateModel*)model
 {
+    //先清空输入框的内容
+    _searchTxtField.text = @"";
+    
     _nowStateModel = model;
     [self updateBtnNavTitle];
     
@@ -219,6 +224,15 @@
         [_baobeiInfoArr removeAllObjects];
         [_tableview.mj_header beginRefreshing];
 //    }
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //收起键盘
+    [_searchTxtField resignFirstResponder];
+    //刷新列表
+    [_baobeiInfoArr removeAllObjects];
+    [_tableview.mj_header beginRefreshing];
+    return YES;
 }
 
 #pragma mark UITableViewDataSource

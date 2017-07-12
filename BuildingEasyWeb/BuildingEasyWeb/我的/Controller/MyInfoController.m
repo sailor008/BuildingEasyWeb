@@ -397,7 +397,6 @@ typedef void (^onTabVCell)(void);
             [MBProgressHUD hideHUD];
             callback();
         } failure:^(NSError *error, NSString *msg) {
-//            NSLog(@"Error:更新个人头像的resourceKey失败！detail：%@", msg);
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:msg];
         }];
