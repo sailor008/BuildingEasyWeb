@@ -24,6 +24,7 @@
 @interface CustomerStatisticController ()<SelectStatusDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (nonatomic, strong) StatusListView* statusListView;
 
 @property (nonatomic, strong) NSMutableArray* baobeiInfoArr;
 
@@ -93,14 +94,23 @@
 
 - (void)onBtnNavTitle:(UIButton*)btn
 {
-    //修改指示图标的方向为：打开列表
-    UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;
-    btnNavTitle.imageView.transform = CGAffineTransformMakeScale(1.0, -1.0);
-    //显示可选择的状态列表
-    StatusListView* listView = [[StatusListView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
-    listView.delegate = self;
-    [self.view addSubview:listView];
-    [listView showWithListData:self.stateList];
+    if(_statusListView) {
+        //重置指示图标的方向为：收起列表
+        UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;
+        btnNavTitle.imageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        
+        [_statusListView removeFromSuperview];
+        _statusListView = NULL;
+    } else {
+        //修改指示图标的方向为：打开列表
+        UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;
+        btnNavTitle.imageView.transform = CGAffineTransformMakeScale(1.0, -1.0);
+        //显示可选择的状态列表
+        _statusListView = [[StatusListView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        _statusListView.delegate = self;
+        [self.view addSubview:_statusListView];
+        [_statusListView showWithListData:self.stateList];
+    }
 }
 
 - (void)finishSelectStatus:(StatisticStateModel*)model
