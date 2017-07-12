@@ -12,7 +12,7 @@
 #import "NSString+Addition.h"
 #import "User.h"
 
-static const NSString* host = @"39.108.58.165:11071";
+static const NSString* host = @"113.209.77.204:11071";
 
 @interface NetworkManager ()
 

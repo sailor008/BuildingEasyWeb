@@ -26,8 +26,10 @@
 #import "BuildingSectionView.h"
 #import "CityModel.h"
 #import "BuildingFilterModel.h"
+#import "EmptyTipView.h"
+#import <CYLTableViewPlaceHolder.h>
 
-@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate>
+@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate, CYLTableViewPlaceHolderDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -52,6 +54,7 @@
 @property (nonatomic, copy) NSString* distanceId;
 @property (nonatomic, copy) NSString* classifyId;
 @property (nonatomic, copy) NSString* keyword;
+@property (nonatomic, copy) NSString* cityCode;
 
 @end
 
@@ -94,6 +97,7 @@
     _distanceId = @"0";
     _classifyId = @"0";
     _keyword = @"";
+    _cityCode = @"0";
     
     [_tableView registerNibWithName:@"BuildingCell"];
     
@@ -187,6 +191,7 @@
                                  @"distanceId":_distanceId,
                                  @"classifyId":_classifyId,
                                  @"areaCode":[User shareUser].areaCode,
+                                 @"cityCode":_cityCode,
                                  @"lon":@([User shareUser].lng),
                                  @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
@@ -206,7 +211,7 @@
             [_buildingArr addObject:model];
         }
         
-        [_tableView reloadData];
+        [_tableView cyl_reloadData];
         [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
@@ -465,9 +470,11 @@
 #pragma mark CityListControllerDelegate
 - (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
 {
+    _cityCode = cityCode;
     [self setupLocationButtonFace:city];
     
     [User shareUser].city = city;
+    [_tableView.mj_header beginRefreshing];
 }
 
 #pragma mark UITextFieldDelegate
@@ -478,6 +485,20 @@
         _keyword = @"";
     }
     [_tableView.mj_header beginRefreshing];
+    return YES;
+}
+
+#pragma mark CYLTableViewPlaceHolderDelegate
+- (UIView *)makePlaceHolderView
+{
+    EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
+    tipView.tip = @"木有楼盘";
+    tipView.backgroundColor = [UIColor clearColor];
+    return tipView;
+}
+
+- (BOOL)enableScrollWhenPlaceHolderViewShowing
+{
     return YES;
 }
 
