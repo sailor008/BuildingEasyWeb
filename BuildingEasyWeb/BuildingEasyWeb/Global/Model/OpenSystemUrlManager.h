@@ -14,4 +14,8 @@
 + (void)callPhone:(NSString *)phone;
 + (void)showMapGuideWithLat:(double)latitude lng:(double)longitude;
 
++ (void)jumpToContactSetting;
++ (void)jumpToLocationSetting;
++ (void)jumpToPhotoSetting;
+
 @end

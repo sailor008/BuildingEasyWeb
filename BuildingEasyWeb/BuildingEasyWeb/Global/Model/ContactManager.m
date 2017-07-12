@@ -11,6 +11,7 @@
 #import <Contacts/Contacts.h>
 #import <AddressBook/AddressBook.h>
 #import <UIKit/UIKit.h>
+#import "OpenSystemUrlManager.h"
 
 @implementation ContactManager
 
@@ -46,6 +47,7 @@
         [ContactManager readLocalAddressBook:contacts];
     } else {
         NSLog(@"请在设置中打开通讯录授权");
+        [ContactManager jumpToSetContactauthority];
     }
 }
 
@@ -102,12 +104,14 @@
                 });
             } else {
                 NSLog(@"授权失败");
+                [ContactManager jumpToSetContactauthority];
             }
         }];
     } else if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) {
         [ContactManager readLocalContactBook:contacts];
     } else {
         NSLog(@"未授权");
+        [ContactManager jumpToSetContactauthority];
     }
 }
 
@@ -151,6 +155,24 @@
     }];
     
     contacts([tempArr copy]);
+}
+
++ (void)jumpToSetContactauthority
+{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+    alertVc.title = @"请到设置>隐私>通讯录打开本应用的权限设置";
+    UIAlertAction *actionEnsure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [OpenSystemUrlManager jumpToContactSetting];
+    }];
+    [actionEnsure setValue:[UIColor blackColor] forKey:@"_titleTextColor"];
+    
+    UIAlertAction *actionCancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
+    }];
+//    [actionCancle setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
+    
+    [alertVc addAction:actionEnsure];
+    [alertVc addAction:actionCancle];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController: alertVc animated:YES completion:nil];
 }
 
 @end

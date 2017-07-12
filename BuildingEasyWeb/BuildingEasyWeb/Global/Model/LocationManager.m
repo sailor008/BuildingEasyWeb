@@ -10,6 +10,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
+#import "OpenSystemUrlManager.h"
 
 @interface LocationManager () <CLLocationManagerDelegate>
 
@@ -45,15 +46,7 @@
         } else {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"定位服务未开启" message:@"请前往「系统设置 > 隐私」开启定位服务" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* gotoAction = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSString* urlStr = nil;
-                if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
-                    urlStr = @"App-Prefs:root=LOCATION_SERVICES";
-                } else {
-                    urlStr = @"prefs:root=LOCATION_SERVICES";
-                }
-                if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlStr]]) {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-                }
+                [OpenSystemUrlManager jumpToLocationSetting];
             }];
             UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
             [alert addAction:gotoAction];

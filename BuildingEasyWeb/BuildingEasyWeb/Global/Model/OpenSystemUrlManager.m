@@ -47,4 +47,43 @@
                                    MKLaunchOptionsShowsTrafficKey:[NSNumber numberWithBool:YES]}];
 }
 
++ (void)jumpToContactSetting
+{
+    NSString* urlStr = nil;
+    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+        urlStr = @"App-Prefs:root=CONTACTS";
+    } else {
+        urlStr = @"prefs:root=CONTACTS";
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlStr]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    }
+}
+
++ (void)jumpToLocationSetting
+{
+    NSString* urlStr = nil;
+    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+        urlStr = @"App-Prefs:root=LOCATION_SERVICES";
+    } else {
+        urlStr = @"prefs:root=LOCATION_SERVICES";
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlStr]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    }
+}
+
++ (void)jumpToPhotoSetting
+{
+    NSString* urlStr = nil;
+    if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+        urlStr = @"App-Prefs:root=PHOTO";
+    } else {
+        urlStr = @"prefs:root=PHOTO";
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlStr]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    }
+}
+
 @end
