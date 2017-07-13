@@ -50,7 +50,6 @@
         
         [QNYunManager uploadFileWithPath:imgPath key:imgKey token:uptoken success:^(id qnResponse) {
             NSString* newKey = [qnResponse objectForKey:@"key"];
-            NSLog(@"上传七牛云成功，newkey = %@", newKey);
             success(newKey);
         } failure:^(NSError *error, NSString *reqId) {
             failureBlock(error, @"上传七牛失败！");

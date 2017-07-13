@@ -47,7 +47,7 @@
         [ContactManager readLocalAddressBook:contacts];
     } else {
         NSLog(@"请在设置中打开通讯录授权");
-        [ContactManager jumpToSetContactauthority];
+        [ContactManager jumpToSetContactAuthority];
     }
 }
 
@@ -104,14 +104,14 @@
                 });
             } else {
                 NSLog(@"授权失败");
-                [ContactManager jumpToSetContactauthority];
+                [ContactManager jumpToSetContactAuthority];
             }
         }];
     } else if ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized) {
         [ContactManager readLocalContactBook:contacts];
     } else {
         NSLog(@"未授权");
-        [ContactManager jumpToSetContactauthority];
+        [ContactManager jumpToSetContactAuthority];
     }
 }
 
@@ -157,10 +157,9 @@
     contacts([tempArr copy]);
 }
 
-+ (void)jumpToSetContactauthority
++ (void)jumpToSetContactAuthority
 {
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
-    alertVc.title = @"请到前往「系统设置 > 隐私 > 通讯录」打开本应用的权限设置";
+    UIAlertController* alertVC = [UIAlertController alertControllerWithTitle:@"通讯录权限未开启" message:@"请前往「系统设置 > 隐私」开启通讯录权限" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionEnsure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [OpenSystemUrlManager jumpToContactSetting];
     }];
@@ -170,9 +169,9 @@
     }];
 //    [actionCancle setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
     
-    [alertVc addAction:actionEnsure];
-    [alertVc addAction:actionCancle];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController: alertVc animated:YES completion:nil];
+    [alertVC addAction:actionEnsure];
+    [alertVC addAction:actionCancle];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController: alertVC animated:YES completion:nil];
 }
 
 @end
