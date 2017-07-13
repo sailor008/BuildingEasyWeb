@@ -494,6 +494,7 @@
     EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
     tipView.tip = @"木有楼盘";
     tipView.backgroundColor = [UIColor clearColor];
+    tipView.userInteractionEnabled = NO;
     return tipView;
 }
 
