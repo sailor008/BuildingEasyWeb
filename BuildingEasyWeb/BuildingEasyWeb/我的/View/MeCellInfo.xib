@@ -16,7 +16,7 @@
                 <frame key="frameInset" width="342" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="168E5913-9924-4824-BAFD-F93CC061529C" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
+                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="9E0427F5-D71A-42FF-86AF-B66AA9FCDED0" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="CuY-5z-khL"/>
                             <constraint firstAttribute="width" constant="60" id="aNh-Jy-cYx"/>
@@ -35,10 +35,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="cB5-zK-mXk" firstAttribute="leading" secondItem="sba-4q-6Qz" secondAttribute="trailing" constant="11" id="BNk-Ot-O1U"/>
-                    <constraint firstItem="sba-4q-6Qz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Fmn-9K-kND"/>
                     <constraint firstItem="p0j-s0-oux" firstAttribute="leading" secondItem="sba-4q-6Qz" secondAttribute="trailing" constant="11" id="HbW-xp-CA3"/>
+                    <constraint firstItem="sba-4q-6Qz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TIA-Kg-QUJ"/>
+                    <constraint firstItem="sba-4q-6Qz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7.5" id="aev-sh-ZHR"/>
                     <constraint firstItem="cB5-zK-mXk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="iJf-Ek-ipk"/>
-                    <constraint firstItem="sba-4q-6Qz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iid-pk-dmV"/>
                     <constraint firstItem="p0j-s0-oux" firstAttribute="top" secondItem="cB5-zK-mXk" secondAttribute="bottom" constant="4" id="t5U-SK-A9F"/>
                 </constraints>
             </tableViewCellContentView>
@@ -50,7 +50,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="168E5913-9924-4824-BAFD-F93CC061529C" width="60" height="60">
+        <image name="9E0427F5-D71A-42FF-86AF-B66AA9FCDED0" width="60" height="60">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

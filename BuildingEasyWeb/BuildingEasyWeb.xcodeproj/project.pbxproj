@@ -43,6 +43,7 @@
 		C782F4AC1EEEF78B0067C07F /* MsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4AB1EEEF78B0067C07F /* MsgModel.m */; };
 		C787FC031F152D08007F60A5 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C787FC011F152D08007F60A5 /* StatusCell.m */; };
 		C787FC041F152D08007F60A5 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C787FC021F152D08007F60A5 /* StatusCell.xib */; };
+		C790582E1F17CA2400D95FBA /* ImagePickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */; };
 		C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE691EF0414B000EF857 /* MyInfoController.m */; };
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
@@ -240,6 +241,8 @@
 		C787FC001F152D08007F60A5 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
 		C787FC011F152D08007F60A5 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
 		C787FC021F152D08007F60A5 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
+		C790582C1F17CA2400D95FBA /* ImagePickerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerHelper.h; sourceTree = "<group>"; };
+		C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerHelper.m; sourceTree = "<group>"; };
 		C7BBCE681EF0414B000EF857 /* MyInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoController.h; sourceTree = "<group>"; };
 		C7BBCE691EF0414B000EF857 /* MyInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoController.m; sourceTree = "<group>"; };
 		C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoController.xib; sourceTree = "<group>"; };
@@ -654,6 +657,8 @@
 				CF52681A1F05400A00166E2F /* UploadImageManager.m */,
 				CF38943C1F11C49000BDA6E8 /* BEWAlertAction.h */,
 				CF38943D1F11C49000BDA6E8 /* BEWAlertAction.m */,
+				C790582C1F17CA2400D95FBA /* ImagePickerHelper.h */,
+				C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1273,6 +1278,7 @@
 				CF665BF91EEB9AB200028B1B /* BaobeiCell.m in Sources */,
 				CF413D561EEAE9A0009A1B50 /* BaobeiController.m in Sources */,
 				CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */,
+				C790582E1F17CA2400D95FBA /* ImagePickerHelper.m in Sources */,
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
 				C717497D1F0688940085E590 /* EditTxtTVCell.m in Sources */,
 				CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */,

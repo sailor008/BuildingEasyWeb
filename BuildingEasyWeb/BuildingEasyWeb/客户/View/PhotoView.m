@@ -10,6 +10,7 @@
 
 #import "PhotoCell.h"
 #import "BEWAlertAction.h"
+#import "ImagePickerHelper.h"
 
 @interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
@@ -142,17 +143,23 @@
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     BEWAlertAction* cameraAction = [BEWAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        _imagePicker.delegate = self;
-        _imagePicker.allowsEditing = YES;
-        [vc presentViewController:_imagePicker animated:YES completion:nil];
+        
+        [ImagePickerHelper startCamera:^{
+            _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            _imagePicker.delegate = self;
+            _imagePicker.allowsEditing = YES;
+            [vc presentViewController:_imagePicker animated:YES completion:nil];
+        }];
     }];
     
     BEWAlertAction* albumAction = [BEWAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        _imagePicker.delegate = self;
-        _imagePicker.allowsEditing = YES;
-        [vc presentViewController:_imagePicker animated:YES completion:nil];
+        
+        [ImagePickerHelper startPhotoLibrary:^{
+            _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            _imagePicker.delegate = self;
+            _imagePicker.allowsEditing = YES;
+            [vc presentViewController:_imagePicker animated:YES completion:nil];
+        }];
     }];
     
     BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];

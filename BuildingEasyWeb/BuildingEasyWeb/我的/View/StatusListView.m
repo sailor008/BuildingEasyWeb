@@ -93,7 +93,6 @@
 
     StatisticStateModel* model = _listData[indexPath.row];
     [self.delegate finishSelectStatus:model];
-    [self removeFromSuperview];
 }
 
 @end
