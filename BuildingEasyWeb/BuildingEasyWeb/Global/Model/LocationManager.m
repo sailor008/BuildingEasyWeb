@@ -37,7 +37,7 @@
 + (void)startGetLocation:(LocationCity)locationCity
 {
     if ([CLLocationManager locationServicesEnabled]) {
-        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse ||  [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
             // 开始定位
             //        [_locationManager requestLocation];
             [LocationManager shareLocation].city = locationCity;

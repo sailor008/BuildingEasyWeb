@@ -121,7 +121,7 @@
     
     _adsView = [[AdsScrollView alloc] init];
     _adsView.frame = CGRectMake(0, 0, ScreenWidth, 165);
-    _adsView.placeholderImage = @"logo.png";
+    _adsView.placeholderImage = @"底图.png";
     UIView* headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, ScreenWidth, 175);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -215,7 +215,6 @@
         [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD showError:msg toView:self.view];
         [TableRefreshManager tableViewEndRefresh:_tableView];
     }];
 }
