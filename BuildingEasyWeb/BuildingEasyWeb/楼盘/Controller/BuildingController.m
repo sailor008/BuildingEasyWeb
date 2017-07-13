@@ -54,7 +54,7 @@
 @property (nonatomic, copy) NSString* distanceId;
 @property (nonatomic, copy) NSString* classifyId;
 @property (nonatomic, copy) NSString* keyword;
-@property (nonatomic, copy) NSString* cityCode;
+@property (nonatomic, copy) NSString* city;
 
 @end
 
@@ -97,7 +97,7 @@
     _distanceId = @"0";
     _classifyId = @"0";
     _keyword = @"";
-    _cityCode = @"0";
+    _city = @"";
     
     [_tableView registerNibWithName:@"BuildingCell"];
     
@@ -141,6 +141,7 @@
         [weakSelf setupLocationButtonFace:city];
         
         [User shareUser].city = city;
+        weakSelf.city = city;
         [User shareUser].lat = lat;
         [User shareUser].lng = lng;
         
@@ -191,7 +192,7 @@
                                  @"distanceId":_distanceId,
                                  @"classifyId":_classifyId,
                                  @"areaCode":[User shareUser].areaCode,
-                                 @"cityCode":_cityCode,
+                                 @"city":_city,
                                  @"lon":@([User shareUser].lng),
                                  @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
@@ -469,7 +470,7 @@
 #pragma mark CityListControllerDelegate
 - (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
 {
-    _cityCode = cityCode;
+    _city = city;
     [self setupLocationButtonFace:city];
     
     [User shareUser].city = city;

@@ -23,6 +23,7 @@
 #import "WXApiObject.h"
 #import "WXApi.h"
 #import "BEWAlertAction.h"
+#import "NSString+Addition.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -132,8 +133,8 @@
 #pragma mark Action
 - (IBAction)share:(id)sender
 {
-    _shareView.frame = self.view.bounds;
-    [self.view addSubview:_shareView];
+    _shareView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    [self.view.window addSubview:_shareView];
 }
 
 - (IBAction)callPhone:(id)sender
@@ -200,11 +201,6 @@
     req.scene = WXSceneSession;
     
     [WXApi sendReq:req];
-    
-//    [MBProgressHUD showMessage:@"还没接入微信分享" toView:self.view];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [MBProgressHUD hideHUDForView:self.view];
-//    });
 }
 
 #pragma mark Request Data
@@ -256,8 +252,8 @@
     _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
     [_formulaTableView reloadData];
     
-    _typeDetailLabel.text = _detail.buildInfo.houseType;
-    _sellDetaillabel.text = _detail.buildInfo.sellingPoint;
+    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
+    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
     [self analysisBaseInfoArray];
 }
 // 解析基本信息

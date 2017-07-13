@@ -11,10 +11,12 @@
 #import "PhotoCell.h"
 #import "BEWAlertAction.h"
 
-@interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, PhotoCellDelegate>
 {
     BOOL _isShow;
-    BOOL _isSelect;
+    NSUInteger _imageCount;
+    
+    BOOL _registerKVO;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *photoTitleLabel;
@@ -49,6 +51,11 @@
     [_collectionView registerNib:[UINib nibWithNibName:@"PhotoCell" bundle:nil] forCellWithReuseIdentifier:@"PhotoCell"];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
+    
+    if (_registerKVO == NO) {
+        [_collectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:NULL];
+        _registerKVO = YES;
+    }
     
     if (_photoLeft > 0.0) {
         _collectionViewLeft.constant = _photoLeft + 10.0;
@@ -90,12 +97,8 @@
 - (NSArray<UIImage *> *)resultArray
 {
     NSMutableArray* array = [NSMutableArray arrayWithArray:_photoArray];
-    if (_photoArray.count < _limitNum) {
+    if (_imageCount < _limitNum) {
         [array removeLastObject];
-    } else if (_photoArray.count == _limitNum) {
-        if (_isSelect == NO) {
-            [array removeLastObject];
-        }
     }
     return [array copy];
 }
@@ -113,10 +116,17 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
+    cell.index = indexPath.row;
+    cell.delegate = self;
     if (_isShow) {
         cell.imagUrlStr = _sourceArray[indexPath.row];
     } else {
         cell.photo = _photoArray[indexPath.row];
+        if (indexPath.row < _imageCount) {
+            cell.showDelete = YES;
+        } else {
+            cell.showDelete = NO;
+        }
     }
     
     return cell;
@@ -167,7 +177,7 @@
 #pragma mark UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    _isSelect = YES;
+    ++_imageCount;
     
     UIImage * image = info[UIImagePickerControllerEditedImage];
     
@@ -184,6 +194,26 @@
             [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
         }
     }];
+}
+
+#pragma mark PhotoCellDelegate
+- (void)deleteImageWithIndex:(NSInteger)index
+{
+    [_photoArray removeObjectAtIndex:index];
+    --_imageCount;
+    [_collectionView reloadData];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
+        [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+    }
+}
+
+- (void)dealloc
+{
+    [self.collectionView removeObserver:self forKeyPath:@"contentSize" context:NULL];
 }
 
 @end

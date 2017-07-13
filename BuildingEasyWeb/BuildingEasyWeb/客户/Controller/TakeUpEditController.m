@@ -293,7 +293,7 @@
     }
     
     kWeakSelf(weakSelf);
-    [MBProgressHUD showLoadingToView:self.view];
+    [MBProgressHUD showLoading];
     dispatch_queue_t asyncQueue = dispatch_queue_create("BEWTakeUpEdit", DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_group_t group = dispatch_group_create();
@@ -353,13 +353,13 @@
             [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
                 
-                [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+                [MBProgressHUD dismissWithSuccess:@"提交成功"];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
                                                                           * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.navigationController popViewControllerAnimated:YES];
                 });
             } failure:^(NSError *error, NSString *msg) {
-                [MBProgressHUD dissmissWithError:msg toView:self.view];
+                [MBProgressHUD dissmissWithError:msg];
             }];
         }
         
