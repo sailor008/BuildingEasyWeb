@@ -49,7 +49,7 @@
     _commissionLabel.text = model.commission;
     _priceLabel.text = model.average;
 //    [_buildingImageView sd_setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:GetIMAGE(@"logo.png")];
-    [_buildingImageView setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:GetIMAGE(@"logo.png")];
+    [_buildingImageView setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholderImage:GetIMAGE(@"底图.png")];
     
     if (model.isHot) {
         _hotImageView.hidden = NO;

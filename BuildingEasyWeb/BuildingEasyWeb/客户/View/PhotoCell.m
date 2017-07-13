@@ -32,7 +32,7 @@
 - (void)setImagUrlStr:(NSString *)imagUrlStr
 {
     _imagUrlStr = imagUrlStr;
-    [_photoImageView setImageWithURL:[NSURL URLWithString:imagUrlStr] placeholderImage:GetIMAGE(@"logo.png")];
+    [_photoImageView setImageWithURL:[NSURL URLWithString:imagUrlStr] placeholderImage:GetIMAGE(@"底图.png")];
 }
 
 @end

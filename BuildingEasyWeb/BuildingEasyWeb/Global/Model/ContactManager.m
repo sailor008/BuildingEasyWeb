@@ -160,7 +160,7 @@
 + (void)jumpToSetContactauthority
 {
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
-    alertVc.title = @"请到设置>隐私>通讯录打开本应用的权限设置";
+    alertVc.title = @"请到前往「系统设置 > 隐私 > 通讯录」打开本应用的权限设置";
     UIAlertAction *actionEnsure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [OpenSystemUrlManager jumpToContactSetting];
     }];
