@@ -50,6 +50,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 @property (nonatomic, strong) CustomerBaobeiModel* beobeiInfoModel;
 
+@property (nonatomic, assign) BOOL canDeleteCell;
+
 @end
 
 @implementation BaobeiController
@@ -60,8 +62,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     
     self.title = @"报备客户";
     
-    _intend = -1;
+    _intend = 0;
     _bulidList = [NSMutableArray array];
+    
+    _canDeleteCell = YES;
     
     [self setupUI];
     
@@ -69,11 +73,13 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [self requestBaobeiInfo];
         _importButton.hidden = YES;
         _addButton.hidden = YES;
+        _canDeleteCell = NO;
     }
     
     if (_baobeiModel) {
         [self selectBuildingResult:@[_baobeiModel.buildModel]];
         _addButton.hidden = YES;
+        _canDeleteCell = NO;
     }
 }
 
@@ -106,6 +112,9 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         _phoneLabel.enabled = NO;
         _importButton.enabled = NO;
         _addButton.enabled = NO;
+    } else {
+        UIButton* intendButton = _intendButtonArr[_beobeiInfoModel.intention];
+        intendButton.selected = YES;
     }
     
     _headerView.frame = CGRectMake(0, 10, ScreenWidth, 200);
@@ -261,7 +270,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     if (indexPath.row < _bulidList.count) {
         cell.model = _bulidList[indexPath.row];
     }
-    cell.isModify = _isModify;
+    cell.isModify = _canDeleteCell;
     return cell;
 }
 

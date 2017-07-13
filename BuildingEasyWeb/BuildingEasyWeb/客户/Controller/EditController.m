@@ -100,7 +100,7 @@
     }
     
     kWeakSelf(weakSelf);
-    [MBProgressHUD showLoadingToView:self.view];
+    [MBProgressHUD showLoading];
     dispatch_queue_t asyncQueue = dispatch_queue_create("BEWEdit", DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_group_t group = dispatch_group_create();
@@ -137,7 +137,7 @@
     
     dispatch_group_notify(group, asyncQueue, ^{
         [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
-            [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+            [MBProgressHUD dismissWithSuccess:@"提交成功"];
             [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1
@@ -145,7 +145,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             });
         } failure:^(NSError *error, NSString *msg) {
-            [MBProgressHUD dissmissWithError:msg toView:self.view];
+            [MBProgressHUD dissmissWithError:msg];
         }];
     });
 }

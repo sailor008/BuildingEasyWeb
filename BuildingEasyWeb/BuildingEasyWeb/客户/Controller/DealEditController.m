@@ -250,30 +250,29 @@ static const NSInteger kPhotoViewTag = 1000;
 {
     NSMutableArray* imagArr = [NSMutableArray array];
     
-    [MBProgressHUD showLoadingToView:self.view];
     if (_type == kEditTypeNew) {// 新建编辑才上传图片
         if (_idPhotoView.resultArray.count == 0) {
-            [MBProgressHUD dissmissWithError:@"请上传买方身份证" toView:self.view];
+            [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
             return;
         }
         if (_firstFormPhotoView.resultArray.count == 0) {
-            [MBProgressHUD dissmissWithError:@"请上传首付单" toView:self.view];
+            [MBProgressHUD showError:@"请上传首付单" toView:self.view];
             return;
         }
         if (_posFormPhotoView.resultArray.count == 0) {
-            [MBProgressHUD dissmissWithError:@"请上传Pos单" toView:self.view];
+            [MBProgressHUD showError:@"请上传Pos单" toView:self.view];
             return;
         }
         if (_depositPhotoView.resultArray.count == 0) {
-            [MBProgressHUD dissmissWithError:@"请上传定金单" toView:self.view];
+            [MBProgressHUD showError:@"请上传定金单" toView:self.view];
             return;
         }
         if (_takeupPhotoView.resultArray.count == 0) {
-            [MBProgressHUD dissmissWithError:@"请上传认购书" toView:self.view];
+            [MBProgressHUD showError:@"请上传认购书" toView:self.view];
             return;
         }
         if (_dealPhotoView.resultArray.count == 0) {
-            [MBProgressHUD dissmissWithError:@"请上传合同" toView:self.view];
+            [MBProgressHUD showError:@"请上传合同" toView:self.view];
             return;
         }
         [imagArr addObjectsFromArray:_idPhotoView.resultArray];
@@ -289,7 +288,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[0];
         if (model.text.length == 0) {
-            [MBProgressHUD dissmissWithError:@"请选择开始日期" toView:self.view];
+            [MBProgressHUD showError:@"请选择开始日期" toView:self.view];
             return;
         }
         parameters[@"startTime"] = [model.text timeIntervalWithDateStr];
@@ -297,7 +296,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[1];
         if (model.text.length == 0) {
-            [MBProgressHUD dissmissWithError:@"请选择结束日期" toView:self.view];
+            [MBProgressHUD showError:@"请选择结束日期" toView:self.view];
             return;
         }
         parameters[@"endTime"] = [model.text timeIntervalWithDateStr];
@@ -309,7 +308,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[3];
         if (model.text.length == 0) {
-            [MBProgressHUD dissmissWithError:@"请填写单价" toView:self.view];
+            [MBProgressHUD showError:@"请填写单价" toView:self.view];
             return;
         }
         parameters[@"price"] = model.text;
@@ -317,7 +316,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[4];
         if (model.text.length == 0) {
-            [MBProgressHUD dissmissWithError:@"请填写总价" toView:self.view];
+            [MBProgressHUD showError:@"请填写总价" toView:self.view];
             return;
         }
         parameters[@"total"] = model.text;
@@ -325,7 +324,7 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[5];
         if (model.text.length == 0) {
-            [MBProgressHUD dissmissWithError:@"请选择交付日期" toView:self.view];
+            [MBProgressHUD showError:@"请选择交付日期" toView:self.view];
             return;
         }
         parameters[@"leadTime"] = [model.text timeIntervalWithDateStr];
@@ -333,6 +332,7 @@ static const NSInteger kPhotoViewTag = 1000;
     
     // 检验完毕
     kWeakSelf(weakSelf);
+    [MBProgressHUD showLoading];
     dispatch_queue_t asyncQueue = dispatch_queue_create("BEWDealEdit", DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_group_t group = dispatch_group_create();
@@ -374,12 +374,12 @@ static const NSInteger kPhotoViewTag = 1000;
         [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
             
-            [MBProgressHUD dismissWithSuccess:@"提交成功" toView:self.view];
+            [MBProgressHUD dismissWithSuccess:@"提交成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         } failure:^(NSError *error, NSString *msg) {
-            [MBProgressHUD dissmissWithError:msg toView:self.view];
+            [MBProgressHUD dissmissWithError:msg];
         }];
     });
 }

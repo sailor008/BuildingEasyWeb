@@ -55,7 +55,7 @@
 - (void)setIsModify:(BOOL)isModify
 {
     _isModify = isModify;
-    _deleteButton.hidden = isModify;
+    _deleteButton.hidden = !isModify;
 }
 
 #pragma mark Action

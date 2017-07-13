@@ -13,6 +13,7 @@
 @interface PhotoCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end
 
@@ -29,10 +30,25 @@
     _photoImageView.image = photo;
 }
 
+- (void)setShowDelete:(BOOL)showDelete
+{
+    _showDelete = showDelete;
+    _deleteButton.hidden = !showDelete;
+}
+
 - (void)setImagUrlStr:(NSString *)imagUrlStr
 {
     _imagUrlStr = imagUrlStr;
     [_photoImageView setImageWithURL:[NSURL URLWithString:imagUrlStr] placeholderImage:GetIMAGE(@"底图.png")];
+    _deleteButton.hidden = YES;
+}
+
+#pragma mark Action
+- (IBAction)deleteImage:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(deleteImageWithIndex:)]) {
+        [_delegate deleteImageWithIndex:_index];
+    }
 }
 
 @end
