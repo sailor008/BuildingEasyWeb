@@ -20,10 +20,10 @@
 
 + (void)login:(NSString *)phone password:(NSString *)password callback:(Callback)callback
 {
-    [MBProgressHUD showLoading];
+//    [MBProgressHUD showMessage:@"登录中"];
     NSDictionary* parameters = @{@"mobile":phone, @"pwd":password};
     [NetworkManager postWithUrl:@"wx/login" parameters:parameters success:^(id reponse) {
-        [MBProgressHUD hideHUD];
+//        [MBProgressHUD hideHUD];
         
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = password;

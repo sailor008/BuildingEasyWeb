@@ -215,7 +215,6 @@
         [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD showError:msg toView:self.view];
         [TableRefreshManager tableViewEndRefresh:_tableView];
     }];
 }

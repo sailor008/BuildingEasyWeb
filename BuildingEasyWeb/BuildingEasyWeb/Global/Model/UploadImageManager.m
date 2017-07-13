@@ -25,9 +25,9 @@
         NSString* imgKey = uptokenModel.key;
         NSString* uptoken = uptokenModel.upToken;
         
-        UIImage* compressImg = [image compressImageWithTargetSize:CGSizeMake(120.0, 120.0)];
+//        UIImage* compressImg = [image compressImageWithTargetSize:CGSizeMake(300.0, 300.0)];
         
-        NSData* imageData = UIImagePNGRepresentation(compressImg);
+        NSData* imageData = UIImagePNGRepresentation(image);
         [QNYunManager uploadData:imageData key:imgKey token:uptoken success:^(id qnResponse) {
             NSString* newKey = [qnResponse objectForKey:@"key"];
             imageKey(newKey);

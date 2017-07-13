@@ -54,21 +54,6 @@
     self.tabBar.tintColor = Hex(0xff4c00);
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    if ([User shareUser].isLogin == NO) {
-//        NSString* mobile = [User shareUser].mobile;
-//        NSString* pwd = [User shareUser].pwd;
-//        [LoginManager login:mobile password:pwd callback:^{
-//            [LoginManager getUserInfo];
-//        }];
-//    } else {
-//        [LoginManager getUserInfo];
-//    }
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
