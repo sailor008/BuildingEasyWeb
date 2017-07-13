@@ -21,15 +21,19 @@
 #import "Global.h"
 
 
-@interface CustomerStatisticController ()<SelectStatusDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@interface CustomerStatisticController ()<SelectStatusDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *searchTxtField;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) StatusListView* statusListView;
 
 @property (nonatomic, strong) NSMutableArray* baobeiInfoArr;
-
 @property (nonatomic, assign) const float cellHeight;
 @property (nonatomic, copy) StatisticStateModel* nowStateModel;
+
+@property (nonatomic, assign) BOOL isSearch;
+
 
 @end
 
@@ -38,7 +42,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    _searchBar.showsCancelButton = YES;
+    
+//    [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    _searchTxtField.returnKeyType = UIReturnKeySearch;
+    _searchTxtField.delegate = self;
     
     [self setupProperty];
     [self addTableViewRefresh];
@@ -115,10 +123,13 @@
 
 - (void)finishSelectStatus:(StatisticStateModel*)model
 {
+    //先清空输入框的内容
+    _searchTxtField.text = @"";
+    
     _nowStateModel = model;
     [self updateBtnNavTitle];
     
-    _baobeiInfoArr = [NSMutableArray array];
+    [_baobeiInfoArr removeAllObjects];
     [_tableview.mj_header beginRefreshing];
 }
 
@@ -164,14 +175,16 @@
 #pragma mark Request - 网络请求
 - (void)requestData
 {
-    NSLog(@"当前搜索的关键词是：%@", _searchBar.text);
+//    NSString* searchStr = _searchBar.text;
+    NSString* searchStr = _searchTxtField.text;
+    NSLog(@"当前搜索的关键词是：%@", searchStr);
     NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
 
     const NSInteger pageSize = 10;
     NSDictionary* parameters = @{@"pageNo":@(_tableview.page),
                                  @"pageSize":@(pageSize),
                                  @"state":_nowStateModel.state,
-                                 @"name":_searchBar.text,
+                                 @"name":searchStr,
                                  };
     [NetworkManager postWithUrl:@"wx/getCustomerInfoByState" parameters:parameters success:^(id reponse) {
 //        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
@@ -203,30 +216,23 @@
     }];
 }
 
-#pragma mark UISearchBarDelegate
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+#pragma mark Action
+- (void)textFieldDidChange:(UITextField *)textField
 {
-    [searchBar resignFirstResponder];
-    
-    _baobeiInfoArr = [NSMutableArray array];
-    [_tableview.mj_header beginRefreshing];
+//    _isSearch = textField.text.length > 0;
+//    if (textField.text.length) {
+        [_baobeiInfoArr removeAllObjects];
+        [_tableview.mj_header beginRefreshing];
+//    }
 }
-
-////支持空搜索
-- (void)searchBarTextDidBeginEditing:(UISearchBar *) searchBar
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    UITextField *searchBarTextField = nil;
-    NSArray *views = ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) ? searchBar.subviews : [[searchBar.subviews objectAtIndex:0] subviews];
-    
-    for (UIView *subview in views)
-    {
-        if ([subview isKindOfClass:[UITextField class]])
-        {
-            searchBarTextField = (UITextField *)subview;
-            break;
-        }
-    }
-    searchBarTextField.enablesReturnKeyAutomatically = NO;
+    //收起键盘
+    [_searchTxtField resignFirstResponder];
+    //刷新列表
+    [_baobeiInfoArr removeAllObjects];
+    [_tableview.mj_header beginRefreshing];
+    return YES;
 }
 
 #pragma mark UITableViewDataSource
@@ -271,5 +277,32 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+
+
+//#pragma mark UISearchBarDelegate
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+//{
+//    [searchBar resignFirstResponder];
+//
+//    [_baobeiInfoArr removeAllObjects];
+//    [_tableview.mj_header beginRefreshing];
+//}
+//
+//////支持空搜索
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *) searchBar
+//{
+//    UITextField *searchBarTextField = nil;
+//    NSArray *views = ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) ? searchBar.subviews : [[searchBar.subviews objectAtIndex:0] subviews];
+//
+//    for (UIView *subview in views)
+//    {
+//        if ([subview isKindOfClass:[UITextField class]])
+//        {
+//            searchBarTextField = (UITextField *)subview;
+//            break;
+//        }
+//    }
+//    searchBarTextField.enablesReturnKeyAutomatically = NO;
+//}
 
 @end
