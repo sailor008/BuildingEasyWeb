@@ -30,6 +30,7 @@
 #import "Global.h"
 #import "User.h"
 #import "MyImageHelper.h"
+#import "ImagePickerHelper.h"
 
 
 typedef void (^onTabVCell)(void);
@@ -194,7 +195,7 @@ typedef void (^onTabVCell)(void);
         }
         if(indexPath.section == 0 && indexPath.row == 0) {
             cell.detailTextLabel.text = @"";
-            _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(285.0, 8.0, 60.0, 60.0)];
+            _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth - 35 - 60, 8.0, 60.0, 60.0)];
             _headImgView.layer.masksToBounds = YES;
             _headImgView.layer.cornerRadius = 30.0f;
             //            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
@@ -305,32 +306,34 @@ typedef void (^onTabVCell)(void);
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     alertVc.title = @"请选择图片来源";
     
+    kWeakSelf(weakSelf);
     UIAlertAction *camera = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        }
-        imagePicker.delegate = self;
-        imagePicker.allowsEditing = YES;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-        
+        [ImagePickerHelper startCamera:^{
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
+            imagePicker.delegate = weakSelf;
+            imagePicker.allowsEditing = YES;
+            [weakSelf presentViewController:imagePicker animated:YES completion:nil];
+        }];
     }];
     [camera setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
     
     UIAlertAction *picture = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        pickerImage.delegate = self;
-        pickerImage.allowsEditing = YES;
-        
-        [self presentViewController:pickerImage animated:YES completion:nil];
+        [ImagePickerHelper startPhotoLibrary:^{
+            UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+            pickerImage.delegate = weakSelf;
+            pickerImage.allowsEditing = YES;
+            [weakSelf presentViewController:pickerImage animated:YES completion:nil];
+        }];
     }];
     [picture setValue:Hex(0xff4c00) forKey:@"_titleTextColor"];
-
     
     UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
     }];
@@ -351,7 +354,7 @@ typedef void (^onTabVCell)(void);
         //取出选取的图片
         UIImage* pickImg = info[UIImagePickerControllerEditedImage];
         //把图片按size 压缩
-        UIImage *compressImg = [pickImg compressImageWithTargetSize:CGSizeMake(120.0, 120.0)];
+        UIImage *compressImg = [pickImg compressImageWithTargetSize:CGSizeMake(180.0, 180.0)];
         //把图片转成NSData
         NSData *imgData;
         if (UIImagePNGRepresentation(compressImg) == nil)

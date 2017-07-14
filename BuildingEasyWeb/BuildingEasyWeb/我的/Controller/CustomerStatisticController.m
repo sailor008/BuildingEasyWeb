@@ -123,9 +123,10 @@
 
 - (void)finishSelectStatus:(StatisticStateModel*)model
 {
+    [_statusListView removeFromSuperview];
+    _statusListView = NULL;
     //先清空输入框的内容
     _searchTxtField.text = @"";
-    
     _nowStateModel = model;
     [self updateBtnNavTitle];
     
