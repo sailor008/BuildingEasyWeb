@@ -454,14 +454,14 @@ static const NSInteger kPhotoViewTag = 1000;
             PhotoView* photoView = _footerView.subviews[i];
             NSString* imgUrl = dic[@"imgUrl"];
             NSArray* imgArr = @[imgUrl];
-            photoView.sourceArray = imgArr;
+            photoView.sourceUrlArray = imgArr;
         } else {
             NSString* imgUrl = dic[@"imgUrl"];
             [dealImgArr addObject:imgUrl];
         }
     }
     
-    _dealPhotoView.sourceArray = [dealImgArr copy];
+    _dealPhotoView.sourceUrlArray = [dealImgArr copy];
     
     [_tableView reloadData];
 }

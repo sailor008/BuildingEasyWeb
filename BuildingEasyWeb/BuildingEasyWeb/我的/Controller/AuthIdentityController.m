@@ -109,7 +109,7 @@
         NSString* initPath = [cfgInfo objectForKey:@"imgPath"];
         if(initPath.length) {
             NSLog(@"photoView 的初始图片：%@", initPath);
-            [photoview setSourceArray:[NSArray arrayWithObject:initPath]];
+            photoview.sourceUrlArray = [NSArray arrayWithObject:initPath];
         }
         if([[User shareUser].auth integerValue] == 1) {
             photoview.canSelectedPhoto = NO;
@@ -161,6 +161,7 @@
         }
         return;
     }
+    
     //check image is select
     for (int i = 0; i < _photoViewArray.count; i++) {
         PhotoView* view = _photoViewArray[i];
