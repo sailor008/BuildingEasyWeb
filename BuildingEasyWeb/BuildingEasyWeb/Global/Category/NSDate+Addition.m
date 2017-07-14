@@ -19,6 +19,15 @@
     return [formatter stringFromDate:date];
 }
 
++ (NSString *)simpleDateStrWithTimeInterval:(NSTimeInterval)timeInterval
+{
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat  =@"yyyy/MM/dd";
+    return [formatter stringFromDate:date];
+}
+
 + (NSDate *)localDate
 {
     NSDate* date = [NSDate date];
