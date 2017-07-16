@@ -15,8 +15,11 @@
 #import "Global.h"
 #import "WXApi.h"
 
-@interface AppDelegate () <WXApiDelegate>
+#import <BaiduMapKit/BaiduMapAPI_Base/BMKMapManager.h>
 
+@interface AppDelegate () <WXApiDelegate> {
+    BMKMapManager* _mapManager;
+}
 @end
 
 @implementation AppDelegate
@@ -24,6 +27,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // 要使用百度地图，请先启动BaiduMapManager
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定generalDelegate参数
+    BOOL ret = [_mapManager start:@"CGDlxKxs9FrWCGbGiBHMlNBeTGLGwpDo"  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    } else {
+        NSLog(@"BaiduMapManager start success success!!!");
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];

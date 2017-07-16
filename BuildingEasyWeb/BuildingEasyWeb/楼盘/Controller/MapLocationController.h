@@ -10,4 +10,6 @@
 
 @interface MapLocationController : BaseController
 
+- (void)locationAtPoint:(NSDictionary*)pointInfo;
+
 @end

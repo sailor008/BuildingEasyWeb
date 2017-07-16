@@ -208,9 +208,12 @@
 
 - (IBAction)mapLocation:(id)sender
 {
-    NSLog(@"跳转到地图定位：》》》》》》》》》》》longitude = %@， latitude = %@",_detail.buildInfo.longitude, _detail.buildInfo.latitude);
     MapLocationController* locationVC = [[MapLocationController alloc]init];
     [self.navigationController pushViewController:locationVC animated:YES];
+    NSDictionary* pointInfo = @{@"longitude": _detail.buildInfo.longitude,
+                                @"latitude": _detail.buildInfo.latitude,
+                                };
+    [locationVC locationAtPoint:pointInfo];
 }
 
 #pragma mark Request Data
