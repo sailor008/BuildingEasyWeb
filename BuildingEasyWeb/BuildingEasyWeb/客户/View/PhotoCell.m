@@ -51,4 +51,10 @@
     }
 }
 
+- (UIImage*)getContentImage
+{
+    UIImage* img = [_photoImageView.image copy];
+    return img;
+}
+
 @end

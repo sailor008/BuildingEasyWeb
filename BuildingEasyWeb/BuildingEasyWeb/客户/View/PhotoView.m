@@ -9,8 +9,10 @@
 #import "PhotoView.h"
 
 #import "PhotoCell.h"
+#import "ScreenImageView.h"
 #import "BEWAlertAction.h"
 #import "ImagePickerHelper.h"
+
 
 @interface PhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, PhotoCellDelegate>
 {
@@ -83,9 +85,9 @@
     _photoTitleLabel.text = sectionTitle;
 }
 
-- (void)setSourceArray:(NSArray *)sourceArray
+- (void)setSourceUrlArray:(NSArray *)sourceArray
 {
-    _sourceArray = [sourceArray copy];
+    _sourceUrlArray = [sourceArray copy];
     _isShow = YES;
     [_collectionView reloadData];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -109,7 +111,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (_isShow) {
-        return _sourceArray.count;
+        return _sourceUrlArray.count;
     }
     return _photoArray.count;
 }
@@ -120,7 +122,7 @@
     cell.index = indexPath.row;
     cell.delegate = self;
     if (_isShow) {
-        cell.imagUrlStr = _sourceArray[indexPath.row];
+        cell.imagUrlStr = _sourceUrlArray[indexPath.row];
     } else {
         cell.photo = _photoArray[indexPath.row];
         if (indexPath.row < _imageCount) {
@@ -137,6 +139,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_isShow) {
+        PhotoCell* cell = (PhotoCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        ScreenImageView *imgRootView = [[ScreenImageView alloc]init];
+        UIImage* oriImg = [cell getContentImage];
+        [imgRootView displayImage: oriImg];
+        [[UIApplication sharedApplication].keyWindow addSubview: imgRootView];
         return;
     }
     if (indexPath.row != _photoArray.count - 1 || _canSelectedPhoto == NO) {

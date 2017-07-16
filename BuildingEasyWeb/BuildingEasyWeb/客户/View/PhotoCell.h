@@ -25,4 +25,6 @@
 
 @property (nonatomic, weak) id<PhotoCellDelegate> delegate;
 
+- (UIImage*)getContentImage;
+
 @end

@@ -24,6 +24,9 @@
 #import "WXApi.h"
 #import "BEWAlertAction.h"
 #import "NSString+Addition.h"
+#import "NSDate+Addition.h"
+#import "MapLocationController.h"
+
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -64,7 +67,7 @@
     _adsView.placeholderImage = @"底图.png";
     
     // 预设基本信息模型
-    NSArray* array = @[@"区域", @"开发商", @"开盘时间", @"交房时间", @"装修", @"建筑面积", @"总户数", @"车位数", @"车位比", @"绿化率", @"产权年限", @"面积率", @"合作按揭银行", @"物业公司", @"物业费"];
+    NSArray* array = @[@"区域", @"开发商", @"开盘时间", @"交房时间", @"装修", @"建筑面积", @"总户数", @"车位数", @"车位比", @"绿化率", @"产权年限", @"面积率", @"按揭银行", @"物业公司", @"物业费"];
     
     NSMutableArray* temp = [NSMutableArray array];
     for (int i = 0; i < array.count; i += 2) {
@@ -203,6 +206,16 @@
     [WXApi sendReq:req];
 }
 
+- (IBAction)mapLocation:(id)sender
+{
+    MapLocationController* locationVC = [[MapLocationController alloc]init];
+    [self.navigationController pushViewController:locationVC animated:YES];
+    NSDictionary* pointInfo = @{@"longitude": _detail.buildInfo.longitude,
+                                @"latitude": _detail.buildInfo.latitude,
+                                };
+    [locationVC locationAtPoint:pointInfo];
+}
+
 #pragma mark Request Data
 - (void)requestData
 {
@@ -267,9 +280,9 @@
     
     item = _baseInfoArray[1];
     dic = item[0];
-    dic[@"开盘时间"] = _detail.buildInfo.openTime;
+    dic[@"开盘时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.openTime intValue]/1000] ;
     dic = item [1];
-    dic[@"交房时间"] = _detail.buildInfo.handTime;
+    dic[@"交房时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.handTime intValue]/1000] ;
     
     item = _baseInfoArray[2];
     dic = item[0];
@@ -297,7 +310,7 @@
     
     item = _baseInfoArray[6];
     dic = item[0];
-    dic[@"合作按揭银行"] = _detail.buildInfo.bank;
+    dic[@"按揭银行"] = _detail.buildInfo.bank;
     dic = item [1];
     dic[@"物业公司"] = _detail.buildInfo.property;
     

@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - BaiduMapKit (3.3.2)
   - CYLTableViewPlaceHolder (1.0.8)
   - HappyDNS (0.3.10)
   - IQKeyboardManager (4.0.9)
@@ -29,6 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - BaiduMapKit
   - CYLTableViewPlaceHolder
   - IQKeyboardManager
   - MBProgressHUD
@@ -39,6 +41,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BaiduMapKit: 5118390d63b375483bd64c963e8e32a40fd9ddb5
   CYLTableViewPlaceHolder: 44075c119aab78bbc514c75d771d6565e19938e8
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   IQKeyboardManager: 322c7405df3eb5f7e50dede32ea937bf3d4364e0
@@ -48,6 +51,6 @@ SPEC CHECKSUMS:
   Qiniu: 77a3dba411556a383d72d17e842345a9d4c83252
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: c4d2c026e587740de6dad3d9acd03c2c2c7b8820
+PODFILE CHECKSUM: 4b599cdf5d54c2e78e7cfc87965b55a252ddd160
 
 COCOAPODS: 1.2.1

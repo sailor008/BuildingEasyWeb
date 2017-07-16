@@ -23,7 +23,7 @@
 @property (nonatomic, assign) CGFloat photoLeft;
 @property (nonatomic, assign) BOOL canSelectedPhoto;
 
-@property (nonatomic, copy) NSArray* sourceArray;
+@property (nonatomic, copy) NSArray* sourceUrlArray;
 
 @property (nonatomic, copy, readonly) NSArray<UIImage *>* resultArray;
 

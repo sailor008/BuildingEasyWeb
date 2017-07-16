@@ -11,6 +11,7 @@
 @interface NSDate (Addition)
 
 + (NSString *)dateStrWithTimeInterval:(NSTimeInterval)timeInterval;
++ (NSString *)simpleDateStrWithTimeInterval:(NSTimeInterval)timeInterval;
 
 + (NSDate *)localDate;
 - (NSDate *)toLocalDate;

@@ -46,7 +46,8 @@
         _secondLabel.hidden = NO;
         _secondContentLabel.hidden = NO;
     } else {
-        _secondLabel.hidden = YES;
+        _secondLabel.text = @"";
+        _secondLabel.hidden = NO;
         _secondContentLabel.hidden = YES;
     }
     

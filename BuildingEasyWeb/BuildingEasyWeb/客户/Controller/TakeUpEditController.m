@@ -408,7 +408,7 @@
             NSString* imgUrl = dic[@"imgUrl"];
             [tempArr addObject:imgUrl];
         }
-        _photoView.sourceArray = [tempArr copy];
+        _photoView.sourceUrlArray = [tempArr copy];
         
         _dataArray = [TakeUpManager detailTakeUpArrayWithData:reponse canEdit:NO];
         NSMutableArray* tempSectionArr = [_sectionArray mutableCopy];

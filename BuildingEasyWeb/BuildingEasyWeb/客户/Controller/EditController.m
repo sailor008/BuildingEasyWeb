@@ -180,7 +180,7 @@
             [imgArr addObject:imgUrl];
         }
         
-        _photoView.sourceArray = [imgArr copy];
+        _photoView.sourceUrlArray = [imgArr copy];
         
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg toView:self.view];
