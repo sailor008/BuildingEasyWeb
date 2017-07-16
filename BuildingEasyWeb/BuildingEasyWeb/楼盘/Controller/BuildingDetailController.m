@@ -25,6 +25,7 @@
 #import "BEWAlertAction.h"
 #import "NSString+Addition.h"
 #import "NSDate+Addition.h"
+#import "MapLocationController.h"
 
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
@@ -203,6 +204,13 @@
     req.scene = WXSceneSession;
     
     [WXApi sendReq:req];
+}
+
+- (IBAction)mapLocation:(id)sender
+{
+    NSLog(@"跳转到地图定位：》》》》》》》》》》》longitude = %@， latitude = %@",_detail.buildInfo.longitude, _detail.buildInfo.latitude);
+    MapLocationController* locationVC = [[MapLocationController alloc]init];
+    [self.navigationController pushViewController:locationVC animated:YES];
 }
 
 #pragma mark Request Data

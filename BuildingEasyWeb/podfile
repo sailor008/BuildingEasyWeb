@@ -8,4 +8,5 @@ pod 'MBProgressHUD'
 pod 'CYLTableViewPlaceHolder'
 pod 'SDWebImage'
 pod "Qiniu", "~> 7.1"
+pod 'BaiduMapKit' #百度地图SDK
 end

@@ -45,6 +45,9 @@
 @property (nonatomic, copy) NSString* bank;
 @property (nonatomic, copy) NSString* property;
 @property (nonatomic, copy) NSString* propertyMoney;
+@property (nonatomic, copy) NSString* longitude; //经度
+@property (nonatomic, copy) NSString* latitude;  //纬度
+
 
 //
 @property (nonatomic, copy) NSString* position;
