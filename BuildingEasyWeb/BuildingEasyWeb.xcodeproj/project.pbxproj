@@ -45,6 +45,8 @@
 		C787FC041F152D08007F60A5 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C787FC021F152D08007F60A5 /* StatusCell.xib */; };
 		C790582E1F17CA2400D95FBA /* ImagePickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */; };
 		C790583B1F17EDF900D95FBA /* ScreenImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C790583A1F17EDF900D95FBA /* ScreenImageView.m */; };
+		C79058411F1B059500D95FBA /* PickPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C79058401F1B059500D95FBA /* PickPhotoView.m */; };
+		C79058431F1B062E00D95FBA /* PickPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C79058421F1B062E00D95FBA /* PickPhotoView.xib */; };
 		C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE691EF0414B000EF857 /* MyInfoController.m */; };
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
@@ -246,6 +248,9 @@
 		C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerHelper.m; sourceTree = "<group>"; };
 		C79058391F17EDF900D95FBA /* ScreenImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenImageView.h; sourceTree = "<group>"; };
 		C790583A1F17EDF900D95FBA /* ScreenImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenImageView.m; sourceTree = "<group>"; };
+		C790583F1F1B059500D95FBA /* PickPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickPhotoView.h; sourceTree = "<group>"; };
+		C79058401F1B059500D95FBA /* PickPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickPhotoView.m; sourceTree = "<group>"; };
+		C79058421F1B062E00D95FBA /* PickPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickPhotoView.xib; sourceTree = "<group>"; };
 		C7BBCE681EF0414B000EF857 /* MyInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoController.h; sourceTree = "<group>"; };
 		C7BBCE691EF0414B000EF857 /* MyInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoController.m; sourceTree = "<group>"; };
 		C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoController.xib; sourceTree = "<group>"; };
@@ -889,6 +894,9 @@
 				C787FC001F152D08007F60A5 /* StatusCell.h */,
 				C787FC011F152D08007F60A5 /* StatusCell.m */,
 				C787FC021F152D08007F60A5 /* StatusCell.xib */,
+				C790583F1F1B059500D95FBA /* PickPhotoView.h */,
+				C79058401F1B059500D95FBA /* PickPhotoView.m */,
+				C79058421F1B062E00D95FBA /* PickPhotoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1108,6 +1116,7 @@
 				C7CA422A1F10769B00112216 /* CustomerStateTVCell.xib in Resources */,
 				CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */,
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
+				C79058431F1B062E00D95FBA /* PickPhotoView.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */,
 				C71749541EFEB5AB0085E590 /* ModifyMyPwdController.xib in Resources */,
@@ -1219,6 +1228,7 @@
 				CF8F80951EF7D564009A6C3E /* NSDate+Addition.m in Sources */,
 				CF5A4C7A1EE05357002A281B /* BaseController.m in Sources */,
 				CF30C3C71EF4BFCC0070D124 /* BuildingProgressCell.m in Sources */,
+				C79058411F1B059500D95FBA /* PickPhotoView.m in Sources */,
 				CF0CEB181EFEA9E40018B35B /* EditTextCell.m in Sources */,
 				CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */,
 				CF7720FB1EE6D6FD00DD5AE2 /* MainTabController.m in Sources */,

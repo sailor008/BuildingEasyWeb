@@ -12,7 +12,8 @@
 #import "UITableView+Addition.h"
 #import "UIView+Addition.h"
 
-#import "PhotoView.h"
+#import "PickPhotoView.h"
+//#import "PhotoView.h"
 #import "EditTxtTVCell.h"
 #import "SampleEditTxtCell.h"
 
@@ -22,16 +23,16 @@
 #import "NetworkManager.h"
 
 
-@interface AuthIdentityController ()<UITableViewDelegate, UITableViewDataSource, PhotoViewDelegate>
+@interface AuthIdentityController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *footView;
 @property (weak, nonatomic) IBOutlet UIButton *btnEnsure;
 
 @property (nonatomic, strong) SampleEditTxtCell* editTxtCell;
 @property (nonatomic, copy) NSMutableArray* photoViewArray;
-
+@property (nonatomic, copy) NSMutableArray* tmpUploadArray;
 @property (nonatomic, assign)int successUploadCount;
-//@property (nonatomic, assign)const int photoViewTag;
+
 @property (nonatomic, copy) NSArray* photoviewCfgArray;
 @property (nonatomic, copy) NSArray* editTxtCfgArray;
 
@@ -42,6 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _tmpUploadArray = [[NSMutableArray alloc]init];
     
     [_tableView registerNibWithName:@"EditTxtTVCell"];
 
@@ -100,9 +102,10 @@
     _photoViewArray = [NSMutableArray arrayWithCapacity:_photoviewCfgArray.count];
     for(int i = 0; i < _photoviewCfgArray.count; i++) {
         NSDictionary* cfgInfo = _photoviewCfgArray[i];
-        PhotoView* photoview = [self getPhotoView];
-        photoview.delegate = self;
+        PickPhotoView* photoview = [self getPhotoView];
+//        photoview.delegate = self;
         photoview.sectionTitle = [cfgInfo objectForKey:@"title"];
+        photoview.canDeletePhoto = NO;
         photoview.photoLeft = 0;
         photoview.tag = [(NSNumber*)[cfgInfo objectForKey:@"tag"] intValue];
         photoview.frame = CGRectMake(0, 0, ScreenWidth, 60);
@@ -164,7 +167,7 @@
     
     //check image is select
     for (int i = 0; i < _photoViewArray.count; i++) {
-        PhotoView* view = _photoViewArray[i];
+        PickPhotoView* view = _photoViewArray[i];
         NSDictionary* cfgInfo = _photoviewCfgArray[i];
         NSString* imgInitPath = [cfgInfo objectForKey:@"imgPath"];
         if (view.resultArray.count == 0 && !imgInitPath.length) {
@@ -174,18 +177,28 @@
             return;
         }
     }
-    
     [self requestSaveAuthImages];
 }
 
 - (void)requestSaveAuthImages
 {
-    
     self.successUploadCount = 0;
-    kWeakSelf(weakSelf);
-    
+    [_tmpUploadArray removeAllObjects];
+    for (int i = 0; i < _photoViewArray.count; i++) {
+        PickPhotoView* view = _photoViewArray[i];
+        if (view.resultArray.count > 0) {
+            [_tmpUploadArray addObject: view];
+        }
+    }
+    if (_tmpUploadArray.count <= 0) {
+        //没有认证图片更改，所以只保存 身份证号or 公司名字
+        [self confirmSaveAuthInfo];
+        return;
+    }
+
     [MBProgressHUD showLoading];
     
+    kWeakSelf(weakSelf);
     // 创建队列组，可以使多个网络请求异步执行，执行完之后再进行操作
     dispatch_group_t group = dispatch_group_create();
     //创建全局队列
@@ -193,14 +206,14 @@
     
     dispatch_group_async(group, queue, ^{
         // 循环上传数据
-        for (int i = 0; i < _photoViewArray.count; i++) {
+        for (int i = 0; i < _tmpUploadArray.count; i++) {
             //创建dispatch_semaphore_t对象
             dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
             
-            PhotoView* view = _photoViewArray[i];
+            PickPhotoView* view = _tmpUploadArray[i];
             UIImage* image = view.resultArray[0];
             NSString* imgTag = [NSString stringWithFormat:@"%li", (long)view.tag];
-            NSLog(@"提交图片：tag = %@", imgTag);
+            NSLog(@"上传图片：tag = %@", imgTag);
             [UploadImageManager uploadImage:image type:imgTag imageKey:^(NSString *quReturnImgkey) {
                 NSLog(@"quReturnImgkey = %@", quReturnImgkey);
                 
@@ -232,11 +245,11 @@
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSLog(@"已更新认证图片的数量 = %i", weakSelf.successUploadCount);
         // 执行下面的判断代码
-        if (weakSelf.successUploadCount == _photoViewArray.count) {
+        if (weakSelf.successUploadCount == weakSelf.tmpUploadArray.count) {
             // 返回主线程进行界面上的修改
-            dispatch_async(dispatch_get_main_queue(), ^{
+//            dispatch_async(dispatch_get_main_queue(), ^{
 //                [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待认证！"];
-            });
+//            });
             [weakSelf confirmSaveAuthInfo];
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -251,12 +264,14 @@
 {
     kWeakSelf(weakSelf);
     NSString* strInfo = _editTxtCell.model.text;
-    NSLog(@"身份证号 or 公司名：%@", strInfo);
+//    NSLog(@"身份证号 or 公司名：%@", strInfo);
     NSDictionary* params = @{@"information":strInfo, @"role":[User shareUser].role};
     [NetworkManager postWithUrl:@"wx/authUser" parameters:params success:^(id reponse) {
         NSLog(@"提交认证 [wx/authUser] 成功！");
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUD];
+            [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
+            
             [weakSelf.navigationController popViewControllerAnimated:YES];
         });
     } failure:^(NSError *error, NSString *msg) {
@@ -265,9 +280,9 @@
     }];
 }
 
-- (PhotoView *)getPhotoView
+- (PickPhotoView *)getPhotoView
 {
-    return [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
+    return [[[NSBundle mainBundle] loadNibNamed:@"PickPhotoView" owner:nil options:nil] lastObject];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -295,7 +310,7 @@
         cell = [[UITableViewCell alloc]init];
         cell.backgroundColor = [UIColor redColor];
         
-        PhotoView* view = [_photoViewArray objectAtIndex:indexPath.row];
+        PickPhotoView* view = [_photoViewArray objectAtIndex:indexPath.row];
         [cell addSubview:view];
     }
     return cell;
