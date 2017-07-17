@@ -19,6 +19,7 @@
 + (EmptyTipView *)GetEmptyTipView
 {
     EmptyTipView* tipView = [[[NSBundle mainBundle] loadNibNamed:@"EmptyTipView" owner:nil options:nil] lastObject];
+    tipView.userInteractionEnabled = NO;
     return tipView;
 }
 

@@ -246,6 +246,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         return;
     }
     
+    [MBProgressHUD showLoadingToView:self.view];
     if (_isModify) {
         [self commitModifyBaobeiInfo];
     } else {
@@ -400,7 +401,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     parameters[@"intention"] = @(_intend);
     BuildBaobeiModel* baobeiModel = _bulidList[0];
     parameters[@"adviserId"] = baobeiModel.selectedAdviser.adviserId;
-    [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/modifyCustomer" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         [self showBaobeiSuccess];

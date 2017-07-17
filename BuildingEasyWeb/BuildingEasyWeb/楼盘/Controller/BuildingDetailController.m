@@ -198,10 +198,28 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareSuccess) name:kShareSuccess object:nil];
     
-    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-    req.text = @"单纯分享文本";
-    req.bText = YES;
+//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+//    req.text = @"单纯分享文本";
+//    req.bText = YES;
+//    req.scene = WXSceneSession;
+//    
+//    [WXApi sendReq:req];
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = @"http://113.209.77.204:11072/building/dist/index.html";
+    
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"标题";
+    message.description = @"描述";
+    message.mediaObject = ext;
+    message.messageExt = nil;
+    message.messageAction = nil;
+    message.mediaTagName = nil;
+    [message setThumbImage:GetIMAGE(@"wxShare.png")];
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
     req.scene = WXSceneSession;
+    req.message = message;
     
     [WXApi sendReq:req];
 }
@@ -209,6 +227,7 @@
 - (IBAction)mapLocation:(id)sender
 {
     MapLocationController* locationVC = [[MapLocationController alloc]init];
+    locationVC.locationName = _detail.buildInfo.area;
     [self.navigationController pushViewController:locationVC animated:YES];
     NSDictionary* pointInfo = @{@"longitude": _detail.buildInfo.longitude,
                                 @"latitude": _detail.buildInfo.latitude,

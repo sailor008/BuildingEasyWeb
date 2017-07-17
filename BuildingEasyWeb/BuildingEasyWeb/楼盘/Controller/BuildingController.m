@@ -130,6 +130,8 @@
     
     _sectionView = [[[NSBundle mainBundle] loadNibNamed:@"BuildingSectionView" owner:nil options:nil] lastObject];
     _sectionView.delegate = self;
+    
+    _searchTextField.borderStyle = UITextBorderStyleNone;
 }
 
 - (void)requestDataWithCheckLocation
@@ -494,7 +496,6 @@
     EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
     tipView.tip = @"木有楼盘";
     tipView.backgroundColor = [UIColor clearColor];
-    tipView.userInteractionEnabled = NO;
     return tipView;
 }
 
