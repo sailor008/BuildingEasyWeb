@@ -20,4 +20,6 @@
 - (BOOL)isMobile;
 - (BOOL)isNumber;// 纯数字
 
+- (NSString *)deleteHTMLLabel;// 去处html标签
+
 @end

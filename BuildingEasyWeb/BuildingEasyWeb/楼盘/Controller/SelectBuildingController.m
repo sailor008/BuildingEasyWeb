@@ -207,6 +207,7 @@
 #pragma mark RequestData
 - (void)requestData
 {
+    [MBProgressHUD showLoadingToView:self.view];
     NSString* keyWord = _searchTextField.text.length ? _searchTextField.text : @"";
     
     NSDictionary* parameters = @{@"averAgeId":@0,
@@ -220,6 +221,7 @@
                                  @"pageSize":@10,
                                  @"keyword":keyWord};
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
+        [MBProgressHUD hideHUDForView:self.view];
         if (_tableView.page == 1) {
             [_buildingArr removeAllObjects];
         }

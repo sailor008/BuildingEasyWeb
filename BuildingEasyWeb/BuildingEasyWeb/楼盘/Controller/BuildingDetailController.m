@@ -284,8 +284,10 @@
     _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
     [_formulaTableView reloadData];
     
-    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
-    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
+//    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
+//    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
+    _typeDetailLabel.text = [_detail.buildInfo.houseType deleteHTMLLabel];
+    _sellDetaillabel.text = [_detail.buildInfo.sellingPoint deleteHTMLLabel];
     [self analysisBaseInfoArray];
 }
 // 解析基本信息
@@ -299,9 +301,10 @@
     
     item = _baseInfoArray[1];
     dic = item[0];
-    dic[@"开盘时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.openTime intValue]/1000] ;
+    
+    dic[@"开盘时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.openTime integerValue]/1000] ;
     dic = item [1];
-    dic[@"交房时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.handTime intValue]/1000] ;
+    dic[@"交房时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.handTime integerValue]/1000] ;
     
     item = _baseInfoArray[2];
     dic = item[0];

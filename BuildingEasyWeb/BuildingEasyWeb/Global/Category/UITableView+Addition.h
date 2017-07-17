@@ -21,4 +21,6 @@
 - (void)registerNibWithName:(NSString *)nibName;
 - (void)registerClassWithName:(NSString *)className;
 
+- (void)bewReload;
+
 @end

@@ -332,6 +332,7 @@
 		CF32760A1EFFF5EB00018294 /* EditInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoModel.m; sourceTree = "<group>"; };
 		CF38943C1F11C49000BDA6E8 /* BEWAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEWAlertAction.h; sourceTree = "<group>"; };
 		CF38943D1F11C49000BDA6E8 /* BEWAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEWAlertAction.m; sourceTree = "<group>"; };
+		CF39007F1F1CF186008FD9D6 /* BEWTableViewPlaceHolderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEWTableViewPlaceHolderDelegate.h; sourceTree = "<group>"; };
 		CF413D4E1EEADDE7009A1B50 /* BuildingBaseInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingBaseInfoCell.h; sourceTree = "<group>"; };
 		CF413D4F1EEADDE7009A1B50 /* BuildingBaseInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingBaseInfoCell.m; sourceTree = "<group>"; };
 		CF413D501EEADDE7009A1B50 /* BuildingBaseInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuildingBaseInfoCell.xib; sourceTree = "<group>"; };
@@ -672,6 +673,7 @@
 				CF38943D1F11C49000BDA6E8 /* BEWAlertAction.m */,
 				C790582C1F17CA2400D95FBA /* ImagePickerHelper.h */,
 				C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */,
+				CF39007F1F1CF186008FD9D6 /* BEWTableViewPlaceHolderDelegate.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";

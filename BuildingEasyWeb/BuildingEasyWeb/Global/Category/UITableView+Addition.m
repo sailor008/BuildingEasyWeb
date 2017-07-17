@@ -10,6 +10,9 @@
 
 #import <objc/runtime.h>
 #import <MJRefresh.h>
+#import <CYLTableViewPlaceHolder.h>
+#import "BEWTableViewPlaceHolderDelegate.h"
+#import "EmptyTipView.h"
 
 static const char kTableViewPage;
 static const char kTableViewAllPage;
@@ -87,6 +90,18 @@ static const char kTableViewHasNext;
 - (void)registerClassWithName:(NSString *)className
 {
     [self registerClass:NSClassFromString(className) forCellReuseIdentifier:className];
+}
+
+- (void)bewReload
+{
+    [self cyl_reloadData];
+    UIView* lastView = [self.subviews lastObject];
+    if ([lastView isKindOfClass:[EmptyTipView class]]) {
+        if ([self.delegate respondsToSelector:@selector(placeHolderViewFrame)]) {
+//            lastView.frame = [self.delegate performSelector:@selector(placeHolderViewFrame)];
+            NSLog(@"frame:%@", [self.delegate performSelector:@selector(placeHolderViewFrame)]);
+        }
+    }
 }
 
 @end
