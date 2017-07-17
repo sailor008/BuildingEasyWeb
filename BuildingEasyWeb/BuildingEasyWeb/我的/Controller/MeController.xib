@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeController">
             <connections>
+                <outlet property="redHintView" destination="Qls-Ch-A5w" id="Wk7-Xv-HDM"/>
                 <outlet property="tableView" destination="fUw-BI-CSP" id="hCt-sp-XuD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -38,5 +39,10 @@
             </constraints>
             <point key="canvasLocation" x="43" y="98"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Qls-Ch-A5w">
+            <rect key="frame" x="0.0" y="0.0" width="8" height="8"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+        </imageView>
     </objects>
 </document>
