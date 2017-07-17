@@ -18,10 +18,6 @@
     [currentVC.navigationController popToRootViewControllerAnimated:NO];
     MainTabController* mainTabVC = (MainTabController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     
-//    UINavigationController* navi = mainTabVC.viewControllers[1];
-//    CustomerListController* customerListVC = navi.viewControllers[0];
-//    customerListVC.needRefreshList = YES;
-    
     mainTabVC.selectedIndex = 1;
 }
 

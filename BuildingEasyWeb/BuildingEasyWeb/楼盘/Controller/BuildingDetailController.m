@@ -198,10 +198,28 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareSuccess) name:kShareSuccess object:nil];
     
-    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-    req.text = @"单纯分享文本";
-    req.bText = YES;
+//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+//    req.text = @"单纯分享文本";
+//    req.bText = YES;
+//    req.scene = WXSceneSession;
+//    
+//    [WXApi sendReq:req];
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = @"http://113.209.77.204:11072/building/dist/index.html";
+    
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"标题";
+    message.description = @"描述";
+    message.mediaObject = ext;
+    message.messageExt = nil;
+    message.messageAction = nil;
+    message.mediaTagName = nil;
+    [message setThumbImage:GetIMAGE(@"wxShare.png")];
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
     req.scene = WXSceneSession;
+    req.message = message;
     
     [WXApi sendReq:req];
 }
@@ -209,6 +227,7 @@
 - (IBAction)mapLocation:(id)sender
 {
     MapLocationController* locationVC = [[MapLocationController alloc]init];
+    locationVC.locationName = _detail.buildInfo.area;
     [self.navigationController pushViewController:locationVC animated:YES];
     NSDictionary* pointInfo = @{@"longitude": _detail.buildInfo.longitude,
                                 @"latitude": _detail.buildInfo.latitude,
@@ -265,8 +284,10 @@
     _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
     [_formulaTableView reloadData];
     
-    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
-    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
+//    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
+//    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
+    _typeDetailLabel.text = [_detail.buildInfo.houseType deleteHTMLLabel];
+    _sellDetaillabel.text = [_detail.buildInfo.sellingPoint deleteHTMLLabel];
     [self analysisBaseInfoArray];
 }
 // 解析基本信息
@@ -280,9 +301,10 @@
     
     item = _baseInfoArray[1];
     dic = item[0];
-    dic[@"开盘时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.openTime intValue]/1000] ;
+    
+    dic[@"开盘时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.openTime integerValue]/1000] ;
     dic = item [1];
-    dic[@"交房时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.handTime intValue]/1000] ;
+    dic[@"交房时间"] = [NSDate simpleDateStrWithTimeInterval: [_detail.buildInfo.handTime integerValue]/1000] ;
     
     item = _baseInfoArray[2];
     dic = item[0];

@@ -28,8 +28,9 @@
 #import "BuildingFilterModel.h"
 #import "EmptyTipView.h"
 #import <CYLTableViewPlaceHolder.h>
+#import "BEWTableViewPlaceHolderDelegate.h"
 
-@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate, CYLTableViewPlaceHolderDelegate>
+@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate, BEWTableViewPlaceHolderDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -68,6 +69,7 @@
     [self setupProperty];
     [self addTableViewRefresh];
     
+    [MBProgressHUD showLoading];
     if ([User shareUser].isLogin == NO) {
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
@@ -119,23 +121,27 @@
     [self setupLocationButtonFace:@""];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_locationButton];
     
+    CGFloat bannerHeight = 185.0f;//165.0f;
     _adsView = [[AdsScrollView alloc] init];
-    _adsView.frame = CGRectMake(0, 0, ScreenWidth, 165);
+    _adsView.frame = CGRectMake(0, 0, ScreenWidth, bannerHeight);
     _adsView.placeholderImage = @"底图.png";
     UIView* headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(0, 0, ScreenWidth, 175);
+    headerView.frame = CGRectMake(0, 0, ScreenWidth, bannerHeight + 10);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [headerView addSubview:_adsView];
     _tableView.tableHeaderView = headerView;
     
     _sectionView = [[[NSBundle mainBundle] loadNibNamed:@"BuildingSectionView" owner:nil options:nil] lastObject];
     _sectionView.delegate = self;
+    
+    _searchTextField.borderStyle = UITextBorderStyleNone;
 }
 
 - (void)requestDataWithCheckLocation
 {
     kWeakSelf(weakSelf);
     [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
+        [MBProgressHUD hideHUD];
         weakSelf.lat = lat;
         weakSelf.lng = lng;
         [weakSelf setupLocationButtonFace:city];
@@ -494,13 +500,18 @@
     EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
     tipView.tip = @"木有楼盘";
     tipView.backgroundColor = [UIColor clearColor];
-    tipView.userInteractionEnabled = NO;
     return tipView;
 }
 
 - (BOOL)enableScrollWhenPlaceHolderViewShowing
 {
     return YES;
+}
+
+#pragma mark BEWTableViewPlaceHolderDelegate
+- (CGRect)placeHolderViewFrame
+{
+    return CGRectMake(0, 0, 100, 100);
 }
 
 #pragma mark Action

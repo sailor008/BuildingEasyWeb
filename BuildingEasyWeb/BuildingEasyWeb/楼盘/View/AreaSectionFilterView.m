@@ -72,14 +72,17 @@
 {
     sender.selected = !sender.isSelected;
     
+    UITableView* tableView = (UITableView *)self.superview;
+    
     if (sender.isSelected) {
+        [tableView bringSubviewToFront:_filterTableView];
+        
         if (_delegate && [_delegate respondsToSelector:@selector(showFilter)]) {
             [_delegate showFilter];
         }
     } else {
         CGRect rect = _filterTableView.frame;
         
-        UITableView* tableView = (UITableView *)self.superview;
         tableView.scrollEnabled = YES;
         
         [UIView animateWithDuration:0.25 animations:^{

@@ -68,8 +68,12 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
     _currentButton = sender;
     sender.selected = !sender.isSelected;
     
+    UITableView* tableView = (UITableView *)self.superview;
+    
     if (sender.isSelected) {
         _currentButtonTag = sender.tag - kBuildingSectionButtonBaseTag;
+        
+        [tableView bringSubviewToFront:_filterTableView];
         
         if (_delegate && [_delegate respondsToSelector:@selector(showFilterViewWithOptionTag:)]) {
             [_delegate showFilterViewWithOptionTag:sender.tag - kBuildingSectionButtonBaseTag];
@@ -78,7 +82,6 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
     } else {
         CGRect rect = _filterTableView.frame;
         
-        UITableView* tableView = (UITableView *)self.superview;
         tableView.scrollEnabled = YES;
         
         [UIView animateWithDuration:0.25 animations:^{

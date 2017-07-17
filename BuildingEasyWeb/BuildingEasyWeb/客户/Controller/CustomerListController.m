@@ -53,7 +53,6 @@
     
     [_searchTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    _needRefreshList = NO;
     [self requestData];
     
     kWeakSelf(weakSelf);
@@ -66,10 +65,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
-    
-    if (_needRefreshList) {
-        [_tableView.mj_header beginRefreshing];
-    }
 }
 
 - (void)didReceiveMemoryWarning {

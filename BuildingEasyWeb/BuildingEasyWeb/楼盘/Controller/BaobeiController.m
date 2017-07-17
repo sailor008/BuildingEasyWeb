@@ -52,6 +52,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 @property (nonatomic, assign) BOOL canDeleteCell;
 
+@property (nonatomic, copy) NSString* errorMsg;// 错误信息
+
 @end
 
 @implementation BaobeiController
@@ -221,10 +223,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (void)baobei
 {
-//    if (![[User shareUser].auth isEqualToNumber:@1]) {
-//        [MBProgressHUD showError:@"请先进行用户认证"];
-//        return;
-//    }
     if (!_nameLabel.text.length) {
         [MBProgressHUD showError:@"请填写客户姓名"];
         return;
@@ -246,6 +244,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         return;
     }
     
+    [MBProgressHUD showLoadingToView:self.view];
     if (_isModify) {
         [self commitModifyBaobeiInfo];
     } else {
@@ -367,10 +366,15 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 - (void)commitBaobeiNewCustomer
 {
     if (_tempIndex >= _bulidList.count) {
-        [MBProgressHUD hideHUDForView:self.view];
+        
         _tempIndex = 0;
         
-        [self showBaobeiSuccess];
+        if (_errorMsg.length) {
+            [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
+        } else {
+            [MBProgressHUD hideHUDForView:self.view];
+            [self showBaobeiSuccess];
+        }
         return;
     }
     
@@ -389,6 +393,11 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         
     } failure:^(NSError *error, NSString *msg) {
         _tempIndex++;
+        if (msg.length) {
+            _errorMsg = msg;
+        } else {
+            _errorMsg = @"报备出错";
+        }
         [self commitBaobeiNewCustomer];
     }];
 }
@@ -400,7 +409,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     parameters[@"intention"] = @(_intend);
     BuildBaobeiModel* baobeiModel = _bulidList[0];
     parameters[@"adviserId"] = baobeiModel.selectedAdviser.adviserId;
-    [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/modifyCustomer" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         [self showBaobeiSuccess];

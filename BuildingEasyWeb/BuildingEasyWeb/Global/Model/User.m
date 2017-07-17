@@ -8,17 +8,19 @@
 
 #import "User.h"
 
+static NSString* const kUserFileName = @"UserInfo";
+
 static NSString* const kNickname = @"NickName";
 static NSString* const kUserID = @"UserID";
 static NSString* const kMobile = @"Mobile";
 static NSString* const kToken = @"Token";
 static NSString* const kHeadImg = @"HeadImg";
 static NSString* const kRole = @"Role";
-static NSString* const kUserFileName = @"UserInfo";
 static NSString* const kUserPWD = @"UserPWD";
 static NSString* const kAuth = @"Auth";
 static NSString* const kEmail = @"Email";
 static NSString* const kUserName = @"Name";
+static NSString* const kMessageID = @"MessageID";
 
 @implementation User
 
@@ -38,6 +40,14 @@ static NSString* const kUserName = @"Name";
         return @"0";
     }
     return _areaCode;
+}
+
+- (NSString *)messageId
+{
+    if (_messageId.length == 0) {
+        _messageId = @"0";
+    }
+    return _messageId;
 }
 
 - (NSString *)getUserFilePath
@@ -68,6 +78,7 @@ static NSString* const kUserName = @"Name";
             shareUser.name = userInfo.name;
             shareUser.email = userInfo.email;
             shareUser.auth = userInfo.auth;
+            shareUser.messageId = userInfo.messageId;
             return YES;
         }
     }
@@ -129,6 +140,7 @@ static NSString* const kUserName = @"Name";
         _name = [aDecoder decodeObjectForKey:kUserName];
         _email = [aDecoder decodeObjectForKey:kEmail];
         _auth = [aDecoder decodeObjectForKey:kAuth];
+        _messageId = [aDecoder decodeObjectForKey:kMessageID];
     }
     return self;
 }
@@ -145,6 +157,7 @@ static NSString* const kUserName = @"Name";
     [aCoder encodeObject:_name forKey:kUserName];
     [aCoder encodeObject:_email forKey:kEmail];
     [aCoder encodeObject:_auth forKey:kAuth];
+    [aCoder encodeObject:self.messageId forKey:kMessageID];
 }
 
 @end

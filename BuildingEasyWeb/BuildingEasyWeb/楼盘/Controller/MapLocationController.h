@@ -10,6 +10,8 @@
 
 @interface MapLocationController : BaseController
 
+@property (nonatomic, copy) NSString* locationName;
+
 - (void)locationAtPoint:(NSDictionary*)pointInfo;
 
 @end

@@ -46,15 +46,25 @@
                         <action selector="recommendOthers:" destination="-1" eventType="touchUpInside" id="dDL-2P-wuB"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEI-6J-myn">
+                    <rect key="frame" x="0.0" y="617" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="7Ju-8i-eox"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="lnX-k4-jbN" secondAttribute="trailing" id="0h6-q9-a9j"/>
                 <constraint firstItem="lnX-k4-jbN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4Gx-vw-WcT"/>
                 <constraint firstAttribute="trailing" secondItem="LmR-Ai-Km7" secondAttribute="trailing" id="Epg-aU-IUm"/>
+                <constraint firstItem="AEI-6J-myn" firstAttribute="top" secondItem="lnX-k4-jbN" secondAttribute="top" id="G5Z-qI-B5u"/>
                 <constraint firstAttribute="bottom" secondItem="lnX-k4-jbN" secondAttribute="bottom" id="SmI-Sx-adM"/>
                 <constraint firstItem="LmR-Ai-Km7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dt9-i4-Q4q"/>
                 <constraint firstItem="lnX-k4-jbN" firstAttribute="top" secondItem="LmR-Ai-Km7" secondAttribute="bottom" id="jme-us-l9F"/>
+                <constraint firstItem="AEI-6J-myn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kzo-qb-B3y"/>
+                <constraint firstAttribute="trailing" secondItem="AEI-6J-myn" secondAttribute="trailing" id="tse-qc-QrZ"/>
                 <constraint firstItem="LmR-Ai-Km7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zY8-dV-mlo"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="82.5"/>

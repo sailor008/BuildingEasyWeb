@@ -25,6 +25,8 @@
 
 @property (nonatomic, assign) BOOL isLogin;
 
+@property (nonatomic, copy) NSString* messageId;// 最大消息id
+
 // 辅助使用，因为多个地方要用到，但不做本地归档
 @property (nonatomic, copy) NSString* city;
 @property (nonatomic, copy) NSString* areaCode;

@@ -82,7 +82,7 @@
     // 添加一个PointAnnotation
     BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
     annotation.coordinate = coor;
-    annotation.title = @"这里";
+    annotation.title = _locationName;
     [_mapView addAnnotation:annotation];
 
 //    dispatch_async(dispatch_get_main_queue(), ^{

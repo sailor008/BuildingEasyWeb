@@ -190,7 +190,6 @@
 - (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
 {
     _city = city;
-    _areaCode = cityCode;
     [_areaSectionView setCurrentCity:city];
     
     [_tableView.mj_header beginRefreshing];
@@ -208,22 +207,25 @@
 #pragma mark RequestData
 - (void)requestData
 {
+    [MBProgressHUD showLoadingToView:self.view];
     NSString* keyWord = _searchTextField.text.length ? _searchTextField.text : @"";
+    
     NSDictionary* parameters = @{@"averAgeId":@0,
                                  @"distanceId":@0,
                                  @"classifyId":@0,
                                  @"areaCode":_areaCode,
+                                 @"city":_city,
                                  @"lon":@([User shareUser].lng),
                                  @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":keyWord};
-    [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         if (_tableView.page == 1) {
-            [_buildIdArr removeAllObjects];
+            [_buildingArr removeAllObjects];
         }
+        
         _tableView.page ++;
         
         _tableView.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
@@ -237,7 +239,7 @@
         [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD showError:msg toView:self.view];
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
         [TableRefreshManager tableViewEndRefresh:_tableView];
     }];
 }
