@@ -21,6 +21,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="登录底图" translatesAutoresizingMaskIntoConstraints="NO" id="n6U-LT-awL">
+                    <rect key="frame" x="0.0" y="462" width="375" height="205"/>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="beV-et-cBn">
                     <rect key="frame" x="157" y="67" width="60" height="60"/>
                 </imageView>
@@ -100,9 +103,6 @@
                         <action selector="registerNewCount:" destination="-1" eventType="touchUpInside" id="UKO-gD-aHY"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="登录底图" translatesAutoresizingMaskIntoConstraints="NO" id="n6U-LT-awL">
-                    <rect key="frame" x="0.0" y="462" width="375" height="205"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhI-sJ-m5q">
                     <rect key="frame" x="34" y="429.5" width="56" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
