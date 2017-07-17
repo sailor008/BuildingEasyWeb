@@ -16,6 +16,7 @@
 #import <MJExtension.h>
 #import "NetworkManager.h"
 #import "Global.h"
+#import "User.h"
 
 @interface MyMessageController ()<UITableViewDelegate, UITableViewDataSource, CYLTableViewPlaceHolderDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -103,6 +104,9 @@
             _tableview.page = (NSInteger)ceil(_msgDataArr.count / pageSize);
         }
         NSLog(@"当前获取到的最大信息id = %lu", (unsigned long)_nowMaxMsgId);
+        [User shareUser].messageId = [NSString stringWithFormat:@"%li", _nowMaxMsgId];
+        [[User shareUser] saveUserInfoToFile];
+
         if(_nowMaxMsgId < self.maxMsgId) {
             _tableview.hasNext = YES;
         } else {
