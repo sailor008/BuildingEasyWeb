@@ -37,6 +37,7 @@ typedef void (^onTabVCell)(void);
 @interface MeController ()<UITableViewDataSource, UITableViewDelegate, EditMyInfoDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIImageView *redHintView;
 
 @property (nonatomic, copy) NSArray *viewCfgData;
 
@@ -50,11 +51,20 @@ typedef void (^onTabVCell)(void);
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    _redHintView.layer.masksToBounds = YES;
+    _redHintView.layer.cornerRadius = _redHintView.frame.size.width * 0.5;
+    
     [_tableView registerNibWithName:@"MeCellBase"];
     [_tableView registerNibWithName:@"MeCellInfo"];
     [_tableView registerNibWithName:@"MeCellStatus"];
 
     [self initViewCfg];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self requestMaxMsgId];
 }
@@ -82,6 +92,12 @@ typedef void (^onTabVCell)(void);
         [MBProgressHUD hideHUD];
         _maxMsgId = [[reponse objectForKey:@"messageId"] integerValue];
         NSLog(@">>>>>>>>>>>>>>>用户消息最大的id = %li", _maxMsgId);
+        
+        if (_maxMsgId > [[User shareUser].messageId integerValue]) {
+            _redHintView.hidden = NO;
+        } else {
+            _redHintView.hidden = YES;
+        }
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:msg];
@@ -231,6 +247,12 @@ typedef void (^onTabVCell)(void);
     }else {
         MeCellBase* cell = [tableView dequeueReusableCellWithIdentifier:@"MeCellBase" forIndexPath:indexPath];
         [cell initWithData: _viewCfgData[indexPath.row][0] title: _viewCfgData[indexPath.row][1]];
+        NSString* title = _viewCfgData[indexPath.row][1];
+        if([title isEqualToString:@"我的消息"]){
+            _redHintView.layer.position = CGPointMake(ScreenWidth - 36, cell.frame.size.height * 0.5);
+            [cell addSubview: _redHintView];
+            _redHintView.hidden = YES;
+        }
         return cell;
     }
 }

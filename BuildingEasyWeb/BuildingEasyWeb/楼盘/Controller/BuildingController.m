@@ -69,7 +69,10 @@
     [self setupProperty];
     [self addTableViewRefresh];
     
-    [MBProgressHUD showLoading];
+    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+    if (phoneVersion.integerValue > 8) {
+        [MBProgressHUD showLoading];
+    }
     if ([User shareUser].isLogin == NO) {
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
