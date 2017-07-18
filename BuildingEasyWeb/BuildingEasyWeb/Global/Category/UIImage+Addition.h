@@ -12,4 +12,6 @@
 
 - (UIImage *)compressImageWithTargetSize:(CGSize)targetSize;
 
++ (UIImage *)createImageWithColor:(UIColor *)color;
+
 @end
