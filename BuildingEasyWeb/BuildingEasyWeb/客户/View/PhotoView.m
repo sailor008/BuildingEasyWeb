@@ -90,11 +90,11 @@
     _sourceUrlArray = [sourceArray copy];
     _isShow = YES;
     [_collectionView reloadData];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
-            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
-        }
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
+//            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+//        }
+//    });
 }
 
 - (NSArray<UIImage *> *)resultArray
@@ -204,9 +204,9 @@
     
     [_collectionView reloadData];
     [_imagePicker dismissViewControllerAnimated:YES completion:^{
-        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
-            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
-        }
+//        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
+//            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+//        }
     }];
 }
 
@@ -220,8 +220,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
 {
-    if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
-        [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+    if (_limitNum > 1) {
+        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
+            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+        }
     }
 }
 
