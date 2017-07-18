@@ -12,6 +12,7 @@
 #import "LoginManager.h"
 #import "NetworkManager.h"
 #import "NSString+Addition.h"
+#import "UIButton+Addition.h"
 
 static NSInteger const kNewPWDButtonTag = 1000;
 //static NSInteger const kAgainPWDButtonTag = 1001;
@@ -22,6 +23,7 @@ static NSInteger const kNewPWDButtonTag = 1000;
 @property (weak, nonatomic) IBOutlet UITextField *codeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *againPassWordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *countdownButton;
 
 @end
 
@@ -43,10 +45,18 @@ static NSInteger const kNewPWDButtonTag = 1000;
 #pragma mark Action
 - (IBAction)getVerificationCode:(id)sender
 {
+    if (!_phoneTextField.text.length) {
+        [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
+        return;
+    }
+    [_countdownButton countDownFromTime:60 completion:^(UIButton *btn) {
+        
+    }];
     [NetworkManager postWithUrl:@"wx/sendResetCode" parameters:@{@"mobile":_phoneTextField.text} success:^(id reponse) {
         NSLog(@"获取验证码成功");
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"获取验证码失败:%@", error);
+        [MBProgressHUD showError:msg toView:self.view];
     }];
 }
 
