@@ -14,6 +14,7 @@
 #import "NetworkManager.h"
 
 #import "NSString+Addition.h"
+#import "UIButton+Addition.h"
 
 @interface RegisterController ()
 
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *codeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *countdownButton;
 
 @property (nonatomic, assign) BEWUserRole userRole;
 
@@ -66,6 +68,11 @@
     }
     [NetworkManager postWithUrl:@"wx/registerCode" parameters:@{@"mobile": _phoneTextField.text} success:^(id reponse) {
         NSLog(@"reponse:%@", reponse);
+    
+        //注意：在xib中把代码的类型改为 custom（UIButtonTypeCustom），否则倒计时会闪烁！而且需要把按钮的宽、高，固定一下，不然会出现背景图的大小 在button标题改变时不一致！！！
+        [_countdownButton countDownFromTime:60 completion:^(UIButton *btn) {
+            
+        }];
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD showError:msg toView:self.view];
     }];
