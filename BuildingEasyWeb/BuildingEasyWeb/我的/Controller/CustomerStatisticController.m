@@ -172,8 +172,7 @@
 {
     kWeakSelf(weakSelf);
     [TableRefreshManager tableView:_tableview loadData:^(BOOL isMore) {
-        NSLog(@"loadData isMore = :%i", isMore);
-            [weakSelf requestData];
+        [weakSelf requestData];
     }];
 }
 
