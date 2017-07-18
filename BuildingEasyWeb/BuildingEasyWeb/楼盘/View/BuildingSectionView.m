@@ -100,7 +100,7 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 {
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuildingSectionFilterCell" forIndexPath:indexPath];
     cell.textLabel.text = _contentArray[indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.textColor = Hex(0x747474);
     return cell;

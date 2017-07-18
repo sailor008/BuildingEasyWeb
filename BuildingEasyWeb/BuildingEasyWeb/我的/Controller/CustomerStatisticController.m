@@ -102,6 +102,10 @@
 
 - (void)onBtnNavTitle:(UIButton*)btn
 {
+    if (_tableview.mj_header.isRefreshing || _tableview.mj_footer.isRefreshing) {
+        return;
+    }
+    
     if(_statusListView) {
         //重置指示图标的方向为：收起列表
         UIButton* btnNavTitle = (UIButton*)self.navigationItem.titleView;

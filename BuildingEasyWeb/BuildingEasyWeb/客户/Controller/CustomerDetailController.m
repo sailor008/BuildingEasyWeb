@@ -18,7 +18,7 @@
 #import "OpenSystemUrlManager.h"
 #import "Global.h"
 
-@interface CustomerDetailController () <UITableViewDataSource, UITableViewDelegate>
+@interface CustomerDetailController () <UITableViewDataSource, UITableViewDelegate, ProgressDetailControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -118,7 +118,14 @@
     ProgressDetailController* progressDetailVC = [[ProgressDetailController alloc] init];
     CustomerBuildModel* model = _buildList[indexPath.row];
     progressDetailVC.customerId = model.customerId;
+    progressDetailVC.delegate = self;
     [self.navigationController pushViewController:progressDetailVC animated:YES];
+}
+
+#pragma mark ProgressDetailControllerDelegate
+- (void)changeState
+{
+    [self requestData];
 }
 
 #pragma mark RequestData

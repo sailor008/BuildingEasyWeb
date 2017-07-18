@@ -8,8 +8,16 @@
 
 #import "BaseController.h"
 
+@protocol ProgressDetailControllerDelegate <NSObject>
+
+- (void)changeState;
+
+@end
+
 @interface ProgressDetailController : BaseController
 
 @property (nonatomic, copy) NSString* customerId;
+
+@property (nonatomic, weak) id<ProgressDetailControllerDelegate> delegate;
 
 @end

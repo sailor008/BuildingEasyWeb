@@ -67,7 +67,7 @@
     [NetworkManager postWithUrl:@"wx/registerCode" parameters:@{@"mobile": _phoneTextField.text} success:^(id reponse) {
         NSLog(@"reponse:%@", reponse);
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error:%@---%@", msg, error);
+        [MBProgressHUD showError:msg toView:self.view];
     }];
 
 }

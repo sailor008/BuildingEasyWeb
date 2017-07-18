@@ -33,6 +33,8 @@
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    _textField.borderStyle = UITextBorderStyleNone;
+    
     if (_obserTextField == NO) {
         [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         _obserTextField = YES;
