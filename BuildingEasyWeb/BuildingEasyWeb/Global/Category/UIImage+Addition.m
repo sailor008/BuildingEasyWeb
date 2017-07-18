@@ -51,4 +51,23 @@
     return newimage;
 }
 
++ (UIImage *)createImageWithColor:(UIColor *)color {
+    // 画布大小
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    // 在当前画布上开启绘图上下文
+    UIGraphicsBeginImageContext(rect.size);
+    // 画笔
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // 设置画笔颜色
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    // 填充画布
+    CGContextFillRect(context, rect);
+    // 取得画布中的图片
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 结束绘图上下文
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+
 @end

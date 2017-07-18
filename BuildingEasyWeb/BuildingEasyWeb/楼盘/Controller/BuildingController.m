@@ -70,7 +70,7 @@
     [self addTableViewRefresh];
     
     NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
-    if (phoneVersion.integerValue > 8) {
+    if (phoneVersion.integerValue > 9) {
         [MBProgressHUD showLoading];
     }
     if ([User shareUser].isLogin == NO) {

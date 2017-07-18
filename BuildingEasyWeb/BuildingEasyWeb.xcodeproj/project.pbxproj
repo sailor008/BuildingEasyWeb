@@ -24,6 +24,7 @@
 		C71749931F0905F40085E590 /* MyImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749921F0905F40085E590 /* MyImageHelper.m */; };
 		C71749971F09404D0085E590 /* CustomerStatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71749951F09404D0085E590 /* CustomerStatisticController.m */; };
 		C71749981F09404D0085E590 /* CustomerStatisticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71749961F09404D0085E590 /* CustomerStatisticController.xib */; };
+		C77B3EA81F1E501400166D60 /* UIButton+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C77B3EA71F1E501400166D60 /* UIButton+Addition.m */; };
 		C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F47E1EE9B9DD0067C07F /* MeCellBase.m */; };
 		C782F4811EE9B9DD0067C07F /* MeCellBase.xib in Resources */ = {isa = PBXBuildFile; fileRef = C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */; };
 		C782F4851EE9B9FC0067C07F /* MeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C782F4831EE9B9FC0067C07F /* MeController.m */; };
@@ -217,6 +218,8 @@
 		C71749941F09404D0085E590 /* CustomerStatisticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerStatisticController.h; sourceTree = "<group>"; };
 		C71749951F09404D0085E590 /* CustomerStatisticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerStatisticController.m; sourceTree = "<group>"; };
 		C71749961F09404D0085E590 /* CustomerStatisticController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomerStatisticController.xib; sourceTree = "<group>"; };
+		C77B3EA61F1E501300166D60 /* UIButton+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Addition.h"; sourceTree = "<group>"; };
+		C77B3EA71F1E501400166D60 /* UIButton+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Addition.m"; sourceTree = "<group>"; };
 		C782F47D1EE9B9DD0067C07F /* MeCellBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeCellBase.h; sourceTree = "<group>"; };
 		C782F47E1EE9B9DD0067C07F /* MeCellBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeCellBase.m; sourceTree = "<group>"; };
 		C782F47F1EE9B9DD0067C07F /* MeCellBase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeCellBase.xib; sourceTree = "<group>"; };
@@ -1027,6 +1030,8 @@
 				CF8F80941EF7D564009A6C3E /* NSDate+Addition.m */,
 				CF52681C1F054C5A00166E2F /* UIImage+Addition.h */,
 				CF52681D1F054C5A00166E2F /* UIImage+Addition.m */,
+				C77B3EA61F1E501300166D60 /* UIButton+Addition.h */,
+				C77B3EA71F1E501400166D60 /* UIButton+Addition.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1277,6 +1282,7 @@
 				CFDD36881EEBD87B007497AC /* AreaSectionFilterView.m in Sources */,
 				CF38943E1F11C49000BDA6E8 /* BEWAlertAction.m in Sources */,
 				CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */,
+				C77B3EA81F1E501400166D60 /* UIButton+Addition.m in Sources */,
 				CFEEC0241EE2BE5C00E1DB74 /* UITableView+Addition.m in Sources */,
 				CF0BE8531EFBFE360003DFC7 /* TextDetailController.m in Sources */,
 				CF99FBE91EF3BEB4001C8A9C /* BuildingDetailModel.m in Sources */,
@@ -1446,7 +1452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Li Li (UVKA39B4R2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ShenZhen CanPlay Technology Co., Ltd. (QD5JT3AFJU)";
 				DEVELOPMENT_TEAM = QD5JT3AFJU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1462,8 +1468,8 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23528375-a0cb-42f0-97a8-02bb1360aa1f";
-				PROVISIONING_PROFILE_SPECIFIER = louyi_developer;
+				PROVISIONING_PROFILE = "76c5da9f-8689-4258-ad4a-51eabf9c172c";
+				PROVISIONING_PROFILE_SPECIFIER = louyi_canplay_dis_prof;
 			};
 			name = Release;
 		};
