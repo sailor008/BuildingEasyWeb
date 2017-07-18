@@ -244,6 +244,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         return;
     }
     
+    _errorMsg = nil;
     [MBProgressHUD showLoadingToView:self.view];
     if (_isModify) {
         [self commitModifyBaobeiInfo];

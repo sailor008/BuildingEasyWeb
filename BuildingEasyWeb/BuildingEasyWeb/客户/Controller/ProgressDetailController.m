@@ -156,6 +156,10 @@ const NSInteger kCustomProgressLabelTag = 2000;
     [NetworkManager postWithUrl:@"wx/nextStep" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         
+        if (_delegate && [_delegate respondsToSelector:@selector(changeState)]) {
+            [_delegate changeState];
+        }
+        
         [self requestData];
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg toView:self.view];
@@ -265,15 +269,14 @@ const NSInteger kCustomProgressLabelTag = 2000;
         progressLabel.textColor = Hex(0x747474);
     }
     // 失效就全置灰
-    if (_detailModel.currentState == 6) {
-        return;
-    }
-    // 再设置
-    for (int i = 0; i <= _detailModel.currentState; i ++) {
-        UIImageView* progressImageView = [_progressView viewWithTag:i + kCustomProgressImageViewTag];
-        progressImageView.hidden = NO;
-        UILabel* progressLabel = [_progressView viewWithTag:i + kCustomProgressLabelTag];
-        progressLabel.textColor = Hex(0xff4c00);
+    if (_detailModel.currentState != 6) {
+        // 再设置
+        for (int i = 0; i <= _detailModel.currentState; i ++) {
+            UIImageView* progressImageView = [_progressView viewWithTag:i + kCustomProgressImageViewTag];
+            progressImageView.hidden = NO;
+            UILabel* progressLabel = [_progressView viewWithTag:i + kCustomProgressLabelTag];
+            progressLabel.textColor = Hex(0xff4c00);
+        }
     }
     
     _tableViewHeight.constant = 55 * _detailModel.stateList.count;

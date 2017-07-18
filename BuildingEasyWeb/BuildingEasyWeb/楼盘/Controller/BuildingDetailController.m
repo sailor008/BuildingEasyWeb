@@ -197,19 +197,18 @@
 - (IBAction)shareToWeChat:(UIButton *)sender
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareSuccess) name:kShareSuccess object:nil];
+
+    NSMutableString* desc = [NSMutableString string];
+    for (FormulaModel* model in _detail.formulaList) {
+        [desc appendFormat:@"%@,%@,%@,%@", model.apartment, model.formula, model.formulaDesc, model.buildDesc];
+    }
     
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.text = @"单纯分享文本";
-//    req.bText = YES;
-//    req.scene = WXSceneSession;
-//    
-//    [WXApi sendReq:req];
     WXWebpageObject *ext = [WXWebpageObject object];
     ext.webpageUrl = @"http://113.209.77.204:11072/building/dist/index.html";
     
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"标题";
-    message.description = @"描述";
+    message.title = _detail.buildInfo.name;
+    message.description = desc;
     message.mediaObject = ext;
     message.messageExt = nil;
     message.messageAction = nil;
@@ -218,7 +217,7 @@
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
-    req.scene = WXSceneSession;
+    req.scene = (int)(sender.tag - 1000);
     req.message = message;
     
     [WXApi sendReq:req];
@@ -284,10 +283,10 @@
     _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
     [_formulaTableView reloadData];
     
-//    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
-//    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
-    _typeDetailLabel.text = [_detail.buildInfo.houseType deleteHTMLLabel];
-    _sellDetaillabel.text = [_detail.buildInfo.sellingPoint deleteHTMLLabel];
+    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
+    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
+//    _typeDetailLabel.text = [_detail.buildInfo.houseType deleteHTMLLabel];
+//    _sellDetaillabel.text = [_detail.buildInfo.sellingPoint deleteHTMLLabel];
     [self analysisBaseInfoArray];
 }
 // 解析基本信息

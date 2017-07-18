@@ -52,7 +52,7 @@
         self.window.rootViewController = naviVC;
     }
     
-    [WXApi registerApp:@"wx393b4a816ff23299"];
+    [WXApi registerApp:@"wx4f0ba7492358c672"];
     
     [self.window makeKeyAndVisible];
     

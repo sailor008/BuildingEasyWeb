@@ -28,6 +28,12 @@
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    _idCardTextField.borderStyle = UITextBorderStyleNone;
+    _nameTextField.borderStyle = UITextBorderStyleNone;
+    _phoneTextField.borderStyle = UITextBorderStyleNone;
+    _clientTextField.borderStyle = UITextBorderStyleNone;
+    _clientIdcardTextField.borderStyle = UITextBorderStyleNone;
+    
     if (_obserTextField == NO) {
         [_idCardTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         [_nameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];

@@ -74,7 +74,6 @@
             
         }];
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"error:%@---%@", msg, error);
         [MBProgressHUD showError:msg toView:self.view];
     }];
 
