@@ -69,7 +69,7 @@
     [NetworkManager postWithUrl:@"wx/registerCode" parameters:@{@"mobile": _phoneTextField.text} success:^(id reponse) {
         NSLog(@"reponse:%@", reponse);
     
-        //注意：在xib中把代码的类型改为 custom（UIButtonTypeCustom），否则倒计时会闪烁！！！
+        //注意：在xib中把代码的类型改为 custom（UIButtonTypeCustom），否则倒计时会闪烁！而且需要把按钮的宽、高，固定一下，不然会出现背景图的大小 在button标题改变时不一致！！！
         [_countdownButton countDownFromTime:60 completion:^(UIButton *btn) {
             
         }];
