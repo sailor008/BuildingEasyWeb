@@ -18,6 +18,7 @@
 
 @property (nonatomic, weak) id<EditMyInfoDelegate> delegate;
 
+@property (nonatomic, copy) NSString* originalText;
 
 - (void)onBtnEnsure:(id)sender;
 

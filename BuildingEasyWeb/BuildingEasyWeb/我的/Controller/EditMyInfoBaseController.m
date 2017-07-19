@@ -22,6 +22,10 @@
     _btnEnsure.layer.masksToBounds = YES;
     _btnEnsure.layer.cornerRadius = 2.5f;
     [_btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _txtEdit.borderStyle = UITextBorderStyleNone;
+    
+    _txtEdit.text = _originalText;
 }
 
 - (void)didReceiveMemoryWarning {

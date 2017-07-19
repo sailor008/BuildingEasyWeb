@@ -236,6 +236,8 @@ typedef void (^onTabVCell)(void);
     EditMyEmailController* editEmailVC = [[EditMyEmailController alloc] init];
     editEmailVC.delegate = self;
     editEmailVC.hidesBottomBarWhenPushed = YES;
+    editEmailVC.title = @"修改邮箱";
+    editEmailVC.originalText = [User shareUser].email;
     [self.navigationController pushViewController:editEmailVC animated:YES];
 };
 
@@ -243,6 +245,8 @@ typedef void (^onTabVCell)(void);
     EditMyNameController* editNameVC = [[EditMyNameController alloc] init];
     editNameVC.delegate = self;
     editNameVC.hidesBottomBarWhenPushed = YES;
+    editNameVC.title = @"修改名字";
+    editNameVC.originalText = [User shareUser].name;
     [self.navigationController pushViewController:editNameVC animated:YES];
 };
 
@@ -250,6 +254,8 @@ typedef void (^onTabVCell)(void);
     EditMyNickNameController* editNickNameVC = [[EditMyNickNameController alloc] init];
     editNickNameVC.delegate = self;
     editNickNameVC.hidesBottomBarWhenPushed = YES;
+    editNickNameVC.title = @"修改昵称";
+    editNickNameVC.originalText = [User shareUser].nickName;
     [self.navigationController pushViewController:editNickNameVC animated:YES];
 };
 
