@@ -43,6 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"认证";
+    
     _tmpUploadArray = [[NSMutableArray alloc]init];
     
     [_tableView registerNibWithName:@"EditTxtTVCell"];
