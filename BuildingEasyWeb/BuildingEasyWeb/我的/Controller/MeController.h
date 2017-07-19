@@ -10,4 +10,7 @@
 
 @interface MeController : BaseController
 
+
+- (void)updateMsgState;
+
 @end

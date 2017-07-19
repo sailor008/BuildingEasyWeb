@@ -25,7 +25,9 @@
 
 @property (nonatomic, assign) BOOL isLogin;
 
-@property (nonatomic, copy) NSString* messageId;// 最大消息id
+@property (nonatomic, copy) NSString* messageId;// 当前已获取到数据的消息id
+@property (nonatomic, assign) NSUInteger maxMsgId;// 最大消息id
+
 
 // 辅助使用，因为多个地方要用到，但不做本地归档
 @property (nonatomic, copy) NSString* city;
