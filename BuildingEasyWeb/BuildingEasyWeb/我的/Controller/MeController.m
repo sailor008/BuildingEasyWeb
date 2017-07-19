@@ -303,29 +303,10 @@ typedef void (^onTabVCell)(void);
 
 - (void)pushToStatisticVC:(NSInteger)stateVal
 {
-    [MBProgressHUD showLoading];
-    [NetworkManager postWithUrl:@"wx/getStateNumList" parameters:@{} success:^(id reponse) {
-        NSLog(@"Success：获取统计筛选条件 [wx/getStateNumList] 成功！");
-        NSArray* tmpArray = (NSArray *)reponse;
-        NSMutableArray* statelist = [NSMutableArray array];
-        [statelist removeAllObjects];
-        for (NSDictionary* dic in tmpArray) {
-            StatisticStateModel *model = [StatisticStateModel mj_objectWithKeyValues:dic];
-            [statelist addObject:model];
-        }
-        
-        [MBProgressHUD hideHUD];
-        CustomerStatisticController* customerStatisticVC = [[CustomerStatisticController alloc]init];
-        customerStatisticVC.hidesBottomBarWhenPushed = YES;
-        customerStatisticVC.stateList = statelist;
-        customerStatisticVC.initState = stateVal;
-        [self.navigationController pushViewController:customerStatisticVC animated:YES];
-        
-    } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"Error：获取统计筛选条件 [wx/getStateNumList] 失败。detail：%@", msg);
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:msg];
-    }];
+    CustomerStatisticController* customerStatisticVC = [[CustomerStatisticController alloc]init];
+    customerStatisticVC.hidesBottomBarWhenPushed = YES;
+    customerStatisticVC.initState = stateVal;
+    [self.navigationController pushViewController:customerStatisticVC animated:YES];
 }
 
 

@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) StatusListView* statusListView;
 
+@property (nonatomic, strong)NSArray* stateList;
 @property (nonatomic, strong) NSMutableArray* baobeiInfoArr;
 @property (nonatomic, assign) const float cellHeight;
 @property (nonatomic, copy) StatisticStateModel* nowStateModel;
@@ -48,11 +49,13 @@
     _searchTxtField.returnKeyType = UIReturnKeySearch;
     _searchTxtField.delegate = self;
     
-    [self setupProperty];
-    [self addTableViewRefresh];
-    [_tableview.mj_header beginRefreshing];
-
-    [self initBtnNavTitle];
+    [self requestStateList:^{
+        [self setupProperty];
+        [self addTableViewRefresh];
+        [_tableview.mj_header beginRefreshing];
+        
+        [self initBtnNavTitle];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +72,34 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)requestStateList:(Callback)reqSuccessCallback
+{
+    [MBProgressHUD showLoading];
+    [NetworkManager postWithUrl:@"wx/getStateNumList" parameters:@{} success:^(id reponse) {
+        NSLog(@"Success：获取统计筛选条件 [wx/getStateNumList] 成功！");
+        NSArray* tmpArray = (NSArray *)reponse;
+        NSMutableArray* statelist = [NSMutableArray array];
+        [statelist removeAllObjects];
+        for (NSDictionary* dic in tmpArray) {
+            StatisticStateModel *model = [StatisticStateModel mj_objectWithKeyValues:dic];
+            [statelist addObject:model];
+        }
+        
+        [MBProgressHUD hideHUD];
+        _stateList = statelist;
+        
+        if(reqSuccessCallback) {
+            reqSuccessCallback();
+        }
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"Error：获取统计筛选条件 [wx/getStateNumList] 失败。detail：%@", msg);
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:msg];
+    }];
+    
+}
 
 - (void)initBtnNavTitle
 {
