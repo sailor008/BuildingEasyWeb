@@ -68,6 +68,7 @@
 {
     _showImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0.5*(ScreenHeight - ScreenWidth), ScreenWidth, ScreenWidth)];
     _showImgView.image = oriImg;
+    _showImgView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:_showImgView];
     
     

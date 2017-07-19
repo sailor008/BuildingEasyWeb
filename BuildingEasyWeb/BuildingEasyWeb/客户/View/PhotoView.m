@@ -213,7 +213,13 @@
 #pragma mark PhotoCellDelegate
 - (void)deleteImageWithIndex:(NSInteger)index
 {
-    [_photoArray removeObjectAtIndex:index];
+    if (_imageCount == _limitNum) {
+        [_photoArray removeObjectAtIndex:index];
+        [_photoArray addObject:GetIMAGE(@"图片.png")];
+    } else {
+        [_photoArray removeObjectAtIndex:index];
+    }
+    
     --_imageCount;
     [_collectionView reloadData];
 }

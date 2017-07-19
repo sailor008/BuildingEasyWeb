@@ -26,7 +26,7 @@
 #import "NSString+Addition.h"
 #import "NSDate+Addition.h"
 #import "MapLocationController.h"
-
+#import "User.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -204,7 +204,9 @@
     }
     
     WXWebpageObject *ext = [WXWebpageObject object];
-    ext.webpageUrl = @"http://113.209.77.204:11072/building/dist/index.html";
+//    ext.webpageUrl = @"http://113.209.77.204:11072/building/dist/index.html";
+    NSString* shareUrlStr = [NSString stringWithFormat:@"http://113.209.77.204:11072/index.html?userId=%@&buildId=%@", [User shareUser].userId, _buildId];
+    ext.webpageUrl = shareUrlStr;
     
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = _detail.buildInfo.name;

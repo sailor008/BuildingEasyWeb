@@ -164,8 +164,8 @@
     _searchTxtField.text = @"";
     _nowStateModel = model;
     [self updateBtnNavTitle];
-    
-    [_baobeiInfoArr removeAllObjects];
+#warning 不要先清空数组内容再beginRefreshing，否则当tableview有被滑动过，这个操作顺序会触发到重用方法，带来crash
+//    [_baobeiInfoArr removeAllObjects];
     [_tableview.mj_header beginRefreshing];
 }
 
@@ -223,6 +223,10 @@
                                  };
     [NetworkManager postWithUrl:@"wx/getCustomerInfoByState" parameters:parameters success:^(id reponse) {
 //        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
+        if (_tableview.page == 1) {
+            [_baobeiInfoArr removeAllObjects];
+        }
+        
         NSArray* tmpArray = (NSArray *)reponse;
         NSInteger startIdx = (_tableview.page - 1) * pageSize;
         for (NSDictionary* dic in tmpArray) {
@@ -256,7 +260,7 @@
 {
 //    _isSearch = textField.text.length > 0;
 //    if (textField.text.length) {
-        [_baobeiInfoArr removeAllObjects];
+//        [_baobeiInfoArr removeAllObjects];
         [_tableview.mj_header beginRefreshing];
 //    }
 }
@@ -265,7 +269,7 @@
     //收起键盘
     [_searchTxtField resignFirstResponder];
     //刷新列表
-    [_baobeiInfoArr removeAllObjects];
+//    [_baobeiInfoArr removeAllObjects];
     [_tableview.mj_header beginRefreshing];
     return YES;
 }
