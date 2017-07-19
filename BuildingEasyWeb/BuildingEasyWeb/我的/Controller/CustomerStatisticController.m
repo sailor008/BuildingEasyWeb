@@ -33,7 +33,7 @@
 @property (nonatomic, assign) const float cellHeight;
 @property (nonatomic, copy) StatisticStateModel* nowStateModel;
 
-@property (nonatomic, assign) BOOL isSearch;
+@property (nonatomic, copy) NSString* preSearchStr;
 
 
 @end
@@ -45,7 +45,7 @@
     // Do any additional setup after loading the view from its nib.
     
 //    [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    [_searchTxtField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingDidEnd];
+    [_searchTxtField addTarget:self action:@selector(textFieldDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
     _searchTxtField.returnKeyType = UIReturnKeySearch;
     _searchTxtField.delegate = self;
     
@@ -210,11 +210,8 @@
 #pragma mark Request - 网络请求
 - (void)requestData
 {
-//    NSString* searchStr = _searchBar.text;
+//    NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
     NSString* searchStr = _searchTxtField.text;
-    NSLog(@"当前搜索的关键词是：%@", searchStr);
-    NSLog(@">>>>>>>>>>>>>>>>>tableview.page = %ld", (long)_tableview.page);
-
     const NSInteger pageSize = 10;
     NSDictionary* parameters = @{@"pageNo":@(_tableview.page),
                                  @"pageSize":@(pageSize),
@@ -223,6 +220,8 @@
                                  };
     [NetworkManager postWithUrl:@"wx/getCustomerInfoByState" parameters:parameters success:^(id reponse) {
 //        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
+        //缓存最后一次搜索词语
+        _preSearchStr = searchStr;
         if (_tableview.page == 1) {
             [_baobeiInfoArr removeAllObjects];
         }
@@ -256,20 +255,15 @@
 }
 
 #pragma mark Action
-- (void)textFieldDidChange:(UITextField *)textField
+- (void)textFieldDidEnd:(UITextField *)textField
 {
-//    _isSearch = textField.text.length > 0;
-//    if (textField.text.length) {
-//        [_baobeiInfoArr removeAllObjects];
-        [_tableview.mj_header beginRefreshing];
-//    }
+    [_tableview.mj_header beginRefreshing];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     //收起键盘
     [_searchTxtField resignFirstResponder];
     //刷新列表
-//    [_baobeiInfoArr removeAllObjects];
     [_tableview.mj_header beginRefreshing];
     return YES;
 }
