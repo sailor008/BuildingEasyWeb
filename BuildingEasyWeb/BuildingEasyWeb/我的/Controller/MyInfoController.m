@@ -270,6 +270,7 @@ typedef void (^onTabVCell)(void);
         
         AuthIdentityController* authVC = [[AuthIdentityController alloc]init];
         authVC.hidesBottomBarWhenPushed = YES;
+        authVC.title = @"认证";
         authVC.userExtModel = model;
         [self.navigationController pushViewController:authVC animated:YES];
     } failure:^(NSError *error, NSString *msg) {
