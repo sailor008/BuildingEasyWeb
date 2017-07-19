@@ -33,6 +33,8 @@
     // Do any additional setup after loading the view from its nib.
     _btnEnsure.layer.masksToBounds = YES;
     _btnEnsure.layer.cornerRadius = 2.5f;
+    
+    self.title = @"修改密码";
 }
 
 - (void)didReceiveMemoryWarning {
