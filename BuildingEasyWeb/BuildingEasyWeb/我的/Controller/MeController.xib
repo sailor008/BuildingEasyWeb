@@ -20,9 +20,6 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fUw-BI-CSP">
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="667" id="Blf-tG-BtB"/>
-                    </constraints>
                     <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
@@ -33,9 +30,10 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fUw-BI-CSP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="47d-w6-tLl"/>
-                <constraint firstItem="fUw-BI-CSP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jci-a8-n7N"/>
-                <constraint firstAttribute="trailing" secondItem="fUw-BI-CSP" secondAttribute="trailing" id="u4n-sa-r8o"/>
+                <constraint firstItem="fUw-BI-CSP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1RJ-21-DSv"/>
+                <constraint firstAttribute="trailing" secondItem="fUw-BI-CSP" secondAttribute="trailing" id="AMm-O8-wQX"/>
+                <constraint firstAttribute="bottom" secondItem="fUw-BI-CSP" secondAttribute="bottom" id="Bzx-m0-wAJ"/>
+                <constraint firstItem="fUw-BI-CSP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NMh-uy-MnN"/>
             </constraints>
             <point key="canvasLocation" x="43" y="98"/>
         </view>
