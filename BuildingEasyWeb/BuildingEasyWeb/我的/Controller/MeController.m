@@ -62,13 +62,6 @@ typedef void (^onTabVCell)(void);
     
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self requestMaxMsgId];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -84,24 +77,18 @@ typedef void (^onTabVCell)(void);
  }
  */
 
-- (void)requestMaxMsgId
+- (void)viewWillAppear:(BOOL)animated
 {
-    [MBProgressHUD showLoading];
-    [NetworkManager postWithUrl:@"wx/getUserMaxMessageId" parameters:@{} success:^(id reponse) {
-//        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
-        [MBProgressHUD hideHUD];
-        _maxMsgId = [[reponse objectForKey:@"messageId"] integerValue];
-        NSLog(@">>>>>>>>>>>>>>>用户消息最大的id = %li", _maxMsgId);
-        
-        if (_maxMsgId > [[User shareUser].messageId integerValue]) {
-            _redHintView.hidden = NO;
-        } else {
-            _redHintView.hidden = YES;
-        }
-    } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showError:msg];
-    }];
+    [self updateMsgState];
+}
+
+- (void)updateMsgState
+{
+    if ([User shareUser].maxMsgId > [[User shareUser].messageId integerValue]) {
+        _redHintView.hidden = NO;
+    } else {
+        _redHintView.hidden = YES;
+    }
 }
 
 - (void)initViewCfg {

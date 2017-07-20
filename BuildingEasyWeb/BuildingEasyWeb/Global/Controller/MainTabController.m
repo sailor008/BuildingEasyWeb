@@ -8,6 +8,8 @@
 
 #import "MainTabController.h"
 
+#import "UIView+MBProgressHUD.h"
+
 #import "BuildingController.h"
 #import "MeController.h"
 #import "CustomerListController.h"
@@ -15,7 +17,10 @@
 #import "LoginManager.h"
 #import "User.h"
 
-@interface MainTabController ()
+
+@interface MainTabController ()<UITabBarControllerDelegate>
+
+@property (nonatomic, assign) NSUInteger selectedIdx;
 
 @end
 
@@ -23,6 +28,9 @@
 
 - (void)setupControllers
 {
+    _selectedIdx = 0;
+    self.delegate = self;
+
     BuildingController* buildingVC = [[BuildingController alloc] init];
     buildingVC.title = @"楼盘";
     UINavigationController* buildingNaVC = [[UINavigationController alloc] initWithRootViewController:buildingVC];
@@ -57,6 +65,31 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    if(_selectedIdx == tabBarController.selectedIndex){
+        return;
+    }
+    _selectedIdx = tabBarController.selectedIndex;
+    
+    if (_selectedIdx == 2) {
+        //我的 个人信息主界面
+        [MBProgressHUD showLoading];
+        [NetworkManager postWithUrl:@"wx/getUserMaxMessageId" parameters:@{} success:^(id reponse) {
+            [MBProgressHUD hideHUD];
+            NSUInteger maxMsgId = [[reponse objectForKey:@"messageId"] integerValue];
+            [User shareUser].maxMsgId = maxMsgId;
+            
+            UINavigationController* meNaVC = (UINavigationController*)viewController;
+            MeController* meVC = (MeController*)meNaVC.topViewController;
+            [meVC updateMsgState];
+        } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:msg];
+        }];
+    }
 }
 
 @end
