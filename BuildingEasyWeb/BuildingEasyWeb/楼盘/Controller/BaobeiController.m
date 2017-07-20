@@ -297,10 +297,11 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     BuildAdviserView* adviserView = [[[NSBundle mainBundle] loadNibNamed:@"BuildAdviserView" owner:nil options:nil] lastObject];
     adviserView.frame = self.view.bounds;
     adviserView.delegate = self;
-    [self.view addSubview:adviserView];
 
     _selectedModel = _bulidList[index];
     adviserView.model = _selectedModel;
+    
+    [self.view addSubview:adviserView];
 }
 
 #pragma mark BuildAdviserViewDelegate
