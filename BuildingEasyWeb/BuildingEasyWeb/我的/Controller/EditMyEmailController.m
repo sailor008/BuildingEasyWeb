@@ -50,7 +50,6 @@
 
 - (void)onBtnEnsure:(id)sender{
     [super onBtnEnsure:sender];
-    NSLog(@"邮箱的内容：%@", self.txtEdit.text);
     
     NSString* emailVal = self.txtEdit.text;
     if([self isValidateEmail: emailVal]) {

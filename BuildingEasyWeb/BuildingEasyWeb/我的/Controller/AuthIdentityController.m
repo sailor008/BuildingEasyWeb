@@ -113,7 +113,7 @@
         photoview.frame = CGRectMake(0, 0, ScreenWidth, 60);
         NSString* initPath = [cfgInfo objectForKey:@"imgPath"];
         if(initPath.length) {
-            NSLog(@"photoView 的初始图片：%@", initPath);
+//            NSLog(@"photoView 的初始图片：%@", initPath);
             photoview.sourceUrlArray = [NSArray arrayWithObject:initPath];
         }
         if([[User shareUser].auth integerValue] == 1) {
@@ -215,9 +215,9 @@
             PickPhotoView* view = _tmpUploadArray[i];
             UIImage* image = view.resultArray[0];
             NSString* imgTag = [NSString stringWithFormat:@"%li", (long)view.tag];
-            NSLog(@"上传图片：tag = %@", imgTag);
+//            NSLog(@"上传图片：tag = %@", imgTag);
             [UploadImageManager uploadImage:image type:imgTag imageKey:^(NSString *quReturnImgkey) {
-                NSLog(@"quReturnImgkey = %@", quReturnImgkey);
+//                NSLog(@"quReturnImgkey = %@", quReturnImgkey);
                 
                 [NetworkManager postWithUrl:@"wx/uploadAuthImg" parameters:@{@"type":imgTag, @"resourceKey":quReturnImgkey} success:^(id reponse) {
                     

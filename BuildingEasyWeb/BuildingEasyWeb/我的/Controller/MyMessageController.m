@@ -87,8 +87,7 @@
                                  @"pageSize":@(pageSize),
                                  };
     [NetworkManager postWithUrl:@"wx/getUserMessageList" parameters:parameters success:^(id reponse) {
-//        NSLog(@"Success：获取用户消息列表 [wx/getUserMessageList] 成功！");
-//        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
+//        NSLog(@"Success：获取用户消息列表>>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
         NSArray* tmpArray = (NSArray *)reponse;
         NSInteger startIdx = (_tableview.page - 1) * pageSize;
         for (NSDictionary* dic in tmpArray) {
@@ -103,8 +102,8 @@
             ////下滑列表时，指定页数
             _tableview.page = (NSInteger)ceil(_msgDataArr.count / pageSize);
         }
-        NSLog(@"当前获取到的最大信息id = %lu", (unsigned long)_nowMaxMsgId);
-        [User shareUser].messageId = [NSString stringWithFormat:@"%li", _nowMaxMsgId];
+//        NSLog(@"当前获取到的最大信息id = %lu", (unsigned long)_nowMaxMsgId);
+        [User shareUser].messageId = [NSString stringWithFormat:@"%lu", (unsigned long)_nowMaxMsgId];
         [[User shareUser] saveUserInfoToFile];
 
         if(_nowMaxMsgId < self.maxMsgId) {

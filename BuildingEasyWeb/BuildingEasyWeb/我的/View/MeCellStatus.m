@@ -68,7 +68,6 @@
 
 -(void)onCellClick:(NSUInteger)cellTag
 {
-//    NSLog(@">>>>>>>>>>> btnTag = %li", cellTag);
     _clickCB(cellTag);
 }
 

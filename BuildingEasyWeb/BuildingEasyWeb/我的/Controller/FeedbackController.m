@@ -73,7 +73,7 @@
 - (void)onBtnSubmit:(UIButton*) btn {
     NSString* contentStr = _txtContent.text;
     if(contentStr.length > 0) {
-        NSLog(@"输入的字符长度：%ld", contentStr.length);
+//        NSLog(@"输入的字符长度：%ld", contentStr.length);
         if ([[contentStr  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0) {
             //输入的内容全是空格！不访问网络
             [MBProgressHUD dissmissWithError:@"输入的内容有误！"];
