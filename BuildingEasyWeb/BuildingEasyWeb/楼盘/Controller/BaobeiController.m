@@ -196,6 +196,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (IBAction)continuRecommend:(id)sender
 {
+    [MBProgressHUD hideHUDForView:self.view];
     [_successView removeFromSuperview];
     
     // 当前界面清空使用
@@ -297,7 +298,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     adviserView.frame = self.view.bounds;
     adviserView.delegate = self;
     [self.view addSubview:adviserView];
-    
+
     _selectedModel = _bulidList[index];
     adviserView.model = _selectedModel;
 }
@@ -390,7 +391,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     
     [NetworkManager postWithUrl:@"wx/addCustomer" parameters:parameters success:^(id reponse) {
         _tempIndex++;
-        [self baobei];
+        [self commitBaobeiNewCustomer];
         
     } failure:^(NSError *error, NSString *msg) {
         _tempIndex++;

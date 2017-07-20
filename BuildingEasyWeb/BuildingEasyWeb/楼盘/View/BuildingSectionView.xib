@@ -231,6 +231,12 @@
                 <constraint firstAttribute="bottom" secondItem="fbG-NI-urk" secondAttribute="bottom" id="V34-R7-s6c"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="buttonArray" destination="Rw0-gA-dWs" id="cCM-el-Y2Z"/>
+                <outletCollection property="buttonArray" destination="Ddd-ZO-4kG" id="1lI-or-3mz"/>
+                <outletCollection property="buttonArray" destination="283-rB-q5s" id="q4Y-Zu-Q52"/>
+                <outletCollection property="buttonArray" destination="6a0-Pp-pBF" id="nKe-m6-abs"/>
+            </connections>
             <point key="canvasLocation" x="34.5" y="39"/>
         </view>
     </objects>

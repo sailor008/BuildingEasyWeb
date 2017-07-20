@@ -21,6 +21,9 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 @property (nonatomic, assign) NSInteger currentButtonTag;
 @property (nonatomic, strong) UIButton* currentButton;
 
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttonArray;
+
+
 @end
 
 @implementation BuildingSectionView
@@ -49,6 +52,12 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
     
     CGFloat filterY = sectionY + self.bounds.size.height + tableView.frame.origin.y;
     
+    // 已经添加到tableView，并且已经展开（height > 0），直接刷新数据
+    if (_filterTableView.height > 0 && _filterTableView.superview) {
+        [_filterTableView reloadData];
+        return;
+    }
+    
     _filterTableView.frame = CGRectMake(0, filterY, [UIScreen mainScreen].bounds.size.width, 0);
     if (!_filterTableView.superview) {
         [tableView addSubview:_filterTableView];
@@ -66,6 +75,12 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 - (IBAction)tapButtonToShowHideFilter:(UIButton *)sender
 {
     _currentButton = sender;
+    // 清空其他按钮状态
+    for (UIButton* button in _buttonArray) {
+        if (button != sender) {
+            button.selected = NO;
+        }
+    }
     sender.selected = !sender.isSelected;
     
     UITableView* tableView = (UITableView *)self.superview;

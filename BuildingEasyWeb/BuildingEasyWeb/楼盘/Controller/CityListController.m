@@ -45,6 +45,7 @@
     _cityList = [NSMutableArray array];
     _searchList = [NSMutableArray array];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"CityCell"];
+    _tableView.sectionIndexColor = Hex(0xff4c00);
 }
 
 - (void)viewDidAppear:(BOOL)animated

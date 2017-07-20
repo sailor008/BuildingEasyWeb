@@ -563,9 +563,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCq-M9-13z">
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCq-M9-13z">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7Y-bX-jkR">
@@ -690,7 +689,11 @@
             <constraints>
                 <constraint firstItem="w7Y-bX-jkR" firstAttribute="leading" secondItem="tc3-eP-sjh" secondAttribute="leading" constant="50" id="6Og-a9-rJ9"/>
                 <constraint firstItem="w7Y-bX-jkR" firstAttribute="centerY" secondItem="tc3-eP-sjh" secondAttribute="centerY" id="OqI-wK-u9y"/>
+                <constraint firstAttribute="trailing" secondItem="oCq-M9-13z" secondAttribute="trailing" id="XfQ-sJ-nQo"/>
                 <constraint firstAttribute="trailing" secondItem="w7Y-bX-jkR" secondAttribute="trailing" constant="50" id="cSD-Wd-acf"/>
+                <constraint firstItem="oCq-M9-13z" firstAttribute="top" secondItem="tc3-eP-sjh" secondAttribute="top" id="goS-0X-sZi"/>
+                <constraint firstAttribute="bottom" secondItem="oCq-M9-13z" secondAttribute="bottom" id="nv9-A6-7hf"/>
+                <constraint firstItem="oCq-M9-13z" firstAttribute="leading" secondItem="tc3-eP-sjh" secondAttribute="leading" id="uHH-Td-dWV"/>
             </constraints>
             <point key="canvasLocation" x="491.5" y="-1114.5"/>
         </view>

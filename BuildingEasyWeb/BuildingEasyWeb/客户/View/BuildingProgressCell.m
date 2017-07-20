@@ -55,7 +55,7 @@ const NSInteger kProgressLabelTag = 2000;
         case 0:
             _intendImageView.image = GetIMAGE(@"强.png");
             break;
-        case 2:
+        case 1:
             _intendImageView.image = GetIMAGE(@"中.png");
             break;
         default:
