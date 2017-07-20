@@ -262,8 +262,7 @@ typedef void (^onTabVCell)(void);
 - (void)onAuthentication {
     [MBProgressHUD showLoading];
     [NetworkManager postWithUrl:@"wx/getUserOtherInfo" parameters:@{} success:^(id reponse) {
-        NSLog(@"Success：获取已填写的认证信息 [wx/getUserOtherInfo] 成功！");
-//        NSLog(@"reponse : %@", reponse);
+//        NSLog(@"Success：获取已填写的认证信息成功！reponse: %@",reponse);
         [MBProgressHUD hideHUD];
         NSDictionary* tmpDic = (NSDictionary*)reponse;
         UserExtInfoModel *model = [UserExtInfoModel mj_objectWithKeyValues:tmpDic];
@@ -274,8 +273,9 @@ typedef void (^onTabVCell)(void);
         authVC.userExtModel = model;
         [self.navigationController pushViewController:authVC animated:YES];
     } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"Error：获取已填写的认证信息 [wx/getUserOtherInfo] 失败。detail：%@", msg);
+//        NSLog(@"Error：获取已填写的认证信息 [wx/getUserOtherInfo] 失败。detail：%@", msg);
         [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:msg];
     }];
 };
 
@@ -288,16 +288,13 @@ typedef void (^onTabVCell)(void);
 #pragma mark EditMyInfoDelegate
 - (void)finishEidtMyInfo:(NSString*)tag desc:(NSString*)descStr
 {
-    NSLog(@"finishEidtMyInfo : %@",descStr);
+//    NSLog(@"finishEidtMyInfo : %@",descStr);
     if([tag isEqualToString:@"wx/modifyUserEmail"]) {
         [User shareUser].email = descStr;
-        NSLog(@"邮箱：%@", [User shareUser].email);
     } else if([tag isEqualToString: @"wx/modifyUserNickName"]) {
         [User shareUser].nickName = descStr;
-        NSLog(@"昵称：%@", [User shareUser].nickName);
     } else if([tag isEqualToString: @"wx/modifyUserName"]) {
         [User shareUser].name = descStr;
-        NSLog(@"姓名：%@", [User shareUser].name);
 //        kWeakSelf(weakSelf);
         [self.delegate finishEidtMyInfo:@"wx/modifyUserName" desc:descStr];
     }
@@ -403,7 +400,7 @@ typedef void (^onTabVCell)(void);
     [UploadImageManager uploadImageFile: filePath type:@4 success:^(NSString* imgKey){
         NSDictionary* parameters = @{@"resourceKey": imgKey};
         [NetworkManager postWithUrl:@"wx/updateHeadImg" parameters:parameters success:^(id reponse) {
-            NSLog(@"Success:更新updateHeadImg 成功！");
+//            NSLog(@"Success:更新updateHeadImg 成功！");
             [MBProgressHUD hideHUD];
             callback();
         } failure:^(NSError *error, NSString *msg) {

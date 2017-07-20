@@ -149,15 +149,12 @@ typedef void (^onTabVCell)(void);
 #pragma mark EditMyInfoDelegate
 - (void)finishEidtMyInfo:(NSString*)tag desc:(NSString*)descStr
 {
-    NSLog(@"MeController>>>>> finishEidtMyInfo : %@", descStr);
+//    NSLog(@"MeController>>>>> finishEidtMyInfo : %@", descStr);
     MeCellInfo* cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSString* name = [User shareUser].name;
     NSString* mobile = [User shareUser].mobile;
     NSString* headImgUrl = [User shareUser].headImg;
     [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
-//    NSString* headImgUrl = @"";
-//    [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
-//    [cell setHeadImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:descStr]]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
