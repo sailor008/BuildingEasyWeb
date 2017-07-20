@@ -229,6 +229,7 @@
 {
     MapLocationController* locationVC = [[MapLocationController alloc]init];
     locationVC.locationName = _detail.buildInfo.area;
+    locationVC.title = _detail.buildInfo.name;
     [self.navigationController pushViewController:locationVC animated:YES];
     NSDictionary* pointInfo = @{@"longitude": _detail.buildInfo.longitude,
                                 @"latitude": _detail.buildInfo.latitude,

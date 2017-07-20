@@ -16,6 +16,8 @@ static NSString* const kBaobeiNewSuccess = @"BaobeiNewSuccess";
 
 static NSString* const kEditSuceess = @"EditSuceess";
 
+static NSString* const kBaobeiModifySuccess = @"BaobeiModifySuccess";
+
 typedef NS_ENUM(NSInteger, BEWUserRole) {
     kPersonRole = 0,
     kAgencyRole
