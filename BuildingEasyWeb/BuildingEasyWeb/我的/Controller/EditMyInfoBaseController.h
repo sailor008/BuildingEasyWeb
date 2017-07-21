@@ -19,6 +19,8 @@
 @property (nonatomic, weak) id<EditMyInfoDelegate> delegate;
 
 @property (nonatomic, copy) NSString* originalText;
+@property (nonatomic, assign) NSInteger txtLenLimit;//输入文本长度的上限值
+
 
 - (void)onBtnEnsure:(id)sender;
 

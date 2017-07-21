@@ -293,9 +293,11 @@ typedef void (^onTabVCell)(void);
         [User shareUser].email = descStr;
     } else if([tag isEqualToString: @"wx/modifyUserNickName"]) {
         [User shareUser].nickName = descStr;
+        //更新”我的“主界面 的昵称显示
+        [self.delegate finishEidtMyInfo:@"wx/modifyUserNickName" desc:descStr];
     } else if([tag isEqualToString: @"wx/modifyUserName"]) {
         [User shareUser].name = descStr;
-//        kWeakSelf(weakSelf);
+        //更新”我的“主界面 的姓名显示
         [self.delegate finishEidtMyInfo:@"wx/modifyUserName" desc:descStr];
     }
 

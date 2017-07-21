@@ -30,7 +30,8 @@
     
     self.titleLabel.text = @"邮箱:";
     self.txtEdit.placeholder = @"请输入";
-    
+    self.txtEdit.keyboardType = UIKeyboardTypeEmailAddress;
+    self.txtLenLimit = 30;
 }
 
 - (void)didReceiveMemoryWarning {

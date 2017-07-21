@@ -9,6 +9,7 @@
 
 #import "FeedbackController.h"
 
+#import "NSString+Addition.h"
 #import "NetworkManager.h"
 #import "UIView+MBProgressHUD.h"
 
@@ -74,9 +75,9 @@
     NSString* contentStr = _txtContent.text;
     if(contentStr.length > 0) {
 //        NSLog(@"输入的字符长度：%ld", contentStr.length);
-        if ([[contentStr  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0) {
+        if([contentStr isStringBlank]){
             //输入的内容全是空格！不访问网络
-            [MBProgressHUD dissmissWithError:@"输入的内容有误！"];
+            [MBProgressHUD dissmissWithError:@"请输入内容！"];
         } else {
             [NetworkManager postWithUrl:@"wx/feedBack" parameters:@{@"content": contentStr}success:^(id reponse) {
                 NSLog(@"反馈成功！！！response:%@", reponse);

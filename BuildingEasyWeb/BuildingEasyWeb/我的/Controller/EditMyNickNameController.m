@@ -7,6 +7,8 @@
 //
 
 #import "EditMyNickNameController.h"
+
+#import "NSString+Addition.h"
 #import "NetworkManager.h"
 #import "UIView+MBProgressHUD.h"
 
@@ -65,16 +67,16 @@
             [MBProgressHUD showError:msg];
         }];
     } else {
-        
+        [MBProgressHUD showError:@"请输入昵称！"];
     }
 }
 
 - (BOOL)isNickNameFormatVaild:(NSString*) txtVal
 {
-    if(txtVal.length){
-        return true;
-    } else {
+    if([txtVal isStringBlank]){
         return false;
+    } else {
+        return true;
     }
 }
 

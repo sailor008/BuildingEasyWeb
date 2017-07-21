@@ -105,6 +105,17 @@
     return [predicate evaluateWithObject:self];
 }
 
+- (BOOL)isStringBlank
+{
+    if(!self.length) {
+        return true;
+    }
+    if ([[self  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0) {
+        return true;
+    }
+    return false;
+}
+
 - (NSString *)deleteHTMLLabel
 {
     NSString* html = [self copy];

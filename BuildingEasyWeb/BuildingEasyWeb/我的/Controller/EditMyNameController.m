@@ -7,6 +7,8 @@
 //
 
 #import "EditMyNameController.h"
+
+#import "NSString+Addition.h"
 #import "NetworkManager.h"
 #import "UIView+MBProgressHUD.h"
 
@@ -51,6 +53,10 @@
     [super onBtnEnsure:sender];
     
     NSString* nameVal = self.txtEdit.text;
+    if ([nameVal isStringBlank]) {
+        [MBProgressHUD showError:@"请输入有效姓名！"];
+        return;
+    }
     [MBProgressHUD showLoading];
     NSDictionary* parameters = @{@"name": nameVal};
     [NetworkManager postWithUrl:@"wx/modifyUserName" parameters:parameters success:^(id reponse) {

@@ -20,6 +20,8 @@
 - (BOOL)isMobile;
 - (BOOL)isNumber;// 纯数字
 
+- (BOOL)isStringBlank;//字符串的内容是否为纯空格,或者字符内容为空
+
 - (NSString *)deleteHTMLLabel;// 去处html标签
 
 @end
