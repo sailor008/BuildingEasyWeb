@@ -53,13 +53,13 @@
 */
 - (IBAction)onBtnEnsure:(id)sender {
     BOOL isCanModify = true;
-    if (!_curPwd.text.length) {
+    if ([_curPwd.text isStringBlank]) {
         isCanModify = false;
         [MBProgressHUD showError:@"请输入密码" toView:self.view];
-    }else if (!_resetPwd.text.length) {
+    }else if ([_resetPwd.text isStringBlank]) {
         isCanModify = false;
         [MBProgressHUD showError:@"请输入新密码" toView:self.view];
-    }else if (!_ensurePwd.text.length) {
+    }else if ([_ensurePwd.text isStringBlank]) {
         isCanModify = false;
         [MBProgressHUD showError:@"请确认新密码" toView:self.view];
     }else if([_curPwd.text isEqualToString: _resetPwd.text]) {
@@ -67,7 +67,7 @@
         [MBProgressHUD showError:@"新密码与旧密码相同！" toView:self.view];
     }else if(![_resetPwd.text isEqualToString: _ensurePwd.text]) {
         isCanModify = false;
-        [MBProgressHUD showError:@"新密码不一致！" toView:self.view];
+        [MBProgressHUD showError:@"两次新密码输入不一致！" toView:self.view];
     }
     
     if(isCanModify) {

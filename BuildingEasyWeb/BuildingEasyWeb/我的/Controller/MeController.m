@@ -9,6 +9,7 @@
 #import "MeController.h"
 #import "UITableView+Addition.h"
 #import "UIView+MBProgressHUD.h"
+#import "NSString+Addition.h"
 
 #import "MeCellBase.h"
 #import "MeCellInfo.h"
@@ -152,6 +153,10 @@ typedef void (^onTabVCell)(void);
 //    NSLog(@"MeController>>>>> finishEidtMyInfo : %@", descStr);
     MeCellInfo* cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSString* name = [User shareUser].name;
+    if([name isStringBlank]) {
+        //姓名为空，则显示昵称
+        name = [User shareUser].nickName;
+    }
     NSString* mobile = [User shareUser].mobile;
     NSString* headImgUrl = [User shareUser].headImg;
     [cell updateWithData:name phone:mobile imgUrl:headImgUrl];
@@ -205,6 +210,10 @@ typedef void (^onTabVCell)(void);
     if(indexPath.section == 0) {
         MeCellInfo* cell = [tableView dequeueReusableCellWithIdentifier:@"MeCellInfo" forIndexPath:indexPath];
         NSString* name = [User shareUser].name;
+        if([name isStringBlank]) {
+            //姓名为空，则显示昵称
+            name = [User shareUser].nickName;
+        }
         NSString* mobile = [User shareUser].mobile;
         NSString* headImgUrl = [User shareUser].headImg;
         [cell updateWithData:name phone:mobile imgUrl:headImgUrl];

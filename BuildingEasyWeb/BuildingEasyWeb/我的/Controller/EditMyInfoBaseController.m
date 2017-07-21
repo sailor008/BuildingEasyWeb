@@ -9,7 +9,7 @@
 #import "EditMyInfoBaseController.h"
 
 
-@interface EditMyInfoBaseController ()
+@interface EditMyInfoBaseController ()<UITextFieldDelegate>
 
 
 @end
@@ -24,8 +24,10 @@
     [_btnEnsure addTarget:self action:@selector(onBtnEnsure:) forControlEvents:UIControlEventTouchUpInside];
     
     _txtEdit.borderStyle = UITextBorderStyleNone;
-    
+    _txtEdit.delegate = self;
     _txtEdit.text = _originalText;
+    _txtLenLimit = 18;
+    [_txtEdit addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,6 +44,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == _txtEdit) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > _txtLenLimit) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == _txtEdit) {
+        if (textField.text.length > _txtLenLimit) {
+            textField.text = [textField.text substringToIndex:_txtLenLimit];
+        }
+    }
+}
 
 - (void)onBtnEnsure:(id)sender{
         
