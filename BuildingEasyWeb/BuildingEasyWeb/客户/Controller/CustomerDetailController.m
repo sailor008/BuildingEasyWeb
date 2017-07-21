@@ -37,6 +37,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kEditSuceess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kBaobeiModifySuccess object:nil];
     
     _nameLabel.text = _customerName;
     _phoneLabel.text = _phone;
