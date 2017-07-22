@@ -62,6 +62,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
     // Do any additional setup after loading the view from its nib.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kEditSuceess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kBaobeiModifySuccess object:nil];
     
     _canLookDetail = YES;
     [_tableView registerNibWithName:@"ProgressCell"];
