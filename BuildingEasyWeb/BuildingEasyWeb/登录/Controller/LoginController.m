@@ -57,6 +57,10 @@
         [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
         return;
     }
+    if (![_phoneTextField.text isMobile]) {
+        [MBProgressHUD showError:@"手机号码格式错误" toView:self.view];
+        return;
+    }
     if (!_passWordTextField.text.length) {
         [MBProgressHUD showError:@"请填写密码" toView:self.view];
         return;
