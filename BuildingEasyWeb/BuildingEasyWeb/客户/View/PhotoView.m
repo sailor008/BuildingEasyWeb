@@ -51,6 +51,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
     [_collectionView registerNib:[UINib nibWithNibName:@"PhotoCell" bundle:nil] forCellWithReuseIdentifier:@"PhotoCell"];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
@@ -83,6 +84,19 @@
 {
     _sectionTitle = sectionTitle;
     _photoTitleLabel.text = sectionTitle;
+    
+//    UILabel* tempLabel = [[UILabel alloc] init];
+//    tempLabel.font = [UIFont systemFontOfSize:15];
+//    tempLabel.text = sectionTitle;
+//    [tempLabel sizeToFit];
+//    
+//    CGFloat itemSize = (ScreenWidth - tempLabel.bounds.size.width - 30 - 13 * 2) / 3;
+//    UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc]init];
+//    layout.minimumInteritemSpacing = 13;
+//    layout.minimumLineSpacing = 13;
+//    layout.itemSize = CGSizeMake(itemSize, itemSize);
+//    
+//    _collectionView.collectionViewLayout = layout;
 }
 
 - (void)setSourceUrlArray:(NSArray *)sourceArray

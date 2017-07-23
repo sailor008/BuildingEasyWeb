@@ -179,7 +179,7 @@ typedef void (^onTabVCell)(void);
     NSString* const cellid = @"cell";
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellid];
     if(cell == nil){
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellid];
         cell.textLabel.font = [UIFont systemFontOfSize: 15.0f];
         cell.textLabel.text = _aryCellTitle[indexPath.section][indexPath.row];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0f];

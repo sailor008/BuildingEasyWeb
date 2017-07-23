@@ -80,8 +80,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     
     if (_baobeiModel) {
         [self selectBuildingResult:@[_baobeiModel.buildModel]];
-        _addButton.hidden = YES;
-        _canDeleteCell = NO;
+//        _addButton.hidden = YES;
+//        _canDeleteCell = NO;
     }
 }
 

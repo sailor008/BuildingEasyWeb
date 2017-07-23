@@ -19,44 +19,44 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区域" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u6-Fx-h79">
-                        <rect key="frame" x="0.0" y="0.0" width="52" height="39.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="62" height="39.5"/>
                         <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="52" id="oFA-7f-ckl"/>
+                            <constraint firstAttribute="width" constant="62" id="oFA-7f-ckl"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区域" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbe-QT-mjJ">
-                        <rect key="frame" x="52" y="0.0" width="113" height="39.5"/>
+                        <rect key="frame" x="62" y="0.0" width="103" height="39.5"/>
                         <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="113" id="1AV-SL-RsS"/>
+                            <constraint firstAttribute="width" constant="103" id="1AV-SL-RsS"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区域" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKZ-uc-NUg">
-                        <rect key="frame" x="165" y="0.0" width="52" height="39.5"/>
+                        <rect key="frame" x="165" y="0.0" width="62" height="39.5"/>
                         <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="52" id="K4c-83-qbK"/>
+                            <constraint firstAttribute="width" constant="62" id="K4c-83-qbK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区域" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6L-cD-YGD">
-                        <rect key="frame" x="217" y="0.0" width="103" height="39.5"/>
+                        <rect key="frame" x="227" y="0.0" width="93" height="39.5"/>
                         <color key="backgroundColor" red="1" green="0.93333333330000001" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kt5-bN-WNU" userLabel="分隔线">
-                        <rect key="frame" x="52" y="0.0" width="1" height="39.5"/>
+                        <rect key="frame" x="62" y="0.0" width="1" height="39.5"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="ld1-9j-vYi"/>
@@ -70,7 +70,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C5b-YL-SB9" userLabel="分隔线">
-                        <rect key="frame" x="217" y="0.0" width="1" height="39.5"/>
+                        <rect key="frame" x="227" y="0.0" width="1" height="39.5"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="fUK-9G-0nk"/>

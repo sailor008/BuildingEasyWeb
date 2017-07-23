@@ -107,7 +107,7 @@
     
     NSDictionary* parameters = @{@"mobile":_phoneTextField.text,
                                  @"regCode":_codeTextField.text,
-                                 @"role":@(_userRole - 1),
+                                 @"role":@(_userRole),
                                  @"pwd":[_passwordTextField.text md5]};
     [LoginManager registerWithInfo:parameters];
 }

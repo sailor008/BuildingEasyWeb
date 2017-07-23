@@ -37,10 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSh-UD-Nuc">
-                        <rect key="frame" x="280" y="5" width="30" height="39.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="hDX-vx-hGK"/>
-                        </constraints>
+                        <rect key="frame" x="56" y="5" width="254" height="40"/>
                         <state key="normal" image="日历"/>
                         <connections>
                             <action selector="selectDate:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hHV-Sf-l7h"/>
@@ -55,9 +52,10 @@
                     <constraint firstItem="jwy-AN-twC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ny0-L9-CR1"/>
                     <constraint firstAttribute="bottom" secondItem="HSh-UD-Nuc" secondAttribute="bottom" constant="5" id="OtA-XY-6pl"/>
                     <constraint firstItem="p5M-2y-5s8" firstAttribute="leading" secondItem="jwy-AN-twC" secondAttribute="trailing" id="SWr-Br-jC9"/>
-                    <constraint firstItem="HSh-UD-Nuc" firstAttribute="leading" secondItem="p5M-2y-5s8" secondAttribute="trailing" constant="5" id="VLB-K2-QcW"/>
                     <constraint firstItem="p5M-2y-5s8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="f2W-PO-qJZ"/>
+                    <constraint firstItem="HSh-UD-Nuc" firstAttribute="leading" secondItem="p5M-2y-5s8" secondAttribute="leading" id="fUS-Py-wdF"/>
                     <constraint firstItem="gF2-Ib-0Ec" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="h26-Vi-ZVo"/>
+                    <constraint firstItem="gF2-Ib-0Ec" firstAttribute="leading" secondItem="p5M-2y-5s8" secondAttribute="trailing" constant="23" id="hVj-WP-ffP"/>
                     <constraint firstAttribute="trailing" secondItem="gF2-Ib-0Ec" secondAttribute="trailing" constant="10" id="nDX-cK-zmf"/>
                     <constraint firstAttribute="bottom" secondItem="p5M-2y-5s8" secondAttribute="bottom" constant="5" id="sIM-ed-0P2"/>
                 </constraints>
