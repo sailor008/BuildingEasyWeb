@@ -183,6 +183,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (IBAction)addIntentBuilding:(id)sender
 {
+    if (_bulidList.count >= 5) {
+        [MBProgressHUD showError:@"最多同时报备5个楼盘"];
+        return;
+    }
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
     buildingVC.delegate = self;
     [self.navigationController pushViewController:buildingVC animated:YES];
@@ -330,6 +334,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         }
         
         [_bulidList addObject:baobeiModel];
+    }
+    
+    if (_bulidList.count > 5) {
+        [_bulidList removeObjectsInRange:NSMakeRange(5, _bulidList.count - 5)];
     }
     
     [_tableView reloadData];
