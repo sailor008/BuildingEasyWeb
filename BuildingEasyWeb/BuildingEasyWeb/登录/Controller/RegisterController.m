@@ -66,6 +66,10 @@
         [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
         return;
     }
+    if (![_phoneTextField.text isMobile]) {
+        [MBProgressHUD showError:@"手机号码格式错误" toView:self.view];
+        return;
+    }
     [_countdownButton countDownFromTime:60 completion:^(UIButton *btn) {
         
     }];
@@ -94,6 +98,10 @@
     }
     if (!_phoneTextField.text.length) {
         [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
+        return;
+    }
+    if (![_phoneTextField.text isMobile]) {
+        [MBProgressHUD showError:@"手机号码格式错误" toView:self.view];
         return;
     }
     if (!_codeTextField.text.length) {

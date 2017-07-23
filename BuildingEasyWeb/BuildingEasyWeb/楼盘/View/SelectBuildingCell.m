@@ -32,7 +32,18 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    _selectButton.selected = selected;
+//    _selectButton.selected = selected;
+}
+
+- (void)setIsUnderSelected:(BOOL)isUnderSelected
+{
+//    _selectButton.selected = isUnderSelected;
+    if (isUnderSelected) {
+        [_selectButton setImage:GetIMAGE(@"选中.png") forState:UIControlStateNormal];
+    } else {
+        [_selectButton setImage:GetIMAGE(@"未选中.png") forState:UIControlStateNormal];
+    }
+    
 }
 
 - (void)setModel:(BuildingListModel *)model

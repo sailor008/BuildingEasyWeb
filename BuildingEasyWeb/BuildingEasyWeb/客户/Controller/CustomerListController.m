@@ -39,7 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kBaobeiNewSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:kBaobeiNewSuccess object:nil];
     
     UIButton* addCustomerButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addCustomerButton setImage:GetIMAGE(@"添加客户.png") forState:UIControlStateNormal];
@@ -70,6 +70,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)refreshData
+{
+    [_tableView.mj_header beginRefreshing];
 }
 
 #pragma mark UITableViewDataSource

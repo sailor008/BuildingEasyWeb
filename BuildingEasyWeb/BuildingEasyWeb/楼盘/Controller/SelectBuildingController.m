@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong) NSMutableArray* buildIdArr;
 
+@property (nonatomic, strong) NSMutableArray* selectedIDArr;
+
 @property (nonatomic, copy) NSString* city;
 @property (nonatomic, copy) NSString* areaCode;
 
@@ -50,6 +52,9 @@
     _buildingArr = [NSMutableArray array];
     _areaList = [NSMutableArray array];
     _buildIdArr = [NSMutableArray array];
+    
+    _selectedIDArr = [NSMutableArray array];
+    
     [self setupUI];
     [self addTableViewRefresh];
     
@@ -64,7 +69,7 @@
 - (void)setupUI
 {
     [_tableView registerNibWithName:@"SelectBuildingCell"];
-    _tableView.allowsMultipleSelection = YES;
+//    _tableView.allowsMultipleSelection = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(commitSelectedBuildIdsResult)];
     
     _areaSectionView = [[[NSBundle mainBundle] loadNibNamed:@"AreaSectionFilterView" owner:nil options:nil] lastObject];
@@ -86,6 +91,7 @@
 - (void)commitSelectedBuildIdsResult
 {
     if (_buildIdArr.count == 0) {
+        [MBProgressHUD showError:@"请选择要报备的楼盘"];
         return;
     }
     if (_delegate && [_delegate respondsToSelector:@selector(selectBuildingResult:)]) {
@@ -105,6 +111,13 @@
     SelectBuildingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"SelectBuildingCell" forIndexPath:indexPath];
     BuildingListModel* model = _buildingArr[indexPath.row];
     cell.model = model;
+    
+    if ([_selectedIDArr containsObject:model.buildId]) {
+        cell.isUnderSelected = YES;
+    } else {
+        cell.isUnderSelected = NO;
+    }
+    
     return cell;
 }
 
@@ -132,28 +145,49 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BuildingListModel* model = _buildingArr[indexPath.row];
-    [_buildIdArr addObject:model];
     
-    self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+    
+    if ([_selectedIDArr containsObject:model.buildId]) {
+        
+        [_buildIdArr removeObject:model];
+        
+        [_selectedIDArr removeObject:model.buildId];
+        
+        if (_buildIdArr.count) {
+            self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+        } else {
+            self.navigationItem.rightBarButtonItem.title = @"确定";
+        }
+        
+    } else {
+        [_buildIdArr addObject:model];
+        
+        [_selectedIDArr addObject:model.buildId];
+        
+        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+    }
+    [tableView reloadData];
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    BuildingListModel* model = _buildingArr[indexPath.row];
-    [_buildIdArr removeObject:model];
-    
-    if (_buildIdArr.count) {
-        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
-    } else {
-        self.navigationItem.rightBarButtonItem.title = @"确定";
-    }
-}
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    BuildingListModel* model = _buildingArr[indexPath.row];
+//    [_buildIdArr removeObject:model];
+//    
+//    [_selectedIDArr removeObject:model.buildId];
+//    
+//    if (_buildIdArr.count) {
+//        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+//    } else {
+//        self.navigationItem.rightBarButtonItem.title = @"确定";
+//    }
+//}
 
 #pragma mark CYLTableViewPlaceHolderDelegate
 - (UIView *)makePlaceHolderView
 {
     EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
-    tipView.tip = @"木有楼盘";
+    tipView.tip = @"暂无楼盘信息";
     tipView.backgroundColor = [UIColor clearColor];
     return tipView;
 }
@@ -224,6 +258,10 @@
         [MBProgressHUD hideHUDForView:self.view];
         if (_tableView.page == 1) {
             [_buildingArr removeAllObjects];
+            
+            [_buildIdArr removeAllObjects];
+//            [_selectedIDArr removeAllObjects];
+//            self.navigationItem.rightBarButtonItem.title = @"确定";
         }
         
         _tableView.page ++;

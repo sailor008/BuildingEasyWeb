@@ -374,7 +374,7 @@ static const NSInteger kPhotoViewTag = 1000;
         [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
             
-            [MBProgressHUD dismissWithSuccess:@"提交成功"];
+            [MBProgressHUD dismissWithSuccess:@"提交成功，请耐心等待运营审核"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
