@@ -1,20 +1,17 @@
 //
-//  BuildingDetailController.h
+//  DistanceCommissionModel.h
 //  BuildingEasyWeb
 //
-//  Created by zhenghongyi on 2017/6/7.
+//  Created by zhenghongyi on 2017/7/23.
 //  Copyright © 2017年 zhenghongyi. All rights reserved.
 //
 
-#import "BaseController.h"
+#import <Foundation/Foundation.h>
 
-@interface BuildingDetailController : BaseController
+@interface DistanceCommissionModel : NSObject
 
 @property (nonatomic, copy) NSString* buildId;
-
 @property (nonatomic, copy) NSString* commission;
 @property (nonatomic, copy) NSString* distance;
-
-@property (nonatomic, assign) BOOL isFromBanner;
 
 @end

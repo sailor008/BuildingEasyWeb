@@ -27,6 +27,7 @@
 #import "NSDate+Addition.h"
 #import "MapLocationController.h"
 #import "User.h"
+#import "DistanceCommissionModel.h"
 
 @interface BuildingDetailController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -96,6 +97,9 @@
     _tableView.layer.borderWidth = 1;
     
     [self requestData];
+    if (_isFromBanner) {
+        [self requestCommissionAndDistance];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -248,6 +252,26 @@
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"error :%@", error);
         [MBProgressHUD dissmissWithError:msg toView:self.view];
+    }];
+}
+
+- (void)requestCommissionAndDistance
+{
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"lon"] = @([User shareUser].lng);
+    parameters[@"lat"] = @([User shareUser].lat);
+    parameters[@"buildId"] = _buildId;
+ 
+    [NetworkManager postWithUrl:@"wx/getBuildDistanceInfo" parameters:parameters success:^(id reponse) {
+        
+        DistanceCommissionModel* model = [DistanceCommissionModel mj_objectWithKeyValues:reponse];
+        if (model) {
+            _commission = model.commission;
+            _distance = model.distance;
+        }
+        
+    } failure:^(NSError *error, NSString *msg) {
+        NSLog(@"error :%@", error);
     }];
 }
 

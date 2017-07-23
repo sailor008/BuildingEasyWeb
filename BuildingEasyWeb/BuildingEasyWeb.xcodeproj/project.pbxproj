@@ -169,6 +169,7 @@
 		CFDD369A1EEBF297007497AC /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFDD36981EEBF297007497AC /* ContactCell.xib */; };
 		CFE2AF8A1EFFB84B004A98B3 /* DealEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE2AF881EFFB84B004A98B3 /* DealEditController.m */; };
 		CFE2AF8B1EFFB84B004A98B3 /* DealEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */; };
+		CFE3FCA11F246DA300D7C1BB /* DistanceCommissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE3FCA01F246DA300D7C1BB /* DistanceCommissionModel.m */; };
 		CFE578AD1F04033700ADCABC /* GetImageTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */; };
 		CFE828D51EE39B3600290C79 /* UIViewController+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE828D41EE39B3600290C79 /* UIViewController+MBProgressHUD.m */; };
 		CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */ = {isa = PBXBuildFile; fileRef = CFEAFF681EF66618000EEB27 /* BuildAdviser.m */; };
@@ -453,6 +454,8 @@
 		CFE2AF871EFFB84B004A98B3 /* DealEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealEditController.h; sourceTree = "<group>"; };
 		CFE2AF881EFFB84B004A98B3 /* DealEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealEditController.m; sourceTree = "<group>"; };
 		CFE2AF891EFFB84B004A98B3 /* DealEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealEditController.xib; sourceTree = "<group>"; };
+		CFE3FC9F1F246DA300D7C1BB /* DistanceCommissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistanceCommissionModel.h; sourceTree = "<group>"; };
+		CFE3FCA01F246DA300D7C1BB /* DistanceCommissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceCommissionModel.m; sourceTree = "<group>"; };
 		CFE578AB1F04033700ADCABC /* GetImageTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetImageTokenManager.h; sourceTree = "<group>"; };
 		CFE578AC1F04033700ADCABC /* GetImageTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetImageTokenManager.m; sourceTree = "<group>"; };
 		CFE828D31EE39B2F00290C79 /* UIViewController+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MBProgressHUD.h"; sourceTree = "<group>"; };
@@ -957,6 +960,8 @@
 				CFEAFF681EF66618000EEB27 /* BuildAdviser.m */,
 				CFEAFF741EF6C255000EEB27 /* BuildBaobeiModel.h */,
 				CFEAFF751EF6C255000EEB27 /* BuildBaobeiModel.m */,
+				CFE3FC9F1F246DA300D7C1BB /* DistanceCommissionModel.h */,
+				CFE3FCA01F246DA300D7C1BB /* DistanceCommissionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1271,6 +1276,7 @@
 				CF2F53A41EF184AA00A2DADD /* BuildingSectionView.m in Sources */,
 				CF99FBF71EF3DFC0001C8A9C /* CustomerListCell.m in Sources */,
 				CF2FCA8B1EF915D0001E974C /* ProgressCell.m in Sources */,
+				CFE3FCA11F246DA300D7C1BB /* DistanceCommissionModel.m in Sources */,
 				CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */,
 				CF8F80921EF7C652009A6C3E /* CustomerBuildModel.m in Sources */,
 				CF3061D01EE4003A00D3FC7E /* ContactManager.m in Sources */,

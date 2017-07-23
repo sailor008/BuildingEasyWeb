@@ -245,7 +245,7 @@
         
         for (NSDictionary* banner in bannerList) {
             [array addObject:banner[@"imgUrl"]];
-            [_bannerIdArr addObject:banner[@"id"]];
+            [_bannerIdArr addObject:banner[@"businessId"]];
         }
         _adsView.sourceArray = [array copy];
         
@@ -440,10 +440,8 @@
     if (_bannerIdArr.count > 0) {
         BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
         detailVC.hidesBottomBarWhenPushed = YES;
-//        BuildingListModel* model = _buildingArr[indexPath.row];
         detailVC.buildId = _bannerIdArr[adsIndex];
-//        detailVC.commission = model.commission;
-//        detailVC.distance = model.distance;
+        detailVC.isFromBanner = YES;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
