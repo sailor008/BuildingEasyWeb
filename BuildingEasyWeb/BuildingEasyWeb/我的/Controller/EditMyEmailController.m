@@ -65,7 +65,7 @@
             [MBProgressHUD showError:msg];
         }];
     } else {
-        [MBProgressHUD showError:@"email格式错误！"];
+        [MBProgressHUD showError:@"请输入正确的邮箱！"];
     }
 }
 
