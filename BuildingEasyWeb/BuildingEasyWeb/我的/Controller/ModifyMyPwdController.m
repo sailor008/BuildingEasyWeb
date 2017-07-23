@@ -53,13 +53,13 @@
 */
 - (IBAction)onBtnEnsure:(id)sender {
     BOOL isCanModify = true;
-    if ([_curPwd.text isStringBlank]) {
+    if ([_curPwd.text isStringBlank] || _curPwd.text.length == 0) {
         isCanModify = false;
         [MBProgressHUD showError:@"请输入密码" toView:self.view];
-    }else if ([_resetPwd.text isStringBlank]) {
+    }else if ([_resetPwd.text isStringBlank] || _resetPwd.text.length == 0) {
         isCanModify = false;
         [MBProgressHUD showError:@"请输入新密码" toView:self.view];
-    }else if ([_ensurePwd.text isStringBlank]) {
+    }else if ([_ensurePwd.text isStringBlank] || _ensurePwd.text.length == 0) {
         isCanModify = false;
         [MBProgressHUD showError:@"请确认新密码" toView:self.view];
     }else if([_curPwd.text isEqualToString: _resetPwd.text]) {

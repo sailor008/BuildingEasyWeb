@@ -30,7 +30,7 @@
 #import <CYLTableViewPlaceHolder.h>
 #import "BEWTableViewPlaceHolderDelegate.h"
 
-@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate, BEWTableViewPlaceHolderDelegate>
+@interface BuildingController () <UITableViewDataSource, UITableViewDelegate, BuildingSectionViewDelegate, CityListControllerDelegate, UITextFieldDelegate, BEWTableViewPlaceHolderDelegate, AdsScrollViewDelegate>
 
 @property (nonatomic, strong) UIButton* locationButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -56,6 +56,8 @@
 @property (nonatomic, copy) NSString* classifyId;
 @property (nonatomic, copy) NSString* keyword;
 @property (nonatomic, copy) NSString* city;
+
+@property (nonatomic, strong) NSMutableArray* bannerIdArr;
 
 @end
 
@@ -98,6 +100,8 @@
     _priceList = [NSMutableArray array];
     _distanceList = [NSMutableArray array];
     
+    _bannerIdArr = [NSMutableArray array];
+    
     _averAgeId = @"0";
     _distanceId = @"0";
     _classifyId = @"0";
@@ -128,6 +132,7 @@
     _adsView = [[AdsScrollView alloc] init];
     _adsView.frame = CGRectMake(0, 0, ScreenWidth, bannerHeight);
     _adsView.placeholderImage = @"底图.png";
+    _adsView.delegate = self;
     UIView* headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, ScreenWidth, bannerHeight + 10);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -234,9 +239,13 @@
 {
     [NetworkManager postWithUrl:@"wx/getBannerList" parameters:nil success:^(id reponse) {
         NSArray* bannerList = (NSArray *)reponse;
+        
         NSMutableArray* array = [NSMutableArray array];
+        [_bannerIdArr removeAllObjects];
+        
         for (NSDictionary* banner in bannerList) {
             [array addObject:banner[@"imgUrl"]];
+            [_bannerIdArr addObject:banner[@"businessId"]];
         }
         _adsView.sourceArray = [array copy];
         
@@ -425,6 +434,18 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+#pragma mark AdsScrollViewDelegate
+- (void)tapAds:(NSInteger)adsIndex
+{
+    if (_bannerIdArr.count > 0) {
+        BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
+        detailVC.hidesBottomBarWhenPushed = YES;
+        detailVC.buildId = _bannerIdArr[adsIndex];
+        detailVC.isFromBanner = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+}
+
 #pragma mark BuildingSectionViewDelegate
 - (void)showFilterViewWithOptionTag:(NSInteger)index
 {
@@ -501,7 +522,7 @@
 - (UIView *)makePlaceHolderView
 {
     EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
-    tipView.tip = @"木有楼盘";
+    tipView.tip = @"暂无楼盘信息";
     tipView.backgroundColor = [UIColor clearColor];
     return tipView;
 }

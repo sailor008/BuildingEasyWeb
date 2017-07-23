@@ -73,7 +73,7 @@
 
 - (BOOL)isNickNameFormatVaild:(NSString*) txtVal
 {
-    if([txtVal isStringBlank]){
+    if([txtVal isStringBlank] || txtVal == nil){
         return false;
     } else {
         return true;

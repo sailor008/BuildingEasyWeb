@@ -170,7 +170,7 @@
 - (UIView *)makePlaceHolderView
 {
     EmptyTipView* tipView = [EmptyTipView GetEmptyTipView];
-    tipView.tip = @"还木有联系人";
+    tipView.tip = @"暂无联系人";
     tipView.backgroundColor = [UIColor clearColor];
     return tipView;
 }

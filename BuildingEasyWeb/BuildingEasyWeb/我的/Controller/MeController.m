@@ -153,7 +153,7 @@ typedef void (^onTabVCell)(void);
 //    NSLog(@"MeController>>>>> finishEidtMyInfo : %@", descStr);
     MeCellInfo* cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     NSString* name = [User shareUser].name;
-    if([name isStringBlank]) {
+    if([name isStringBlank] || name == nil) {
         //姓名为空，则显示昵称
         name = [User shareUser].nickName;
     }
@@ -210,7 +210,7 @@ typedef void (^onTabVCell)(void);
     if(indexPath.section == 0) {
         MeCellInfo* cell = [tableView dequeueReusableCellWithIdentifier:@"MeCellInfo" forIndexPath:indexPath];
         NSString* name = [User shareUser].name;
-        if([name isStringBlank]) {
+        if([name isStringBlank] || name == nil) {
             //姓名为空，则显示昵称
             name = [User shareUser].nickName;
         }

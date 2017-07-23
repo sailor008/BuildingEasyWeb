@@ -53,7 +53,7 @@
     [super onBtnEnsure:sender];
     
     NSString* nameVal = self.txtEdit.text;
-    if ([nameVal isStringBlank]) {
+    if ([nameVal isStringBlank] || nameVal == nil) {
         [MBProgressHUD showError:@"请输入姓名！"];
         return;
     }

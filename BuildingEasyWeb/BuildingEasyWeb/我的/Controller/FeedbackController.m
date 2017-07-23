@@ -75,7 +75,7 @@
     NSString* contentStr = _txtContent.text;
     if(contentStr.length > 0) {
 //        NSLog(@"输入的字符长度：%ld", contentStr.length);
-        if([contentStr isStringBlank]){
+        if([contentStr isStringBlank] || contentStr == nil){
             //输入的内容全是空格！不访问网络
             [MBProgressHUD dissmissWithError:@"请输入内容！"];
         } else {

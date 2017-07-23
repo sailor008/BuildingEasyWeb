@@ -62,6 +62,7 @@
     _currentImageView = [[UIImageView alloc] init];
     _currentImageView.clipsToBounds = YES;
     _currentImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _currentImageView.userInteractionEnabled = YES;
     [_scrollView addSubview:_currentImageView];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAds)];
@@ -69,7 +70,8 @@
     
     _anotherImageView = [[UIImageView alloc] init];
     _anotherImageView.clipsToBounds = YES;
-    _currentImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _anotherImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _anotherImageView.userInteractionEnabled = YES;
     [_scrollView addSubview:_anotherImageView];
     
     _pageCtr = [[UIPageControl alloc] init];
