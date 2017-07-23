@@ -183,27 +183,34 @@ typedef void (^onTabVCell)(void);
         cell.textLabel.font = [UIFont systemFontOfSize: 15.0f];
         cell.textLabel.text = _aryCellTitle[indexPath.section][indexPath.row];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13.0f];
-        //update 属性值
-        cell.detailTextLabel.text = _aryCellContent[indexPath.section][indexPath.row];
         cell.detailTextLabel.textColor = Hex(0x747474);
-        if(indexPath.section == 0 && indexPath.row == 1) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }else {
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+        
         if(indexPath.section == 0 && indexPath.row == 0) {
             cell.detailTextLabel.text = @"";
             _headImgView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth - 35 - 60, 8.0, 60.0, 60.0)];
             _headImgView.layer.masksToBounds = YES;
             _headImgView.layer.cornerRadius = 30.0f;
-            //            [_headImgView sd_setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
-            [_headImgView setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
             
             [cell addSubview:_headImgView];
         }
     }
+    
+    //update 属性值
+    cell.detailTextLabel.text = _aryCellContent[indexPath.section][indexPath.row];
+    
+    if(indexPath.section == 0 && indexPath.row == 1) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }else {
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    if(indexPath.section == 0 && indexPath.row == 0) {
+        cell.detailTextLabel.text = @"";
+        [_headImgView setImageWithURL:[NSURL URLWithString:[User shareUser].headImg] placeholderImage:GetIMAGE(@"头像")];
+    }
+    
     return cell;
 }
 
