@@ -137,7 +137,7 @@
     
     dispatch_group_notify(group, asyncQueue, ^{
         [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
-            [MBProgressHUD dismissWithSuccess:@"提交成功"];
+            [MBProgressHUD dismissWithSuccess:@"提交成功，请耐心等待运营审核"];
             [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1

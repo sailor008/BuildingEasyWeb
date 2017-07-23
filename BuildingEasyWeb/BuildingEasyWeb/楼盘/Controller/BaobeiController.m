@@ -316,6 +316,19 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     for (BuildingListModel* model in buildIDs) {
         BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
         baobeiModel.buildModel = model;
+        
+        BOOL hasSomeBuildId = NO;
+        for (BuildBaobeiModel* existModel in _bulidList) {
+            if ([existModel.buildModel.buildId isEqualToString:model.buildId]) {
+                hasSomeBuildId = YES;
+                break;
+            }
+        }
+        
+        if (hasSomeBuildId) {
+            continue;
+        }
+        
         [_bulidList addObject:baobeiModel];
     }
     
@@ -368,40 +381,58 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 // 报备新客户
 - (void)commitBaobeiNewCustomer
 {
-    if (_tempIndex >= _bulidList.count) {
+//    if (_tempIndex >= _bulidList.count) {
+//        
+//        _tempIndex = 0;
+//        
+//        if (_errorMsg.length) {
+//            [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
+//        } else {
+//            [MBProgressHUD hideHUDForView:self.view];
+//            [self showBaobeiSuccess];
+//        }
+//        return;
+//    }
+    
+    NSMutableString* buildIdsStr = [NSMutableString string];
+    NSMutableString* adviserIdsStr = [NSMutableString string];
+    for (int i = 0; i < _bulidList.count; i ++) {
+        BuildBaobeiModel* model = _bulidList[i];
+        [buildIdsStr appendString:model.buildModel.buildId];
+        [adviserIdsStr appendString:model.selectedAdviser.adviserId];
         
-        _tempIndex = 0;
-        
-        if (_errorMsg.length) {
-            [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
-        } else {
-            [MBProgressHUD hideHUDForView:self.view];
-            [self showBaobeiSuccess];
+        if (i < _bulidList.count - 1) {
+            [buildIdsStr appendString:@","];
+            [adviserIdsStr appendString:@","];
         }
-        return;
     }
     
-    BuildBaobeiModel* model = _bulidList[_tempIndex];
+//    BuildBaobeiModel* model = _bulidList[_tempIndex];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"name"] = _nameLabel.text;
     parameters[@"mobile"] = _phoneLabel.text;
     parameters[@"intention"] = @(_intend);
-    parameters[@"buildId"] = model.buildModel.buildId;
-    parameters[@"adviserId"] = model.selectedAdviser.adviserId;
+//    parameters[@"buildId"] = model.buildModel.buildId;
+//    parameters[@"adviserId"] = model.selectedAdviser.adviserId;
+    parameters[@"buildIds"] = buildIdsStr;
+    parameters[@"adviserIds"] = adviserIdsStr;
     
-    [NetworkManager postWithUrl:@"wx/addCustomer" parameters:parameters success:^(id reponse) {
+    [NetworkManager postWithUrl:@"wx/addCustomerV" parameters:parameters success:^(id reponse) {
         _tempIndex++;
-        [self commitBaobeiNewCustomer];
+//        [self commitBaobeiNewCustomer];
+        [MBProgressHUD hideHUDForView:self.view];
+        [self showBaobeiSuccess];
         
     } failure:^(NSError *error, NSString *msg) {
-        _tempIndex++;
-        if (msg.length) {
-            _errorMsg = msg;
-        } else {
-            _errorMsg = @"报备出错";
-        }
-        [self commitBaobeiNewCustomer];
+//        _tempIndex++;
+//        if (msg.length) {
+//            _errorMsg = msg;
+//        } else {
+//            _errorMsg = @"报备出错";
+//        }
+//        [self commitBaobeiNewCustomer];
+        [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
     }];
 }
 // 提交修改报备信息

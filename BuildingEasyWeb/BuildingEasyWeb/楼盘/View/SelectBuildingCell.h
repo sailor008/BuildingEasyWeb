@@ -12,6 +12,7 @@
 
 @interface SelectBuildingCell : UITableViewCell
 
+@property (nonatomic, assign) BOOL isUnderSelected;
 @property (nonatomic, strong) BuildingListModel* model;
 
 @end
