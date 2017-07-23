@@ -54,7 +54,7 @@
     
     NSString* nameVal = self.txtEdit.text;
     if ([nameVal isStringBlank] || nameVal == nil) {
-        [MBProgressHUD showError:@"请输入有效姓名！"];
+        [MBProgressHUD showError:@"请输入姓名！"];
         return;
     }
     [MBProgressHUD showLoading];

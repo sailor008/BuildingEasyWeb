@@ -245,7 +245,7 @@ typedef void (^onTabVCell)(void);
     EditMyNameController* editNameVC = [[EditMyNameController alloc] init];
     editNameVC.delegate = self;
     editNameVC.hidesBottomBarWhenPushed = YES;
-    editNameVC.title = @"修改名字";
+    editNameVC.title = @"修改姓名";
     editNameVC.originalText = [User shareUser].name;
     [self.navigationController pushViewController:editNameVC animated:YES];
 };
