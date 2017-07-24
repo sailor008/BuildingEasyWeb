@@ -37,14 +37,16 @@
 {
     _model = model;
     
-    NSArray* stateArr = @[@"发起报备", @"接受审核", @"接受成功",
-                          @"待上门", @"系统确认带看", @"上传凭证后台审核", @"已上门",
-                          @"待认购", @"确认认购", @"上传凭证后台审核", @"已认购",
-                          @"待签约", @"确认签约", @"上传凭证后台审核", @"已签约",
-                          @"待回款", @"后台确认", @"上传凭证回款", @"已回款",
-                          @"待结清", @"确认结清", @"上传凭证结清", @"已结清",
-                          @"失效"];
-    _stateLabel.text = stateArr[model.state];
+//    NSArray* stateArr = @[@"发起报备", @"接受审核", @"接受成功",
+//                          @"待上门", @"系统确认带看", @"上传凭证后台审核", @"已上门",
+//                          @"待认购", @"确认认购", @"上传凭证后台审核", @"已认购",
+//                          @"待签约", @"确认签约", @"上传凭证后台审核", @"已签约",
+//                          @"待回款", @"后台确认", @"上传凭证回款", @"已回款",
+//                          @"待结清", @"确认结清", @"上传凭证结清", @"已结清",
+//                          @"失效"];
+//    _stateLabel.text = stateArr[model.state];
+    
+    _stateLabel.text = model.report;
     
     NSTimeInterval timeInterval = model.time / 1000;
     _timeLabel.text = [NSDate dateStrWithTimeInterval:timeInterval];

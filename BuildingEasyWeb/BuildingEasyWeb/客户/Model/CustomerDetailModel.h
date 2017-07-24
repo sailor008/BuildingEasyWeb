@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) NSInteger state;
 @property (nonatomic, assign) NSInteger time;
+@property (nonatomic, copy) NSString* report;
 
 @end
 

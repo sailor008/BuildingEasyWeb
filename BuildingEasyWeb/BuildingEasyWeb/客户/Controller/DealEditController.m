@@ -41,6 +41,9 @@ static const NSInteger kPhotoViewTag = 1000;
 
 @property (nonatomic, assign) CGFloat singlePhotoViewHeight;
 
+@property (nonatomic, strong) NSMutableArray* imageArr;
+@property (nonatomic, strong) NSMutableDictionary* parameters;
+
 @end
 
 @implementation DealEditController
@@ -283,6 +286,8 @@ static const NSInteger kPhotoViewTag = 1000;
         [imagArr addObjectsFromArray:_dealPhotoView.resultArray];
     }
     
+    _imageArr = imagArr;
+    
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"customerId"] = _customerId;
     {
@@ -330,17 +335,41 @@ static const NSInteger kPhotoViewTag = 1000;
         parameters[@"leadTime"] = [model.text timeIntervalWithDateStr];
     }
     
+    _parameters = parameters;
+    
     // 检验完毕
-    kWeakSelf(weakSelf);
     [MBProgressHUD showLoading];
-    dispatch_queue_t asyncQueue = dispatch_queue_create("BEWDealEdit", DISPATCH_QUEUE_CONCURRENT);
     
-    dispatch_group_t group = dispatch_group_create();
+    [self uploadImageAndCommit];
+}
+
+- (void)uploadImageAndCommit
+{
+    static int i = 0;
     
-    for (int i = 0; i < imagArr.count; i ++) {
-        dispatch_group_enter(group);
+    if (i >= _imageArr.count) {
+        NSString* urlStr = nil;
+        if (_type > kEditTypeNew) {
+            urlStr = @"wx/updateSignInfo";
+            _parameters[@"signId"] = _signId;
+        } else {
+            urlStr = @"wx/saveSignInfo";
+        }
         
-        [UploadImageManager uploadImage:imagArr[i] type:@"5" imageKey:^(NSString *key) {
+        [NetworkManager postWithUrl:urlStr parameters:_parameters success:^(id reponse) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
+            
+            [MBProgressHUD dismissWithSuccess:@"提交成功，请耐心等待运营审核"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD dissmissWithError:msg];
+            i = 0;
+        }];
+    } else {
+        kWeakSelf(weakSelf);
+        [UploadImageManager uploadImage:_imageArr[i] type:@"5" imageKey:^(NSString *key) {
             
             NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
             parameters[@"customerId"] = weakSelf.customerId;
@@ -350,38 +379,20 @@ static const NSInteger kPhotoViewTag = 1000;
                 parameters[@"type"] = @(5);
             }
             [NetworkManager postWithUrl:@"wx/uploadSignImg" parameters:parameters success:^(id reponse) {
-                dispatch_group_leave(group);
+                ++ i;
+                
+                [weakSelf uploadImageAndCommit];
             } failure:^(NSError *error, NSString *msg) {
-                dispatch_group_leave(group);
+                ++ i;
+                [weakSelf uploadImageAndCommit];
             }];
             
         } failure:^(NSError *error, NSString *msg) {
             NSLog(@"error:%@---%@", error, msg);
-            dispatch_group_leave(group);
+            ++ i;
+            [weakSelf uploadImageAndCommit];
         }];
     }
-    
-    NSString* urlStr = nil;
-    if (_type > kEditTypeNew) {
-        urlStr = @"wx/updateSignInfo";
-        parameters[@"signId"] = _signId;
-    } else {
-        urlStr = @"wx/saveSignInfo";
-    }
-    
-    dispatch_group_notify(group, asyncQueue, ^{
-        
-        [NetworkManager postWithUrl:urlStr parameters:parameters success:^(id reponse) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kEditSuceess object:nil];
-            
-            [MBProgressHUD dismissWithSuccess:@"提交成功，请耐心等待运营审核"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-        } failure:^(NSError *error, NSString *msg) {
-            [MBProgressHUD dissmissWithError:msg];
-        }];
-    });
 }
 
 #pragma mark RequestData
@@ -444,14 +455,15 @@ static const NSInteger kPhotoViewTag = 1000;
     }
     
     NSArray* imgList = data[@"imgList"];
-    NSUInteger count = imgList.count;
     NSMutableArray* dealImgArr = [NSMutableArray array];
     for (int i = 0; i < imgList.count; i ++) {
-        // 倒序
-        NSDictionary* dic = imgList[count - i - 1];
         
-        if (i < 5) {
-            PhotoView* photoView = _footerView.subviews[i];
+        NSDictionary* dic = imgList[i];
+        
+        NSInteger photoType = [dic[@"type"] integerValue];
+        
+        if (photoType < 5) {
+            PhotoView* photoView = _footerView.subviews[photoType];
             NSString* imgUrl = dic[@"imgUrl"];
             NSArray* imgArr = @[imgUrl];
             photoView.sourceUrlArray = imgArr;

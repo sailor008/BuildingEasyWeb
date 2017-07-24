@@ -219,9 +219,11 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (void)setupInterFace
 {
     _nameLabel.text = _detailModel.customerName;
-    _customerNameLabel.text = _detailModel.customerName;
+//    _customerNameLabel.text = _detailModel.customerName;
+    _customerNameLabel.text = _detailModel.adviser.name;
     _phoneLabel.text = _detailModel.customerMobile;
-    _customerPhoneLabel.text = _detailModel.customerMobile;
+//    _phoneLabel.text = _detailModel.adviser.mobile;
+    _customerPhoneLabel.text = _detailModel.adviser.mobile;
     _buildNameLabel.text = _detailModel.buildName;
     
     NSArray* imageArr = @[@"强.png", @"中.png", @"弱.png"];
