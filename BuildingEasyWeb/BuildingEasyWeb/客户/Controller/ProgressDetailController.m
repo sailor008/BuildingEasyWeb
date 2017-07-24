@@ -129,12 +129,16 @@ const NSInteger kCustomProgressLabelTag = 2000;
 
 - (IBAction)sendMessage:(id)sender
 {
-    [OpenSystemUrlManager sendMessage:_detailModel.adviser.mobile];
+    [OpenSystemUrlManager sendMessage:_detailModel.customerMobile];
 }
 
-- (IBAction)callPhone:(id)sender
+- (IBAction)callPhone:(UIButton *)sender
 {
-    [OpenSystemUrlManager callPhone:_detailModel.adviser.mobile];
+    if (sender.tag == 1000) {
+        [OpenSystemUrlManager callPhone:_detailModel.customerMobile];
+    } else {
+        [OpenSystemUrlManager callPhone:_detailModel.adviser.mobile];
+    }
 }
 
 - (IBAction)modifyBaobei:(id)sender

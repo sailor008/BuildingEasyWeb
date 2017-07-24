@@ -36,6 +36,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 @property (weak, nonatomic) IBOutlet UITextField *phoneLabel;
 @property (weak, nonatomic) IBOutlet UIButton *importButton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *fullAddButton;// 用来扩大点击区域的
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *intendButtonArr;
 
@@ -75,6 +76,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [self requestBaobeiInfo];
         _importButton.hidden = YES;
         _addButton.hidden = YES;
+        _fullAddButton.hidden = YES;
         _canDeleteCell = NO;
     }
     
@@ -183,8 +185,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (IBAction)addIntentBuilding:(id)sender
 {
-    if (_bulidList.count >= 5) {
-        [MBProgressHUD showError:@"最多同时报备5个楼盘"];
+    if (_bulidList.count >= 6) {
+        [MBProgressHUD showError:@"最多同时报备6个楼盘"];
         return;
     }
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
@@ -336,8 +338,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [_bulidList addObject:baobeiModel];
     }
     
-    if (_bulidList.count > 5) {
-        [_bulidList removeObjectsInRange:NSMakeRange(5, _bulidList.count - 5)];
+    if (_bulidList.count > 6) {
+        [_bulidList removeObjectsInRange:NSMakeRange(6, _bulidList.count - 6)];
     }
     
     [_tableView reloadData];
@@ -389,19 +391,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 // 报备新客户
 - (void)commitBaobeiNewCustomer
 {
-//    if (_tempIndex >= _bulidList.count) {
-//        
-//        _tempIndex = 0;
-//        
-//        if (_errorMsg.length) {
-//            [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
-//        } else {
-//            [MBProgressHUD hideHUDForView:self.view];
-//            [self showBaobeiSuccess];
-//        }
-//        return;
-//    }
-    
     NSMutableString* buildIdsStr = [NSMutableString string];
     NSMutableString* adviserIdsStr = [NSMutableString string];
     for (int i = 0; i < _bulidList.count; i ++) {
@@ -415,31 +404,18 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         }
     }
     
-//    BuildBaobeiModel* model = _bulidList[_tempIndex];
-    
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"name"] = _nameLabel.text;
     parameters[@"mobile"] = _phoneLabel.text;
     parameters[@"intention"] = @(_intend);
-//    parameters[@"buildId"] = model.buildModel.buildId;
-//    parameters[@"adviserId"] = model.selectedAdviser.adviserId;
     parameters[@"buildIds"] = buildIdsStr;
     parameters[@"adviserIds"] = adviserIdsStr;
     
     [NetworkManager postWithUrl:@"wx/addCustomerV" parameters:parameters success:^(id reponse) {
-        _tempIndex++;
-//        [self commitBaobeiNewCustomer];
         [MBProgressHUD hideHUDForView:self.view];
         [self showBaobeiSuccess];
         
     } failure:^(NSError *error, NSString *msg) {
-//        _tempIndex++;
-//        if (msg.length) {
-//            _errorMsg = msg;
-//        } else {
-//            _errorMsg = @"报备出错";
-//        }
-//        [self commitBaobeiNewCustomer];
         [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
     }];
 }

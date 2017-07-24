@@ -96,7 +96,7 @@
                                                 <action selector="sendMessage:" destination="-1" eventType="touchUpInside" id="71m-sL-gmg"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJ2-41-AZN">
+                                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJ2-41-AZN">
                                             <rect key="frame" x="232" y="139.5" width="27" height="27"/>
                                             <state key="normal" image="电话白色"/>
                                             <connections>
@@ -410,7 +410,7 @@
                                             <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAL-4J-og8">
+                                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAL-4J-og8">
                                             <rect key="frame" x="320" y="11.5" width="25" height="25"/>
                                             <state key="normal" image="电话橙色"/>
                                             <connections>
