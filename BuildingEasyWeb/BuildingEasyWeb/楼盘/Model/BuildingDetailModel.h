@@ -7,6 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BuildAdviser.h"
+
+@interface DetailAdviser : BuildAdviser
+
+@property (nonatomic, copy) NSString* position;
+
+@end
 
 @interface FormulaModel : NSObject
 
@@ -60,5 +67,6 @@
 
 @property (nonatomic, strong) BuildingInfoModel* buildInfo;
 @property (nonatomic, copy) NSArray* formulaList;
+@property (nonatomic, copy) NSArray* advisers;
 
 @end

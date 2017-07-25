@@ -76,12 +76,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gly-wB-Z9r">
-                        <rect key="frame" x="230" y="83" width="80" height="40"/>
+                        <rect key="frame" x="210" y="83" width="100" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="ijQ-wr-7p4"/>
-                            <constraint firstAttribute="width" constant="80" id="jdB-Jb-lXf"/>
                         </constraints>
-                        <state key="normal" title="更换顾问">
+                        <state key="normal" title=" 更换置业经理 ">
                             <color key="titleColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>

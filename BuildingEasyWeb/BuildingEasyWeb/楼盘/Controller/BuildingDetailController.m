@@ -148,13 +148,16 @@
 {
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    NSString* adviserStr = [NSString stringWithFormat:@"%@:%@ %@", _detail.buildInfo.position, _detail.buildInfo.staff, _detail.buildInfo.phone];
-    BEWAlertAction* importAction = [BEWAlertAction actionWithTitle:adviserStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [OpenSystemUrlManager callPhone:_detail.buildInfo.phone];
-    }];
+    
+    for (DetailAdviser* adviser in _detail.advisers) {
+        NSString* adviserStr = [NSString stringWithFormat:@"%@:%@ %@", adviser.position, adviser.name, adviser.mobile];
+        BEWAlertAction* phoneAction = [BEWAlertAction actionWithTitle:adviserStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [OpenSystemUrlManager callPhone:adviser.mobile];
+        }];
+        [sheet addAction:phoneAction];
+    }
     
     BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    [sheet addAction:importAction];
     [sheet addAction:cancelAction];
     [self presentViewController:sheet animated:YES completion:nil];
 }
