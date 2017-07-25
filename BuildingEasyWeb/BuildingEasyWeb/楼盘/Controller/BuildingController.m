@@ -440,7 +440,7 @@
     if (_bannerIdArr.count > 0) {
         BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
         detailVC.hidesBottomBarWhenPushed = YES;
-        detailVC.buildId = _bannerIdArr[adsIndex];
+        detailVC.buildId = [NSString stringWithFormat:@"%ld", [_bannerIdArr[adsIndex] integerValue]];
         detailVC.isFromBanner = YES;
         [self.navigationController pushViewController:detailVC animated:YES];
     }

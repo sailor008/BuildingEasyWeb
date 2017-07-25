@@ -77,6 +77,7 @@
 		CF0CEB1E1EFEABEE0018B35B /* EditSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0CEB1D1EFEABEE0018B35B /* EditSectionView.xib */; };
 		CF184E5C1EE2E844009E7A3C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF184E5B1EE2E844009E7A3C /* LocationManager.m */; };
 		CF184E5E1EE2E878009E7A3C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */; };
+		CF24F2A51F279C5F00A45372 /* LocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CF24F2A41F279C5F00A45372 /* LocationConverter.m */; };
 		CF2B6DC31F0682B300CCF32F /* BuyerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2B6DC11F0682B300CCF32F /* BuyerCell.m */; };
 		CF2B6DC41F0682B300CCF32F /* BuyerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2B6DC21F0682B300CCF32F /* BuyerCell.xib */; };
 		CF2BCFC01EF55EDB00DBEDC2 /* AreaSectionFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2BCFBF1EF55EDB00DBEDC2 /* AreaSectionFilterView.xib */; };
@@ -302,6 +303,8 @@
 		CF184E5A1EE2E844009E7A3C /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		CF184E5B1EE2E844009E7A3C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CF184E5D1EE2E878009E7A3C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CF24F2A31F279C5F00A45372 /* LocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationConverter.h; sourceTree = "<group>"; };
+		CF24F2A41F279C5F00A45372 /* LocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationConverter.m; sourceTree = "<group>"; };
 		CF2B6DC01F0682B300CCF32F /* BuyerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyerCell.h; sourceTree = "<group>"; };
 		CF2B6DC11F0682B300CCF32F /* BuyerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyerCell.m; sourceTree = "<group>"; };
 		CF2B6DC21F0682B300CCF32F /* BuyerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BuyerCell.xib; sourceTree = "<group>"; };
@@ -680,6 +683,8 @@
 				C790582C1F17CA2400D95FBA /* ImagePickerHelper.h */,
 				C790582D1F17CA2400D95FBA /* ImagePickerHelper.m */,
 				CF39007F1F1CF186008FD9D6 /* BEWTableViewPlaceHolderDelegate.h */,
+				CF24F2A31F279C5F00A45372 /* LocationConverter.h */,
+				CF24F2A41F279C5F00A45372 /* LocationConverter.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1327,6 +1332,7 @@
 				CF5268211F05500900166E2F /* TakeUpModel.m in Sources */,
 				CF30C3C21EF4B9E80070D124 /* CustomerDetailController.m in Sources */,
 				C782F4801EE9B9DD0067C07F /* MeCellBase.m in Sources */,
+				CF24F2A51F279C5F00A45372 /* LocationConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

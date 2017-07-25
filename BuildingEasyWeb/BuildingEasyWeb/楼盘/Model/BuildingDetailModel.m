@@ -8,6 +8,10 @@
 
 #import "BuildingDetailModel.h"
 
+@implementation DetailAdviser
+
+@end
+
 @implementation FormulaModel
 
 @end
@@ -20,7 +24,8 @@
 
 + (NSDictionary *)mj_objectClassInArray
 {
-    return @{@"formulaList" : @"FormulaModel"};
+    return @{@"formulaList" : @"FormulaModel",
+             @"advisers" : @"DetailAdviser"};
 }
 
 @end

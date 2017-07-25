@@ -129,12 +129,16 @@ const NSInteger kCustomProgressLabelTag = 2000;
 
 - (IBAction)sendMessage:(id)sender
 {
-    [OpenSystemUrlManager sendMessage:_detailModel.adviser.mobile];
+    [OpenSystemUrlManager sendMessage:_detailModel.customerMobile];
 }
 
-- (IBAction)callPhone:(id)sender
+- (IBAction)callPhone:(UIButton *)sender
 {
-    [OpenSystemUrlManager callPhone:_detailModel.adviser.mobile];
+    if (sender.tag == 1000) {
+        [OpenSystemUrlManager callPhone:_detailModel.customerMobile];
+    } else {
+        [OpenSystemUrlManager callPhone:_detailModel.adviser.mobile];
+    }
 }
 
 - (IBAction)modifyBaobei:(id)sender
@@ -219,9 +223,11 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (void)setupInterFace
 {
     _nameLabel.text = _detailModel.customerName;
-    _customerNameLabel.text = _detailModel.customerName;
+//    _customerNameLabel.text = _detailModel.customerName;
+    _customerNameLabel.text = _detailModel.adviser.name;
     _phoneLabel.text = _detailModel.customerMobile;
-    _customerPhoneLabel.text = _detailModel.customerMobile;
+//    _phoneLabel.text = _detailModel.adviser.mobile;
+    _customerPhoneLabel.text = _detailModel.adviser.mobile;
     _buildNameLabel.text = _detailModel.buildName;
     
     NSArray* imageArr = @[@"强.png", @"中.png", @"弱.png"];

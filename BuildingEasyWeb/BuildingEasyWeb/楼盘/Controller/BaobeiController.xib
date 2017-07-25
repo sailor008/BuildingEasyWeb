@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaobeiController">
             <connections>
                 <outlet property="addButton" destination="UVO-nb-RMc" id="pa2-tF-brr"/>
+                <outlet property="fullAddButton" destination="dkl-r0-7pN" id="isD-iO-Rhx"/>
                 <outlet property="headerView" destination="00j-WS-PgT" id="Qjj-gR-R8g"/>
                 <outlet property="importButton" destination="64I-Ly-gRe" id="lgw-cN-CoK"/>
                 <outlet property="nameLabel" destination="bSN-0D-KOt" id="PZc-3W-ips"/>
@@ -252,6 +253,12 @@
                                 <constraint firstAttribute="height" constant="1" id="sL0-PI-aDm"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkl-r0-7pN">
+                            <rect key="frame" x="87" y="10" width="278" height="30"/>
+                            <connections>
+                                <action selector="addIntentBuilding:" destination="-1" eventType="touchUpInside" id="KZW-vc-pbp"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -263,7 +270,10 @@
                         <constraint firstAttribute="trailing" secondItem="FgA-tO-v6Y" secondAttribute="trailing" id="IOC-61-jDP"/>
                         <constraint firstAttribute="trailing" secondItem="UVO-nb-RMc" secondAttribute="trailing" constant="10" id="LAc-y9-pbk"/>
                         <constraint firstItem="97c-C1-v6M" firstAttribute="leading" secondItem="GwF-I0-eCm" secondAttribute="leading" constant="10" id="UdR-kH-bcL"/>
+                        <constraint firstItem="dkl-r0-7pN" firstAttribute="leading" secondItem="c80-dL-jdD" secondAttribute="leading" id="ap6-SK-yVC"/>
+                        <constraint firstItem="dkl-r0-7pN" firstAttribute="centerY" secondItem="c80-dL-jdD" secondAttribute="centerY" id="dH7-Y2-dMX"/>
                         <constraint firstItem="UVO-nb-RMc" firstAttribute="top" secondItem="GwF-I0-eCm" secondAttribute="top" constant="11" id="jI7-V7-g2N"/>
+                        <constraint firstItem="dkl-r0-7pN" firstAttribute="trailing" secondItem="UVO-nb-RMc" secondAttribute="trailing" id="lPU-e0-HVm"/>
                         <constraint firstAttribute="bottom" secondItem="UVO-nb-RMc" secondAttribute="bottom" constant="11" id="p03-R1-FP6"/>
                         <constraint firstItem="c80-dL-jdD" firstAttribute="leading" secondItem="97c-C1-v6M" secondAttribute="trailing" id="tje-Nh-GpP"/>
                         <constraint firstItem="97c-C1-v6M" firstAttribute="centerY" secondItem="GwF-I0-eCm" secondAttribute="centerY" id="w6r-M3-vs2"/>
@@ -286,7 +296,7 @@
                 <constraint firstAttribute="trailing" secondItem="fBd-ub-rgu" secondAttribute="trailing" id="xCr-Ym-Ehc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="514.5" y="113.5"/>
+            <point key="canvasLocation" x="514.5" y="113"/>
         </view>
         <view contentMode="scaleToFill" id="uMf-qI-3Rj">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -324,7 +334,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="aVP-Vl-PYi"/>
                             </constraints>
-                            <state key="normal" title="继续推荐">
+                            <state key="normal" title="继续报备">
                                 <color key="titleColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>

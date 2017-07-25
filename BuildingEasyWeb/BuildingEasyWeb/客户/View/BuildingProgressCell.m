@@ -48,8 +48,10 @@ const NSInteger kProgressLabelTag = 2000;
     _model = model;
     
     _buildNameLabel.text = model.buildName;
-    _nameLabel.text = model.customerName;
-    _phoneLabel.text = model.customerMobile;
+//    _nameLabel.text = model.customerName;
+    _nameLabel.text = model.adviser.name;
+//    _phoneLabel.text = model.customerMobile;
+    _phoneLabel.text = model.adviser.mobile;
     
     switch (model.intention) {
         case 0:
