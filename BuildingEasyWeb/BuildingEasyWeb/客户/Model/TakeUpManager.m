@@ -89,6 +89,7 @@
                 
                 [MBProgressHUD showError:@"身份证/护照编号不能为空"];
                 *result = NO;
+                continue;
             }
             model.name = itemModel.name;
             if (!itemModel.name.length) {
@@ -96,6 +97,7 @@
                 
                 [MBProgressHUD showError:@"联系人不能为空"];
                 *result = NO;
+                continue;
             }
             model.mobile = itemModel.mobile;
             if (!itemModel.mobile.length) {
@@ -103,10 +105,12 @@
                 
                 [MBProgressHUD showError:@"联系电话不能为空"];
                 *result = NO;
+                continue;
             }
             if (![model.mobile isMobile]) {
                 [MBProgressHUD showError:@"联系电话格式错误"];
                 *result = NO;
+                continue;
             }
             model.client = itemModel.client;
             if (!itemModel.client.length) {
@@ -121,26 +125,30 @@
             
         } else {
             NSArray* array = (NSArray *)item;
-            for (int i = 0; i < array.count; i ++) {
-                id subItem = array[i];
+            for (int j = 0; j < array.count; j ++) {
+                id subItem = array[j];
                 if ([subItem isKindOfClass:[EditInfoModel class]]) {
                     EditInfoModel* itemModel = (EditInfoModel *)subItem;
-                    if (itemModel.text.length == 0 && itemModel.isRadio == NO) {
-                        NSString* tipStr = [NSString stringWithFormat:@"%@不能为空", itemModel.title];
-                        
-                        *result = NO;
-                        
-                        [MBProgressHUD showError:tipStr];
-                        
-                        break;
-                    }
-                    if ([itemModel.title containsString:@"电话"]) {
-                        if (![itemModel.text isMobile]) {
-                            [MBProgressHUD showError:@"联系电话格式错误"];
+                    
+                    if (i < originalTakeUpArray.count - 2) {// 合同信息部分不做校验
+                        if (itemModel.text.length == 0 && itemModel.isRadio == NO) {
+                            NSString* tipStr = [NSString stringWithFormat:@"%@不能为空", itemModel.title];
+                            
                             *result = NO;
+                            
+                            [MBProgressHUD showError:tipStr];
+                            
                             break;
                         }
+                        if ([itemModel.title containsString:@"电话"]) {
+                            if (![itemModel.text isMobile]) {
+                                [MBProgressHUD showError:@"联系电话格式错误"];
+                                *result = NO;
+                                break;
+                            }
+                        }
                     }
+                    
                     if (itemModel.isDate) {
                         [commitModel setValue:[itemModel.text timeIntervalWithDateStr] forKey:itemModel.commitStr];
                     } else if (itemModel.isRadio) {

@@ -16,4 +16,6 @@
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) BOOL canLookUpDetail;
 
+@property (nonatomic, assign) BOOL isVisit;// 带看：上传现场确认单
+
 @end

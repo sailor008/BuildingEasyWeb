@@ -106,6 +106,8 @@
 		CF413D571EEAE9A0009A1B50 /* BaobeiController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF413D551EEAE9A0009A1B50 /* BaobeiController.xib */; };
 		CF413D5A1EEAF44E009A1B50 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF413D591EEAF44E009A1B50 /* NSString+Addition.m */; };
 		CF45481E1EEEE3E0001829E9 /* BuildingListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */; };
+		CF51663B1F28BFE9005C0C38 /* EditShowHideSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF51663A1F28BFE9005C0C38 /* EditShowHideSectionView.m */; };
+		CF51663D1F28C039005C0C38 /* EditShowHideSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF51663C1F28C039005C0C38 /* EditShowHideSectionView.xib */; };
 		CF52681B1F05400A00166E2F /* UploadImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF52681A1F05400A00166E2F /* UploadImageManager.m */; };
 		CF52681E1F054C5A00166E2F /* UIImage+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = CF52681D1F054C5A00166E2F /* UIImage+Addition.m */; };
 		CF5268211F05500900166E2F /* TakeUpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF5268201F05500900166E2F /* TakeUpModel.m */; };
@@ -350,6 +352,9 @@
 		CF413D591EEAF44E009A1B50 /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
 		CF45481C1EEEE3E0001829E9 /* BuildingListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingListModel.h; sourceTree = "<group>"; };
 		CF45481D1EEEE3E0001829E9 /* BuildingListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingListModel.m; sourceTree = "<group>"; };
+		CF5166391F28BFE9005C0C38 /* EditShowHideSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditShowHideSectionView.h; sourceTree = "<group>"; };
+		CF51663A1F28BFE9005C0C38 /* EditShowHideSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditShowHideSectionView.m; sourceTree = "<group>"; };
+		CF51663C1F28C039005C0C38 /* EditShowHideSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditShowHideSectionView.xib; sourceTree = "<group>"; };
 		CF5268191F05400A00166E2F /* UploadImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageManager.h; sourceTree = "<group>"; };
 		CF52681A1F05400A00166E2F /* UploadImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageManager.m; sourceTree = "<group>"; };
 		CF52681C1F054C5A00166E2F /* UIImage+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Addition.h"; sourceTree = "<group>"; };
@@ -809,6 +814,9 @@
 				CF0CEB1A1EFEABC30018B35B /* EditSectionView.h */,
 				CF0CEB1B1EFEABC30018B35B /* EditSectionView.m */,
 				CF0CEB1D1EFEABEE0018B35B /* EditSectionView.xib */,
+				CF5166391F28BFE9005C0C38 /* EditShowHideSectionView.h */,
+				CF51663A1F28BFE9005C0C38 /* EditShowHideSectionView.m */,
+				CF51663C1F28C039005C0C38 /* EditShowHideSectionView.xib */,
 				CF0524791EFF51FB00BE8840 /* PhotoView.h */,
 				CF05247A1EFF51FB00BE8840 /* PhotoView.m */,
 				CF05247C1EFF523F00BE8840 /* PhotoView.xib */,
@@ -1141,6 +1149,7 @@
 				C7CA422A1F10769B00112216 /* CustomerStateTVCell.xib in Resources */,
 				CF30C3C81EF4BFCC0070D124 /* BuildingProgressCell.xib in Resources */,
 				C782F4901EE9D7430067C07F /* MeCellStatus.xib in Resources */,
+				CF51663D1F28C039005C0C38 /* EditShowHideSectionView.xib in Resources */,
 				C79058431F1B062E00D95FBA /* PickPhotoView.xib in Resources */,
 				CF5A4CB81EE065C6002A281B /* LoginController.xib in Resources */,
 				CF0BE8541EFBFE360003DFC7 /* TextDetailController.xib in Resources */,
@@ -1307,6 +1316,7 @@
 				CF0CEB131EFEA8D20018B35B /* TakeUpEditController.m in Sources */,
 				CF0524811EFF54A400BE8840 /* PhotoCell.m in Sources */,
 				C71749971F09404D0085E590 /* CustomerStatisticController.m in Sources */,
+				CF51663B1F28BFE9005C0C38 /* EditShowHideSectionView.m in Sources */,
 				CFEAFF6C1EF66971000EEB27 /* BuildAdviserView.m in Sources */,
 				C782F49E1EED21790067C07F /* FeedbackController.m in Sources */,
 				C782F4991EEBCAD80067C07F /* AboutMeController.m in Sources */,

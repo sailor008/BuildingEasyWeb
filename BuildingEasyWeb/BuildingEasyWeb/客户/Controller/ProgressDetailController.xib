@@ -27,6 +27,7 @@
                 <outlet property="tableView" destination="b9Q-tq-yDE" id="l8Z-9V-5yC"/>
                 <outlet property="tableViewHeight" destination="qTF-QG-n5B" id="Nxh-Mb-eVG"/>
                 <outlet property="timeLabel" destination="rgf-aK-sWP" id="csu-hu-9Pa"/>
+                <outlet property="tipLabel" destination="cjt-ag-xsW" id="Jju-tF-Rci"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -494,6 +495,12 @@
                                                 <constraint firstAttribute="height" constant="1" id="x3A-0B-dDH"/>
                                             </constraints>
                                         </view>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(请谨慎填写，以防系统确认失误)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjt-ag-xsW">
+                                            <rect key="frame" x="81.5" y="14.5" width="180.5" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -503,8 +510,10 @@
                                         <constraint firstAttribute="trailing" secondItem="LYj-JC-FBy" secondAttribute="trailing" id="RXW-kR-m6A"/>
                                         <constraint firstAttribute="height" constant="40" id="Srz-JZ-6Wi"/>
                                         <constraint firstAttribute="trailing" secondItem="CpH-hK-W7i" secondAttribute="trailing" constant="20" id="VwN-sg-dAR"/>
+                                        <constraint firstItem="cjt-ag-xsW" firstAttribute="bottom" secondItem="ldl-zC-08V" secondAttribute="bottom" id="lhl-wK-ZqU"/>
                                         <constraint firstItem="ldl-zC-08V" firstAttribute="leading" secondItem="eez-iq-0a8" secondAttribute="leading" constant="20" id="oDv-4O-bcI"/>
                                         <constraint firstItem="LYj-JC-FBy" firstAttribute="leading" secondItem="eez-iq-0a8" secondAttribute="leading" id="p7e-Ki-ghH"/>
+                                        <constraint firstItem="cjt-ag-xsW" firstAttribute="leading" secondItem="ldl-zC-08V" secondAttribute="trailing" id="xyK-1p-nUr"/>
                                     </constraints>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b9Q-tq-yDE">

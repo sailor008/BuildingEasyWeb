@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIView *lookUpDetailView;
+@property (weak, nonatomic) IBOutlet UILabel *lookUpDetailLabel;
 
 @end
 
@@ -73,6 +74,16 @@
         _lookUpDetailView.hidden = !canLookUpDetail;
     } else {
         _lookUpDetailView.hidden = YES;
+    }
+}
+
+- (void)setIsVisit:(BOOL)isVisit
+{
+    _isVisit = isVisit;
+    if (isVisit) {
+        _lookUpDetailLabel.text = @"上传现场确认单";
+    } else {
+        _lookUpDetailLabel.text = @"查看详情";
     }
 }
 

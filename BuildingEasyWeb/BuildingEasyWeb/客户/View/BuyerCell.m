@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *clientTextField;
 @property (weak, nonatomic) IBOutlet UITextField *clientIdcardTextField;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *showHideButton;
+
 @end
 
 @implementation BuyerCell
@@ -65,6 +68,8 @@
     _phoneTextField.enabled = model.canEdit;
     _clientTextField.enabled = model.canEdit;
     _clientIdcardTextField.enabled = model.canEdit;
+    
+    _showHideButton.selected = _model.isShow;
 }
 
 #pragma mark Action
@@ -80,6 +85,18 @@
         _model.client = _clientTextField.text;
     } else if (textField == _clientIdcardTextField) {
         _model.clientIdcard = _clientIdcardTextField.text;
+    }
+}
+
+- (IBAction)showHideTap:(UIButton *)sender
+{
+    if (_model.isShow == YES) {
+        return;
+    }
+    sender.selected = YES;
+    _model.isShow = YES;
+    if (_delegate && [_delegate respondsToSelector:@selector(buyerCellShowHide:withModel:)]) {
+        [_delegate buyerCellShowHide:sender.isSelected withModel:_model];
     }
 }
 

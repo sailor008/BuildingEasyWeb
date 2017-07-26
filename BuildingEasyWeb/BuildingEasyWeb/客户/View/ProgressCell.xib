@@ -104,6 +104,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lookUpDetailLabel" destination="vC8-mb-ZaY" id="gpr-Uk-q3Q"/>
                 <outlet property="lookUpDetailView" destination="dhV-LD-5gc" id="aCn-gE-gd5"/>
                 <outlet property="progressImageView" destination="yGC-Ql-PaA" id="c2y-AV-k2n"/>
                 <outlet property="stateLabel" destination="PC2-04-O7D" id="EIA-ug-SNA"/>
