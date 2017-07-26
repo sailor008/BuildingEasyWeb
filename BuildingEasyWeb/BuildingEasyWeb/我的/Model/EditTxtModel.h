@@ -12,4 +12,6 @@
 @property (nonatomic, copy) NSString* title;
 @property (nonatomic, copy) NSString* placeholder;
 @property (nonatomic, copy) NSString* text;
+@property (nonatomic, copy) NSString* tipString;
+
 @end

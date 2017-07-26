@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="btnEnsure" destination="c0d-nk-sjc" id="VpN-wa-5ly"/>
                 <outlet property="footView" destination="muI-t6-OXB" id="BXu-JN-chX"/>
+                <outlet property="phoneLabel" destination="b1f-X2-tSL" id="tUv-Tu-aYL"/>
                 <outlet property="tableView" destination="ZyP-4x-xH2" id="D7y-eF-809"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,8 +28,35 @@
                         <outlet property="delegate" destination="-1" id="dYp-Tw-7Td"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIn-aR-adp" userLabel="bottomView">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客服电话：0755-26666786" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1f-X2-tSL">
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.4549019608" green="0.4549019608" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kod-P1-Ghl" userLabel="btnPhone">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="95" id="Nva-ZD-pq5"/>
+                            </constraints>
+                            <connections>
+                                <action selector="onBtnPhone:" destination="-1" eventType="touchUpInside" id="va3-Uv-Trb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Kod-P1-Ghl" firstAttribute="trailing" secondItem="b1f-X2-tSL" secondAttribute="trailing" id="8ZH-Fu-j7L"/>
+                        <constraint firstItem="b1f-X2-tSL" firstAttribute="centerY" secondItem="BIn-aR-adp" secondAttribute="centerY" id="G0k-Q8-3pu"/>
+                        <constraint firstAttribute="height" constant="45" id="SqH-mb-s5n"/>
+                        <constraint firstItem="b1f-X2-tSL" firstAttribute="centerX" secondItem="BIn-aR-adp" secondAttribute="centerX" id="cFw-Cq-6Qd"/>
+                        <constraint firstItem="Kod-P1-Ghl" firstAttribute="centerY" secondItem="b1f-X2-tSL" secondAttribute="centerY" id="oBX-Ld-RqY"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
+                <constraint firstItem="BIn-aR-adp" firstAttribute="trailing" secondItem="ZyP-4x-xH2" secondAttribute="trailing" id="ABN-sg-cxY"/>
+                <constraint firstItem="BIn-aR-adp" firstAttribute="leading" secondItem="ZyP-4x-xH2" secondAttribute="leading" id="BQl-tK-e5A"/>
+                <constraint firstItem="BIn-aR-adp" firstAttribute="bottom" secondItem="ZyP-4x-xH2" secondAttribute="bottom" id="Swe-y4-AIh"/>
                 <constraint firstItem="ZyP-4x-xH2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Zbz-op-9Ac"/>
                 <constraint firstAttribute="bottom" secondItem="ZyP-4x-xH2" secondAttribute="bottom" id="Zvm-g2-lSo"/>
                 <constraint firstItem="ZyP-4x-xH2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="u8Y-DX-daq"/>
@@ -41,6 +69,9 @@
             <subviews>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0d-nk-sjc">
                     <color key="backgroundColor" red="1" green="0.29803921570000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="DAP-Ox-hxM"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="保存">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,7 +81,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="c0d-nk-sjc" firstAttribute="centerX" secondItem="muI-t6-OXB" secondAttribute="centerX" id="Ckj-ae-RuK"/>
-                <constraint firstAttribute="bottom" secondItem="c0d-nk-sjc" secondAttribute="bottom" constant="20" id="Lo6-LK-vBR"/>
                 <constraint firstItem="c0d-nk-sjc" firstAttribute="leading" secondItem="muI-t6-OXB" secondAttribute="leading" constant="10" id="TUs-QF-Q5e"/>
                 <constraint firstItem="c0d-nk-sjc" firstAttribute="top" secondItem="muI-t6-OXB" secondAttribute="top" constant="62" id="kLB-M1-82n"/>
             </constraints>
