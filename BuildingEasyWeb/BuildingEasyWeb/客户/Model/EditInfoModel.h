@@ -32,6 +32,9 @@
 @property (nonatomic, copy) NSString* client;
 @property (nonatomic, copy) NSString* clientIdcard;
 
+// 辅助使用
+@property (nonatomic, assign) BOOL isShow;
+
 - (instancetype)initWithTitle:(NSString *)title placeholder:(NSString *)placeholder text:(NSString *)text commitStr:(NSString *)commitStr;
 
 @end

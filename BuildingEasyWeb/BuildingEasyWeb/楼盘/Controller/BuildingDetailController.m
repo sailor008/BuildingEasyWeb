@@ -245,20 +245,21 @@
     
     UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    BEWAlertAction* baiduAction = [BEWAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //百度地图
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
+    
+    //百度地图
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
+        BEWAlertAction* baiduAction = [BEWAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
             NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/marker?location=%f,%f&title=%@&content=%@", _detail.buildInfo.latitude.floatValue, _detail.buildInfo.longitude.floatValue, _detail.buildInfo.name, _detail.buildInfo.address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }
-    }];
-    [sheet addAction:baiduAction];
+        }];
+        [sheet addAction:baiduAction];
+    }
     
-    // 腾讯地图和高德地图用的是火星坐标，而百度地图则是在火星坐标的基础上还进行了加密
-    BEWAlertAction* qqAction = [BEWAlertAction actionWithTitle:@"腾讯地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        //腾讯地图
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"qqmap://"]]) {
+    //腾讯地图
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"qqmap://"]]) {
+        // 腾讯地图和高德地图用的是火星坐标，而百度地图则是在火星坐标的基础上还进行了加密
+        BEWAlertAction* qqAction = [BEWAlertAction actionWithTitle:@"腾讯地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             CLLocationCoordinate2D bd09;
             bd09.latitude = _detail.buildInfo.latitude.floatValue;
@@ -267,16 +268,16 @@
             
             NSString *urlString = [[NSString stringWithFormat:@"qqmap://map/marker?marker=coord:%f,%f;title:%@;addr:%@", gcj02.latitude, gcj02.longitude, _detail.buildInfo.name, _detail.buildInfo.address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             // 网页版腾讯地图
-    //        NSString *urlString = [[NSString stringWithFormat:@"http://apis.map.qq.com/uri/v1/marker?marker=coord:%f,%f;title:%@;addr:%@&referer=myapp", _detail.buildInfo.latitude.floatValue, _detail.buildInfo.longitude.floatValue, _detail.buildInfo.name, _detail.buildInfo.address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+            //        NSString *urlString = [[NSString stringWithFormat:@"http://apis.map.qq.com/uri/v1/marker?marker=coord:%f,%f;title:%@;addr:%@&referer=myapp", _detail.buildInfo.latitude.floatValue, _detail.buildInfo.longitude.floatValue, _detail.buildInfo.name, _detail.buildInfo.address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }
-    }];
-    [sheet addAction:qqAction];
+        }];
+        [sheet addAction:qqAction];
+    }
     
-    BEWAlertAction* amapAction = [BEWAlertAction actionWithTitle:@"高德地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //高德地图
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+    //高德地图
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+        BEWAlertAction* amapAction = [BEWAlertAction actionWithTitle:@"高德地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             CLLocationCoordinate2D bd09;
             bd09.latitude = _detail.buildInfo.latitude.floatValue;
@@ -285,15 +286,16 @@
             
             NSString *urlString = [[NSString stringWithFormat:@"iosamap://viewMap?sourceApplication=楼易经济&poiname=%@&lat=%f&lon=%f&dev=1", _detail.buildInfo.name, gcj02.latitude, gcj02.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }
-    }];
-    [sheet addAction:amapAction];
-    
+        }];
+        [sheet addAction:amapAction];
+    }
     
     BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     [sheet addAction:cancelAction];
-    [self presentViewController:sheet animated:YES completion:nil];
     
+    if (sheet.actions.count > 1) {
+        [self presentViewController:sheet animated:YES completion:nil];
+    }
 }
 
 #pragma mark Request Data

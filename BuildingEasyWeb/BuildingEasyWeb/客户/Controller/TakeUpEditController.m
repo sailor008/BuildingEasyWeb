@@ -24,8 +24,9 @@
 #import "UIView+MBProgressHUD.h"
 #import "NSString+Addition.h"
 #import "UploadImageManager.h"
+#import "EditShowHideSectionView.h"
 
-@interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate, EditSectionViewDelegate, PayTypeCellDelegate>
+@interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate, EditSectionViewDelegate, PayTypeCellDelegate, EditShowHideSectionViewDelegate, BuyerCellDelegate>
 {
     BOOL _canEdit;
 }
@@ -38,6 +39,11 @@
 @property (nonatomic, copy) NSArray* sectionArray;
 
 @property (nonatomic, copy) NSDictionary* takeUpInfo;
+
+@property (nonatomic, strong) UIView* footerView;
+@property (nonatomic, strong) UIView* footerContainView;
+
+@property (nonatomic, strong) NSArray* contractInfoArray;
 
 @end
 
@@ -70,20 +76,64 @@
     }
     
     [_tableView registerNib:[UINib nibWithNibName:@"EditSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"kEditSectionView"];
+    [_tableView registerNib:[UINib nibWithNibName:@"EditShowHideSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"kEditShowHideSectionView"];
     [_tableView registerNibWithName:@"EditTextCell"];
     [_tableView registerNibWithName:@"PayTypeCell"];
     [_tableView registerNibWithName:@"BuyerCell"];
     _tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
+    // tableView footer
+    _footerContainView = [[UIView alloc] init];
+    _footerContainView.frame = CGRectMake(0, 10, ScreenWidth, 118);
+    _footerContainView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel* footerLabel = [[UILabel alloc] init];
+    footerLabel.text = @"认购书";
+    footerLabel.font = [UIFont systemFontOfSize:15];
+    [footerLabel sizeToFit];
+    footerLabel.frame = CGRectMake(10, 20, footerLabel.width, footerLabel.height);
+    [_footerContainView addSubview:footerLabel];
+    
+    CGFloat photoViewTop = 0.0;
+    if (_type == kEditTypeNew) {
+        UILabel* tip1Label = [[UILabel alloc] init];
+        tip1Label.text = @"1.合同关键信息必须拍照;";
+        tip1Label.font = [UIFont systemFontOfSize:13];
+        tip1Label.textColor = Hex(0xff4c00);
+        [tip1Label sizeToFit];
+        tip1Label.frame = CGRectMake(footerLabel.right + 10, footerLabel.top, tip1Label.width, tip1Label.height);
+        [_footerContainView addSubview:tip1Label];
+        
+        UILabel* tip2Label = [[UILabel alloc] init];
+        tip2Label.text = @"2.如若有认筹项目，请一并上传认筹书。";
+        tip2Label.font = [UIFont systemFontOfSize:13];
+        tip2Label.textColor = Hex(0xff4c00);
+        [tip2Label sizeToFit];
+        tip2Label.frame = CGRectMake(footerLabel.right + 10, tip1Label.bottom, tip2Label.width, tip2Label.height);
+        [_footerContainView addSubview:tip2Label];
+        
+        photoViewTop = tip2Label.bottom;
+    }
+    
     _photoView = [[[NSBundle mainBundle] loadNibNamed:@"PhotoView" owner:nil options:nil] lastObject];
     _photoView.delegate = self;
-    _photoView.sectionTitle = @"认购书";
+    _photoView.sectionTitle = @"";
     _photoView.limitNum = 9;
-    _photoView.frame = CGRectMake(0, 10, ScreenWidth, 118);
+    _photoView.frame = CGRectMake(footerLabel.right, photoViewTop, ScreenWidth - footerLabel.right, 118);
+    
+    [_footerContainView addSubview:_photoView];
+    
+    _footerContainView.height = _photoView.bottom;
+    
     
     UIView* footerView = [[UIView alloc] init];
     footerView.frame = CGRectMake(0, 0, ScreenWidth, 128);
-    [footerView addSubview:_photoView];
+    
+    [footerView addSubview:_footerContainView];
+    
+    footerView.height = _footerContainView.bottom;
+    
+    _footerView = footerView;
     
     _tableView.tableFooterView = footerView;
 }
@@ -91,8 +141,21 @@
 - (void)setupProperty
 {
     _canEdit = YES;
+    _contractInfoArray = [NSArray array];
     
     _dataArray = [TakeUpManager originalTakeUpArray];
+    {// 预保存合同信息，为了可以展开，不做收缩
+        NSMutableArray* tempArr = [NSMutableArray array];
+        [tempArr addObject:_dataArray[_dataArray.count - 2]];
+        [tempArr addObject:_dataArray[_dataArray.count - 1]];
+        _contractInfoArray = [tempArr copy];
+        
+        tempArr = [_dataArray mutableCopy];
+        [tempArr removeLastObject];
+        [tempArr removeLastObject];
+        
+        _dataArray = [tempArr copy];
+    }
     
     _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"合同信息", @""];
 }
@@ -111,11 +174,18 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if ([_dataArray.lastObject isKindOfClass:[EditInfoModel class]]) {
+        return _dataArray.count + 1;
+    }
     return _dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([_dataArray.lastObject isKindOfClass:[EditInfoModel class]] && section >= _dataArray.count) {
+        return 0;
+    }
+    
     id item = _dataArray[section];
     if ([item isKindOfClass:[EditInfoModel class]]) {
         return 1;
@@ -144,6 +214,7 @@
     } else if (model.isBuyer) {
         BuyerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuyerCell" forIndexPath:indexPath];
         cell.model = model;
+        cell.delegate = self;
         return cell;
     } else {
         EditTextCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EditTextCell" forIndexPath:indexPath];
@@ -157,7 +228,11 @@
 {
     id item = _dataArray[indexPath.section];
     if ([item isKindOfClass:[EditInfoModel class]]) {
-        return 260;
+        if ([(EditInfoModel *)item isShow]) {
+            return 285;
+        } else {
+            return 185;
+        }
     }
     return 50;
 }
@@ -165,15 +240,21 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString* sectionTitle = _sectionArray[section];
-    EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
-    sectionView.delegate = self;
-    sectionView.sectionTitle = sectionTitle;
-    if (section == 2 && _canEdit == YES) {
-        sectionView.canAdd = YES;
+    if ([sectionTitle isEqualToString:@"合同信息"]) {
+        EditShowHideSectionView* sectionView =  [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditShowHideSectionView"];
+        sectionView.delegate = self;
+        return sectionView;
     } else {
-        sectionView.canAdd = NO;
+        EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
+        sectionView.delegate = self;
+        sectionView.sectionTitle = sectionTitle;
+        if (section == 2 && _canEdit == YES) {
+            sectionView.canAdd = YES;
+        } else {
+            sectionView.canAdd = NO;
+        }
+        return sectionView;
     }
-    return sectionView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -191,16 +272,19 @@
     return 0.1;
 }
 
+#pragma mark BuyerCellDelegate
+- (void)buyerCellShowHide:(BOOL)isShowHide withModel:(EditInfoModel *)model
+{
+    [_tableView reloadData];
+}
+
 #pragma mark PhotoViewDelegate
 - (void)photoView:(PhotoView *)photoView resetHeight:(CGFloat)height
 {
     _photoView.height = height;
-    
-    UIView* footerView = [[UIView alloc] init];
-    footerView.frame = CGRectMake(0, 0, ScreenWidth, height + 10);
-    [footerView addSubview:_photoView];
-    
-    _tableView.tableFooterView = footerView;
+    _footerContainView.height = _photoView.bottom;
+    _footerView.height = _footerContainView.bottom;
+    _tableView.tableFooterView = _footerView;
 }
 
 #pragma mark EditSectionViewDelegate
@@ -220,6 +304,21 @@
     _sectionArray = [tempSectionArr copy];
     
     [_tableView reloadData];
+}
+
+#pragma mark EditShowHideSectionViewDelegate
+- (void)sectionShowHide:(BOOL)isShowHide
+{
+    if (isShowHide) {// 展开
+        NSMutableArray* tempArr = [_dataArray mutableCopy];
+        [tempArr addObjectsFromArray:_contractInfoArray];
+        _dataArray = [tempArr copy];
+        
+        [_tableView reloadData];
+        
+    } else {// 收起
+        // 不能直接用deleteSections方式，因为deleteSections会指定删除掉倒数第二个section，但和判断冲突
+    }
 }
 
 #pragma mark PayTypeCellDelegate
@@ -371,6 +470,9 @@
     self.title = @"编辑";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(commit)];
     _canEdit = YES;
+    
+    NSArray* tempArr = [_dataArray copy];
+    
     _dataArray = [TakeUpManager detailTakeUpArrayWithData:_takeUpInfo canEdit:YES];
     // 判断付款方式
     if ([[_takeUpInfo objectForKey:@"type"] boolValue] == NO) {
@@ -385,6 +487,38 @@
         
         _dataArray = [tempArr copy];
     }
+    
+    // 因为有展开收缩，所以需要和之前的数组做对比
+    {
+        BOOL hideContractInfo = NO;
+        for (int i = 2; i < _dataArray.count; i ++) {
+            if (i < tempArr.count) {
+                EditInfoModel* model = tempArr[i];
+                EditInfoModel* editModel = _dataArray[i];
+                editModel.isShow = model.isShow;
+            } else {
+                hideContractInfo = YES;
+            }
+        }
+        if (hideContractInfo == YES) {// 合同信息被收起
+            // 预保存合同信息，为了可以展开，不做收缩
+            NSMutableArray* tempArr = [NSMutableArray array];
+            [tempArr addObject:_dataArray[_dataArray.count - 2]];
+            [tempArr addObject:_dataArray[_dataArray.count - 1]];
+            _contractInfoArray = [tempArr copy];
+            
+            tempArr = [_dataArray mutableCopy];
+            [tempArr removeLastObject];
+            [tempArr removeLastObject];
+            
+            _dataArray = [tempArr copy];
+        }
+        
+    }
+    for (int i = 0; i < tempArr.count; i ++) {
+        
+    }
+    
     [_tableView reloadData];
 }
 
@@ -398,7 +532,6 @@
     [MBProgressHUD showLoadingToView:self.view];
     [NetworkManager postWithUrl:@"wx/getSubscribeInfo" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
-        NSLog(@"reponse:%@", reponse);
         
         _takeUpInfo = reponse;
         
@@ -431,6 +564,19 @@
             
             itemArr = [tempItemArr copy];
             tempArr[tempArr.count - 1] = itemArr;
+            
+            _dataArray = [tempArr copy];
+        }
+        
+        {// 预保存合同信息，为了可以展开，不做收缩
+            NSMutableArray* tempArr = [NSMutableArray array];
+            [tempArr addObject:_dataArray[_dataArray.count - 2]];
+            [tempArr addObject:_dataArray[_dataArray.count - 1]];
+            _contractInfoArray = [tempArr copy];
+            
+            tempArr = [_dataArray mutableCopy];
+            [tempArr removeLastObject];
+            [tempArr removeLastObject];
             
             _dataArray = [tempArr copy];
         }

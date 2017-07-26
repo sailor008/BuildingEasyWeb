@@ -43,6 +43,8 @@ const NSInteger kCustomProgressLabelTag = 2000;
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -186,6 +188,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
     
     cell.index = indexPath.row;
     cell.canLookUpDetail = _canLookDetail;
+    cell.isVisit = (_detailModel.currentState == 1);// 带看
     return cell;
 }
 
@@ -223,10 +226,8 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (void)setupInterFace
 {
     _nameLabel.text = _detailModel.customerName;
-//    _customerNameLabel.text = _detailModel.customerName;
     _customerNameLabel.text = _detailModel.adviser.name;
     _phoneLabel.text = _detailModel.customerMobile;
-//    _phoneLabel.text = _detailModel.adviser.mobile;
     _customerPhoneLabel.text = _detailModel.adviser.mobile;
     _buildNameLabel.text = _detailModel.buildName;
     
@@ -260,9 +261,11 @@ const NSInteger kCustomProgressLabelTag = 2000;
     if (lastState.state < 4 || lastState.state == 7 || lastState.state == 11 || lastState.state == 15 || lastState.state == 19 || lastState.state == 23) {
         _editButton.hidden = YES;
         _canLookDetail = NO;
+        _tipLabel.hidden = YES;
     } else {
         _editButton.hidden = NO;
         _canLookDetail = YES;
+        _tipLabel.hidden = NO;
     }
     
     NSTimeInterval timeInterval = _detailModel.createTime / 1000;
