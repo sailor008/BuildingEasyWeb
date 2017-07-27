@@ -26,7 +26,7 @@
 @property (nonatomic, copy) NSString* userId;
 @property (nonatomic, copy) NSString* faceImg;
 @property (nonatomic, copy) NSString* inverseImg;
-@property (nonatomic, copy) NSString* handImg;
+@property (nonatomic, copy) NSString* storeNum;
 @property (nonatomic, copy) NSString* idCard;
 @property (nonatomic, copy) NSString* businessLicenceImg;
 @property (nonatomic, copy) NSString* company;
