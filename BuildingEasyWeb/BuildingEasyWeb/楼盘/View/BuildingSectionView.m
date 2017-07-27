@@ -126,7 +126,12 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 {
     UIView* containView = _currentButton.superview;
     UILabel* textLabel = containView.subviews[0];
-    textLabel.text = self.contentArray[indexPath.row];
+    if (indexPath.row == 0) {
+        NSArray* titleArr = @[@"区域", @"类型", @"价格", @"距离"];
+        textLabel.text = titleArr[_currentButton.tag - kBuildingSectionButtonBaseTag];
+    } else {
+        textLabel.text = self.contentArray[indexPath.row];
+    }
     
     [self tapButtonToShowHideFilter:_currentButton];
     if (_delegate && [_delegate respondsToSelector:@selector(selectFilterResultIndex:currentTag:)]) {

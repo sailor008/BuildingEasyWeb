@@ -28,6 +28,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
 @interface ProgressDetailController () <UITableViewDataSource, UITableViewDelegate>
 {
     BOOL _canLookDetail;
+    CGFloat _reportStrWidth;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -62,6 +63,8 @@ const NSInteger kCustomProgressLabelTag = 2000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    _reportStrWidth = ScreenWidth - 54 - 87.5 - 20;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kEditSuceess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestData) name:kBaobeiModifySuccess object:nil];
@@ -195,7 +198,18 @@ const NSInteger kCustomProgressLabelTag = 2000;
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55;
+    NSInteger i = _detailModel.stateList.count - 1 - indexPath.row;
+    StateList* model = _detailModel.stateList[i];
+    CGFloat reportStrHeight = [model.report boundingRectWithSize:CGSizeMake(_reportStrWidth, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+    
+    CGFloat cellHeight = reportStrHeight + 10.5 + 26;
+    
+    if (cellHeight < 55) {
+        return 55;
+    }
+    
+    return cellHeight;
+//    return 55;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
