@@ -32,8 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self initUI];
     
+    [self initUI];
     [self setupProperty];
     [self addTableViewRefresh];
  
@@ -65,6 +65,10 @@
 
 - (void)setupProperty
 {
+    //进入到 我的信息 界面，就保存当前已拿到的最大消息id
+    [User shareUser].messageId = [NSString stringWithFormat:@"%lu", (unsigned long) [User shareUser].maxMsgId];
+    [[User shareUser] saveUserInfoToFile];
+    
     _nowMaxMsgId = 0;
     _msgDataArr = [NSMutableArray array];
     
@@ -88,7 +92,7 @@
                                  };
     [NetworkManager postWithUrl:@"wx/getUserMessageList" parameters:parameters success:^(id reponse) {
 //        NSLog(@"Success：获取用户消息列表>>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
-        NSArray* tmpArray = (NSArray *)reponse;
+        NSArray* tmpArray = (NSArray *)[reponse objectForKey:@"messageInfos"];
         NSInteger startIdx = (_tableview.page - 1) * pageSize;
         for (NSDictionary* dic in tmpArray) {
             MsgModel* model = [MsgModel mj_objectWithKeyValues:dic];
@@ -102,15 +106,7 @@
             ////下滑列表时，指定页数
             _tableview.page = (NSInteger)ceil(_msgDataArr.count / pageSize);
         }
-//        NSLog(@"当前获取到的最大信息id = %lu", (unsigned long)_nowMaxMsgId);
-        [User shareUser].messageId = [NSString stringWithFormat:@"%lu", (unsigned long)_nowMaxMsgId];
-        [[User shareUser] saveUserInfoToFile];
-
-        if(_nowMaxMsgId < self.maxMsgId) {
-            _tableview.hasNext = YES;
-        } else {
-            _tableview.hasNext = NO;
-        }
+        _tableview.hasNext = [[reponse objectForKey:@"hasNext"] boolValue];
         
         [_tableview cyl_reloadData];
         [TableRefreshManager tableViewEndRefresh:_tableview];
