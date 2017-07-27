@@ -77,7 +77,7 @@
 {
     [MBProgressHUD showLoading];
     [NetworkManager postWithUrl:@"wx/getStateNumList" parameters:@{} success:^(id reponse) {
-//        NSLog(@"Success：获取统计筛选条件 [wx/getStateNumList] 成功！");
+//        NSLog(@"Success：获取统计筛选条件 [wx/getStateNumList] 成功！%@", reponse);
         NSArray* tmpArray = (NSArray *)reponse;
         NSMutableArray* statelist = [NSMutableArray array];
         [statelist removeAllObjects];
@@ -87,7 +87,7 @@
         }
         
         [MBProgressHUD hideHUD];
-        _stateList = statelist;
+        self.stateList = statelist;
         
         if(reqSuccessCallback) {
             reqSuccessCallback();

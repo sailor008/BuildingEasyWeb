@@ -50,7 +50,11 @@ static const NSString* host = @"113.209.77.204:11071";
         [NetworkManager handleWithResponseObject:responseObject success:successBlock failure:failureBlock];
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failureBlock(error, error.domain);
+        NSString* errorTipStr = error.domain;
+        if(error.code < 2000){
+            errorTipStr = @"网络连接失败！";
+        }
+        failureBlock(error, errorTipStr);
     }];
 }
 
@@ -67,7 +71,11 @@ static const NSString* host = @"113.209.77.204:11071";
         [NetworkManager handleWithResponseObject:responseObject success:successBlock failure:failureBlock];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failureBlock(error, error.domain);
+        NSString* errorTipStr = error.domain;
+        if(error.code < 2000){
+            errorTipStr = @"网络连接失败！";
+        }
+        failureBlock(error, errorTipStr);
     }];
 }
 
