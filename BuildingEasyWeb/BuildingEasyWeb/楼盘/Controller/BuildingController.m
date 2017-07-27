@@ -438,6 +438,8 @@
 - (void)tapAds:(NSInteger)adsIndex
 {
     if (_bannerIdArr.count > 0) {
+        [self dismissSearch:nil];
+        
         BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
         detailVC.hidesBottomBarWhenPushed = YES;
         detailVC.buildId = [NSString stringWithFormat:@"%ld", [_bannerIdArr[adsIndex] integerValue]];
@@ -504,6 +506,13 @@
     [self setupLocationButtonFace:city];
     
     [User shareUser].city = city;
+    
+    _averAgeId = @"0";
+    _distanceId = @"0";
+    _classifyId = @"0";
+    _keyword = @"";
+    [User shareUser].areaCode = @"0";
+    
     [_tableView.mj_header beginRefreshing];
 }
 
@@ -555,10 +564,13 @@
 
 - (IBAction)dismissSearch:(id)sender
 {
+    _searchTextField.text = nil;
+    _keyword = @"";
     [_searchTextField resignFirstResponder];
     [UIView animateWithDuration:0.5 animations:^{
         _searchBarView.left = ScreenWidth;
     }];
+    [_tableView.mj_header beginRefreshing];
 }
 
 @end

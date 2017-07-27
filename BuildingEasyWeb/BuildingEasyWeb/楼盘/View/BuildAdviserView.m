@@ -62,7 +62,10 @@
 - (IBAction)tapSure:(id)sender
 {
     NSIndexPath* indexPath = [_tableView indexPathForSelectedRow];
-    
+    if (_adviserArray.count <= indexPath.row) {
+        [self removeFromSuperview];
+        return;
+    }
     BuildAdviser* adviser = _adviserArray[indexPath.row];
     _model.selectedAdviser = adviser;
     if (_delegate && [_delegate respondsToSelector:@selector(selectedAdviser)]) {
