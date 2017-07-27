@@ -205,10 +205,10 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareSuccess) name:kShareSuccess object:nil];
 
-    NSMutableString* desc = [NSMutableString string];
-    for (FormulaModel* model in _detail.formulaList) {
-        [desc appendFormat:@"%@,%@,%@,%@", model.apartment, model.formula, model.formulaDesc, model.buildDesc];
-    }
+//    NSMutableString* desc = [NSMutableString string];
+//    for (FormulaModel* model in _detail.formulaList) {
+//        [desc appendFormat:@"%@,%@,%@,%@", model.apartment, model.formula, model.formulaDesc, model.buildDesc];
+//    }
     
     WXWebpageObject *ext = [WXWebpageObject object];
 //    ext.webpageUrl = @"http://113.209.77.204:11072/building/dist/index.html";
@@ -217,7 +217,7 @@
     
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = _detail.buildInfo.name;
-    message.description = desc;
+    message.description = @"【买楼易 卖楼易】";
     message.mediaObject = ext;
     message.messageExt = nil;
     message.messageAction = nil;

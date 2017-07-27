@@ -244,24 +244,28 @@
     [MBProgressHUD showLoadingToView:self.view];
     NSString* keyWord = _searchTextField.text.length ? _searchTextField.text : @"";
     
-    NSDictionary* parameters = @{@"averAgeId":@0,
-                                 @"distanceId":@0,
-                                 @"classifyId":@0,
-                                 @"areaCode":_areaCode,
-                                 @"city":_city,
+//    NSDictionary* parameters = @{@"averAgeId":@0,
+//                                 @"distanceId":@0,
+//                                 @"classifyId":@0,
+//                                 @"areaCode":_areaCode,
+//                                 @"city":_city,
+//                                 @"lon":@([User shareUser].lng),
+//                                 @"lat":@([User shareUser].lat),
+//                                 @"pageNo":@(_tableView.page),
+//                                 @"pageSize":@10,
+//                                 @"keyword":keyWord};
+    NSDictionary* parameters = @{@"city":_city,
                                  @"lon":@([User shareUser].lng),
                                  @"lat":@([User shareUser].lat),
                                  @"pageNo":@(_tableView.page),
                                  @"pageSize":@10,
                                  @"keyword":keyWord};
-    [NetworkManager postWithUrl:@"wx/getBuildList" parameters:parameters success:^(id reponse) {
+    [NetworkManager postWithUrl:@"wx/getBuildListV" parameters:parameters success:^(id reponse) {
         [MBProgressHUD hideHUDForView:self.view];
         if (_tableView.page == 1) {
             [_buildingArr removeAllObjects];
             
             [_buildIdArr removeAllObjects];
-//            [_selectedIDArr removeAllObjects];
-//            self.navigationItem.rightBarButtonItem.title = @"确定";
         }
         
         _tableView.page ++;

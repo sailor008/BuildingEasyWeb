@@ -396,6 +396,10 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     for (int i = 0; i < _bulidList.count; i ++) {
         BuildBaobeiModel* model = _bulidList[i];
         [buildIdsStr appendString:model.buildModel.buildId];
+        if (model.selectedAdviser.adviserId.length == 0) {
+            [MBProgressHUD dissmissWithError:@"该楼盘无法报备，请重新选择楼盘" toView:self.view];
+            return;
+        }
         [adviserIdsStr appendString:model.selectedAdviser.adviserId];
         
         if (i < _bulidList.count - 1) {
