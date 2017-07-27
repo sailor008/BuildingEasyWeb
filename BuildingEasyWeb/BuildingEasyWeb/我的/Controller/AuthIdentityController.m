@@ -11,15 +11,18 @@
 #import "UIView+MBProgressHUD.h"
 #import "UITableView+Addition.h"
 #import "UIView+Addition.h"
+#import "NSString+Addition.h"
 
 #import "PickPhotoView.h"
 //#import "PhotoView.h"
 #import "EditTxtTVCell.h"
 #import "SampleEditTxtCell.h"
+#import "BEWAlertAction.h"
 
 #import "Global.h"
 #import "User.h"
 #import "UploadImageManager.h"
+#import "OpenSystemUrlManager.h"
 #import "NetworkManager.h"
 
 
@@ -27,8 +30,11 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *footView;
 @property (weak, nonatomic) IBOutlet UIButton *btnEnsure;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 
-@property (nonatomic, strong) SampleEditTxtCell* editTxtCell;
+@property (nonatomic, strong) SampleEditTxtCell* fEditTxtCell;
+@property (nonatomic, strong) SampleEditTxtCell* sEditTxtCell;
+
 @property (nonatomic, copy) NSMutableArray* photoViewArray;
 @property (nonatomic, copy) NSMutableArray* tmpUploadArray;
 @property (nonatomic, assign)int successUploadCount;
@@ -78,6 +84,7 @@
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
         firstCellModel.title = @"企业名称";
         firstCellModel.placeholder = @"请输入企业名称";
+        firstCellModel.tipString = @"请输入企业名称!";
         firstCellModel.text = _userExtModel.company;
         _editTxtCfgArray = @[firstCellModel];
         
@@ -88,13 +95,20 @@
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
         firstCellModel.title = @"身份证号";
         firstCellModel.placeholder = @"请输入身份证号";
+        firstCellModel.tipString = @"请输入身份证号!";
         firstCellModel.text = _userExtModel.idCard;
         _editTxtCfgArray = @[firstCellModel];
+        
+        EditTxtModel* secondCellModel = [[EditTxtModel alloc]init];
+        secondCellModel.title = @"门店编号";
+        secondCellModel.placeholder = @"请输入门店编号";
+        secondCellModel.tipString = @"请输入门店编号!";
+        secondCellModel.text = _userExtModel.storeNum;
+        _editTxtCfgArray = @[firstCellModel, secondCellModel];
 
         _photoviewCfgArray = @[
                        @{@"title":@"身份证正面：", @"tag":@0, @"desc":@"请上传身份证正面！", @"imgPath":_userExtModel.faceImg},
                        @{@"title":@"身份证背面：", @"tag":@1, @"desc":@"请上传身份证背面！", @"imgPath":_userExtModel.inverseImg},
-                       @{@"title":@"手持身份证：", @"tag":@2, @"desc":@"请上传手持身份证！", @"imgPath":_userExtModel.handImg},
                        ];
     }
 }
@@ -113,7 +127,6 @@
         photoview.frame = CGRectMake(0, 0, ScreenWidth, 60);
         NSString* initPath = [cfgInfo objectForKey:@"imgPath"];
         if(initPath.length) {
-//            NSLog(@"photoView 的初始图片：%@", initPath);
             photoview.sourceUrlArray = [NSArray arrayWithObject:initPath];
         }
         if([[User shareUser].auth integerValue] == 1) {
@@ -123,23 +136,41 @@
     }
     
     CGFloat eTxtHeight = 50;
-    EditTxtModel* editTxtModel = _editTxtCfgArray[0];
-    _editTxtCell = [[SampleEditTxtCell alloc]init];
-    _editTxtCell.view.frame = CGRectMake(0, 10, ScreenWidth, eTxtHeight);
-    _editTxtCell.model = editTxtModel;
-    
     UIView* headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(0, 0, ScreenWidth, eTxtHeight + 10);
+    headerView.frame = CGRectMake(0, 0, ScreenWidth, eTxtHeight * _editTxtCfgArray.count + 10);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [headerView addSubview:_editTxtCell.view];
+    NSMutableArray *tmpCellArr = [[NSMutableArray alloc]init];
+    //添加输入框：身份证号 or 公司名称
+    EditTxtModel* fTxtModel = _editTxtCfgArray[0];
+    _fEditTxtCell = [[SampleEditTxtCell alloc]init];
+    _fEditTxtCell.view.frame = CGRectMake(0, 10 + eTxtHeight * 0, ScreenWidth, eTxtHeight);
+    _fEditTxtCell.model = fTxtModel;
+    [tmpCellArr addObject:_fEditTxtCell];
+    [headerView addSubview:_fEditTxtCell.view];
+    //添加输入框：门店编号
+    if(_editTxtCfgArray.count > 1) {
+        EditTxtModel* sTxtModel = _editTxtCfgArray[1];
+        _sEditTxtCell = [[SampleEditTxtCell alloc]init];
+        _sEditTxtCell.view.frame = CGRectMake(0, 10 + eTxtHeight * 1, ScreenWidth, eTxtHeight);
+        _sEditTxtCell.model = sTxtModel;
+        [tmpCellArr addObject:_sEditTxtCell];
+        [headerView addSubview:_sEditTxtCell.view];
+    }
     _tableView.tableHeaderView = headerView;
     
+    
     if([[User shareUser].auth integerValue] == 1) {
-        //已通过认证
-        [_editTxtCell setTextEnable:NO];
+        ////已通过认证时，输入框不能操作
+        for(int i = 0; i < tmpCellArr.count; i++) {
+            SampleEditTxtCell* editTxtCell = tmpCellArr[i];
+            [editTxtCell setTextEnable:NO];
+        }
     } else {
-        [_editTxtCell setTextEnable:YES];
-
+        for(int i = 0; i < tmpCellArr.count; i++) {
+            SampleEditTxtCell* editTxtCell = tmpCellArr[i];
+            [editTxtCell setTextEnable:YES];
+        }
+        
         _btnEnsure.backgroundColor = Hex(0xff4c00);
         _btnEnsure.layer.masksToBounds = YES;
         _btnEnsure.layer.cornerRadius = 2.5f;
@@ -157,14 +188,17 @@
 - (void)onBtnEnsure:(UIButton*)btn
 {
     //check edit txt is nil
-    EditTxtModel* editTxtModel = _editTxtCfgArray[0];
-    if (!editTxtModel.text.length) {
-        if([[User shareUser].role intValue] == kAgencyRole) {
-            [MBProgressHUD showError:@"请输入企业名称！"];
-        } else {
-            [MBProgressHUD showError:@"请输入身份证号码！"];
-        }
+    NSString* fTxtStr = _fEditTxtCell.model.text;
+    if (fTxtStr == nil || [fTxtStr isStringBlank]) {
+        [MBProgressHUD showError:_fEditTxtCell.model.tipString];
         return;
+    }
+    if(_sEditTxtCell != nil ) {
+        NSString* sTxtVal = _sEditTxtCell.model.text;
+        if(sTxtVal == nil || [sTxtVal isStringBlank]){
+            [MBProgressHUD showError:_sEditTxtCell.model.tipString];
+            return;
+        }
     }
     
     //check image is select
@@ -265,9 +299,14 @@
 - (void)confirmSaveAuthInfo
 {
     kWeakSelf(weakSelf);
-    NSString* strInfo = _editTxtCell.model.text;
-//    NSLog(@"身份证号 or 公司名：%@", strInfo);
-    NSDictionary* params = @{@"information":strInfo, @"role":[User shareUser].role};
+    NSString* strInfo = _fEditTxtCell.model.text;
+    NSString* strStoreNum = @"";
+    if(_sEditTxtCell != nil){
+        strStoreNum = _sEditTxtCell.model.text;
+    }
+    NSDictionary* params = @{@"information":strInfo,
+                             @"storeNum":strStoreNum,
+                             @"role":[User shareUser].role};
     [NetworkManager postWithUrl:@"wx/authUser" parameters:params success:^(id reponse) {
         NSLog(@"提交认证 [wx/authUser] 成功！");
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -317,5 +356,20 @@
     }
     return cell;
 }
+
+- (IBAction)onBtnPhone:(id)sender {
+    UIAlertController* sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+
+    BEWAlertAction* phoneAction = [BEWAlertAction actionWithTitle:@"联系客服" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         NSArray * tmpStrArr = [_phoneLabel.text componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"："]];
+        NSString* phoneNum = tmpStrArr[1];
+        [OpenSystemUrlManager callPhone:phoneNum];
+    }];
+    [sheet addAction:phoneAction];
+    BEWAlertAction* cancelAction = [BEWAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [sheet addAction:cancelAction];
+    [self presentViewController:sheet animated:YES completion:nil];
+}
+
 
 @end
