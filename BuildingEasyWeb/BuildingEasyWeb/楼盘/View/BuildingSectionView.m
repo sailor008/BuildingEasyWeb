@@ -124,6 +124,10 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIView* containView = _currentButton.superview;
+    UILabel* textLabel = containView.subviews[0];
+    textLabel.text = self.contentArray[indexPath.row];
+    
     [self tapButtonToShowHideFilter:_currentButton];
     if (_delegate && [_delegate respondsToSelector:@selector(selectFilterResultIndex:currentTag:)]) {
         [_delegate selectFilterResultIndex:indexPath.row currentTag:_currentButtonTag];
