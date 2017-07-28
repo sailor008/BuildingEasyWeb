@@ -37,11 +37,14 @@
             </constraints>
         </view>
         <view contentMode="scaleToFill" id="fuq-zW-d85">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYl-Ru-1EV">
                     <color key="backgroundColor" red="1" green="0.29803921568627451" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="7Ve-zH-tks"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="退出">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,7 +54,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="wYl-Ru-1EV" firstAttribute="top" secondItem="fuq-zW-d85" secondAttribute="top" constant="51" id="0eD-hp-L96"/>
-                <constraint firstAttribute="bottom" secondItem="wYl-Ru-1EV" secondAttribute="bottom" id="YFI-sV-tdi"/>
                 <constraint firstItem="wYl-Ru-1EV" firstAttribute="leading" secondItem="fuq-zW-d85" secondAttribute="leading" constant="10" id="kWl-ia-sfe"/>
                 <constraint firstItem="wYl-Ru-1EV" firstAttribute="centerX" secondItem="fuq-zW-d85" secondAttribute="centerX" id="zCB-dK-aOw"/>
             </constraints>
