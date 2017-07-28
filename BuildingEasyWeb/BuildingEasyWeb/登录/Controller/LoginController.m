@@ -13,15 +13,17 @@
 #import "FindPassWordController.h"
 #import "UIView+MBProgressHUD.h"
 #import "NSString+Addition.h"
+#import "UIView+Addition.h"
 #import "User.h"
 
-@interface LoginController ()
+@interface LoginController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 
 @property (nonatomic, strong) UIView* bottomView;
 @property (nonatomic, strong) UIScrollView* introduceScrollView;
+@property (nonatomic, strong) UIPageControl* pageCtr;
 
 @end
 
@@ -31,8 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    BOOL isFirstLaunch = [[[NSUserDefaults standardUserDefaults] valueForKey:kFirstLaunch] boolValue];
-    if (isFirstLaunch == NO) {
+    BOOL isNoFirstLaunch = [[[NSUserDefaults standardUserDefaults] valueForKey:kFirstLaunch] boolValue];
+    if (isNoFirstLaunch == NO) {
         _bottomView = [[UIView alloc] init];
         _bottomView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         _bottomView.backgroundColor = [UIColor whiteColor];
@@ -42,6 +44,7 @@
         _introduceScrollView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         _introduceScrollView.pagingEnabled = YES;
         _introduceScrollView.showsHorizontalScrollIndicator = NO;
+        _introduceScrollView.delegate = self;
         
         UIImageView* launch1ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_1.jpeg")];
         launch1ImageView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
@@ -62,6 +65,14 @@
         _introduceScrollView.contentSize = CGSizeMake(ScreenWidth * 3, ScreenHeight);
         
         [self.view addSubview:_introduceScrollView];
+        
+        _pageCtr = [[UIPageControl alloc] init];
+        _pageCtr.frame = CGRectMake(ScreenWidth / 2, ScreenHeight - 50, 20, 50);
+        _pageCtr.numberOfPages = 3;
+        _pageCtr.currentPage = 0;
+        _pageCtr.pageIndicatorTintColor = [UIColor blackColor];
+        _pageCtr.currentPageIndicatorTintColor = Hex(0xff4c00);
+        [self.view addSubview:_pageCtr];
         
         [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kFirstLaunch];
     }
@@ -92,9 +103,11 @@
     [UIView animateWithDuration:2 animations:^{
         _bottomView.alpha = 0;
         _introduceScrollView.alpha = 0;
+        _pageCtr.alpha = 0;
     } completion:^(BOOL finished) {
         [_bottomView removeFromSuperview];
         [_introduceScrollView removeFromSuperview];
+        [_pageCtr removeFromSuperview];
     }];
 }
 
@@ -129,6 +142,12 @@
 {
     FindPassWordController* findPWVC = [[FindPassWordController alloc] init];
     [self.navigationController pushViewController:findPWVC animated:YES];
+}
+
+#pragma mark UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    _pageCtr.currentPage = scrollView.contentOffset.x / ScreenWidth;
 }
 
 @end
