@@ -21,6 +21,6 @@
 - (void)registerNibWithName:(NSString *)nibName;
 - (void)registerClassWithName:(NSString *)className;
 
-- (void)bewReload;
+- (void)bewReload;// 覆盖cyl_reload，增加了修改空置位图位置的功能
 
 @end

@@ -226,7 +226,8 @@
             [_buildingArr addObject:model];
         }
         
-        [_tableView cyl_reloadData];
+//        [_tableView cyl_reloadData];
+        [_tableView bewReload];
         [TableRefreshManager tableViewEndRefresh:_tableView];
         
     } failure:^(NSError *error, NSString *msg) {
@@ -423,7 +424,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self dismissSearch:nil];
+//    [self dismissSearch:nil];
+    [self dismissSearchWithRefresh:NO];
     
     BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
     detailVC.hidesBottomBarWhenPushed = YES;
@@ -438,7 +440,8 @@
 - (void)tapAds:(NSInteger)adsIndex
 {
     if (_bannerIdArr.count > 0) {
-        [self dismissSearch:nil];
+//        [self dismissSearch:nil];
+        [self dismissSearchWithRefresh:NO];
         
         BuildingDetailController* detailVC = [[BuildingDetailController alloc] init];
         detailVC.hidesBottomBarWhenPushed = YES;
@@ -544,7 +547,7 @@
 #pragma mark BEWTableViewPlaceHolderDelegate
 - (CGRect)placeHolderViewFrame
 {
-    return CGRectMake(0, 0, 100, 100);
+    return CGRectMake(0, 195 + 38, ScreenWidth, 100);
 }
 
 #pragma mark Action
@@ -564,13 +567,20 @@
 
 - (IBAction)dismissSearch:(id)sender
 {
+    [self dismissSearchWithRefresh:YES];
+}
+
+- (void)dismissSearchWithRefresh:(BOOL)refresh
+{
     _searchTextField.text = nil;
     _keyword = @"";
     [_searchTextField resignFirstResponder];
     [UIView animateWithDuration:0.5 animations:^{
         _searchBarView.left = ScreenWidth;
     }];
-    [_tableView.mj_header beginRefreshing];
+    if (refresh) {
+        [_tableView.mj_header beginRefreshing];
+    }
 }
 
 @end

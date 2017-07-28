@@ -62,6 +62,7 @@
 
 - (IBAction)getVerificationCode:(id)sender
 {
+    [self.view endEditing:YES];
     if (!_phoneTextField.text.length) {
         [MBProgressHUD showError:@"请填写手机号码" toView:self.view];
         return;
