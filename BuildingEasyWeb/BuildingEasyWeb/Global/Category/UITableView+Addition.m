@@ -97,9 +97,10 @@ static const char kTableViewHasNext;
     [self cyl_reloadData];
     UIView* lastView = [self.subviews lastObject];
     if ([lastView isKindOfClass:[EmptyTipView class]]) {
-        if ([self.delegate respondsToSelector:@selector(placeHolderViewFrame)]) {
-//            lastView.frame = [self.delegate performSelector:@selector(placeHolderViewFrame)];
-            NSLog(@"frame:%@", [self.delegate performSelector:@selector(placeHolderViewFrame)]);
+        if ([self.delegate conformsToProtocol:@protocol(BEWTableViewPlaceHolderDelegate)]) {
+            if ([self.delegate respondsToSelector:@selector(placeHolderViewFrame)]) {
+                lastView.frame = [(id<BEWTableViewPlaceHolderDelegate>)self.delegate placeHolderViewFrame];
+            }
         }
     }
 }

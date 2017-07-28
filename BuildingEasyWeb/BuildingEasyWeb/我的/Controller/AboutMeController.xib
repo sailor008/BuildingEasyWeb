@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,27 +23,35 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AD1-BI-Q4f">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHn-Bf-1dh" userLabel="container">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="231.5"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gVD-3i-QRW"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="gVD-3i-QRW">
+                                    <rect key="frame" x="157.5" y="28" width="60" height="60"/>
+                                </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="楼易网" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQz-R1-wn0">
+                                    <rect key="frame" x="160" y="101" width="55.5" height="21.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.16078431372549018" green="0.16078431372549018" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前版本V" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWc-yZ-RxE">
+                                    <rect key="frame" x="152" y="134.5" width="71.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGE-F4-kWl" userLabel="分割线">
+                                    <rect key="frame" x="31" y="172.5" width="313" height="1"/>
                                     <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="VeJ-PZ-D0M"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="面对房地产行业" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8z-YF-7Vu" userLabel="详情说明">
+                                    <rect key="frame" x="34" y="193.5" width="307" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.16078431372549018" green="0.16078431372549018" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -55,9 +66,9 @@
                                 <constraint firstItem="UWc-yZ-RxE" firstAttribute="top" secondItem="LQz-R1-wn0" secondAttribute="bottom" constant="12" id="SAx-Sa-8r3"/>
                                 <constraint firstItem="UWc-yZ-RxE" firstAttribute="centerX" secondItem="LQz-R1-wn0" secondAttribute="centerX" id="T3O-ni-XYV"/>
                                 <constraint firstItem="LQz-R1-wn0" firstAttribute="centerX" secondItem="gVD-3i-QRW" secondAttribute="centerX" id="ThT-N8-3fc"/>
+                                <constraint firstAttribute="bottom" secondItem="T8z-YF-7Vu" secondAttribute="bottom" constant="20" id="b9f-e8-YwI"/>
                                 <constraint firstAttribute="trailing" secondItem="ZGE-F4-kWl" secondAttribute="trailing" constant="31" id="fmA-jL-Y83"/>
                                 <constraint firstItem="ZGE-F4-kWl" firstAttribute="top" secondItem="UWc-yZ-RxE" secondAttribute="bottom" constant="20" id="nib-dY-UFu"/>
-                                <constraint firstAttribute="height" constant="523" id="wnc-m4-f23"/>
                                 <constraint firstItem="LQz-R1-wn0" firstAttribute="top" secondItem="gVD-3i-QRW" secondAttribute="bottom" constant="13" id="xV7-b2-CXQ"/>
                                 <constraint firstItem="T8z-YF-7Vu" firstAttribute="leading" secondItem="uHn-Bf-1dh" secondAttribute="leading" constant="34" id="zHN-VJ-amB"/>
                                 <constraint firstItem="gVD-3i-QRW" firstAttribute="centerX" secondItem="uHn-Bf-1dh" secondAttribute="centerX" id="zrZ-YF-AoE"/>
@@ -68,7 +79,7 @@
                         <constraint firstItem="uHn-Bf-1dh" firstAttribute="centerX" secondItem="AD1-BI-Q4f" secondAttribute="centerX" id="Lcw-Rd-4TR"/>
                         <constraint firstItem="uHn-Bf-1dh" firstAttribute="leading" secondItem="AD1-BI-Q4f" secondAttribute="leading" id="SaO-U8-Kw8"/>
                         <constraint firstAttribute="trailing" secondItem="uHn-Bf-1dh" secondAttribute="trailing" id="TsA-rD-ap1"/>
-                        <constraint firstAttribute="bottom" secondItem="uHn-Bf-1dh" secondAttribute="bottom" constant="144" id="tKx-9I-kju"/>
+                        <constraint firstAttribute="bottom" secondItem="uHn-Bf-1dh" secondAttribute="bottom" id="tKx-9I-kju"/>
                         <constraint firstItem="uHn-Bf-1dh" firstAttribute="top" secondItem="AD1-BI-Q4f" secondAttribute="top" id="tqS-JT-v55"/>
                     </constraints>
                 </scrollView>

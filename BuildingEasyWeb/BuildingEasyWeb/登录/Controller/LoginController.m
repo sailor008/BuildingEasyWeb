@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passWordTextField;
 
+@property (nonatomic, strong) UIView* bottomView;
+@property (nonatomic, strong) UIScrollView* introduceScrollView;
+
 @end
 
 @implementation LoginController
@@ -27,6 +30,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    BOOL isFirstLaunch = [[[NSUserDefaults standardUserDefaults] valueForKey:kFirstLaunch] boolValue];
+    if (isFirstLaunch == NO) {
+        _bottomView = [[UIView alloc] init];
+        _bottomView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _bottomView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_bottomView];
+        
+        _introduceScrollView = [[UIScrollView alloc] init];
+        _introduceScrollView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _introduceScrollView.pagingEnabled = YES;
+        _introduceScrollView.showsHorizontalScrollIndicator = NO;
+        
+        UIImageView* launch1ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_1.jpeg")];
+        launch1ImageView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        [_introduceScrollView addSubview:launch1ImageView];
+        
+        UIImageView* launch2ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_2.jpeg")];
+        launch2ImageView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight);
+        [_introduceScrollView addSubview:launch2ImageView];
+        
+        UIImageView* launch3ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_3.jpeg")];
+        launch3ImageView.frame = CGRectMake(ScreenWidth * 2, 0, ScreenWidth, ScreenHeight);
+        [_introduceScrollView addSubview:launch3ImageView];
+        launch3ImageView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer* tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissIntroduce)];
+        [launch3ImageView addGestureRecognizer:tapGest];
+        
+        _introduceScrollView.contentSize = CGSizeMake(ScreenWidth * 3, ScreenHeight);
+        
+        [self.view addSubview:_introduceScrollView];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kFirstLaunch];
+    }
     
     _phoneTextField.text = [User shareUser].mobile;
     
@@ -47,6 +85,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dismissIntroduce
+{
+    [UIView animateWithDuration:2 animations:^{
+        _bottomView.alpha = 0;
+        _introduceScrollView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [_bottomView removeFromSuperview];
+        [_introduceScrollView removeFromSuperview];
+    }];
 }
 
 #pragma mark Action
