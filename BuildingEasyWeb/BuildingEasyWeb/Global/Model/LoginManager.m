@@ -39,6 +39,7 @@
         
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD dissmissWithError:msg];
+        callback();
     }];
 }
 

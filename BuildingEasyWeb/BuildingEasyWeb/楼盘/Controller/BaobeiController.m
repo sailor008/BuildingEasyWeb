@@ -53,8 +53,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 @property (nonatomic, assign) BOOL canDeleteCell;
 
-@property (nonatomic, copy) NSString* errorMsg;// 错误信息
-
 @end
 
 @implementation BaobeiController
@@ -251,7 +249,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         return;
     }
     
-    _errorMsg = nil;
     [MBProgressHUD showLoadingToView:self.view];
     if (_isModify) {
         [self commitModifyBaobeiInfo];
@@ -420,7 +417,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [self showBaobeiSuccess];
         
     } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD dissmissWithError:_errorMsg toView:self.view];
+        [MBProgressHUD dissmissWithError:msg toView:self.view];
     }];
 }
 // 提交修改报备信息

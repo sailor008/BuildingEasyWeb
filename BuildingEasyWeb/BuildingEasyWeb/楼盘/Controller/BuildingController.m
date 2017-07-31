@@ -159,7 +159,9 @@
         [User shareUser].lat = lat;
         [User shareUser].lng = lng;
         
-        [weakSelf.tableView.mj_header beginRefreshing];
+        if ([User shareUser].isLogin) {
+            [weakSelf.tableView.mj_header beginRefreshing];
+        }
     }];
 }
 
