@@ -72,6 +72,8 @@ typedef void (^onTabVCell)(void);
     [self setupUI];
     
     [self initViewCfg];
+    
+    [self refreshUserInfo];
 }
 
 - (void)setupUI {
@@ -424,8 +426,11 @@ typedef void (^onTabVCell)(void);
 
 - (void)refreshUserInfo
 {
+    [MBProgressHUD showLoading];
     kWeakSelf(weakSelf);
     [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUD];
+
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = [User shareUser].pwd;
         [user copyAnotherInfoToShareUser];
@@ -437,6 +442,7 @@ typedef void (^onTabVCell)(void);
         //更新个人主界面的头像
         [weakSelf.delegate finishEidtMyInfo:@"wx/updateHeadImg" desc:@""];
     } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD hideHUD];
         
     }];
 }
