@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-//@class PickPhotoView;
-//@protocol PickPhotoViewDelegate <NSObject>
-//
-//- (void)photoView:(PickPhotoView *)photoView resetHeight:(CGFloat)height;
-//
-//@end
+@class PickPhotoView;
+@protocol PickPhotoViewDelegate <NSObject>
+
+- (void)photoView:(PickPhotoView *)photoView finishPickImage:(UIImage*)img;
+
+@end
 
 @interface PickPhotoView : UIView
 
 @property (nonatomic, copy) NSString* sectionTitle;
 @property (nonatomic, assign) int limitNum;
-//@property (nonatomic, weak) id<PickPhotoViewDelegate> delegate;
+@property (nonatomic, weak) id<PickPhotoViewDelegate> delegate;
 @property (nonatomic, assign) CGFloat photoLeft;
 @property (nonatomic, assign) BOOL canSelectedPhoto;
 @property (nonatomic, assign) BOOL canDeletePhoto;
