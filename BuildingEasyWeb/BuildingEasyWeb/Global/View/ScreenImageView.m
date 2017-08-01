@@ -66,7 +66,10 @@
 
 - (void)displayImage:(UIImage*)oriImg
 {
-    _showImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0.5*(ScreenHeight - ScreenWidth), ScreenWidth, ScreenWidth)];
+    CGFloat resultHeight = ScreenWidth/oriImg.size.width* oriImg.size.height;
+    _showImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0.5*(ScreenHeight - resultHeight), ScreenWidth, resultHeight)];
+
+//    _showImgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0.5*(ScreenHeight - ScreenWidth), ScreenWidth, ScreenWidth)];
     _showImgView.image = oriImg;
     _showImgView.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:_showImgView];
