@@ -98,10 +98,12 @@ typedef void (^onTabVCell)(void);
                     ];
     User* m_user = [User shareUser];
     NSString* autoStr;
-    if([m_user.auth integerValue] == 1) {
+    if([m_user.auth integerValue] == kAuthStateWait) {
+        autoStr = @"待认证";
+    }else if([m_user.auth integerValue] == kAuthStateYES) {
         autoStr = @"已认证";
-    }else if([m_user.auth integerValue] == 2) {
-        autoStr = @"未通过";
+    }else if([m_user.auth integerValue] == kAuthStateFAIL) {
+        autoStr = @"认证失败";
     }else {
         autoStr = @"未认证";
     }
@@ -308,10 +310,23 @@ typedef void (^onTabVCell)(void);
         [User shareUser].name = descStr;
         //更新”我的“主界面 的姓名显示
         [self.delegate finishEidtMyInfo:@"wx/modifyUserName" desc:descStr];
-    }
+    } else if([tag isEqualToString:@"wx/authUser"]) {
 
-    [self initViewCfg];
-    [_tableView reloadData];
+    }
+    
+    kWeakSelf(weakSelf);
+    [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUD];
+        User* user = [User mj_objectWithKeyValues:reponse];
+        user.pwd = [User shareUser].pwd;
+        [user copyAnotherInfoToShareUser];
+        [[User shareUser] saveUserInfoToFile];
+        
+        [weakSelf initViewCfg];
+        [weakSelf.tableView reloadData];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD hideHUD];
+    }];
 }
 
 /////////////////////////////

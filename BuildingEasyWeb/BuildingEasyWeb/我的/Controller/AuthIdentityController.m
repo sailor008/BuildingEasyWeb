@@ -129,7 +129,7 @@
         if(initPath.length) {
             photoview.sourceUrlArray = [NSArray arrayWithObject:initPath];
         }
-        if([[User shareUser].auth integerValue] == 1) {
+        if([[User shareUser].auth integerValue] == kAuthStateYES) {
             photoview.canSelectedPhoto = NO;
         }
         [_photoViewArray insertObject:photoview atIndex:i];
@@ -159,7 +159,7 @@
     _tableView.tableHeaderView = headerView;
     
     
-    if([[User shareUser].auth integerValue] == 1) {
+    if([[User shareUser].auth integerValue] == kAuthStateYES) {
         ////已通过认证时，输入框不能操作
         for(int i = 0; i < tmpCellArr.count; i++) {
             SampleEditTxtCell* editTxtCell = tmpCellArr[i];
@@ -314,6 +314,7 @@
             [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
+            [self.delegate finishEidtMyInfo: @"wx/authUser" desc:@""];
         });
     } failure:^(NSError *error, NSString *msg) {
         NSLog(@"Error：提交认证 [wx/authUser] 失败。detail：%@", msg);

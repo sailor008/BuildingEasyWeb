@@ -76,6 +76,14 @@ typedef NS_ENUM(NSInteger, IntentionLevel) {
     kIntentionLevelStrong,        // 2：强（意向程度）
 };
 
+// 用户的认证状态
+typedef NS_ENUM(NSInteger, UserAuthState) {
+    kAuthStateNO,    // 未认证
+    kAuthStateWait,  // 待认证
+    kAuthStateYES,   // 已认证
+    kAuthStateFAIL,  // 认证失败
+};
+
 typedef void(^Callback)();
 
 typedef void(^FailureBlock)(NSError* error, NSString* msg);
