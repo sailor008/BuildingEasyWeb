@@ -99,7 +99,7 @@ typedef void (^onTabVCell)(void);
     User* m_user = [User shareUser];
     NSString* autoStr;
     if([m_user.auth integerValue] == kAuthStateWait) {
-        autoStr = @"待认证";
+        autoStr = @"待审核";
     }else if([m_user.auth integerValue] == kAuthStateYES) {
         autoStr = @"已认证";
     }else if([m_user.auth integerValue] == kAuthStateFAIL) {
