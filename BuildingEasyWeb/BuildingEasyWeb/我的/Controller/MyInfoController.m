@@ -72,6 +72,8 @@ typedef void (^onTabVCell)(void);
     [self setupUI];
     
     [self initViewCfg];
+    
+    [self refreshUserInfo];
 }
 
 - (void)setupUI {
@@ -96,10 +98,12 @@ typedef void (^onTabVCell)(void);
                     ];
     User* m_user = [User shareUser];
     NSString* autoStr;
-    if([m_user.auth integerValue] == 1) {
+    if([m_user.auth integerValue] == kAuthStateWait) {
+        autoStr = @"待审核";
+    }else if([m_user.auth integerValue] == kAuthStateYES) {
         autoStr = @"已认证";
-    }else if([m_user.auth integerValue] == 2) {
-        autoStr = @"未通过";
+    }else if([m_user.auth integerValue] == kAuthStateFAIL) {
+        autoStr = @"认证失败";
     }else {
         autoStr = @"未认证";
     }
@@ -275,6 +279,7 @@ typedef void (^onTabVCell)(void);
         UserExtInfoModel *model = [UserExtInfoModel mj_objectWithKeyValues:tmpDic];
         
         AuthIdentityController* authVC = [[AuthIdentityController alloc]init];
+        authVC.delegate = self;
         authVC.hidesBottomBarWhenPushed = YES;
         authVC.title = @"认证";
         authVC.userExtModel = model;
@@ -306,10 +311,23 @@ typedef void (^onTabVCell)(void);
         [User shareUser].name = descStr;
         //更新”我的“主界面 的姓名显示
         [self.delegate finishEidtMyInfo:@"wx/modifyUserName" desc:descStr];
-    }
+    } else if([tag isEqualToString:@"wx/authUser"]) {
 
-    [self initViewCfg];
-    [_tableView reloadData];
+    }
+    
+    kWeakSelf(weakSelf);
+    [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUD];
+        User* user = [User mj_objectWithKeyValues:reponse];
+        user.pwd = [User shareUser].pwd;
+        [user copyAnotherInfoToShareUser];
+        [[User shareUser] saveUserInfoToFile];
+        
+        [weakSelf initViewCfg];
+        [weakSelf.tableView reloadData];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD hideHUD];
+    }];
 }
 
 /////////////////////////////
@@ -424,8 +442,11 @@ typedef void (^onTabVCell)(void);
 
 - (void)refreshUserInfo
 {
+    [MBProgressHUD showLoading];
     kWeakSelf(weakSelf);
     [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+        [MBProgressHUD hideHUD];
+
         User* user = [User mj_objectWithKeyValues:reponse];
         user.pwd = [User shareUser].pwd;
         [user copyAnotherInfoToShareUser];
@@ -437,6 +458,7 @@ typedef void (^onTabVCell)(void);
         //更新个人主界面的头像
         [weakSelf.delegate finishEidtMyInfo:@"wx/updateHeadImg" desc:@""];
     } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD hideHUD];
         
     }];
 }

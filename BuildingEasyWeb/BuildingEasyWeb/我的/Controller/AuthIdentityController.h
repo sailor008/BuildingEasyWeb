@@ -8,9 +8,11 @@
 
 #import "BaseController.h"
 #import "MyInfoModel.h"
+#import "EditMyInfoDelegate.h"
 
 @interface AuthIdentityController : BaseController
 
 @property(nonatomic, strong) UserExtInfoModel* userExtModel;
+@property (nonatomic, weak) id<EditMyInfoDelegate> delegate;
 
 @end
