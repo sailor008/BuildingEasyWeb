@@ -279,6 +279,7 @@ typedef void (^onTabVCell)(void);
         UserExtInfoModel *model = [UserExtInfoModel mj_objectWithKeyValues:tmpDic];
         
         AuthIdentityController* authVC = [[AuthIdentityController alloc]init];
+        authVC.delegate = self;
         authVC.hidesBottomBarWhenPushed = YES;
         authVC.title = @"认证";
         authVC.userExtModel = model;
