@@ -26,7 +26,7 @@
 #import "NetworkManager.h"
 
 
-@interface AuthIdentityController ()<UITableViewDelegate, UITableViewDataSource>
+@interface AuthIdentityController ()<UITableViewDelegate, UITableViewDataSource, PickPhotoViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *footView;
 @property (weak, nonatomic) IBOutlet UIButton *btnEnsure;
@@ -119,7 +119,7 @@
     for(int i = 0; i < _photoviewCfgArray.count; i++) {
         NSDictionary* cfgInfo = _photoviewCfgArray[i];
         PickPhotoView* photoview = [self getPhotoView];
-//        photoview.delegate = self;
+        photoview.delegate = self;
         photoview.sectionTitle = [cfgInfo objectForKey:@"title"];
         photoview.canDeletePhoto = NO;
         photoview.photoLeft = 0;
@@ -213,87 +213,8 @@
             return;
         }
     }
-    [self requestSaveAuthImages];
-}
-
-- (void)requestSaveAuthImages
-{
-    self.successUploadCount = 0;
-    [_tmpUploadArray removeAllObjects];
-    for (int i = 0; i < _photoViewArray.count; i++) {
-        PickPhotoView* view = _photoViewArray[i];
-        if (view.resultArray.count > 0) {
-            [_tmpUploadArray addObject: view];
-        }
-    }
-    if (_tmpUploadArray.count <= 0) {
-        //没有认证图片更改，所以只保存 身份证号or 公司名字
-        [self confirmSaveAuthInfo];
-        return;
-    }
-
-    [MBProgressHUD showLoading];
     
-    kWeakSelf(weakSelf);
-    // 创建队列组，可以使多个网络请求异步执行，执行完之后再进行操作
-    dispatch_group_t group = dispatch_group_create();
-    //创建全局队列
-    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-    
-    dispatch_group_async(group, queue, ^{
-        // 循环上传数据
-        for (int i = 0; i < _tmpUploadArray.count; i++) {
-            //创建dispatch_semaphore_t对象
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-            
-            PickPhotoView* view = _tmpUploadArray[i];
-            UIImage* image = view.resultArray[0];
-            NSString* imgTag = [NSString stringWithFormat:@"%li", (long)view.tag];
-//            NSLog(@"上传图片：tag = %@", imgTag);
-            [UploadImageManager uploadImage:image type:imgTag imageKey:^(NSString *quReturnImgkey) {
-//                NSLog(@"quReturnImgkey = %@", quReturnImgkey);
-                
-                [NetworkManager postWithUrl:@"wx/uploadAuthImg" parameters:@{@"type":imgTag, @"resourceKey":quReturnImgkey} success:^(id reponse) {
-                    
-                    //统计已upload成功、且更新到louyi服务端的图片数量
-                    weakSelf.successUploadCount++;
-                    
-                    // 请求成功发送信号量(+1)
-                    dispatch_semaphore_signal(semaphore);
-                } failure:^(NSError *error, NSString *msg) {
-                    // 失败也请求成功发送信号量(+1)
-                    dispatch_semaphore_signal(semaphore);
-                    NSLog(@"Error：更新认证图片 [wx/uploadAuthImg] 失败。detail：%@", msg);
-                }];
-                
-            } failure:^(NSError *error, NSString *msg) {
-                NSLog(@"error:%@---%@", error, msg);
-                // 失败也请求成功发送信号量(+1)
-                dispatch_semaphore_signal(semaphore);
-            }];
-            
-            //信号量减1，如果>0，则向下执行，否则等待
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        }
-    });
-    
-    // 当所有队列执行完成之后
-    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSLog(@"已更新认证图片的数量 = %i", weakSelf.successUploadCount);
-        // 执行下面的判断代码
-        if (weakSelf.successUploadCount == weakSelf.tmpUploadArray.count) {
-            // 返回主线程进行界面上的修改
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待认证！"];
-//            });
-            [weakSelf confirmSaveAuthInfo];
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUD];
-                [MBProgressHUD showError:@"保存图片失败！"];
-            });
-        }
-    });
+    [self confirmSaveAuthInfo];
 }
 
 - (void)confirmSaveAuthInfo
@@ -307,24 +228,46 @@
     NSDictionary* params = @{@"information":strInfo,
                              @"storeNum":strStoreNum,
                              @"role":[User shareUser].role};
+    [MBProgressHUD hideHUD];
     [NetworkManager postWithUrl:@"wx/authUser" parameters:params success:^(id reponse) {
-        NSLog(@"提交认证 [wx/authUser] 成功！");
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUD];
-            [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
-            
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            [self.delegate finishEidtMyInfo: @"wx/authUser" desc:@""];
-        });
-    } failure:^(NSError *error, NSString *msg) {
-        NSLog(@"Error：提交认证 [wx/authUser] 失败。detail：%@", msg);
         [MBProgressHUD hideHUD];
+        [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        //注意：下面这个操作会重新拉取用户数据，开启下面这一行代码，上面的提示文本很快会被移除。
+//        [self.delegate finishEidtMyInfo: @"wx/authUser" desc:@""];
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:msg];
     }];
 }
 
 - (PickPhotoView *)getPhotoView
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"PickPhotoView" owner:nil options:nil] lastObject];
+}
+
+#pragma mark PickPhotoViewDelegate
+- (void)photoView:(PickPhotoView *)photoView finishPickImage:(UIImage*)img
+{
+    [MBProgressHUD showLoading];
+    NSString* imgTag = [NSString stringWithFormat:@"%li", (long)photoView.tag];
+//    NSLog(@"上传图片：tag = %@", imgTag);
+    [UploadImageManager uploadImage:img type:nil imageKey:^(NSString *quReturnImgkey) {
+//        NSLog(@"quReturnImgkey = %@", quReturnImgkey);
+        
+        [NetworkManager postWithUrl:@"wx/uploadAuthImg" parameters:@{@"type":imgTag, @"resourceKey":quReturnImgkey} success:^(id reponse) {
+            [MBProgressHUD hideHUD];
+            
+        } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showError:msg];
+        }];
+        
+    } failure:^(NSError *error, NSString *msg) {
+        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:msg];
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -374,3 +317,88 @@
 
 
 @end
+
+
+
+
+
+//- (void)requestSaveAuthImages
+//{
+//    self.successUploadCount = 0;
+//    [_tmpUploadArray removeAllObjects];
+//    for (int i = 0; i < _photoViewArray.count; i++) {
+//        PickPhotoView* view = _photoViewArray[i];
+//        if (view.resultArray.count > 0) {
+//            [_tmpUploadArray addObject: view];
+//        }
+//    }
+//    if (_tmpUploadArray.count <= 0) {
+//        //没有认证图片更改，所以只保存 身份证号or 公司名字
+//        [self confirmSaveAuthInfo];
+//        return;
+//    }
+//    
+//    [MBProgressHUD showLoading];
+//    
+//    kWeakSelf(weakSelf);
+//    // 创建队列组，可以使多个网络请求异步执行，执行完之后再进行操作
+//    dispatch_group_t group = dispatch_group_create();
+//    //创建全局队列
+//    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+//    
+//    dispatch_group_async(group, queue, ^{
+//        // 循环上传数据
+//        for (int i = 0; i < _tmpUploadArray.count; i++) {
+//            //创建dispatch_semaphore_t对象
+//            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+//            
+//            PickPhotoView* view = _tmpUploadArray[i];
+//            UIImage* image = view.resultArray[0];
+//            NSString* imgTag = [NSString stringWithFormat:@"%li", (long)view.tag];
+//            //            NSLog(@"上传图片：tag = %@", imgTag);
+//            [UploadImageManager uploadImage:image type:imgTag imageKey:^(NSString *quReturnImgkey) {
+//                //                NSLog(@"quReturnImgkey = %@", quReturnImgkey);
+//                
+//                [NetworkManager postWithUrl:@"wx/uploadAuthImg" parameters:@{@"type":imgTag, @"resourceKey":quReturnImgkey} success:^(id reponse) {
+//                    
+//                    //统计已upload成功、且更新到louyi服务端的图片数量
+//                    weakSelf.successUploadCount++;
+//                    
+//                    // 请求成功发送信号量(+1)
+//                    dispatch_semaphore_signal(semaphore);
+//                } failure:^(NSError *error, NSString *msg) {
+//                    // 失败也请求成功发送信号量(+1)
+//                    dispatch_semaphore_signal(semaphore);
+//                    NSLog(@"Error：更新认证图片 [wx/uploadAuthImg] 失败。detail：%@", msg);
+//                }];
+//                
+//            } failure:^(NSError *error, NSString *msg) {
+//                NSLog(@"error:%@---%@", error, msg);
+//                // 失败也请求成功发送信号量(+1)
+//                dispatch_semaphore_signal(semaphore);
+//            }];
+//            
+//            //信号量减1，如果>0，则向下执行，否则等待
+//            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+//        }
+//    });
+//    
+//    // 当所有队列执行完成之后
+//    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSLog(@"已更新认证图片的数量 = %i", weakSelf.successUploadCount);
+//        // 执行下面的判断代码
+//        if (weakSelf.successUploadCount == weakSelf.tmpUploadArray.count) {
+//            // 返回主线程进行界面上的修改
+//            //            dispatch_async(dispatch_get_main_queue(), ^{
+//            //                [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待认证！"];
+//            //            });
+//            [weakSelf confirmSaveAuthInfo];
+//        }else{
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [MBProgressHUD hideHUD];
+//                [MBProgressHUD showError:@"保存图片失败！"];
+//            });
+//        }
+//    });
+//}
+

@@ -13,6 +13,7 @@
 #import "ScreenImageView.h"
 #import "BEWAlertAction.h"
 #import "ImagePickerHelper.h"
+#import "UIImage+Addition.h"
 
 
 @interface PickPhotoView () <UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, PhotoCellDelegate>
@@ -46,7 +47,7 @@
         _limitNum = 1;
         _isEdit = NO;
         _canSelectedPhoto = YES;
-        _canDeletePhoto = YES;
+        _canDeletePhoto = NO;
     }
     return self;
 }
@@ -129,11 +130,7 @@
         cell.imagUrlStr = _sourceUrlArray[indexPath.row];
     } else {
         cell.photo = _photoArray[indexPath.row];
-        if (_canDeletePhoto && indexPath.row < _imageCount) {
-            cell.showDelete = YES;
-        } else {
-            cell.showDelete = NO;
-        }
+        cell.showDelete = NO;
     }
     
     return cell;
@@ -198,7 +195,7 @@
     _isEdit = true;
     
     ++_imageCount;
-    UIImage * image = info[UIImagePickerControllerEditedImage];
+    UIImage* image = info[UIImagePickerControllerEditedImage];
     
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
     [_photoArray replaceObjectAtIndex:selectedIndexPath.row withObject:image];
@@ -208,10 +205,11 @@
     }
     
     [_collectionView reloadData];
+    
     [_imagePicker dismissViewControllerAnimated:YES completion:^{
-//        if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
-//            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
-//        }
+        if (_delegate && [_delegate respondsToSelector:@selector(photoView:finishPickImage:)]) {
+            [_delegate photoView:self finishPickImage:image];
+        }
     }];
 }
 
