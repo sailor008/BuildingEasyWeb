@@ -78,10 +78,10 @@ typedef NS_ENUM(NSInteger, IntentionLevel) {
 
 // 用户的认证状态
 typedef NS_ENUM(NSInteger, UserAuthState) {
-    kAuthStateNO,    // 未认证
-    kAuthStateWait,  // 待认证
-    kAuthStateYES,   // 已认证
-    kAuthStateFAIL,  // 认证失败
+    kAuthStateNO,    // 0：未认证
+    kAuthStateWait,  // 1：待认证
+    kAuthStateYES,   // 2：已认证
+    kAuthStateFAIL,  // 3：认证失败
 };
 
 typedef void(^Callback)();
