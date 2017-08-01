@@ -13,10 +13,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="342" height="74"/>
+                <frame key="frameInset" width="342" height="74.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="9E0427F5-D71A-42FF-86AF-B66AA9FCDED0" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
+                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="A88F45A0-6715-4E7F-9D46-F27154AADBD5" translatesAutoresizingMaskIntoConstraints="NO" id="sba-4q-6Qz">
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="CuY-5z-khL"/>
                             <constraint firstAttribute="width" constant="60" id="aNh-Jy-cYx"/>
@@ -50,7 +50,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="9E0427F5-D71A-42FF-86AF-B66AA9FCDED0" width="60" height="60">
+        <image name="A88F45A0-6715-4E7F-9D46-F27154AADBD5" width="60" height="60">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
