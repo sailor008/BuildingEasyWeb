@@ -90,11 +90,14 @@
 
 - (IBAction)showHideTap:(UIButton *)sender
 {
-    if (_model.isShow == YES) {
-        return;
-    }
-    sender.selected = YES;
-    _model.isShow = YES;
+//    if (_model.isShow == YES) {
+//        return;
+//    }
+//    sender.selected = YES;
+//    _model.isShow = YES;
+    sender.selected = !sender.isSelected;
+    _model.isShow = sender.isSelected;
+    
     if (_delegate && [_delegate respondsToSelector:@selector(buyerCellShowHide:withModel:)]) {
         [_delegate buyerCellShowHide:sender.isSelected withModel:_model];
     }
