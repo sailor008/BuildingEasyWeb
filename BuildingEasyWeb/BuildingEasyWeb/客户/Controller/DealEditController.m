@@ -438,12 +438,22 @@ static const NSInteger kPhotoViewTag = 1000;
     {
         EditInfoModel* model = _dataArray[3];
         model.canEdit = NO;
-        model.text = [NSString stringWithFormat:@"%.2f", [signInfo[@"price"] doubleValue]];
+        
+        if ([signInfo[@"price"] isKindOfClass:[NSNumber class]]) {
+            model.text = [NSString stringWithFormat:@"%.2f", [signInfo[@"price"] doubleValue]];
+        } else {
+            model.text = signInfo[@"price"];
+        }
     }
     {
         EditInfoModel* model = _dataArray[4];
         model.canEdit = NO;
-        model.text = [NSString stringWithFormat:@"%.2f", [signInfo[@"total"] doubleValue]];
+        
+        if ([signInfo[@"total"] isKindOfClass:[NSNumber class]]) {
+            model.text = [NSString stringWithFormat:@"%.2f", [signInfo[@"total"] doubleValue]];
+        } else {
+            model.text = signInfo[@"total"];
+        }
     }
     {
         EditInfoModel* model = _dataArray[5];
