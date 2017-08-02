@@ -19,6 +19,7 @@
 #import "SampleEditTxtCell.h"
 #import "BEWAlertAction.h"
 
+#import <MJExtension.h>
 #import "Global.h"
 #import "User.h"
 #import "UploadImageManager.h"
@@ -228,14 +229,27 @@
     NSDictionary* params = @{@"information":strInfo,
                              @"storeNum":strStoreNum,
                              @"role":[User shareUser].role};
-    [MBProgressHUD hideHUD];
+    [MBProgressHUD showLoading];
     [NetworkManager postWithUrl:@"wx/authUser" parameters:params success:^(id reponse) {
-        [MBProgressHUD hideHUD];
-        [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
-        
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-        //注意：下面这个操作会重新拉取用户数据，开启下面这一行代码，上面的提示文本很快会被移除。
-//        [self.delegate finishEidtMyInfo: @"wx/authUser" desc:@""];
+        [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
+            User* user = [User mj_objectWithKeyValues:reponse];
+            user.pwd = [User shareUser].pwd;
+            [user copyAnotherInfoToShareUser];
+            [[User shareUser] saveUserInfoToFile];
+            
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            //注意：下面这个操作会重新拉取用户数据，开启下面这一行代码，上面的提示文本很快会被移除。
+            [self.delegate finishEidtMyInfo: @"wx/authUser" desc:@""];
+            
+        } failure:^(NSError *error, NSString *msg) {
+            [MBProgressHUD hideHUD];
+            [MBProgressHUD showSuccess:@"成功提交认证信息，请耐心等待！"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            //注意：下面这个操作会重新拉取用户数据，开启下面这一行代码，上面的提示文本很快会被移除。
+            [self.delegate finishEidtMyInfo: @"wx/authUser" desc:@""];
+        }];
     } failure:^(NSError *error, NSString *msg) {
         [MBProgressHUD hideHUD];
         [MBProgressHUD showError:msg];
