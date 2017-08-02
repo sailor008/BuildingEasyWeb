@@ -20,6 +20,9 @@ static NSString* const kBaobeiModifySuccess = @"BaobeiModifySuccess";
 
 static NSString* const kFirstLaunch = @"FirstLaunch";
 
+static NSUInteger const kPerBaobeiBuildingMax = 6;
+
+
 typedef NS_ENUM(NSInteger, BEWUserRole) {
     kPersonRole = 0,
     kAgencyRole
