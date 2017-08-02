@@ -29,6 +29,14 @@
 - (void)setModel:(EditInfoModel *)model
 {
     _model = model;
+    // 先清空状态
+    {
+        UIButton* button = [self.contentView viewWithTag:1000];
+        button.selected = NO;
+        
+        button = [self.contentView viewWithTag:1001];
+        button.selected = NO;
+    }
     UIButton* button = [self.contentView viewWithTag:1000 + model.type];
     button.selected = YES;
 }

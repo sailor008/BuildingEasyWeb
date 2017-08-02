@@ -46,15 +46,15 @@
         _introduceScrollView.showsHorizontalScrollIndicator = NO;
         _introduceScrollView.delegate = self;
         
-        UIImageView* launch1ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_1.jpeg")];
+        UIImageView* launch1ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"引导页-c-01.jpeg")];
         launch1ImageView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         [_introduceScrollView addSubview:launch1ImageView];
         
-        UIImageView* launch2ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_2.jpeg")];
+        UIImageView* launch2ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"引导页-c-02.jpeg")];
         launch2ImageView.frame = CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight);
         [_introduceScrollView addSubview:launch2ImageView];
         
-        UIImageView* launch3ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"Launch_3.jpeg")];
+        UIImageView* launch3ImageView = [[UIImageView alloc] initWithImage:GetIMAGE(@"引导页-c-03.jpeg")];
         launch3ImageView.frame = CGRectMake(ScreenWidth * 2, 0, ScreenWidth, ScreenHeight);
         [_introduceScrollView addSubview:launch3ImageView];
         launch3ImageView.userInteractionEnabled = YES;

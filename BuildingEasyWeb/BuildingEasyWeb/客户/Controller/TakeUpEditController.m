@@ -493,9 +493,12 @@
         BOOL hideContractInfo = NO;
         for (int i = 2; i < _dataArray.count; i ++) {
             if (i < tempArr.count) {
-                EditInfoModel* model = tempArr[i];
-                EditInfoModel* editModel = _dataArray[i];
-                editModel.isShow = model.isShow;
+                id obj = tempArr[i];
+                if ([obj isKindOfClass:[EditInfoModel class]]) {
+                    EditInfoModel* model = tempArr[i];
+                    EditInfoModel* editModel = _dataArray[i];
+                    editModel.isShow = model.isShow;
+                }
             } else {
                 hideContractInfo = YES;
             }
