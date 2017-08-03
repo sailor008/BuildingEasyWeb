@@ -104,6 +104,7 @@ const NSInteger kCustomProgressLabelTag = 2000;
         editVC.customerId = _customerId;
         editVC.state = lastState.state;
         editVC.type = lastState.state - 4;
+        editVC.progressState = _detailModel.currentState;
         [self.navigationController pushViewController:editVC animated:YES];
     } else if (lastState.state > 7 && lastState.state < 11) {// 认购
         TakeUpEditController* takeEdit = [[TakeUpEditController alloc] init];
@@ -122,12 +123,14 @@ const NSInteger kCustomProgressLabelTag = 2000;
         editVC.customerId = _customerId;
         editVC.state = lastState.state;
         editVC.type = lastState.state - 16;
+        editVC.progressState = _detailModel.currentState;
         [self.navigationController pushViewController:editVC animated:YES];
     } else if (lastState.state > 19 && lastState.state < 23) {// 结清
         EditController* editVC = [[EditController alloc] init];
         editVC.customerId = _customerId;
         editVC.state = lastState.state;
         editVC.type = lastState.state - 20;
+        editVC.progressState = _detailModel.currentState;
         [self.navigationController pushViewController:editVC animated:YES];
     }
 }

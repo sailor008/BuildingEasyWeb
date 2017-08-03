@@ -106,7 +106,7 @@
         [_footerContainView addSubview:tip1Label];
         
         UILabel* tip2Label = [[UILabel alloc] init];
-        tip2Label.text = @"2.如若有认筹项目，请一并上传认筹书。";
+        tip2Label.text = @"2.如是认筹项目，请一并上传认筹书。";
         tip2Label.font = [UIFont systemFontOfSize:13];
         tip2Label.textColor = Hex(0xff4c00);
         [tip2Label sizeToFit];
@@ -211,6 +211,7 @@
         PayTypeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"PayTypeCell" forIndexPath:indexPath];
         cell.model = model;
         cell.delegate = self;
+        [cell setTitleWithOnce:@"一次性/分期" stages:@"按揭"];
         return cell;
     } else if (model.isBuyer) {
         BuyerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuyerCell" forIndexPath:indexPath];

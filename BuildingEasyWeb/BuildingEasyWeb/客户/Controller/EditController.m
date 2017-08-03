@@ -43,7 +43,22 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    _textView.placeholder = @"编辑进度";
+    NSString* placeholderStr;
+    switch (_progressState) {
+        case 1:
+            placeholderStr = @"请编辑带看信息";
+            break;
+        case 4:
+            placeholderStr = @"请编辑回款信息";
+            break;
+        case 5:
+            placeholderStr = @"请编辑结清信息";
+            break;
+        default:
+            placeholderStr = @"编辑进度";
+            break;
+    }
+    _textView.placeholder = placeholderStr;
     _textView.placeholderColor = Hex(0xababab);
     
     UIView* footerView = [[UIView alloc] init];

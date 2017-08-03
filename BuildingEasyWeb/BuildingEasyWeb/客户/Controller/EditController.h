@@ -18,4 +18,6 @@
 
 @property (nonatomic, assign) BEWEditType type;
 
+@property (nonatomic, assign) BEWProgressState progressState;
+
 @end
