@@ -29,6 +29,7 @@
 @interface TakeUpEditController () <UITableViewDataSource, UITableViewDelegate, PhotoViewDelegate, EditSectionViewDelegate, PayTypeCellDelegate, EditShowHideSectionViewDelegate, BuyerCellDelegate>
 {
     BOOL _canEdit;
+    BOOL _isExpandContractInfo;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -243,6 +244,7 @@
     if ([sectionTitle isEqualToString:@"合同信息"]) {
         EditShowHideSectionView* sectionView =  [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditShowHideSectionView"];
         sectionView.delegate = self;
+        sectionView.isExpand = _isExpandContractInfo;
         return sectionView;
     } else {
         EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
@@ -309,7 +311,8 @@
 #pragma mark EditShowHideSectionViewDelegate
 - (void)sectionShowHide:(BOOL)isShowHide
 {
-    if (isShowHide) {// 展开
+    _isExpandContractInfo = !_isExpandContractInfo;
+    if (_isExpandContractInfo) {// 展开
         NSMutableArray* tempArr = [_dataArray mutableCopy];
         [tempArr addObjectsFromArray:_contractInfoArray];
         _dataArray = [tempArr copy];
@@ -317,7 +320,18 @@
         [_tableView reloadData];
         
     } else {// 收起
-        // 不能直接用deleteSections方式，因为deleteSections会指定删除掉倒数第二个section，但和判断冲突
+        NSMutableArray* tempArr = [NSMutableArray array];
+        [tempArr addObject:_dataArray[_dataArray.count - 2]];
+        [tempArr addObject:_dataArray[_dataArray.count - 1]];
+        _contractInfoArray = [tempArr copy];
+        
+        tempArr = [_dataArray mutableCopy];
+        [tempArr removeLastObject];
+        [tempArr removeLastObject];
+        
+        _dataArray = [tempArr copy];
+        
+        [_tableView reloadData];
     }
 }
 
@@ -493,9 +507,12 @@
         BOOL hideContractInfo = NO;
         for (int i = 2; i < _dataArray.count; i ++) {
             if (i < tempArr.count) {
-                EditInfoModel* model = tempArr[i];
-                EditInfoModel* editModel = _dataArray[i];
-                editModel.isShow = model.isShow;
+                id obj = tempArr[i];
+                if ([obj isKindOfClass:[EditInfoModel class]]) {
+                    EditInfoModel* model = tempArr[i];
+                    EditInfoModel* editModel = _dataArray[i];
+                    editModel.isShow = model.isShow;
+                }
             } else {
                 hideContractInfo = YES;
             }

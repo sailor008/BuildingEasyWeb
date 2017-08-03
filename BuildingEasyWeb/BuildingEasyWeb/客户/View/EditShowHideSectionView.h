@@ -16,6 +16,7 @@
 
 @interface EditShowHideSectionView : UITableViewHeaderFooterView
 
+@property (nonatomic, assign) BOOL isExpand;
 @property (nonatomic, weak) id<EditShowHideSectionViewDelegate> delegate;
 
 @end
