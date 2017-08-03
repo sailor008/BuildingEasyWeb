@@ -21,4 +21,6 @@
 @property (nonatomic, strong) EditInfoModel* model;
 @property (nonatomic, weak) id<PayTypeCellDelegate> delegate;
 
+- (void)setTitleWithOnce:(NSString *)onceStr stages:(NSString *)stagesStr;
+
 @end

@@ -10,6 +10,9 @@
 
 @interface PayTypeCell ()
 
+@property (weak, nonatomic) IBOutlet UILabel *onceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stagesLabel;
+
 @end
 
 @implementation PayTypeCell
@@ -39,6 +42,12 @@
     }
     UIButton* button = [self.contentView viewWithTag:1000 + model.type];
     button.selected = YES;
+}
+
+- (void)setTitleWithOnce:(NSString *)onceStr stages:(NSString *)stagesStr
+{
+    _onceLabel.text = onceStr;
+    _stagesLabel.text = stagesStr;
 }
 
 #pragma mark Action
