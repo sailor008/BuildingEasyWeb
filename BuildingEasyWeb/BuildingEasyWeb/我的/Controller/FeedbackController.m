@@ -33,6 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"意见反馈";
+    _lblPlaceholder.text = @"如您遇到操作和技术问题，或其他项目问题，请填写或联系官方微信服务号。";
     
     _txtBGView.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
     _txtBGView.layer.borderWidth = 0.8f;
