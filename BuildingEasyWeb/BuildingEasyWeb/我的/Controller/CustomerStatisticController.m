@@ -12,7 +12,6 @@
 #import "TableRefreshManager.h"
 #import "UIView+MBProgressHUD.h"
 
-#import "CustomerDetailController.h"
 #import "StatusListView.h"
 #import "CustomerStateTVCell.h"
 #import "ProgressDetailController.h"
