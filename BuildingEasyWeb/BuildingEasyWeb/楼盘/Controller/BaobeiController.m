@@ -189,7 +189,6 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     }
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
     buildingVC.delegate = self;
-    buildingVC.selectCellMax = kPerBaobeiBuildingMax - _bulidList.count;
     [self.navigationController pushViewController:buildingVC animated:YES];
 }
 
