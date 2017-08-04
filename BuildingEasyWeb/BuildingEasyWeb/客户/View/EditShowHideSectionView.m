@@ -11,6 +11,7 @@
 @interface EditShowHideSectionView ()
 
 @property (weak, nonatomic) IBOutlet UIButton *showHideButton;
+@property (weak, nonatomic) IBOutlet UILabel *sectionTitleLabel;
 
 @end
 
@@ -26,6 +27,12 @@
     }
 }
 
+- (void)setSectionTitle:(NSString *)sectionTitle
+{
+    _sectionTitle = sectionTitle;
+    _sectionTitleLabel.text = sectionTitle;
+}
+
 - (IBAction)showHideTap:(UIButton *)sender
 {
 //    if (sender.isSelected == YES) {
@@ -33,8 +40,8 @@
 //    }
 //    sender.selected = YES;
     
-    if (_delegate && [_delegate respondsToSelector:@selector(sectionShowHide:)]) {
-        [_delegate sectionShowHide:sender.isSelected];
+    if (_delegate && [_delegate respondsToSelector:@selector(sectionShowHide:withTitle:)]) {
+        [_delegate sectionShowHide:sender.isSelected withTitle:_sectionTitle];
     }
 }
 

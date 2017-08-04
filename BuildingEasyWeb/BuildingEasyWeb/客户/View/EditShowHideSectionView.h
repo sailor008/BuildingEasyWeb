@@ -10,12 +10,13 @@
 
 @protocol EditShowHideSectionViewDelegate <NSObject>
 
-- (void)sectionShowHide:(BOOL)isShowHide;
+- (void)sectionShowHide:(BOOL)isShowHide withTitle:(NSString *)sectionTitle;
 
 @end
 
 @interface EditShowHideSectionView : UITableViewHeaderFooterView
 
+@property (nonatomic, copy) NSString* sectionTitle;
 @property (nonatomic, assign) BOOL isExpand;
 @property (nonatomic, weak) id<EditShowHideSectionViewDelegate> delegate;
 

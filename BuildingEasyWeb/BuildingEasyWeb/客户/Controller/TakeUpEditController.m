@@ -30,6 +30,7 @@
 {
     BOOL _canEdit;
     BOOL _isExpandContractInfo;
+    BOOL _isExpandSellerInfo;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -45,6 +46,7 @@
 @property (nonatomic, strong) UIView* footerContainView;
 
 @property (nonatomic, strong) NSArray* contractInfoArray;
+@property (nonatomic, strong) NSArray* sellerInfoArray;
 
 @end
 
@@ -98,7 +100,7 @@
     CGFloat photoViewTop = 0.0;
     if (_type == kEditTypeNew) {
         UILabel* tip1Label = [[UILabel alloc] init];
-        tip1Label.text = @"1.合同关键信息必须拍照;";
+        tip1Label.text = @"1.合同关键信息必须拍照上传;";
         tip1Label.font = [UIFont systemFontOfSize:13];
         tip1Label.textColor = Hex(0xff4c00);
         [tip1Label sizeToFit];
@@ -136,7 +138,8 @@
     
     _footerView = footerView;
     
-    _tableView.tableFooterView = footerView;
+//    _tableView.tableFooterView = footerView;
+    _tableView.tableFooterView = nil;
 }
 
 - (void)setupProperty
@@ -145,7 +148,7 @@
     _contractInfoArray = [NSArray array];
     
     _dataArray = [TakeUpManager originalTakeUpArray];
-    {// 预保存合同信息，为了可以展开，不做收缩
+    {// 预保存合同信息，为了可以展开收缩
         NSMutableArray* tempArr = [NSMutableArray array];
         [tempArr addObject:_dataArray[_dataArray.count - 2]];
         [tempArr addObject:_dataArray[_dataArray.count - 1]];
@@ -157,8 +160,27 @@
         
         _dataArray = [tempArr copy];
     }
+    {// 预保存卖家信息，为了可以展开收缩
+        NSMutableArray* tempArr = [NSMutableArray array];
+        [tempArr addObject:_dataArray[_dataArray.count - 2]];
+        [tempArr addObject:_dataArray[_dataArray.count - 1]];
+        _sellerInfoArray = [tempArr copy];
+        
+        tempArr = [_dataArray mutableCopy];
+        [tempArr removeLastObject];
+        [tempArr removeLastObject];
+        
+        _dataArray = [tempArr copy];
+    }
+    {
+        NSMutableArray* tempArr = [_dataArray mutableCopy];
+        [tempArr addObject:@"空"];
+        [tempArr addObject:@"空"];
+        _dataArray = [tempArr copy];
+    }
     
-    _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"合同信息", @""];
+//    _sectionArray = @[@"卖方信息", @"", @"买受人信息", @"合同信息", @""];
+    _sectionArray = @[@"买受人信息", @"卖方信息", @"合同信息"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -175,24 +197,37 @@
 #pragma mark UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_dataArray.lastObject isKindOfClass:[EditInfoModel class]]) {
-        return _dataArray.count + 1;
-    }
-    return _dataArray.count;
+//    if ([_dataArray.lastObject isKindOfClass:[EditInfoModel class]]) {
+//        return _dataArray.count + 1;
+//    }
+//    return _dataArray.count;
+    
+    return _sectionArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([_dataArray.lastObject isKindOfClass:[EditInfoModel class]] && section >= _dataArray.count) {
-        return 0;
-    }
+//    if ([_dataArray.lastObject isKindOfClass:[EditInfoModel class]] && section >= _dataArray.count) {
+//        return 0;
+//    }
+//    
+//    id item = _dataArray[section];
+//    if ([item isKindOfClass:[EditInfoModel class]]) {
+//        return 1;
+//    }
+//    NSArray* rowArray = _dataArray[section];
+//    return rowArray.count;
     
     id item = _dataArray[section];
-    if ([item isKindOfClass:[EditInfoModel class]]) {
-        return 1;
+    if ([item isKindOfClass:[NSString class]]) {
+        return 0;
+    } else {
+        if ([item isKindOfClass:[EditInfoModel class]]) {
+            return 1;
+        }
+        NSArray* rowArray = _dataArray[section];
+        return rowArray.count;
     }
-    NSArray* rowArray = _dataArray[section];
-    return rowArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -242,16 +277,24 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSString* sectionTitle = _sectionArray[section];
-    if ([sectionTitle isEqualToString:@"合同信息"]) {
+//    if ([sectionTitle isEqualToString:@"合同信息"]) {
+    if ([sectionTitle isEqualToString:@"合同信息"] || [sectionTitle isEqualToString:@"卖方信息"]) {
         EditShowHideSectionView* sectionView =  [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditShowHideSectionView"];
         sectionView.delegate = self;
-        sectionView.isExpand = _isExpandContractInfo;
+        sectionView.sectionTitle = sectionTitle;
+        
+        if ([sectionTitle isEqualToString:@"合同信息"]) {
+            sectionView.isExpand = _isExpandContractInfo;
+        } else {
+            sectionView.isExpand = _isExpandSellerInfo;
+        }
         return sectionView;
     } else {
         EditSectionView* sectionView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"kEditSectionView"];
         sectionView.delegate = self;
         sectionView.sectionTitle = sectionTitle;
-        if (section == 2 && _canEdit == YES) {
+//        if (section == 2 && _canEdit == YES) {
+        if (section == 0 && _canEdit == YES) {
             sectionView.canAdd = YES;
         } else {
             sectionView.canAdd = NO;
@@ -298,40 +341,104 @@
     model.canEdit = YES;
     
     NSMutableArray* tempArr = [NSMutableArray arrayWithArray:_dataArray];
-    [tempArr insertObject:model atIndex:3];
+//    [tempArr insertObject:model atIndex:3];
+    [tempArr insertObject:model atIndex:1];
     
     _dataArray = [tempArr copy];
     
     NSMutableArray* tempSectionArr = [_sectionArray mutableCopy];
-    [tempSectionArr insertObject:@"" atIndex:3];
+//    [tempSectionArr insertObject:@"" atIndex:3];
+    [tempSectionArr insertObject:@"" atIndex:1];
     _sectionArray = [tempSectionArr copy];
     
     [_tableView reloadData];
 }
 
 #pragma mark EditShowHideSectionViewDelegate
-- (void)sectionShowHide:(BOOL)isShowHide
+- (void)sectionShowHide:(BOOL)isShowHide withTitle:(NSString *)sectionTitle
 {
-    _isExpandContractInfo = !_isExpandContractInfo;
-    if (_isExpandContractInfo) {// 展开
-        NSMutableArray* tempArr = [_dataArray mutableCopy];
-        [tempArr addObjectsFromArray:_contractInfoArray];
-        _dataArray = [tempArr copy];
-        
-        [_tableView reloadData];
-        
-    } else {// 收起
-        NSMutableArray* tempArr = [NSMutableArray array];
-        [tempArr addObject:_dataArray[_dataArray.count - 2]];
-        [tempArr addObject:_dataArray[_dataArray.count - 1]];
-        _contractInfoArray = [tempArr copy];
-        
-        tempArr = [_dataArray mutableCopy];
-        [tempArr removeLastObject];
-        [tempArr removeLastObject];
-        
-        _dataArray = [tempArr copy];
-        
+    if ([sectionTitle isEqualToString:@"合同信息"]) {
+        _isExpandContractInfo = !_isExpandContractInfo;
+        if (_isExpandContractInfo) {// 展开
+            NSMutableArray* tempArr = [_dataArray mutableCopy];
+            [tempArr removeLastObject];
+            [tempArr addObjectsFromArray:_contractInfoArray];
+            _dataArray = [tempArr copy];
+            
+            tempArr = [_sectionArray mutableCopy];
+            [tempArr addObject:@""];
+            _sectionArray = [tempArr copy];
+            
+            _tableView.tableFooterView = _footerView;
+            
+            [_tableView reloadData];
+            
+        } else {// 收起
+            NSMutableArray* tempArr = [NSMutableArray array];
+            [tempArr addObject:_dataArray[_dataArray.count - 2]];
+            [tempArr addObject:_dataArray[_dataArray.count - 1]];
+            _contractInfoArray = [tempArr copy];
+            
+            tempArr = [_dataArray mutableCopy];
+            [tempArr removeLastObject];
+            [tempArr removeLastObject];
+            [tempArr addObject:@"空"];
+            
+            _dataArray = [tempArr copy];
+            
+            tempArr = [_sectionArray mutableCopy];
+            [tempArr removeLastObject];
+            _sectionArray = [tempArr copy];
+            
+            _tableView.tableFooterView = nil;
+            
+            [_tableView reloadData];
+        }
+    } else {
+        _isExpandSellerInfo = !_isExpandSellerInfo;
+        if (_isExpandSellerInfo) {// 展开
+            NSMutableArray* tempArr = [_dataArray mutableCopy];
+            NSInteger index = [_dataArray indexOfObject:@"空"];
+            [tempArr removeObjectAtIndex:index];
+            
+            [tempArr insertObject:_sellerInfoArray[1] atIndex:index];
+            [tempArr insertObject:_sellerInfoArray[0] atIndex:index];
+            
+            _dataArray = [tempArr copy];
+            
+            tempArr = [_sectionArray mutableCopy];
+            index = [_sectionArray indexOfObject:@"卖方信息"];
+            [tempArr insertObject:@"" atIndex:index + 1];
+            _sectionArray = [tempArr copy];
+            
+        } else {// 收起
+            NSMutableArray* tempArr = [_dataArray mutableCopy];
+            NSMutableArray* tempSellerInfo = [NSMutableArray array];
+            
+            NSInteger index = 0;
+            for (int i = 0; i < _dataArray.count; i ++) {
+                id item = _dataArray[i];
+                if (![item isKindOfClass:[EditInfoModel class]]) {
+                    index = i;
+                    break;
+                }
+            }
+            
+            [tempSellerInfo addObject:tempArr[index]];
+            [tempArr removeObjectAtIndex:index];
+            [tempSellerInfo addObject:tempArr[index]];
+            [tempArr removeObjectAtIndex:index];
+            [tempArr insertObject:@"空" atIndex:index];
+            
+            _sellerInfoArray = [tempSellerInfo copy];
+            
+            _dataArray = [tempArr copy];
+            
+            tempArr = [_sectionArray mutableCopy];
+            index = [_sectionArray indexOfObject:@"卖方信息"];
+            [tempArr removeObjectAtIndex:index + 1];
+            _sectionArray = [tempArr copy];
+        }
         [_tableView reloadData];
     }
 }
@@ -389,6 +496,30 @@
 #pragma mark Action
 - (void)commit
 {
+    NSMutableArray* temp = [_dataArray mutableCopy];
+    if (!_isExpandSellerInfo) {
+        NSInteger index = [temp indexOfObject:@"空"];
+        [temp insertObject:_sellerInfoArray[1] atIndex:index];
+        [temp insertObject:_sellerInfoArray[0] atIndex:index];
+//        [temp removeObject:@"空"];
+        [temp removeObjectAtIndex:index + 2];
+    }
+    if (!_isExpandContractInfo) {
+        NSInteger index = [temp indexOfObject:@"空"];
+        [temp insertObject:_contractInfoArray[1] atIndex:index];
+        [temp insertObject:_contractInfoArray[0] atIndex:index];
+        [temp removeObject:@"空"];
+    }
+    
+    BOOL result = YES;
+//    TakeUpModel* takeUpModel = [TakeUpManager tranToCommitModel:_dataArray tranResult:&result];
+    TakeUpModel* takeUpModel = [TakeUpManager tranToCommitModel:temp tranResult:&result];
+    takeUpModel.customerId = _customerId;
+    
+    if (result == NO) {
+        return;
+    }
+    
     NSArray* imageArr = [NSArray array];
     if (_type == kEditTypeNew) {// 新建编辑才上传图片
         imageArr = _photoView.resultArray;
@@ -396,14 +527,6 @@
             [MBProgressHUD showError:@"请添加认购书" toView:self.view];
             return;
         }
-    }
-    
-    BOOL result = YES;
-    TakeUpModel* takeUpModel = [TakeUpManager tranToCommitModel:_dataArray tranResult:&result];
-    takeUpModel.customerId = _customerId;
-    
-    if (result == NO) {
-        return;
     }
     
     kWeakSelf(weakSelf);
@@ -488,54 +611,79 @@
     
     NSArray* tempArr = [_dataArray copy];
     
-    _dataArray = [TakeUpManager detailTakeUpArrayWithData:_takeUpInfo canEdit:YES];
-    // 判断付款方式
-    if ([[_takeUpInfo objectForKey:@"type"] boolValue] == NO) {
-        NSMutableArray* tempArr = [_dataArray mutableCopy];
-        NSArray* itemArr = [tempArr lastObject];
-        NSMutableArray* tempItemArr = [itemArr mutableCopy];
-        [tempItemArr removeObjectAtIndex:1];
-        [tempItemArr removeObjectAtIndex:1];
+    for (int i = 0; i < tempArr.count; i ++) {
+        id item = tempArr[i];
         
-        itemArr = [tempItemArr copy];
-        tempArr[tempArr.count - 1] = itemArr;
+        if ([item isKindOfClass:[NSString class]]) {
+            continue;
+        }
         
-        _dataArray = [tempArr copy];
-    }
-    
-    // 因为有展开收缩，所以需要和之前的数组做对比
-    {
-        BOOL hideContractInfo = NO;
-        for (int i = 2; i < _dataArray.count; i ++) {
-            if (i < tempArr.count) {
-                id obj = tempArr[i];
-                if ([obj isKindOfClass:[EditInfoModel class]]) {
-                    EditInfoModel* model = tempArr[i];
-                    EditInfoModel* editModel = _dataArray[i];
-                    editModel.isShow = model.isShow;
-                }
-            } else {
-                hideContractInfo = YES;
+        if ([item isKindOfClass:[EditInfoModel class]]) {
+            [(EditInfoModel*)item setCanEdit:YES];
+        } else {
+            NSArray* array = (NSArray *)item;
+            for (int j = 0; j < array.count; j ++){
+                EditInfoModel* subItem = array[j];
+                subItem.canEdit = YES;
             }
         }
-        if (hideContractInfo == YES) {// 合同信息被收起
-            // 预保存合同信息，为了可以展开，不做收缩
-            NSMutableArray* tempArr = [NSMutableArray array];
-            [tempArr addObject:_dataArray[_dataArray.count - 2]];
-            [tempArr addObject:_dataArray[_dataArray.count - 1]];
-            _contractInfoArray = [tempArr copy];
-            
-            tempArr = [_dataArray mutableCopy];
-            [tempArr removeLastObject];
-            [tempArr removeLastObject];
-            
-            _dataArray = [tempArr copy];
+    }
+    for (NSArray* itemArr in _contractInfoArray) {
+        for (EditInfoModel* item in itemArr) {
+            item.canEdit = YES;
         }
-        
     }
-    for (int i = 0; i < tempArr.count; i ++) {
-        
+    for (NSArray* itemArr in _sellerInfoArray) {
+        for (EditInfoModel* item in itemArr) {
+            item.canEdit = YES;
+        }
     }
+    
+//    _dataArray = [TakeUpManager detailTakeUpArrayWithData:_takeUpInfo canEdit:YES];
+//    // 判断付款方式
+//    if ([[_takeUpInfo objectForKey:@"type"] boolValue] == NO) {
+//        NSMutableArray* tempArr = [_dataArray mutableCopy];
+//        NSArray* itemArr = [tempArr lastObject];
+//        NSMutableArray* tempItemArr = [itemArr mutableCopy];
+//        [tempItemArr removeObjectAtIndex:1];
+//        [tempItemArr removeObjectAtIndex:1];
+//        
+//        itemArr = [tempItemArr copy];
+//        tempArr[tempArr.count - 1] = itemArr;
+//        
+//        _dataArray = [tempArr copy];
+//    }
+    
+//    // 因为有展开收缩，所以需要和之前的数组做对比
+//    {
+//        BOOL hideContractInfo = NO;
+//        for (int i = 2; i < _dataArray.count; i ++) {
+//            if (i < tempArr.count) {
+//                id obj = tempArr[i];
+//                if ([obj isKindOfClass:[EditInfoModel class]]) {
+//                    EditInfoModel* model = tempArr[i];
+//                    EditInfoModel* editModel = _dataArray[i];
+//                    editModel.isShow = model.isShow;
+//                }
+//            } else {
+//                hideContractInfo = YES;
+//            }
+//        }
+//        if (hideContractInfo == YES) {// 合同信息被收起
+//            // 预保存合同信息，为了可以展开，不做收缩
+//            NSMutableArray* tempArr = [NSMutableArray array];
+//            [tempArr addObject:_dataArray[_dataArray.count - 2]];
+//            [tempArr addObject:_dataArray[_dataArray.count - 1]];
+//            _contractInfoArray = [tempArr copy];
+//            
+//            tempArr = [_dataArray mutableCopy];
+//            [tempArr removeLastObject];
+//            [tempArr removeLastObject];
+//            
+//            _dataArray = [tempArr copy];
+//        }
+//        
+//    }
     
     [_tableView reloadData];
 }
@@ -563,7 +711,7 @@
         
         _dataArray = [TakeUpManager detailTakeUpArrayWithData:reponse canEdit:NO];
         NSMutableArray* tempSectionArr = [_sectionArray mutableCopy];
-        for (int i = 3; i < _dataArray.count; i ++) {
+        for (int i = 1; i < _dataArray.count; i ++) {
             id obj = _dataArray[i];
             if ([obj isKindOfClass:[EditInfoModel class]]) {
                 [tempSectionArr insertObject:@"" atIndex:i];
@@ -586,7 +734,7 @@
             _dataArray = [tempArr copy];
         }
         
-        {// 预保存合同信息，为了可以展开，不做收缩
+        {// 预保存合同信息，为了可以展开收缩
             NSMutableArray* tempArr = [NSMutableArray array];
             [tempArr addObject:_dataArray[_dataArray.count - 2]];
             [tempArr addObject:_dataArray[_dataArray.count - 1]];
@@ -598,6 +746,26 @@
             
             _dataArray = [tempArr copy];
         }
+        {// 预保存卖家信息，为了可以展开收缩
+            NSMutableArray* tempArr = [NSMutableArray array];
+            [tempArr addObject:_dataArray[_dataArray.count - 2]];
+            [tempArr addObject:_dataArray[_dataArray.count - 1]];
+            _sellerInfoArray = [tempArr copy];
+            
+            tempArr = [_dataArray mutableCopy];
+            [tempArr removeLastObject];
+            [tempArr removeLastObject];
+            
+            _dataArray = [tempArr copy];
+        }
+        {
+            NSMutableArray* tempArr = [_dataArray mutableCopy];
+            [tempArr addObject:@"空"];
+            [tempArr addObject:@"空"];
+            _dataArray = [tempArr copy];
+        }
+        
+        _tableView.tableFooterView = nil;
         
         [_tableView reloadData];
         
