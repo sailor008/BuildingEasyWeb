@@ -18,4 +18,6 @@
 
 @property (nonatomic, weak) id<SelectBuildingResultDelegate> delegate;
 
+@property (nonatomic, assign) NSUInteger selectCellMax;
+
 @end

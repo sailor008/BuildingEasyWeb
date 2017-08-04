@@ -31,8 +31,8 @@
                                 <outlet property="delegate" destination="-1" id="CXG-3V-eDn"/>
                             </connections>
                         </textView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用的不爽，请吐槽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NS-wd-srM">
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用的不爽，请吐槽" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NS-wd-srM">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="0.45490196078431372" green="0.45490196078431372" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -41,6 +41,7 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="QY9-Cd-Pnx" secondAttribute="bottom" id="3Gy-jq-zqo"/>
                         <constraint firstItem="QY9-Cd-Pnx" firstAttribute="leading" secondItem="zg0-bH-Ld3" secondAttribute="leading" constant="5" id="Edo-pp-7M2"/>
+                        <constraint firstAttribute="trailing" secondItem="1NS-wd-srM" secondAttribute="trailing" id="Ekx-pk-MH8"/>
                         <constraint firstItem="1NS-wd-srM" firstAttribute="leading" secondItem="zg0-bH-Ld3" secondAttribute="leadingMargin" id="fQh-8K-5LZ"/>
                         <constraint firstItem="QY9-Cd-Pnx" firstAttribute="top" secondItem="zg0-bH-Ld3" secondAttribute="top" id="pxw-We-BFd"/>
                         <constraint firstItem="1NS-wd-srM" firstAttribute="top" secondItem="zg0-bH-Ld3" secondAttribute="topMargin" id="zJu-pb-Ual"/>

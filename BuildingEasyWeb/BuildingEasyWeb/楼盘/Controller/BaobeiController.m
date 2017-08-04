@@ -183,12 +183,13 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 
 - (IBAction)addIntentBuilding:(id)sender
 {
-    if (_bulidList.count >= 6) {
-        [MBProgressHUD showError:@"最多同时报备6个楼盘"];
+    if (_bulidList.count >= kPerBaobeiBuildingMax) {
+        [MBProgressHUD showError:[NSString stringWithFormat: @"最多同时报备%lu个楼盘",kPerBaobeiBuildingMax]];
         return;
     }
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
     buildingVC.delegate = self;
+    buildingVC.selectCellMax = kPerBaobeiBuildingMax - _bulidList.count;
     [self.navigationController pushViewController:buildingVC animated:YES];
 }
 
@@ -335,8 +336,8 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
         [_bulidList addObject:baobeiModel];
     }
     
-    if (_bulidList.count > 6) {
-        [_bulidList removeObjectsInRange:NSMakeRange(6, _bulidList.count - 6)];
+    if (_bulidList.count > kPerBaobeiBuildingMax) {
+        [_bulidList removeObjectsInRange:NSMakeRange(kPerBaobeiBuildingMax, _bulidList.count - kPerBaobeiBuildingMax)];
     }
     
     [_tableView reloadData];
