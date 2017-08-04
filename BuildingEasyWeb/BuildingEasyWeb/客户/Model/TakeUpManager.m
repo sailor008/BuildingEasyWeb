@@ -61,7 +61,8 @@
     EditInfoModel* model = [[EditInfoModel alloc] init];
     model.isBuyer = YES;
     model.canEdit = YES;
-    [tempArr insertObject:model atIndex:2];
+//    [tempArr insertObject:model atIndex:2];
+    [tempArr insertObject:model atIndex:0];
     
     return [tempArr copy];
 }
@@ -242,7 +243,8 @@
         [tempBuyers addObject:model];
     }
     if (tempBuyers.count > 0) {
-        [tempArr insertObjects:[tempBuyers copy] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, tempBuyers.count)]];
+//        [tempArr insertObjects:[tempBuyers copy] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, tempBuyers.count)]];
+        [tempArr insertObjects:[tempBuyers copy] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, tempBuyers.count)]];
     }
     
     return [tempArr copy];
