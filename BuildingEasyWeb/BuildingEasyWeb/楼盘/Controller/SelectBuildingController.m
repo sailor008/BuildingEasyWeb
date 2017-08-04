@@ -146,7 +146,6 @@
 {
     BuildingListModel* model = _buildingArr[indexPath.row];
     
-    
     if ([_selectedIDArr containsObject:model.buildId]) {
         
         [_buildIdArr removeObject:model];
@@ -160,6 +159,11 @@
         }
         
     } else {
+        if(_selectedIDArr.count >= _selectCellMax) {
+            [MBProgressHUD showError:[NSString stringWithFormat: @"你已选取了%lu个楼盘",kPerBaobeiBuildingMax]];
+            return;
+        }
+        
         [_buildIdArr addObject:model];
         
         [_selectedIDArr addObject:model.buildId];

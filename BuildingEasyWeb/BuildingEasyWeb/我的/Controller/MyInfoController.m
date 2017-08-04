@@ -314,20 +314,9 @@ typedef void (^onTabVCell)(void);
     } else if([tag isEqualToString:@"wx/authUser"]) {
 
     }
-    
     kWeakSelf(weakSelf);
-    [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
-        [MBProgressHUD hideHUD];
-        User* user = [User mj_objectWithKeyValues:reponse];
-        user.pwd = [User shareUser].pwd;
-        [user copyAnotherInfoToShareUser];
-        [[User shareUser] saveUserInfoToFile];
-        
-        [weakSelf initViewCfg];
-        [weakSelf.tableView reloadData];
-    } failure:^(NSError *error, NSString *msg) {
-        [MBProgressHUD hideHUD];
-    }];
+    [weakSelf initViewCfg];
+    [weakSelf.tableView reloadData];
 }
 
 /////////////////////////////
