@@ -73,6 +73,34 @@ typedef NS_ENUM(NSInteger, StatisticState) {
     kStatisticStateInvaild,             // 23：失效
 };
 
+static NSString* const StatisticStateString[] = {
+    @"发起报备",
+    @"接受审核",
+    @"接受成功",
+    @"待上门",
+    @"系统已确认带看",
+    @"上传凭证后台审核",
+    @"已上门",
+    @"待认购",
+    @"系统已确认认购",
+    @"上传凭证后台审核",
+    @"已认购",
+    @"待签约",
+    @"系统已确认签约",
+    @"上传凭证后台审核",
+    @"已签约",
+    @"待回款",
+    @"系统已确认回款",
+    @"上传凭证回款",
+    @"已回款",
+    @"待结清",
+    @"系统已确认结清",
+    @"上传凭证结清",
+    @"已结清",
+    @"失效",
+};
+
+
 typedef NS_ENUM(NSInteger, IntentionLevel) {
     kIntentionLevelWeak,          // 0：弱（意向程度）
     kIntentionLevelMiddle,        // 1：中（意向程度）

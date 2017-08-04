@@ -74,39 +74,7 @@ static NSArray* StatisticStateDescArr;
         _daysLabel.text = @"";
     }
     _dateLabel.text = [NSDate dateStrWithTimeInterval:model.createTime/1000];
-    _nowStateLabel.text = model.stateDesc;
+    _nowStateLabel.text = StatisticStateString[model.state];
 }
 
 @end
-
-
-
-
-
-//    StatisticStateDescArr[kStatisticStateBaobeiBegin    ] = @"发起报备";
-//    StatisticStateDescArr[kStatisticStateBaobeiVerify   ] = @"接受审核";
-//    StatisticStateDescArr[kStatisticStateBaobeiSucces   ] = @"接受成功";
-//    StatisticStateDescArr[kStatisticStateWaitVisit      ] = @"待上门";
-//    StatisticStateDescArr[kStatisticStateVisiting       ] = @"系统已确认带看";
-//    StatisticStateDescArr[kStatisticStateVisitedVerify  ] = @"上传凭证带看后台审核";
-//    StatisticStateDescArr[kStatisticStateVisitedSuccess ] = @"已上门";
-//    StatisticStateDescArr[kStatisticStateWaitSubscribe  ] = @"待认购";
-//    StatisticStateDescArr[kStatisticStateInSubscribe    ] = @"系统已确认认购";
-//    StatisticStateDescArr[kStatisticStateSubscribeVerify] = @"上传凭证后台审核";
-//    StatisticStateDescArr[kStatisticStateSubscribed     ] = @"已认购";
-//    StatisticStateDescArr[kStatisticStateWaitBuy        ] = @"待签约";
-//    StatisticStateDescArr[kStatisticStateBuying         ] = @"系统已确认签约";
-//    StatisticStateDescArr[kStatisticStateBuyVerify      ] = @"上传凭证后台审核";
-//    StatisticStateDescArr[kStatisticStateBought         ] = @"已签约";
-//    StatisticStateDescArr[kStatisticStateWaitPay        ] = @"待回款";
-//    StatisticStateDescArr[kStatisticStatePaying         ] = @"系统已确认回款";
-//    StatisticStateDescArr[kStatisticStatePayVerify      ] = @"上传凭证回款";
-//    StatisticStateDescArr[kStatisticStatePaid           ] = @"已回款";
-//    StatisticStateDescArr[kStatisticStateWaitCheckBill  ] = @"待结清";
-//    StatisticStateDescArr[kStatisticStateCheckingBill   ] = @"系统已确认结清";
-//    StatisticStateDescArr[kStatisticStateCheckBillVerify] = @"上传凭证确认结清";
-//    StatisticStateDescArr[kStatisticStateCheckedBill    ] = @"已结清";
-//    StatisticStateDescArr[kStatisticStateInvaild        ] = @"失效";
-
-
-
