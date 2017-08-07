@@ -21,6 +21,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIButton *showHideButton;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @end
 
@@ -72,6 +73,12 @@
     _showHideButton.selected = _model.isShow;
 }
 
+- (void)setCanDelete:(BOOL)canDelete
+{
+    _canDelete = canDelete;
+    _deleteButton.hidden = !canDelete;
+}
+
 #pragma mark Action
 - (void)textFieldDidChange:(UITextField *)textField
 {
@@ -100,6 +107,13 @@
     
     if (_delegate && [_delegate respondsToSelector:@selector(buyerCellShowHide:withModel:)]) {
         [_delegate buyerCellShowHide:sender.isSelected withModel:_model];
+    }
+}
+
+- (IBAction)deleteBuyer:(id)sender
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(deleteBuyerWithModel:)]) {
+        [_delegate deleteBuyerWithModel:_model];
     }
 }
 
