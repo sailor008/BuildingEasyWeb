@@ -12,9 +12,9 @@
 #import "TableRefreshManager.h"
 #import "UIView+MBProgressHUD.h"
 
-#import "CustomerDetailController.h"
 #import "StatusListView.h"
 #import "CustomerStateTVCell.h"
+#import "ProgressDetailController.h"
 
 #import <MJExtension.h>
 #import "NetworkManager.h"
@@ -56,6 +56,12 @@
         
         [self initBtnNavTitle];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -183,22 +189,6 @@
     [_tableview registerNibWithName:@"CustomerStateTVCell"];
 }
 
-- (NSString*)getStateDesc:(NSInteger)state
-{
-    NSString* stateDesc = @"未知状态";
-    if(state == [_nowStateModel.state integerValue]){
-        stateDesc = _nowStateModel.stateDesc;
-    } else {
-        for (StatisticStateModel* model in self.stateList){
-            if([model.state integerValue] == state) {
-                stateDesc = model.stateDesc;
-                break;
-            }
-        }
-    }
-    return stateDesc;
-}
-
 - (void)addTableViewRefresh
 {
     kWeakSelf(weakSelf);
@@ -219,7 +209,6 @@
                                  @"name":searchStr,
                                  };
     [NetworkManager postWithUrl:@"wx/getCustomerInfoByState" parameters:parameters success:^(id reponse) {
-//        NSLog(@">>>>>>>>>>>>>>>>>>>>>>>> %@", reponse);
         //缓存最后一次搜索词语
         _preSearchStr = searchStr;
         if (_tableview.page == 1) {
@@ -230,7 +219,6 @@
         NSInteger startIdx = (_tableview.page - 1) * pageSize;
         for (NSDictionary* dic in tmpArray) {
             BaobeiInfoModel* model = [BaobeiInfoModel mj_objectWithKeyValues:dic];
-            model.stateDesc = [self getStateDesc: model.state];
             _baobeiInfoArr[startIdx] = model;
             startIdx++;
         }
@@ -278,7 +266,7 @@
 {
     BaobeiInfoModel* model = _baobeiInfoArr[indexPath.row];
     CustomerStateTVCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CustomerStateTVCell" forIndexPath:indexPath];
-    [cell setModel:model];
+    cell.model = model;
     return cell;
 }
 
@@ -302,12 +290,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     BaobeiInfoModel* model = _baobeiInfoArr[indexPath.row];
-    CustomerDetailController* detailVC = [[CustomerDetailController alloc]init];
-    detailVC.customerId = model.customerId;
-    detailVC.customerName = model.customerName;
-    detailVC.phone = model.customerMobile;
-    detailVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    ProgressDetailController* progressDetailVC = [[ProgressDetailController alloc] init];
+    progressDetailVC.customerId = model.customerId;
+//    progressDetailVC.delegate = self;
+    [self.navigationController pushViewController:progressDetailVC animated:YES];
 }
 
 

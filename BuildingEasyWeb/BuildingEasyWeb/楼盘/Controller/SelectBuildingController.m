@@ -159,8 +159,8 @@
         }
         
     } else {
-        if(_selectedIDArr.count >= _selectCellMax) {
-            [MBProgressHUD showError:[NSString stringWithFormat: @"你已选取了%lu个楼盘",kPerBaobeiBuildingMax]];
+        if(_selectedIDArr.count >= kPerBaobeiBuildingMax) {
+            [MBProgressHUD showError:[NSString stringWithFormat: @"最多选择%lu个楼盘",kPerBaobeiBuildingMax]];
             return;
         }
         

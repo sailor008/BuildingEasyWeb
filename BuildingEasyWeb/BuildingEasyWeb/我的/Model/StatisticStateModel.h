@@ -29,7 +29,6 @@
 @property (nonatomic, copy) NSString* buildName;
 @property (nonatomic, assign) NSInteger invalidDay;
 @property (nonatomic, assign) NSInteger state;
-@property (nonatomic, assign) NSString* stateDesc;
 
 @end
 
