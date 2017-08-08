@@ -252,6 +252,11 @@
         BuyerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"BuyerCell" forIndexPath:indexPath];
         cell.model = model;
         cell.delegate = self;
+        if (indexPath.section == 0 || _canEdit == NO) {
+            cell.canDelete = NO;
+        } else {
+            cell.canDelete = YES;
+        }
         return cell;
     } else {
         EditTextCell* cell = [tableView dequeueReusableCellWithIdentifier:@"EditTextCell" forIndexPath:indexPath];
@@ -321,6 +326,21 @@
 #pragma mark BuyerCellDelegate
 - (void)buyerCellShowHide:(BOOL)isShowHide withModel:(EditInfoModel *)model
 {
+    [_tableView reloadData];
+}
+
+- (void)deleteBuyerWithModel:(EditInfoModel *)model
+{
+    NSInteger index = 0;
+    NSMutableArray* temp = [_dataArray mutableCopy];
+    index = [temp indexOfObject:model];
+    [temp removeObject:model];
+    _dataArray = [temp copy];
+    
+    NSMutableArray* tempSectionArr = [_sectionArray mutableCopy];
+    [tempSectionArr removeObjectAtIndex:index];
+    _sectionArray = [tempSectionArr copy];
+    
     [_tableView reloadData];
 }
 

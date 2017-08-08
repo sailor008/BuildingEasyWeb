@@ -13,6 +13,7 @@
 @protocol BuyerCellDelegate <NSObject>
 
 - (void)buyerCellShowHide:(BOOL)isShowHide withModel:(EditInfoModel *)model;
+- (void)deleteBuyerWithModel:(EditInfoModel *)model;
 
 @end
 
@@ -21,5 +22,7 @@
 @property (nonatomic, strong) EditInfoModel* model;
 
 @property (nonatomic, weak) id<BuyerCellDelegate> delegate;
+
+@property (nonatomic, assign) BOOL canDelete;
 
 @end

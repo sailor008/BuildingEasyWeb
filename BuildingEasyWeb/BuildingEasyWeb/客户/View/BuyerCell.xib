@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -207,12 +207,24 @@
                             <action selector="showHideTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="h7R-uD-fAw"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAW-Hg-Wvv">
+                        <rect key="frame" x="290" y="0.0" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Lwf-el-p3V"/>
+                            <constraint firstAttribute="width" constant="30" id="gxd-l4-zhA"/>
+                        </constraints>
+                        <state key="normal" image="删"/>
+                        <connections>
+                            <action selector="deleteBuyer:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Xj2-yn-O90"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="O00-1m-uBs" secondAttribute="trailing" id="1wf-aP-3X1"/>
                     <constraint firstItem="d2r-SW-KUl" firstAttribute="leading" secondItem="b1K-rV-ykb" secondAttribute="trailing" constant="20" id="2xq-zY-hba"/>
                     <constraint firstItem="b1K-rV-ykb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3hy-Fe-rqz"/>
                     <constraint firstItem="d2r-SW-KUl" firstAttribute="centerY" secondItem="b1K-rV-ykb" secondAttribute="centerY" id="8pm-UN-l9F"/>
+                    <constraint firstAttribute="trailing" secondItem="uAW-Hg-Wvv" secondAttribute="trailing" id="Buh-MW-nr9"/>
                     <constraint firstAttribute="trailing" secondItem="d2r-SW-KUl" secondAttribute="trailing" constant="10" id="HM3-h3-g6C"/>
                     <constraint firstItem="WvK-AP-o5B" firstAttribute="top" secondItem="C6Y-BQ-dDO" secondAttribute="bottom" id="I0M-Xo-fXO"/>
                     <constraint firstItem="WvK-AP-o5B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="MEU-f4-fAQ"/>
@@ -224,6 +236,7 @@
                     <constraint firstItem="O00-1m-uBs" firstAttribute="top" secondItem="KMR-q8-eR2" secondAttribute="bottom" id="f9I-cj-xyP"/>
                     <constraint firstItem="KMR-q8-eR2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fXY-LO-MBd"/>
                     <constraint firstAttribute="trailing" secondItem="xtb-2p-cAN" secondAttribute="trailing" id="ija-e3-CTO"/>
+                    <constraint firstItem="uAW-Hg-Wvv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="jJQ-Fq-TO0"/>
                     <constraint firstItem="KMR-q8-eR2" firstAttribute="top" secondItem="xtb-2p-cAN" secondAttribute="bottom" constant="35" id="lG5-C2-WZx"/>
                     <constraint firstItem="KMR-q8-eR2" firstAttribute="top" secondItem="b1K-rV-ykb" secondAttribute="bottom" constant="8" id="lGm-2K-Uz1"/>
                     <constraint firstItem="C6Y-BQ-dDO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mPa-NZ-Ugx"/>
@@ -235,15 +248,18 @@
             <connections>
                 <outlet property="clientIdcardTextField" destination="3aa-MQ-MWi" id="Ogv-qn-25D"/>
                 <outlet property="clientTextField" destination="WuM-kJ-GUj" id="GEX-LW-p7W"/>
+                <outlet property="deleteButton" destination="uAW-Hg-Wvv" id="JoR-gA-HwL"/>
                 <outlet property="idCardTextField" destination="K7Y-ie-ZBt" id="MGW-pB-yCA"/>
                 <outlet property="nameTextField" destination="vxI-10-lM3" id="tmk-tx-pSQ"/>
                 <outlet property="phoneTextField" destination="63F-QU-gR3" id="kjP-88-8i7"/>
                 <outlet property="showHideButton" destination="d2r-SW-KUl" id="p0S-Y8-Ur0"/>
             </connections>
+            <point key="canvasLocation" x="34" y="118.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="关闭" width="17" height="17"/>
+        <image name="删" width="12" height="12"/>
         <image name="打开" width="17" height="17"/>
     </resources>
 </document>
