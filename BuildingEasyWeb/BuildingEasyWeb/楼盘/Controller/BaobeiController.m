@@ -189,6 +189,7 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
     }
     SelectBuildingController* buildingVC = [[SelectBuildingController alloc] init];
     buildingVC.delegate = self;
+    buildingVC.selectedBuildArr = _bulidList;
     [self.navigationController pushViewController:buildingVC animated:YES];
 }
 
@@ -316,22 +317,29 @@ static NSInteger const kIntentionButtonBaseTag = 1000;
 #pragma mark SelectBuildingResultDelegate
 - (void)selectBuildingResult:(NSArray *)buildIDs
 {
+//    for (BuildingListModel* model in buildIDs) {
+//        BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
+//        baobeiModel.buildModel = model;
+//        
+//        BOOL hasSomeBuildId = NO;
+//        for (BuildBaobeiModel* existModel in _bulidList) {
+//            if ([existModel.buildModel.buildId isEqualToString:model.buildId]) {
+//                hasSomeBuildId = YES;
+//                break;
+//            }
+//        }
+//        
+//        if (hasSomeBuildId) {
+//            continue;
+//        }
+//        
+//        [_bulidList addObject:baobeiModel];
+//    }
+    
+    [_bulidList removeAllObjects];
     for (BuildingListModel* model in buildIDs) {
         BuildBaobeiModel* baobeiModel = [[BuildBaobeiModel alloc] init];
         baobeiModel.buildModel = model;
-        
-        BOOL hasSomeBuildId = NO;
-        for (BuildBaobeiModel* existModel in _bulidList) {
-            if ([existModel.buildModel.buildId isEqualToString:model.buildId]) {
-                hasSomeBuildId = YES;
-                break;
-            }
-        }
-        
-        if (hasSomeBuildId) {
-            continue;
-        }
-        
         [_bulidList addObject:baobeiModel];
     }
     

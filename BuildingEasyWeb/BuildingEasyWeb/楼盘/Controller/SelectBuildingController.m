@@ -21,6 +21,7 @@
 #import "User.h"
 #import "EmptyTipView.h"
 #import <CYLTableViewPlaceHolder.h>
+#import "BuildBaobeiModel.h"
 
 @interface SelectBuildingController () <UITableViewDataSource, UITableViewDelegate, AreaSectionFilterViewDelegate, CityListControllerDelegate, UITextFieldDelegate, CYLTableViewPlaceHolderDelegate>
 
@@ -57,6 +58,14 @@
     
     [self setupUI];
     [self addTableViewRefresh];
+    
+    for (BuildBaobeiModel* model in _selectedBuildArr) {
+        [_selectedIDArr addObject:model.buildModel.buildId];
+        [_buildIdArr addObject:model.buildModel];
+    }
+    if (_selectedBuildArr.count) {
+        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _selectedBuildArr.count];
+    }
     
     [self requestData];
 }
@@ -148,12 +157,15 @@
     
     if ([_selectedIDArr containsObject:model.buildId]) {
         
-        [_buildIdArr removeObject:model];
+//        [_buildIdArr removeObject:model];
+//        [_selectedIDArr removeObject:model.buildId];
+        NSInteger index = [_selectedIDArr indexOfObject:model.buildId];
         
-        [_selectedIDArr removeObject:model.buildId];
+        [_buildIdArr removeObjectAtIndex:index];
+        [_selectedIDArr removeObjectAtIndex:index];
         
         if (_buildIdArr.count) {
-            self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+            self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _selectedIDArr.count];
         } else {
             self.navigationItem.rightBarButtonItem.title = @"确定";
         }
@@ -168,24 +180,10 @@
         
         [_selectedIDArr addObject:model.buildId];
         
-        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
+        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _selectedIDArr.count];
     }
     [tableView reloadData];
 }
-
-//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    BuildingListModel* model = _buildingArr[indexPath.row];
-//    [_buildIdArr removeObject:model];
-//    
-//    [_selectedIDArr removeObject:model.buildId];
-//    
-//    if (_buildIdArr.count) {
-//        self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"确定(%ld)", _buildIdArr.count];
-//    } else {
-//        self.navigationItem.rightBarButtonItem.title = @"确定";
-//    }
-//}
 
 #pragma mark CYLTableViewPlaceHolderDelegate
 - (UIView *)makePlaceHolderView
