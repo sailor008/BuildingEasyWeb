@@ -134,6 +134,11 @@ typedef void (^onTabVCell)(void);
 }
 
 - (void)onCustomerExt{
+    if([[User shareUser].auth integerValue] != kAuthStateYES) {
+        [MBProgressHUD showError:@"用户未认证！"];
+        return;
+    }
+    
     BaobeiController* baobeiVC = [[BaobeiController alloc]init];
     baobeiVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:baobeiVC animated:YES];

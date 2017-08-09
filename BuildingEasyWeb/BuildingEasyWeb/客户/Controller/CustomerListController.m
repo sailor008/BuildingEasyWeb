@@ -20,6 +20,7 @@
 #import "TableRefreshManager.h"
 #import "EmptyTipView.h"
 #import "Global.h"
+#import "User.h"
 
 @interface CustomerListController () <UITableViewDataSource, UITableViewDelegate, CYLTableViewPlaceHolderDelegate, BaobeiControllerDelegate>
 
@@ -221,6 +222,11 @@
 
 - (void)addNewCustomer
 {
+    if([[User shareUser].auth integerValue] != kAuthStateYES) {
+        [MBProgressHUD showError:@"用户未认证！"];
+        return;
+    }
+    
     BaobeiController* baobeiVC = [[BaobeiController alloc] init];
     baobeiVC.hidesBottomBarWhenPushed = YES;
     baobeiVC.delegate = self;
