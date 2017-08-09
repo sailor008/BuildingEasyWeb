@@ -173,6 +173,12 @@ static const NSInteger kPhotoViewTag = 1000;
         if ([model.title rangeOfString:@"日期"].location != NSNotFound) {
             model.isDate = YES;
         }
+        if ([model.title rangeOfString:@"开始日期"].location != NSNotFound) {
+            model.minDate = [self minDate];
+        }
+        if ([model.title rangeOfString:@"结束日期"].location != NSNotFound) {
+            model.maxDate = [self maxDate];
+        }
         if ([model.title rangeOfString:@"时间"].location != NSNotFound) {
             model.isDate = YES;
         }
@@ -420,6 +426,7 @@ static const NSInteger kPhotoViewTag = 1000;
         EditInfoModel* model = _dataArray[0];
         NSTimeInterval timeInterval = [signInfo[@"startTime"] doubleValue];
         model.canEdit = NO;
+        model.minDate = [self minDate];
         NSString* dateStr = [NSDate dateStrWithTimeInterval:timeInterval];
         model.text = [dateStr substringToIndex:10];
     }
@@ -427,6 +434,7 @@ static const NSInteger kPhotoViewTag = 1000;
         EditInfoModel* model = _dataArray[1];
         NSTimeInterval timeInterval = [signInfo[@"endTime"] doubleValue];
         model.canEdit = NO;
+        model.maxDate = [self maxDate];
         NSString* dateStr = [NSDate dateStrWithTimeInterval:timeInterval];
         model.text = [dateStr substringToIndex:10];
     }
@@ -486,6 +494,32 @@ static const NSInteger kPhotoViewTag = 1000;
     _dealPhotoView.sourceUrlArray = [dealImgArr copy];
     
     [_tableView reloadData];
+}
+
+- (NSDate *)maxDate
+{
+    NSString* dateStr = [NSString dateStr:[NSDate date]];
+    NSString* yearStr = [dateStr substringToIndex:4];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"YYYY-MM-dd";
+    
+    NSString* maxDateStr = [NSString stringWithFormat:@"%d%@", yearStr.intValue + 100, [dateStr substringFromIndex:4]];
+    NSDate* maxDate = [dateFormatter dateFromString:maxDateStr];
+    
+    return maxDate;
+}
+
+- (NSDate *)minDate
+{
+    NSString* dateStr = [NSString dateStr:[NSDate date]];
+    NSString* yearStr = [dateStr substringToIndex:4];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"YYYY-MM-dd";
+    
+    NSString* minDateStr = [NSString stringWithFormat:@"%d%@", yearStr.intValue - 70, [dateStr substringFromIndex:4]];
+    NSDate* minDate = [dateFormatter dateFromString:minDateStr];
+    
+    return minDate;
 }
 
 @end
