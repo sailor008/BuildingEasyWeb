@@ -15,6 +15,9 @@
 @property (nonatomic, copy) NSString* text;
 @property (nonatomic, assign) BOOL isDate;
 
+@property (nonatomic, strong) NSDate* minDate;
+@property (nonatomic, strong) NSDate* maxDate;
+
 @property (nonatomic, assign) BOOL isRadio;
 @property (nonatomic, assign) BOOL type;
 

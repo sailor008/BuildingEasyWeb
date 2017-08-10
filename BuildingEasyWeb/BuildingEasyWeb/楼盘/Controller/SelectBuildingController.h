@@ -16,6 +16,8 @@
 
 @interface SelectBuildingController : BaseController
 
+@property (nonatomic, copy) NSArray* selectedBuildArr;
+
 @property (nonatomic, weak) id<SelectBuildingResultDelegate> delegate;
 
 @end

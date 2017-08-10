@@ -139,6 +139,9 @@
     _textField.text = [NSString dateStr:[NSDate date]];
     _model.text = _textField.text;
     
+    self.datePicker.minimumDate = _model.minDate;
+    self.datePicker.maximumDate = _model.maxDate;
+    
     UIViewController* vc = (UIViewController *)obj;
     [vc.view addSubview:self.dateView];
 }
