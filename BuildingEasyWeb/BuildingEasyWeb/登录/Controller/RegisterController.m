@@ -7,6 +7,7 @@
 //
 
 #import "RegisterController.h"
+#import "AgreementProtocolController.h"
 
 #import "UIView+MBProgressHUD.h"
 #import "Global.h"
@@ -121,4 +122,10 @@
     [LoginManager registerWithInfo:parameters];
 }
 
+- (IBAction)onBtnArgeement:(id)sender
+{
+    AgreementProtocolController *agreementProtVC = [[AgreementProtocolController alloc]init];
+    [self.navigationController pushViewController:agreementProtVC animated:YES];
+    
+}
 @end

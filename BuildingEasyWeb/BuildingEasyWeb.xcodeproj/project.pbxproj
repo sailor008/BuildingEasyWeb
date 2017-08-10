@@ -50,6 +50,8 @@
 		C79058431F1B062E00D95FBA /* PickPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C79058421F1B062E00D95FBA /* PickPhotoView.xib */; };
 		C79058471F1B6FCE00D95FBA /* MapLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C79058451F1B6FCE00D95FBA /* MapLocationController.m */; };
 		C79058481F1B6FCE00D95FBA /* MapLocationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C79058461F1B6FCE00D95FBA /* MapLocationController.xib */; };
+		C7A6034C1F3B4F0B0051F5FC /* AgreementProtocolController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A6034A1F3B4F0B0051F5FC /* AgreementProtocolController.m */; };
+		C7A6034D1F3B4F0B0051F5FC /* AgreementProtocolController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7A6034B1F3B4F0B0051F5FC /* AgreementProtocolController.xib */; };
 		C7BBCE6B1EF0414B000EF857 /* MyInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE691EF0414B000EF857 /* MyInfoController.m */; };
 		C7BBCE6C1EF0414B000EF857 /* MyInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */; };
 		C7BBCE731EF66761000EF857 /* EditMyInfoBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BBCE711EF66761000EF857 /* EditMyInfoBaseController.m */; };
@@ -263,6 +265,9 @@
 		C79058441F1B6FCE00D95FBA /* MapLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLocationController.h; sourceTree = "<group>"; };
 		C79058451F1B6FCE00D95FBA /* MapLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLocationController.m; sourceTree = "<group>"; };
 		C79058461F1B6FCE00D95FBA /* MapLocationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapLocationController.xib; sourceTree = "<group>"; };
+		C7A603491F3B4F0B0051F5FC /* AgreementProtocolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementProtocolController.h; sourceTree = "<group>"; };
+		C7A6034A1F3B4F0B0051F5FC /* AgreementProtocolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementProtocolController.m; sourceTree = "<group>"; };
+		C7A6034B1F3B4F0B0051F5FC /* AgreementProtocolController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgreementProtocolController.xib; sourceTree = "<group>"; };
 		C7BBCE681EF0414B000EF857 /* MyInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoController.h; sourceTree = "<group>"; };
 		C7BBCE691EF0414B000EF857 /* MyInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoController.m; sourceTree = "<group>"; };
 		C7BBCE6A1EF0414B000EF857 /* MyInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoController.xib; sourceTree = "<group>"; };
@@ -732,6 +737,9 @@
 				CF5785D81EE5A3C400994741 /* FindPassWordController.h */,
 				CF5785D91EE5A3C400994741 /* FindPassWordController.m */,
 				CF5785DA1EE5A3C400994741 /* FindPassWordController.xib */,
+				C7A603491F3B4F0B0051F5FC /* AgreementProtocolController.h */,
+				C7A6034A1F3B4F0B0051F5FC /* AgreementProtocolController.m */,
+				C7A6034B1F3B4F0B0051F5FC /* AgreementProtocolController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1136,6 +1144,7 @@
 				C71749861F07D1B70085E590 /* SampleEditTxtCell.xib in Resources */,
 				C782F4A91EEDB5910067C07F /* MyMsgCell.xib in Resources */,
 				CF53E8EB1EF96747008D0322 /* EditController.xib in Resources */,
+				C7A6034D1F3B4F0B0051F5FC /* AgreementProtocolController.xib in Resources */,
 				CFDD36921EEBE52F007497AC /* ContactListController.xib in Resources */,
 				C782F48B1EE9CDAD0067C07F /* MeCellInfo.xib in Resources */,
 				CF55FF191EE8316B00B0ACD9 /* BuildingDetailController.xib in Resources */,
@@ -1335,6 +1344,7 @@
 				CF7721381EE6F32100DD5AE2 /* SectionFilterView.m in Sources */,
 				C790582E1F17CA2400D95FBA /* ImagePickerHelper.m in Sources */,
 				CF5A4C531EE04769002A281B /* main.m in Sources */,
+				C7A6034C1F3B4F0B0051F5FC /* AgreementProtocolController.m in Sources */,
 				C717497D1F0688940085E590 /* EditTxtTVCell.m in Sources */,
 				CFEAFF691EF66618000EEB27 /* BuildAdviser.m in Sources */,
 				CFEEC0181EE2B0DD00E1DB74 /* RegisterController.m in Sources */,
@@ -1463,7 +1473,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "23528375-a0cb-42f0-97a8-02bb1360aa1f";
+				PROVISIONING_PROFILE = "6c4aff60-0ea3-4e1d-be9c-993138364569";
 				PROVISIONING_PROFILE_SPECIFIER = louyi_developer;
 			};
 			name = Debug;
@@ -1490,7 +1500,7 @@
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.canplay.louyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "76c5da9f-8689-4258-ad4a-51eabf9c172c";
+				PROVISIONING_PROFILE = "6c4aff60-0ea3-4e1d-be9c-993138364569";
 				PROVISIONING_PROFILE_SPECIFIER = louyi_developer;
 			};
 			name = Release;

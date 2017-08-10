@@ -94,17 +94,18 @@
                        ];
     } else {
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
-        firstCellModel.title = @"身份证号";
-        firstCellModel.placeholder = @"请输入身份证号";
-        firstCellModel.tipString = @"请输入身份证号!";
-        firstCellModel.text = _userExtModel.idCard;
-        _editTxtCfgArray = @[firstCellModel];
+        firstCellModel.title = @"门店编号";
+        firstCellModel.placeholder = @"请输入门店编号";
+        firstCellModel.tipString = @"请输入门店编号!";
+        firstCellModel.text = _userExtModel.storeNum;
         
         EditTxtModel* secondCellModel = [[EditTxtModel alloc]init];
-        secondCellModel.title = @"门店编号";
-        secondCellModel.placeholder = @"请输入门店编号";
-        secondCellModel.tipString = @"请输入门店编号!";
-        secondCellModel.text = _userExtModel.storeNum;
+        secondCellModel.title = @"身份证号";
+        secondCellModel.placeholder = @"请输入身份证号";
+        secondCellModel.tipString = @"请输入身份证号!";
+        secondCellModel.text = _userExtModel.idCard;
+        _editTxtCfgArray = @[firstCellModel];
+        
         _editTxtCfgArray = @[firstCellModel, secondCellModel];
 
         _photoviewCfgArray = @[
@@ -141,14 +142,14 @@
     headerView.frame = CGRectMake(0, 0, ScreenWidth, eTxtHeight * _editTxtCfgArray.count + 10);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     NSMutableArray *tmpCellArr = [[NSMutableArray alloc]init];
-    //添加输入框：身份证号 or 公司名称
+    //添加输入框：门店编号 or 公司名称
     EditTxtModel* fTxtModel = _editTxtCfgArray[0];
     _fEditTxtCell = [[SampleEditTxtCell alloc]init];
     _fEditTxtCell.view.frame = CGRectMake(0, 10 + eTxtHeight * 0, ScreenWidth, eTxtHeight);
     _fEditTxtCell.model = fTxtModel;
     [tmpCellArr addObject:_fEditTxtCell];
     [headerView addSubview:_fEditTxtCell.view];
-    //添加输入框：门店编号
+    //添加输入框：身份证号
     if(_editTxtCfgArray.count > 1) {
         EditTxtModel* sTxtModel = _editTxtCfgArray[1];
         _sEditTxtCell = [[SampleEditTxtCell alloc]init];
@@ -194,26 +195,26 @@
         [MBProgressHUD showError:_fEditTxtCell.model.tipString];
         return;
     }
-    if(_sEditTxtCell != nil ) {
-        NSString* sTxtVal = _sEditTxtCell.model.text;
-        if(sTxtVal == nil || [sTxtVal isStringBlank]){
-            [MBProgressHUD showError:_sEditTxtCell.model.tipString];
-            return;
-        }
-    }
-    
-    //check image is select
-    for (int i = 0; i < _photoViewArray.count; i++) {
-        PickPhotoView* view = _photoViewArray[i];
-        NSDictionary* cfgInfo = _photoviewCfgArray[i];
-        NSString* imgInitPath = [cfgInfo objectForKey:@"imgPath"];
-        if (view.resultArray.count == 0 && !imgInitPath.length) {
-            //没有选取图片、且没有网络图片链接时，提示选取对应的图片类别
-            NSString* errMsg = [cfgInfo objectForKey:@"desc"];
-            [MBProgressHUD showError: errMsg];
-            return;
-        }
-    }
+//    if(_sEditTxtCell != nil ) {
+//        NSString* sTxtVal = _sEditTxtCell.model.text;
+//        if(sTxtVal == nil || [sTxtVal isStringBlank]){
+//            [MBProgressHUD showError:_sEditTxtCell.model.tipString];
+//            return;
+//        }
+//    }
+//    
+//    //check image is select
+//    for (int i = 0; i < _photoViewArray.count; i++) {
+//        PickPhotoView* view = _photoViewArray[i];
+//        NSDictionary* cfgInfo = _photoviewCfgArray[i];
+//        NSString* imgInitPath = [cfgInfo objectForKey:@"imgPath"];
+//        if (view.resultArray.count == 0 && !imgInitPath.length) {
+//            //没有选取图片、且没有网络图片链接时，提示选取对应的图片类别
+//            NSString* errMsg = [cfgInfo objectForKey:@"desc"];
+//            [MBProgressHUD showError: errMsg];
+//            return;
+//        }
+//    }
     
     [self confirmSaveAuthInfo];
 }
@@ -221,10 +222,17 @@
 - (void)confirmSaveAuthInfo
 {
     kWeakSelf(weakSelf);
-    NSString* strInfo = _fEditTxtCell.model.text;
-    NSString* strStoreNum = @"";
+    NSString* strStoreNum = _fEditTxtCell.model.text;
+    NSString* strInfo = @"";
     if(_sEditTxtCell != nil){
-        strStoreNum = _sEditTxtCell.model.text;
+        strInfo = _sEditTxtCell.model.text;
+    }
+    
+    if(strInfo == nil){
+        strInfo = @"";
+    }
+    if(strStoreNum == nil){
+        strStoreNum = @"";
     }
     NSDictionary* params = @{@"information":strInfo,
                              @"storeNum":strStoreNum,
