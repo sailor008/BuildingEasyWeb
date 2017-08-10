@@ -51,10 +51,10 @@
         _secondContentLabel.hidden = YES;
     }
     
-    if (_firstContentLabel.text.length == 0) {
+    if (_firstContentLabel.text.length == 0  || [_firstContentLabel.text isEqualToString:@"0"]) {
         _firstContentLabel.text = @"暂无";
     }
-    if (_secondContentLabel.text.length == 0) {
+    if (_secondContentLabel.text.length == 0 || [_secondContentLabel.text isEqualToString:@"0"]) {
         _secondContentLabel.text = @"暂无";
     }
 }
