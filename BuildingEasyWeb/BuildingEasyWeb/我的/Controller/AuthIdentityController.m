@@ -142,14 +142,14 @@
     headerView.frame = CGRectMake(0, 0, ScreenWidth, eTxtHeight * _editTxtCfgArray.count + 10);
     headerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     NSMutableArray *tmpCellArr = [[NSMutableArray alloc]init];
-    //添加输入框：身份证号 or 公司名称
+    //添加输入框：门店编号 or 公司名称
     EditTxtModel* fTxtModel = _editTxtCfgArray[0];
     _fEditTxtCell = [[SampleEditTxtCell alloc]init];
     _fEditTxtCell.view.frame = CGRectMake(0, 10 + eTxtHeight * 0, ScreenWidth, eTxtHeight);
     _fEditTxtCell.model = fTxtModel;
     [tmpCellArr addObject:_fEditTxtCell];
     [headerView addSubview:_fEditTxtCell.view];
-    //添加输入框：门店编号
+    //添加输入框：身份证号
     if(_editTxtCfgArray.count > 1) {
         EditTxtModel* sTxtModel = _editTxtCfgArray[1];
         _sEditTxtCell = [[SampleEditTxtCell alloc]init];
@@ -222,10 +222,17 @@
 - (void)confirmSaveAuthInfo
 {
     kWeakSelf(weakSelf);
-    NSString* strInfo = _fEditTxtCell.model.text;
-    NSString* strStoreNum = @"";
+    NSString* strStoreNum = _fEditTxtCell.model.text;
+    NSString* strInfo = @"";
     if(_sEditTxtCell != nil){
-        strStoreNum = _sEditTxtCell.model.text;
+        strInfo = _sEditTxtCell.model.text;
+    }
+    
+    if(strInfo == nil){
+        strInfo = @"";
+    }
+    if(strStoreNum == nil){
+        strStoreNum = @"";
     }
     NSDictionary* params = @{@"information":strInfo,
                              @"storeNum":strStoreNum,
