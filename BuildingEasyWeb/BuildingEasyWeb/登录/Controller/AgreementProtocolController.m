@@ -23,6 +23,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"服务协议";
     
+    _webView.scalesPageToFit = YES;
     NSURL* url = [NSURL URLWithString:@"http://113.209.77.204:11072/agreement.html"];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     [_webView loadRequest:request];

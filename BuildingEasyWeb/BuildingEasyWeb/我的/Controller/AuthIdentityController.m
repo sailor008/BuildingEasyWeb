@@ -89,6 +89,15 @@
         firstCellModel.text = _userExtModel.company;
         _editTxtCfgArray = @[firstCellModel];
         
+        if([[User shareUser].auth integerValue] == kAuthStateYES) {
+            EditTxtModel* secondCellModel = [[EditTxtModel alloc]init];
+            secondCellModel.title = @"门店编号";
+            secondCellModel.placeholder = @"请输入门店编号";
+            secondCellModel.tipString = @"请输入门店编号!";
+            secondCellModel.text = _userExtModel.storeNum;
+            _editTxtCfgArray = @[firstCellModel, secondCellModel];
+        }
+        
         _photoviewCfgArray = @[
                        @{@"title":@"营业执照：", @"tag":@3, @"desc":@"请上传营业执照！", @"imgPath":_userExtModel.businessLicenceImg},
                        ];
