@@ -230,11 +230,15 @@
 
 - (void)confirmSaveAuthInfo
 {
-    kWeakSelf(weakSelf);
-    NSString* strStoreNum = _fEditTxtCell.model.text;
-    NSString* strInfo = @"";
-    if(_sEditTxtCell != nil){
-        strInfo = _sEditTxtCell.model.text;
+    NSString* strInfo;
+    NSString* strStoreNum;
+    if([[User shareUser].role intValue] == kAgencyRole) {
+        strInfo = _fEditTxtCell.model.text;
+    } else {
+        strStoreNum = _fEditTxtCell.model.text;
+        if(_sEditTxtCell != nil){
+            strInfo = _sEditTxtCell.model.text;
+        }
     }
     
     if(strInfo == nil){
@@ -246,7 +250,9 @@
     NSDictionary* params = @{@"information":strInfo,
                              @"storeNum":strStoreNum,
                              @"role":[User shareUser].role};
+    
     [MBProgressHUD showLoading];
+    kWeakSelf(weakSelf);
     [NetworkManager postWithUrl:@"wx/authUser" parameters:params success:^(id reponse) {
         [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
             User* user = [User mj_objectWithKeyValues:reponse];
