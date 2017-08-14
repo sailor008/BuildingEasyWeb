@@ -69,7 +69,7 @@
     _adsView.placeholderImage = @"底图.png";
     
     // 预设基本信息模型
-    NSArray* array = @[@"区域", @"开发商", @"开盘时间", @"交房时间", @"装修", @"建筑面积", @"总户数", @"车位数", @"车位比", @"绿化率", @"产权年限", @"面积率", @"按揭银行", @"物业公司", @"物业费"];
+    NSArray* array = @[@"区域", @"开发商", @"开盘时间", @"交房时间", @"装修", @"建筑面积", @"总户数", @"车位数", @"车位比", @"绿化率", @"产权年限", @"容积率", @"按揭银行", @"物业公司", @"物业费"];
     
     NSMutableArray* temp = [NSMutableArray array];
     for (int i = 0; i < array.count; i += 2) {
@@ -416,7 +416,7 @@
     dic = item[0];
     dic[@"产权年限"] = _detail.buildInfo.term;
     dic = item [1];
-    dic[@"面积率"] = _detail.buildInfo.acreageRate;
+    dic[@"容积率"] = _detail.buildInfo.acreageRate;
     
     item = _baseInfoArray[6];
     dic = item[0];

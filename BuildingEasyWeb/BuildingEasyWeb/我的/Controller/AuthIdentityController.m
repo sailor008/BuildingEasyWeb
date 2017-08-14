@@ -82,12 +82,24 @@
     [User shareUser].auth = _userExtModel.authStatus;
     
     if([[User shareUser].role intValue] == kAgencyRole) {
+        NSMutableArray* tmpArr = [NSMutableArray array];
+        if([[User shareUser].auth integerValue] == kAuthStateYES) {
+            EditTxtModel* secondCellModel = [[EditTxtModel alloc]init];
+            secondCellModel.title = @"门店编号";
+            secondCellModel.placeholder = @"请输入门店编号";
+            secondCellModel.tipString = @"请输入门店编号!";
+            secondCellModel.text = _userExtModel.storeNum;
+            [tmpArr addObject: secondCellModel];
+        }
+        
         EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
         firstCellModel.title = @"企业名称";
         firstCellModel.placeholder = @"请输入企业名称";
         firstCellModel.tipString = @"请输入企业名称!";
         firstCellModel.text = _userExtModel.company;
-        _editTxtCfgArray = @[firstCellModel];
+        [tmpArr addObject: firstCellModel];
+        
+        _editTxtCfgArray = [tmpArr copy];
         
         _photoviewCfgArray = @[
                        @{@"title":@"营业执照：", @"tag":@3, @"desc":@"请上传营业执照！", @"imgPath":_userExtModel.businessLicenceImg},
@@ -104,7 +116,6 @@
         secondCellModel.placeholder = @"请输入身份证号";
         secondCellModel.tipString = @"请输入身份证号!";
         secondCellModel.text = _userExtModel.idCard;
-        _editTxtCfgArray = @[firstCellModel];
         
         _editTxtCfgArray = @[firstCellModel, secondCellModel];
 
@@ -221,11 +232,15 @@
 
 - (void)confirmSaveAuthInfo
 {
-    kWeakSelf(weakSelf);
-    NSString* strStoreNum = _fEditTxtCell.model.text;
-    NSString* strInfo = @"";
-    if(_sEditTxtCell != nil){
-        strInfo = _sEditTxtCell.model.text;
+    NSString* strInfo;
+    NSString* strStoreNum;
+    if([[User shareUser].role intValue] == kAgencyRole) {
+        strInfo = _fEditTxtCell.model.text;
+    } else {
+        strStoreNum = _fEditTxtCell.model.text;
+        if(_sEditTxtCell != nil){
+            strInfo = _sEditTxtCell.model.text;
+        }
     }
     
     if(strInfo == nil){
@@ -237,7 +252,9 @@
     NSDictionary* params = @{@"information":strInfo,
                              @"storeNum":strStoreNum,
                              @"role":[User shareUser].role};
+    
     [MBProgressHUD showLoading];
+    kWeakSelf(weakSelf);
     [NetworkManager postWithUrl:@"wx/authUser" parameters:params success:^(id reponse) {
         [NetworkManager postWithUrl:@"wx/getUserInfo" parameters:nil success:^(id reponse) {
             User* user = [User mj_objectWithKeyValues:reponse];
