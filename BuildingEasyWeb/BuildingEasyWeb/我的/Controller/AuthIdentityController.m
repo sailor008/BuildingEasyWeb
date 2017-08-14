@@ -82,21 +82,24 @@
     [User shareUser].auth = _userExtModel.authStatus;
     
     if([[User shareUser].role intValue] == kAgencyRole) {
-        EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
-        firstCellModel.title = @"企业名称";
-        firstCellModel.placeholder = @"请输入企业名称";
-        firstCellModel.tipString = @"请输入企业名称!";
-        firstCellModel.text = _userExtModel.company;
-        _editTxtCfgArray = @[firstCellModel];
-        
+        NSMutableArray* tmpArr = [NSMutableArray array];
         if([[User shareUser].auth integerValue] == kAuthStateYES) {
             EditTxtModel* secondCellModel = [[EditTxtModel alloc]init];
             secondCellModel.title = @"门店编号";
             secondCellModel.placeholder = @"请输入门店编号";
             secondCellModel.tipString = @"请输入门店编号!";
             secondCellModel.text = _userExtModel.storeNum;
-            _editTxtCfgArray = @[firstCellModel, secondCellModel];
+            [tmpArr addObject: secondCellModel];
         }
+        
+        EditTxtModel* firstCellModel = [[EditTxtModel alloc]init];
+        firstCellModel.title = @"企业名称";
+        firstCellModel.placeholder = @"请输入企业名称";
+        firstCellModel.tipString = @"请输入企业名称!";
+        firstCellModel.text = _userExtModel.company;
+        [tmpArr addObject: firstCellModel];
+        
+        _editTxtCfgArray = [tmpArr copy];
         
         _photoviewCfgArray = @[
                        @{@"title":@"营业执照：", @"tag":@3, @"desc":@"请上传营业执照！", @"imgPath":_userExtModel.businessLicenceImg},
@@ -113,7 +116,6 @@
         secondCellModel.placeholder = @"请输入身份证号";
         secondCellModel.tipString = @"请输入身份证号!";
         secondCellModel.text = _userExtModel.idCard;
-        _editTxtCfgArray = @[firstCellModel];
         
         _editTxtCfgArray = @[firstCellModel, secondCellModel];
 
