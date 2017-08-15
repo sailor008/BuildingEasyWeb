@@ -491,7 +491,9 @@ static const NSInteger kPhotoViewTag = 1000;
         }
     }
     
-    _dealPhotoView.sourceUrlArray = [dealImgArr copy];
+    if(dealImgArr.count > 0) {
+        _dealPhotoView.sourceUrlArray = [dealImgArr copy];
+    }
     
     [_tableView reloadData];
 }
