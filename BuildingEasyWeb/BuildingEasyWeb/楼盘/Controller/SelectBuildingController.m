@@ -38,6 +38,7 @@
 
 @property (nonatomic, copy) NSString* city;
 @property (nonatomic, copy) NSString* areaCode;
+@property (nonatomic, copy) NSString* areaName;
 
 @end
 
@@ -48,6 +49,8 @@
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"选择报备楼盘";
+    
+    _areaName = @"全部区域";
     
     _areaCode = [User shareUser].areaCode;
     _buildingArr = [NSMutableArray array];
@@ -216,8 +219,9 @@
 - (void)selectFilterResultIndex:(NSInteger)selectedIndex
 {
     AreaModel* model = _areaList[selectedIndex];
+    _areaName = model.areaName;
     _areaCode = model.areaCode;
-
+    
     _tableView.page = 1;
     [_tableView.mj_header beginRefreshing];
 }
@@ -225,6 +229,8 @@
 #pragma mark CityListControllerDelegate
 - (void)selectedCity:(NSString *)city cityCode:(NSString *)cityCode
 {
+    _areaName = @"全部区域";
+    
     _city = city;
     [_areaSectionView setCurrentCity:city];
     
@@ -267,7 +273,8 @@
         if (_tableView.page == 1) {
             [_buildingArr removeAllObjects];
             
-            [_buildIdArr removeAllObjects];
+            //注意：这一行不需要吧，打开此行代码，会有bug
+//            [_buildIdArr removeAllObjects];
         }
         
         _tableView.page ++;
@@ -276,7 +283,9 @@
         NSArray* list = [reponse objectForKey:@"list"];
         for (NSDictionary* dic in list) {
             BuildingListModel* model = [BuildingListModel mj_objectWithKeyValues:dic];
-            [_buildingArr addObject:model];
+            if([_areaName rangeOfString:@"全部"].location !=NSNotFound || [model.address rangeOfString: _areaName].location !=NSNotFound) {
+                [_buildingArr addObject:model];
+            }
         }
         
         [_tableView cyl_reloadData];
