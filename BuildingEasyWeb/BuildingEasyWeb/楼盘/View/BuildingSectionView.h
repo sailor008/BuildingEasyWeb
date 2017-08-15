@@ -21,4 +21,6 @@
 
 - (void)showFilterContent:(NSArray<NSString *> *)content;
 
+- (void)resetInitTitle;
+
 @end

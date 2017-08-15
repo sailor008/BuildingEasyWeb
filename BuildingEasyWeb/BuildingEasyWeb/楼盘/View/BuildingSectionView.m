@@ -143,4 +143,15 @@ const NSInteger kBuildingSectionButtonBaseTag = 1000;
     }
 }
 
+- (void)resetInitTitle
+{
+    NSArray* titleArr = @[@"区域", @"类型", @"价格", @"距离"];
+    for(int i = 0; i < _buttonArray.count; i++) {
+        UIButton *btn = _buttonArray[i];
+        UIView* containView = btn.superview;
+        UILabel* textLabel = containView.subviews[0];
+        textLabel.text = titleArr[i];
+    }
+}
+
 @end
