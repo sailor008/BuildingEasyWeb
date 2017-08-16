@@ -242,7 +242,9 @@
 {
     if (_limitNum > 1) {
         if (_delegate && [_delegate respondsToSelector:@selector(photoView:resetHeight:)]) {
-            [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+            if (_collectionView.contentSize.height + 40 != self.bounds.size.height) {
+                [_delegate photoView:self resetHeight:_collectionView.contentSize.height + 40];
+            }
         }
     }
 }
