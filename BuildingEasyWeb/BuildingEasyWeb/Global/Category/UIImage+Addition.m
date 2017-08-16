@@ -51,6 +51,26 @@
     return newimage;
 }
 
+- (UIImage *)compressImageWithMaxLen:(float)maxLen
+{
+    UIImage *newimage;
+    if (nil == self) {
+        newimage = nil;
+        return newimage;
+    }
+    CGSize targetSize = CGSizeMake(0, 0);
+    CGSize oriSize = self.size;
+    if (oriSize.height > oriSize.width) {
+        targetSize.height = maxLen;
+        targetSize.width = maxLen * oriSize.width/oriSize.height;
+    } else {
+        targetSize.height = maxLen * oriSize.height/oriSize.width;;
+        targetSize.width = maxLen;
+    }
+    newimage = [self compressImageWithTargetSize:targetSize];
+    return newimage;
+}
+
 + (UIImage *)createImageWithColor:(UIColor *)color {
     // 画布大小
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);

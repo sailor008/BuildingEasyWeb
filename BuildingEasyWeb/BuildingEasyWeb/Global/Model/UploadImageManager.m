@@ -24,13 +24,21 @@
         ImgUpTokenModel* uptokenModel = [ImgUpTokenModel mj_objectWithKeyValues:reponse];
         NSString* imgKey = uptokenModel.key;
         NSString* uptoken = uptokenModel.upToken;
-
-#warning 注意：此处优先使用jpg格式，因为jpg图片比 png的三分之一还小！！！
-        NSData* imageData = UIImageJPEGRepresentation(image, 0.8f);
-        if(imageData == nil) {
-            UIImage* compressImg = [image compressImageWithTargetSize:CGSizeMake(450.0f, 450.0f)];
-            imageData = UIImagePNGRepresentation(compressImg);
+        
+        UIImage* resultImg;
+        float referLen = image.size.width < image.size.height? image.size.height: image.size.width;
+        if(referLen > 800) {
+            referLen = 800;
+            resultImg = [image compressImageWithMaxLen: referLen];
+        } else {
+            resultImg = image;
         }
+#warning 注意：此处优先使用jpg格式，因为jpg图片比 png 占存小很多！！！
+        NSData* imageData = UIImageJPEGRepresentation(resultImg, 0.5f);
+        if(imageData == nil) {
+            imageData = UIImagePNGRepresentation(resultImg);
+        }
+//        NSLog(@"resultImg.width = %f, height = %f", resultImg.size.width, resultImg.size.height);
 //        NSLog(@"即将上传七牛云的图片大小：%lu kb", imageData.length/1024);
         
         [QNYunManager uploadData:imageData key:imgKey token:uptoken success:^(id qnResponse) {
