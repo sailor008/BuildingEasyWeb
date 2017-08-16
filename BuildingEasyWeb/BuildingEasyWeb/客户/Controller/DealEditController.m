@@ -44,6 +44,8 @@ static const NSInteger kPhotoViewTag = 1000;
 @property (nonatomic, strong) NSMutableArray* imageArr;
 @property (nonatomic, strong) NSMutableDictionary* parameters;
 
+@property (nonatomic, assign) NSInteger imageIndex;
+
 @end
 
 @implementation DealEditController
@@ -189,6 +191,8 @@ static const NSInteger kPhotoViewTag = 1000;
         [tempArr addObject:model];
     }
     _dataArray = [tempArr copy];
+    
+    self.imageIndex = 0;
 }
 
 - (PhotoView *)getPhotoView
@@ -346,14 +350,13 @@ static const NSInteger kPhotoViewTag = 1000;
     // 检验完毕
     [MBProgressHUD showLoading];
     
+    self.imageIndex = 0;
     [self uploadImageAndCommit];
 }
 
 - (void)uploadImageAndCommit
 {
-    static int i = 0;
-    
-    if (i >= _imageArr.count) {
+    if (self.imageIndex >= _imageArr.count) {
         NSString* urlStr = nil;
         if (_type > kEditTypeNew) {
             urlStr = @"wx/updateSignInfo";
@@ -371,31 +374,31 @@ static const NSInteger kPhotoViewTag = 1000;
             });
         } failure:^(NSError *error, NSString *msg) {
             [MBProgressHUD dissmissWithError:msg];
-            i = 0;
+            self.imageIndex = 0;
         }];
     } else {
         kWeakSelf(weakSelf);
-        [UploadImageManager uploadImage:_imageArr[i] type:@"5" imageKey:^(NSString *key) {
+        [UploadImageManager uploadImage:_imageArr[self.imageIndex] type:@"5" imageKey:^(NSString *key) {
             
             NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
             parameters[@"customerId"] = weakSelf.customerId;
             parameters[@"resourceKey"] = key;
-            parameters[@"type"] = @(i);
-            if (i > 5) {
+            parameters[@"type"] = @(weakSelf.imageIndex);
+            if (weakSelf.imageIndex > 5) {
                 parameters[@"type"] = @(5);
             }
             [NetworkManager postWithUrl:@"wx/uploadSignImg" parameters:parameters success:^(id reponse) {
-                ++ i;
+                ++ weakSelf.imageIndex;
                 
                 [weakSelf uploadImageAndCommit];
             } failure:^(NSError *error, NSString *msg) {
-                ++ i;
+                ++ weakSelf.imageIndex;
                 [weakSelf uploadImageAndCommit];
             }];
             
         } failure:^(NSError *error, NSString *msg) {
             NSLog(@"error:%@---%@", error, msg);
-            ++ i;
+            ++ weakSelf.imageIndex;
             [weakSelf uploadImageAndCommit];
         }];
     }
