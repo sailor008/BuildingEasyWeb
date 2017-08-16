@@ -44,6 +44,8 @@ static const NSInteger kPhotoViewTag = 1000;
 @property (nonatomic, strong) NSMutableArray* imageArr;
 @property (nonatomic, strong) NSMutableDictionary* parameters;
 
+@property (nonatomic, assign) NSInteger imageIndex;
+
 @end
 
 @implementation DealEditController
@@ -100,6 +102,7 @@ static const NSInteger kPhotoViewTag = 1000;
     _idPhotoView.delegate = self;
     _idPhotoView.sectionTitle = @"买方身份证:";
     _idPhotoView.tag = kPhotoViewTag;
+    _idPhotoView.limitNum = 2;
     _idPhotoView.frame = CGRectMake(0, 10, ScreenWidth, photoViewHeight);
     
     _firstFormPhotoView = [self getPhotoView];
@@ -189,6 +192,8 @@ static const NSInteger kPhotoViewTag = 1000;
         [tempArr addObject:model];
     }
     _dataArray = [tempArr copy];
+    
+    self.imageIndex = 0;
 }
 
 - (PhotoView *)getPhotoView
@@ -262,6 +267,10 @@ static const NSInteger kPhotoViewTag = 1000;
     if (_type == kEditTypeNew) {// 新建编辑才上传图片
         if (_idPhotoView.resultArray.count == 0) {
             [MBProgressHUD showError:@"请上传买方身份证" toView:self.view];
+            return;
+        }
+        if (_idPhotoView.resultArray.count < 2) {
+            [MBProgressHUD showError:@"身份证需要上传正反面" toView:self.view];
             return;
         }
         if (_firstFormPhotoView.resultArray.count == 0) {
@@ -346,14 +355,13 @@ static const NSInteger kPhotoViewTag = 1000;
     // 检验完毕
     [MBProgressHUD showLoading];
     
+    self.imageIndex = 0;
     [self uploadImageAndCommit];
 }
 
 - (void)uploadImageAndCommit
 {
-    static int i = 0;
-    
-    if (i >= _imageArr.count) {
+    if (self.imageIndex >= _imageArr.count) {
         NSString* urlStr = nil;
         if (_type > kEditTypeNew) {
             urlStr = @"wx/updateSignInfo";
@@ -371,31 +379,34 @@ static const NSInteger kPhotoViewTag = 1000;
             });
         } failure:^(NSError *error, NSString *msg) {
             [MBProgressHUD dissmissWithError:msg];
-            i = 0;
+            self.imageIndex = 0;
         }];
     } else {
         kWeakSelf(weakSelf);
-        [UploadImageManager uploadImage:_imageArr[i] type:@"5" imageKey:^(NSString *key) {
+        [UploadImageManager uploadImage:_imageArr[self.imageIndex] type:@"5" imageKey:^(NSString *key) {
             
             NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
             parameters[@"customerId"] = weakSelf.customerId;
             parameters[@"resourceKey"] = key;
-            parameters[@"type"] = @(i);
-            if (i > 5) {
+            if (weakSelf.imageIndex < 2) {
+                parameters[@"type"] = @(0);
+            } else if (weakSelf.imageIndex > 6) {
                 parameters[@"type"] = @(5);
+            } else {
+                parameters[@"type"] = @(weakSelf.imageIndex - 1);
             }
             [NetworkManager postWithUrl:@"wx/uploadSignImg" parameters:parameters success:^(id reponse) {
-                ++ i;
+                ++ weakSelf.imageIndex;
                 
                 [weakSelf uploadImageAndCommit];
             } failure:^(NSError *error, NSString *msg) {
-                ++ i;
+                ++ weakSelf.imageIndex;
                 [weakSelf uploadImageAndCommit];
             }];
             
         } failure:^(NSError *error, NSString *msg) {
             NSLog(@"error:%@---%@", error, msg);
-            ++ i;
+            ++ weakSelf.imageIndex;
             [weakSelf uploadImageAndCommit];
         }];
     }
@@ -474,21 +485,29 @@ static const NSInteger kPhotoViewTag = 1000;
     
     NSArray* imgList = data[@"imgList"];
     NSMutableArray* dealImgArr = [NSMutableArray array];
+    NSMutableArray* idImgArr = [NSMutableArray array];
     for (int i = 0; i < imgList.count; i ++) {
         
         NSDictionary* dic = imgList[i];
         
         NSInteger photoType = [dic[@"type"] integerValue];
         
-        if (photoType < 5) {
+        if (photoType < 5 && photoType > 0) {
             PhotoView* photoView = _footerView.subviews[photoType];
             NSString* imgUrl = dic[@"imgUrl"];
             NSArray* imgArr = @[imgUrl];
             photoView.sourceUrlArray = imgArr;
+        } else if (photoType == 0) {
+            NSString* imgUrl = dic[@"imgUrl"];
+            [idImgArr addObject:imgUrl];
         } else {
             NSString* imgUrl = dic[@"imgUrl"];
             [dealImgArr addObject:imgUrl];
         }
+    }
+    
+    if (idImgArr.count > 0) {
+        _idPhotoView.sourceUrlArray = [idImgArr copy];
     }
     
     if(dealImgArr.count > 0) {
