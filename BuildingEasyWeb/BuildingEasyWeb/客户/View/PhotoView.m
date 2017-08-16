@@ -44,6 +44,7 @@
         _photoLeft = 0.0;
         _limitNum = 1;
         _canSelectedPhoto = YES;
+        _isImgPickerAllowEdit = NO;
     }
     return self;
 }
@@ -178,7 +179,7 @@
         [ImagePickerHelper startCamera:^{
             _imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
             _imagePicker.delegate = self;
-            _imagePicker.allowsEditing = YES;
+            _imagePicker.allowsEditing = _isImgPickerAllowEdit;
             [vc presentViewController:_imagePicker animated:YES completion:nil];
         }];
     }];
@@ -188,7 +189,7 @@
         [ImagePickerHelper startPhotoLibrary:^{
             _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             _imagePicker.delegate = self;
-            _imagePicker.allowsEditing = YES;
+            _imagePicker.allowsEditing = _isImgPickerAllowEdit;
             [vc presentViewController:_imagePicker animated:YES completion:nil];
         }];
     }];
@@ -207,7 +208,10 @@
 {
     ++_imageCount;
     
-    UIImage * image = info[UIImagePickerControllerEditedImage];
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    if(image == nil) {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
     
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
     [_photoArray replaceObjectAtIndex:selectedIndexPath.row withObject:image];

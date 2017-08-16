@@ -22,6 +22,7 @@
 @property (nonatomic, weak) id<PhotoViewDelegate> delegate;
 @property (nonatomic, assign) CGFloat photoLeft;
 @property (nonatomic, assign) BOOL canSelectedPhoto;
+@property (nonatomic, assign) BOOL isImgPickerAllowEdit;
 
 @property (nonatomic, copy) NSArray* sourceUrlArray;
 
