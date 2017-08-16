@@ -517,6 +517,8 @@
     _classifyId = @"0";
     _keyword = @"";
     [User shareUser].areaCode = @"0";
+    //更换城市后，重置为初始标题
+    [_sectionView resetInitTitle];
     
     [_tableView.mj_header beginRefreshing];
 }

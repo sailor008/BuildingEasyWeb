@@ -63,6 +63,10 @@
 #pragma mark Action
 - (IBAction)selectCity:(id)sender
 {
+    UIView* containView = _areaButton.superview;
+    UILabel* textLabel = containView.subviews[0];
+    textLabel.text = @"全部区域";
+    
     if ([_delegate respondsToSelector:@selector(selectCity)]) {
         [_delegate selectCity];
     }
@@ -110,6 +114,10 @@
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIView* containView = _areaButton.superview;
+    UILabel* textLabel = containView.subviews[0];
+    textLabel.text = self.contentArray[indexPath.row];
+    
     [self showHideFilter:_areaButton];
     if (_delegate && [_delegate respondsToSelector:@selector(selectFilterResultIndex:)]) {
         [_delegate selectFilterResultIndex:indexPath.row];
