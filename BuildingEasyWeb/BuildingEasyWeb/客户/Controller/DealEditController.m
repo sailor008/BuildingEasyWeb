@@ -99,35 +99,35 @@ static const NSInteger kPhotoViewTag = 1000;
     _idPhotoView = [self getPhotoView];
     CGFloat photoViewHeight = _idPhotoView.height;
     _singlePhotoViewHeight = photoViewHeight;
-    _idPhotoView.delegate = self;
+//    _idPhotoView.delegate = self;
     _idPhotoView.sectionTitle = @"买方身份证:";
     _idPhotoView.tag = kPhotoViewTag;
     _idPhotoView.limitNum = 2;
     _idPhotoView.frame = CGRectMake(0, 10, ScreenWidth, photoViewHeight);
     
     _firstFormPhotoView = [self getPhotoView];
-    _firstFormPhotoView.delegate = self;
+//    _firstFormPhotoView.delegate = self;
     _firstFormPhotoView.sectionTitle = @"首付单:";
     _firstFormPhotoView.photoLeft = tempLabel.width;
     _firstFormPhotoView.tag = kPhotoViewTag + 1;
     _firstFormPhotoView.frame = CGRectMake(0, photoViewHeight, ScreenWidth, photoViewHeight);
     
     _posFormPhotoView = [self getPhotoView];
-    _posFormPhotoView.delegate = self;
+//    _posFormPhotoView.delegate = self;
     _posFormPhotoView.sectionTitle = @"POS单:";
     _posFormPhotoView.photoLeft = tempLabel.width;
     _posFormPhotoView.tag = kPhotoViewTag + 2;
     _posFormPhotoView.frame = CGRectMake(0, photoViewHeight * 2, ScreenWidth, photoViewHeight);
     
     _depositPhotoView = [self getPhotoView];
-    _depositPhotoView.delegate = self;
+//    _depositPhotoView.delegate = self;
     _depositPhotoView.sectionTitle = @"定金单:";
     _depositPhotoView.photoLeft = tempLabel.width;
     _depositPhotoView.tag = kPhotoViewTag + 3;
     _depositPhotoView.frame = CGRectMake(0, photoViewHeight * 3, ScreenWidth, photoViewHeight);
     
     _takeupPhotoView = [self getPhotoView];
-    _takeupPhotoView.delegate = self;
+//    _takeupPhotoView.delegate = self;
     _takeupPhotoView.sectionTitle = @"认购书:";
     _takeupPhotoView.photoLeft = tempLabel.width;
     _takeupPhotoView.tag = kPhotoViewTag + 4;
