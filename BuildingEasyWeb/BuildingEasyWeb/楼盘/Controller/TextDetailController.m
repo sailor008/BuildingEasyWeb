@@ -13,6 +13,7 @@
 @interface TextDetailController ()
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -23,6 +24,9 @@
     // Do any additional setup after loading the view from its nib.
     
     _textView.attributedText = [_textStr htmlAttStr];
+    
+    _webView.scalesPageToFit = YES;
+    [_webView loadHTMLString:_textStr baseURL:nil];
 }
 
 - (void)didReceiveMemoryWarning {
