@@ -100,10 +100,10 @@
 #pragma mark Action
 - (void)commit
 {
-    if (_textView.text.length == 0) {
-        [MBProgressHUD showError:@"请填写内容" toView:self.view];
-        return;
-    }
+//    if (_textView.text.length == 0) {
+//        [MBProgressHUD showError:@"请填写内容" toView:self.view];
+//        return;
+//    }
     
     NSArray* imageArr = [NSArray array];
     if (_type == kEditTypeNew) {// 新建编辑才上传图片
@@ -186,6 +186,9 @@
         [MBProgressHUD hideHUDForView:self.view];
         
         _textView.text = [reponse objectForKey:@"desc"];
+        if (_textView.text.length == 0) {
+            _textView.text = @"暂无信息";
+        }
         
         NSArray* imgList = [reponse objectForKey:@"imgList"];
         NSMutableArray* imgArr = [NSMutableArray array];

@@ -31,7 +31,7 @@
                                 <rect key="frame" x="137.5" y="14.5" width="172.5" height="21"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qf-uD-KGS" userLabel="分隔线">
                                 <rect key="frame" x="0.0" y="49" width="320" height="1"/>
@@ -213,17 +213,25 @@
                             <constraint firstAttribute="height" constant="30" id="Lwf-el-p3V"/>
                             <constraint firstAttribute="width" constant="30" id="gxd-l4-zhA"/>
                         </constraints>
-                        <state key="normal" image="删"/>
                         <connections>
                             <action selector="deleteBuyer:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Xj2-yn-O90"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="删" translatesAutoresizingMaskIntoConstraints="NO" id="5Yu-NK-5PD">
+                        <rect key="frame" x="293" y="0.0" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="8Dm-qy-rve"/>
+                            <constraint firstAttribute="height" constant="22" id="NkI-sC-cwc"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="5Yu-NK-5PD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1E0-PJ-1N7"/>
                     <constraint firstAttribute="trailing" secondItem="O00-1m-uBs" secondAttribute="trailing" id="1wf-aP-3X1"/>
                     <constraint firstItem="d2r-SW-KUl" firstAttribute="leading" secondItem="b1K-rV-ykb" secondAttribute="trailing" constant="20" id="2xq-zY-hba"/>
                     <constraint firstItem="b1K-rV-ykb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="3hy-Fe-rqz"/>
                     <constraint firstItem="d2r-SW-KUl" firstAttribute="centerY" secondItem="b1K-rV-ykb" secondAttribute="centerY" id="8pm-UN-l9F"/>
+                    <constraint firstAttribute="trailing" secondItem="5Yu-NK-5PD" secondAttribute="trailing" constant="5" id="ABC-8B-DEQ"/>
                     <constraint firstAttribute="trailing" secondItem="uAW-Hg-Wvv" secondAttribute="trailing" id="Buh-MW-nr9"/>
                     <constraint firstAttribute="trailing" secondItem="d2r-SW-KUl" secondAttribute="trailing" constant="10" id="HM3-h3-g6C"/>
                     <constraint firstItem="WvK-AP-o5B" firstAttribute="top" secondItem="C6Y-BQ-dDO" secondAttribute="bottom" id="I0M-Xo-fXO"/>
@@ -249,6 +257,7 @@
                 <outlet property="clientIdcardTextField" destination="3aa-MQ-MWi" id="Ogv-qn-25D"/>
                 <outlet property="clientTextField" destination="WuM-kJ-GUj" id="GEX-LW-p7W"/>
                 <outlet property="deleteButton" destination="uAW-Hg-Wvv" id="JoR-gA-HwL"/>
+                <outlet property="deleteImageView" destination="5Yu-NK-5PD" id="EuW-zu-H5z"/>
                 <outlet property="idCardTextField" destination="K7Y-ie-ZBt" id="MGW-pB-yCA"/>
                 <outlet property="nameTextField" destination="vxI-10-lM3" id="tmk-tx-pSQ"/>
                 <outlet property="phoneTextField" destination="63F-QU-gR3" id="kjP-88-8i7"/>

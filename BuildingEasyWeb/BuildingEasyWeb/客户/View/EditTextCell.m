@@ -72,8 +72,12 @@
         _textField.enabled = YES;
     }
         
-    if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"] || [_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"] || [_editTitleLabel.text containsString:@"百分比"]) {
+    if ([_editTitleLabel.text containsString:@"电话"] || [_editTitleLabel.text containsString:@"号码"]) {
         _textField.keyboardType = UIKeyboardTypeNumberPad;
+    } else if ([_editTitleLabel.text containsString:@"面积"] || [_editTitleLabel.text containsString:@"价"] || [_editTitleLabel.text containsString:@"金"] || [_editTitleLabel.text containsString:@"百分比"]) {
+        _textField.keyboardType = UIKeyboardTypeDecimalPad;
+    }  else if ([_editTitleLabel.text containsString:@"电话"]) {
+        _textField.keyboardType = UIKeyboardTypePhonePad;
     } else {
         _textField.keyboardType = UIKeyboardTypeDefault;
     }

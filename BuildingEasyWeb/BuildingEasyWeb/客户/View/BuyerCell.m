@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *showHideButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIImageView *deleteImageView;
 
 @end
 
@@ -77,6 +78,7 @@
 {
     _canDelete = canDelete;
     _deleteButton.hidden = !canDelete;
+    _deleteImageView.hidden = !canDelete;
 }
 
 #pragma mark Action
