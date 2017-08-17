@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="textView" destination="aFl-DR-glE" id="o2d-Jm-qt1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="XPz-53-Zrq" id="aMs-dw-wgx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,14 +28,23 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPz-53-Zrq">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="XPz-53-Zrq" secondAttribute="bottom" id="1Sk-VT-WBp"/>
                 <constraint firstAttribute="trailing" secondItem="aFl-DR-glE" secondAttribute="trailing" constant="20" id="F7N-b3-B96"/>
+                <constraint firstAttribute="trailing" secondItem="XPz-53-Zrq" secondAttribute="trailing" id="GTg-fd-f9k"/>
                 <constraint firstItem="aFl-DR-glE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="dAY-aE-HU7"/>
+                <constraint firstItem="XPz-53-Zrq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="euZ-OJ-V3l"/>
                 <constraint firstAttribute="bottom" secondItem="aFl-DR-glE" secondAttribute="bottom" constant="20" id="hFw-8K-rWn"/>
                 <constraint firstItem="aFl-DR-glE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="isJ-oi-PEb"/>
+                <constraint firstItem="XPz-53-Zrq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zcT-ZV-XKx"/>
             </constraints>
+            <point key="canvasLocation" x="34.5" y="94.5"/>
         </view>
     </objects>
 </document>
