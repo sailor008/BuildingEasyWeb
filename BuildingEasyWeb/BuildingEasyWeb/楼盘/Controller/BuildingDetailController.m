@@ -300,6 +300,8 @@
     
     if (sheet.actions.count > 1) {
         [self presentViewController:sheet animated:YES completion:nil];
+    } else {
+        [MBProgressHUD showError:@"请安装百度、高德、腾讯地图！"];
     }
 }
 
@@ -372,10 +374,11 @@
     _formulaTableViewHeight.constant = _detail.formulaList.count * 101;
     [_formulaTableView reloadData];
     
-    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
-    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
-//    _typeDetailLabel.text = [_detail.buildInfo.houseType deleteHTMLLabel];
-//    _sellDetaillabel.text = [_detail.buildInfo.sellingPoint deleteHTMLLabel];
+//    _typeDetailLabel.attributedText = [_detail.buildInfo.houseType htmlAttStr];
+//    _sellDetaillabel.attributedText = [_detail.buildInfo.sellingPoint htmlAttStr];
+    _typeDetailLabel.text = [_detail.buildInfo.houseType deleteHTMLLabel];
+    _sellDetaillabel.text = [_detail.buildInfo.sellingPoint deleteHTMLLabel];
+    
     [self analysisBaseInfoArray];
 }
 // 解析基本信息
