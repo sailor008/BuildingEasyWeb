@@ -196,6 +196,9 @@
     
     ++_imageCount;
     UIImage* image = info[UIImagePickerControllerEditedImage];
+    if(image == nil) {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
     
     NSIndexPath* selectedIndexPath = [_collectionView indexPathsForSelectedItems][0];
     [_photoArray replaceObjectAtIndex:selectedIndexPath.row withObject:image];

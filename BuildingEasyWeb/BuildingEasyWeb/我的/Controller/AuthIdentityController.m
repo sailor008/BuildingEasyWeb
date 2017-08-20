@@ -213,19 +213,23 @@
 //            return;
 //        }
 //    }
-//    
-//    //check image is select
-//    for (int i = 0; i < _photoViewArray.count; i++) {
-//        PickPhotoView* view = _photoViewArray[i];
-//        NSDictionary* cfgInfo = _photoviewCfgArray[i];
-//        NSString* imgInitPath = [cfgInfo objectForKey:@"imgPath"];
-//        if (view.resultArray.count == 0 && !imgInitPath.length) {
-//            //没有选取图片、且没有网络图片链接时，提示选取对应的图片类别
-//            NSString* errMsg = [cfgInfo objectForKey:@"desc"];
-//            [MBProgressHUD showError: errMsg];
-//            return;
-//        }
-//    }
+//
+    
+    //公司认证，必须上传营业执照
+    if([[User shareUser].role intValue] == kAgencyRole) {
+        //check image is select
+        for (int i = 0; i < _photoViewArray.count; i++) {
+            PickPhotoView* view = _photoViewArray[i];
+            NSDictionary* cfgInfo = _photoviewCfgArray[i];
+            NSString* imgInitPath = [cfgInfo objectForKey:@"imgPath"];
+            if (view.resultArray.count == 0 && !imgInitPath.length) {
+                //没有选取图片、且没有网络图片链接时，提示选取对应的图片类别
+                NSString* errMsg = [cfgInfo objectForKey:@"desc"];
+                [MBProgressHUD showError: errMsg];
+                return;
+            }
+        }
+    }
     
     [self confirmSaveAuthInfo];
 }

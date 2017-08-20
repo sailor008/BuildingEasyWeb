@@ -130,6 +130,24 @@
         //替换字符
         html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>",text] withString:@""];
     }
+    
+    //  过滤html中的\n\r\t换行空格等特殊符号
+    NSMutableString *str1 = [NSMutableString stringWithString:html];
+    for (int i = 0; i < str1.length; i++) {
+        unichar c = [str1 characterAtIndex:i];
+        NSRange range = NSMakeRange(i, 1);
+        
+        //  在这里添加要过滤的特殊符号
+        if ( c == '\r' || c == '\n' || c == '\t' ) {
+            [str1 deleteCharactersInRange:range];
+            --i;
+        }
+    }
+    html  = [NSString stringWithString:str1];
+    //这一行纯粹是当前的业务表现需要，不知为啥得有这一操作！！！
+    html=[html stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //替换掉html的空格
+    html=[html stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     return html;
 }
 
