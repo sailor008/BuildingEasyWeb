@@ -148,6 +148,10 @@
     html=[html stringByReplacingOccurrencesOfString:@" " withString:@""];
     //替换掉html的空格
     html=[html stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    html=[html stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    html=[html stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    html=[html stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    html=[html stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
     return html;
 }
 
