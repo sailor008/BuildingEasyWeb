@@ -34,7 +34,8 @@ static NSInteger const kNewPWDButtonTag = 1000;
     // Do any additional setup after loading the view from its nib.
     
     self.title = @"找回密码";
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
