@@ -71,14 +71,15 @@
     [self setupProperty];
     [self addTableViewRefresh];
     
-    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
-    if (phoneVersion.integerValue > 9) {
-        [MBProgressHUD showLoading];
-    }
     if ([User shareUser].isLogin == NO) {
         NSString* mobile = [User shareUser].mobile;
         NSString* pwd = [User shareUser].pwd;
+        
+        [MBProgressHUD showLoadingToView:[UIApplication sharedApplication].keyWindow];
+//        [MBProgressHUD showLoadingToView:self.view];
         [LoginManager login:mobile password:pwd callback:^{
+            [MBProgressHUD hideHUDForView: [UIApplication sharedApplication].keyWindow];
+//            [MBProgressHUD hideHUDForView:self.view];
             [self requestDataWithCheckLocation];
         }];
     } else {
@@ -149,7 +150,6 @@
 {
     kWeakSelf(weakSelf);
     [LocationManager startGetLocation:^(NSString *city, double lat, double lng) {
-        [MBProgressHUD hideHUD];
         weakSelf.lat = lat;
         weakSelf.lng = lng;
         [weakSelf setupLocationButtonFace:city];
